@@ -10,7 +10,7 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const NAV_MENU = ["Home", "About Us", "Contact Us"];
+const NAV_MENU = ["Home", "Über Mich", "Angebot/Preise", "Kontakt"];
 
 function NavItem({ children }: { children: React.ReactNode }) {
   return (
@@ -71,7 +71,7 @@ export function Navbar() {
           className="text-lg font-bold"
           color={isScrolling ? "blue-gray" : "white"}
         >
-          Material Tailwind
+          Stefanie Kaindl
         </Typography>
         <ul
           className={`ml-10 hidden items-center gap-6 lg:flex ${
@@ -96,7 +96,7 @@ export function Navbar() {
         </IconButton>
       </div>
       <Collapse open={open}>
-        <div className="container mx-auto bg-white rounded-lg py-4 px-6 mt-3 border-t border-gray-200">
+        <div className="container mx-auto bg-white rounded-lg py-4 px-6 mt-3 border-t border-gray-200 text-black">
           <ul className="flex flex-col gap-4">
             {NAV_MENU.map((name) => (
               <NavItem key={name}>{name}</NavItem>
