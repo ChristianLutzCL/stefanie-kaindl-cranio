@@ -9,6 +9,8 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import logo from "../../public/image/sk_logo.png";
 
 const NAV_MENU = ["Home", "Über Mich", "Angebot/Preise", "Kontakt"];
 
@@ -19,7 +21,7 @@ function NavItem({ children }: { children: React.ReactNode }) {
         as="a"
         href="#"
         variant="paragraph"
-        className="flex items-center gap-2 font-medium"
+        className="flex items-center gap-2 font-medium uppercase"
       >
         {children}
       </Typography>
@@ -59,24 +61,26 @@ export function Navbar() {
     <MTNavbar
       fullWidth
       shadow={false}
-      blurred={false}
-      color={isScrolling ? "white" : "transparent"}
+      blurred={true}
+      color={isScrolling ? "blue-gray" : "transparent"}
       className="fixed top-0 z-50 border-0"
     >
       <div className="container mx-auto flex items-center justify-between">
-        <Typography
-          as="a"
-          href="https://www.material-tailwind.com"
-          target="_blank"
-          className="text-lg font-bold"
-          color={isScrolling ? "blue-gray" : "white"}
-        >
-          Stefanie Kaindl
-        </Typography>
+        <div className="flex items-center gap-4">
+          <Image src={logo} height="85" alt="logo" />
+          {/* <Typography
+            as="a"
+            href="https://www.material-tailwind.com"
+            target="_blank"
+            className="text-lg font-serif font-normal"
+            color={isScrolling ? "blue-gray" : "white"}
+          >
+            Stefanie Kaindl
+          </Typography> */}
+        </div>
         <ul
-          className={`ml-10 hidden items-center gap-6 lg:flex ${
-            isScrolling ? "text-gray-900" : "text-white"
-          }`}
+          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling ? "text-gray-900" : "text-white"
+            }`}
         >
           {NAV_MENU.map((name) => (
             <NavItem key={name}>{name}</NavItem>

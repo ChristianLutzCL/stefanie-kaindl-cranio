@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Roboto, Montserrat } from "next/font/google";
 import { Footer, Layout, Navbar } from "@/components";
 
 const roboto = Roboto({
@@ -8,6 +8,12 @@ const roboto = Roboto({
   weight: ["300", "400", "500", "700", "900"],
   display: "swap",
 });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700", "900"],
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Cranio by Stefanie Kaindl",
@@ -24,7 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </head>
-      <body className={roboto.className}>
+      <body className={montserrat.className}>
         <Layout>
           <Navbar />
           {children}
