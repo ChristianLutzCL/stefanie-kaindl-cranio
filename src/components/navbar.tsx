@@ -10,7 +10,7 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import logo from "../../public/image/sk_logo.png";
+import logo from "../../public/image/sk_logo_5.png";
 
 const NAV_MENU = ["Home", "Über Mich", "Angebot/Preise", "Kontakt"];
 
@@ -67,7 +67,7 @@ export function Navbar() {
     >
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Image src={logo} height="85" alt="logo" />
+          <Image src={logo} height="85" alt="logo" className="antialiased" />
           {/* <Typography
             as="a"
             href="https://www.material-tailwind.com"
