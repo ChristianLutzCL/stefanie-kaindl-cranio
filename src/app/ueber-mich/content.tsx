@@ -7,7 +7,7 @@ import logo from "../../../public/image/3.jpg";
 
 function Content() {
   return (
-    <section className="flex pt-40">
+    <section className="flex pt-40 h-screen">
       <div className="flex flex-grid justify-between mx-auto max-w-screen-2xl gap-y-12 items-center w-full">
         <div className="h-full md:w-1/2 px-6 md:px-0">
           <Typography variant="h3" className="font-inter text-white pb-12">

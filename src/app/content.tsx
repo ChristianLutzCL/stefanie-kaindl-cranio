@@ -19,7 +19,7 @@ export function Content() {
         </div>
         
         <div>
-        <Typography variant="lead" className="mt-8 mb-6 font-inter">
+        <Typography variant="lead" className="mt-8 mb-6 font-inter font-medium text-gray-300 antialiased">
         Wie kann Ihnen die Craniosacrale Körperarbeit helfen?
         </Typography>
 
