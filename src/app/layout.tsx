@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Roboto, Montserrat } from "next/font/google";
+import { Roboto, Montserrat, Ubuntu } from "next/font/google";
 import { Footer, Layout, Navbar } from "@/components";
 
 const roboto = Roboto({
@@ -13,6 +13,11 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700", "900"],
   display: "swap",
+})
+
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"]
 })
 
 export const metadata: Metadata = {
@@ -30,7 +35,7 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </head>
-      <body className={montserrat.className}>
+      <body className={ubuntu.className}>
         <Layout>
           <Navbar />
           {children}

@@ -1,14 +1,11 @@
-// components
-import { Navbar, Footer } from "@/components";
+'use client'
 
-// sections
-import Hero from "./../hero";
-import Content from "./../content";
+import Content from "./content";
 
 export default function Impressum() {
   return (
     <>
-      <Content />
+    <Content />
     </>
   );
 }

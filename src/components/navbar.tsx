@@ -10,18 +10,19 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import logo from "../../public/image/sk_logo_5.png";
+import logo from "../../public/logos/sk_logo_5.png";
+import Link from "next/link";
 
-const NAV_MENU = ["Home", "Über Mich", "Angebot/Preise", "Kontakt"];
+const NAV_MENU = ["Home", "Über Mich", "Angebot & Preise", "Kontakt"];
 
 function NavItem({ children }: { children: React.ReactNode }) {
   return (
     <li>
       <Typography
         as="a"
-        href="#"
+        href=""
         variant="paragraph"
-        className="flex items-center gap-2 font-medium uppercase"
+        className="flex items-center gap-2 font-light font-inter transition-all duration-100 underline-offset-1 decoration-transparent decoration-0 hover:underline hover:underline-offset-4 hover:decoration-2 hover:decoration-[#9dccccff] hover:text-[#9dccccff]"
       >
         {children}
       </Typography>
@@ -61,25 +62,19 @@ export function Navbar() {
     <MTNavbar
       fullWidth
       shadow={false}
-      blurred={true}
-      color={isScrolling ? "blue-gray" : "transparent"}
-      className="fixed top-0 z-50 border-0"
+      color="transparent"
+      // blurred={true}
+      // color={isScrolling ? "blue-gray" : "brown"}
+      className={isScrolling ? "fixed top-0 z-50 border-0 bg-outer-space-900 transition-all duration-200" : "fixed top-0 z-50 border-0 bg-transparent transition-all duration-500"}
     >
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Image src={logo} height="85" alt="logo" className="antialiased" />
-          {/* <Typography
-            as="a"
-            href="https://www.material-tailwind.com"
-            target="_blank"
-            className="text-lg font-serif font-normal"
-            color={isScrolling ? "blue-gray" : "white"}
-          >
-            Stefanie Kaindl
-          </Typography> */}
+          <Link href={'/'}>
+            <Image src={logo} height="75" alt="logo" className="antialiased" />
+          </Link>
         </div>
         <ul
-          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling ? "text-gray-900" : "text-white"
+          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling ? "text-white" : "text-white"
             }`}
         >
           {NAV_MENU.map((name) => (
@@ -89,7 +84,7 @@ export function Navbar() {
         <IconButton
           variant="text"
           onClick={handleOpen}
-          color={isScrolling ? "gray" : "white"}
+          color={isScrolling ? "white" : "white"}
           className="ml-auto inline-block lg:hidden"
         >
           {open ? (
@@ -100,7 +95,7 @@ export function Navbar() {
         </IconButton>
       </div>
       <Collapse open={open}>
-        <div className="container mx-auto bg-white rounded-lg py-4 px-6 mt-3 border-t border-gray-200 text-black">
+        <div className="container bg-outer-space-900 mx-auto rounded-md py-4 px-6 mt-3 text-white">
           <ul className="flex flex-col gap-4">
             {NAV_MENU.map((name) => (
               <NavItem key={name}>{name}</NavItem>

@@ -1,3 +1,5 @@
+'use client'
+
 import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
 
@@ -13,15 +15,15 @@ export function Footer() {
               color="gray"
               className="text-center font-sm text-sm !text-gray-700"
             >
-              &copy; {CURRENT_YEAR} Stefanie Kaindl
+              &copy; {CURRENT_YEAR} · Stefanie Kaindl
             </Typography>
           </div>
           <div>
-            Impressum
+            <Link className="hover:underline" href={'/impressum'}>Impressum</Link>
           </div>
-          <div className="text-sm font-sm">
+          <div className="text-center font-sm text-sm !text-gray-700">
             Created by {" "}
-            <Link className="hover:underline" href={'https://twitter.com/chrislutzxy'}>Christian Lutz</Link>
+            <Link className="hover:underline" href={'mailto:chris@inspiredprogrammer.com'}>Christian Lutz</Link>
           </div>
         </div>
       </div>
