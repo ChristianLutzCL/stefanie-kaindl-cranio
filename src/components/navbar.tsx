@@ -35,14 +35,12 @@ const NAV_MENU = [
 function NavItem({ title, href }: { title: string, href: string }) {
   return (
     <li>
-      <Typography
-        as="a"
+      <Link
         href={href}
-        variant="paragraph"
         className="flex items-center gap-2 font-light font-inter transition-all duration-100 underline-offset-1 decoration-transparent decoration-0 hover:underline hover:underline-offset-4 hover:decoration-2 hover:decoration-[#9dccccff] hover:text-[#9dccccff]"
       >
         {title}
-      </Typography>
+      </Link>
     </li>
   );
 }
