@@ -4,27 +4,44 @@ import React from "react";
 import {
   Navbar as MTNavbar,
   Collapse,
-  Button,
   IconButton,
   Typography,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import logo from "../../public/logos/sk_logo_5.png";
+import logo from "../../public/logos/sk_logo_6.png";
 import Link from "next/link";
 
-const NAV_MENU = ["Home", "Über Mich", "Angebot & Preise", "Kontakt"];
 
-function NavItem({ children }: { children: React.ReactNode }) {
+const NAV_MENU = [
+  {
+    title: 'Home',
+    href: '/'
+  },
+  {
+    title: 'Über Mich',
+    href: '/ueber-mich'
+  },
+  {
+    title: 'Angebote & Preise',
+    href: '/angebote-preise'
+  },
+  {
+    title: 'Kontakt',
+    href: '/kontakt'
+  }
+]
+
+function NavItem({ title, href }: { title: string, href: string }) {
   return (
     <li>
       <Typography
         as="a"
-        href=""
+        href={href}
         variant="paragraph"
         className="flex items-center gap-2 font-light font-inter transition-all duration-100 underline-offset-1 decoration-transparent decoration-0 hover:underline hover:underline-offset-4 hover:decoration-2 hover:decoration-[#9dccccff] hover:text-[#9dccccff]"
       >
-        {children}
+        {title}
       </Typography>
     </li>
   );
@@ -63,22 +80,20 @@ export function Navbar() {
       fullWidth
       shadow={false}
       color="transparent"
-      // blurred={true}
-      // color={isScrolling ? "blue-gray" : "brown"}
-      className={isScrolling ? "fixed top-0 z-50 border-0 bg-outer-space-900 transition-all duration-200" : "fixed top-0 z-50 border-0 bg-transparent transition-all duration-500"}
+      className={isScrolling ? "fixed top-0 z-50 border-0 bg-outer-space-800 transition-all duration-200" : "fixed top-0 z-50 border-0 bg-transparent transition-all duration-500"}
     >
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href={'/'}>
-            <Image src={logo} height="75" alt="logo" className="antialiased" />
+            <Image src={logo} height="55" alt="logo" className="antialiased" />
           </Link>
         </div>
         <ul
           className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling ? "text-white" : "text-white"
             }`}
         >
-          {NAV_MENU.map((name) => (
-            <NavItem key={name}>{name}</NavItem>
+          {NAV_MENU.map((item) => (
+            <NavItem key={item.title} href={item.href} title={item.title} />
           ))}
         </ul>
         <IconButton
@@ -95,10 +110,10 @@ export function Navbar() {
         </IconButton>
       </div>
       <Collapse open={open}>
-        <div className="container bg-outer-space-900 mx-auto rounded-md py-4 px-6 mt-3 text-white">
+        <div className="container bg-outer-space-800 mx-auto rounded-md py-4 px-6 mt-3 text-white">
           <ul className="flex flex-col gap-4">
-            {NAV_MENU.map((name) => (
-              <NavItem key={name}>{name}</NavItem>
+            {NAV_MENU.map((item) => (
+              <NavItem key={item.title} href={item.href} title={item.title} />
             ))}
           </ul>
         </div>
