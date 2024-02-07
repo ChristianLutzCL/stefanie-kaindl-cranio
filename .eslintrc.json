@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "next", "prettier"],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "func-names": "off",
+    "no-process-exit": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off"
+  },
+  "root": true,
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "extends": ["plugin:@typescript-eslint/disable-type-checked"]
+    }
+  ]
 }

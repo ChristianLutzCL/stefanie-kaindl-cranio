@@ -1,0 +1,11 @@
+{
+  "singleQuote": true,
+  "printWidth": 90,
+  "semi": true,
+  "jsxSingleQuote": true,
+  "bracketSpacing": false,
+  "bracketSameLine": true,
+  "arrowParens": "always",
+  "tabWidth": 2,
+  "plugins": ["prettier-plugin-tailwindcss", "@typescript-eslint/eslint-plugin"]
+}
