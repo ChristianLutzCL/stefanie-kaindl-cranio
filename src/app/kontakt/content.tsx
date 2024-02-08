@@ -12,18 +12,28 @@ function Content() {
         </Typography>
 
         <div>
-          <Typography variant="h5" color="blue-gray" className="font-inter">
-          Angaben gemäß § 5 TMG
+          <Typography variant="h5" className="font-inter text-white">
+          Craniosacrale Körperarbeit
           </Typography>
-          <Typography className="my-5 font-normal !text-gray-500 font-inter">
+          <Typography className="my-5 font-normal !text-gray-200 font-inter">
             <ul>
               <li>Stefanie Kaindl</li>
               <li>Name</li>
               <li>Adresse 1</li>
-              <li>Adresse 2</li>
+            </ul>
+          </Typography>
+
+          <Typography className="my-5 font-normal !text-gray-200 font-inter">
+            <ul>
+              <li>Telefon: 00000000</li>
+              <li>E-Mail: mail@mail.de</li>
             </ul>
           </Typography>
         </div>
+
+        <Typography variant="h5" className="font-inter text-white">
+          Termine nach vereinbarung
+          </Typography>
       </div>
     </section>
   )
