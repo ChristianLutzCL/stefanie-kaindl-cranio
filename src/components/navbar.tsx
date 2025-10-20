@@ -9,8 +9,10 @@ import {
 } from '@material-tailwind/react';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import logo from '../../public/logos/sk_logo_6.png';
+import logoDark from '../../public/logos/sk_logo_dark.png';
+import logoLight from '../../public/logos/sk_logo_light.png';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const NAV_MENU = [
   {
@@ -31,12 +33,12 @@ const NAV_MENU = [
   },
 ];
 
-function NavItem({title, href}: {title: string; href: string}) {
+function NavItem({title, href, isScrolling}: {title: string; href: string; isScrolling?: boolean}) {
   return (
     <li>
       <Link
         href={href}
-        className='font-inter flex items-center gap-2 font-light decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 hover:text-[#9dccccff] hover:underline hover:decoration-[#9dccccff] hover:decoration-2 hover:underline-offset-4'>
+        className='font-inter flex items-center gap-2 font-light decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 hover:text-[#67B1B1] hover:decoration-[#67B1B1] hover:underline hover:decoration-2 hover:underline-offset-4'>
         {title}
       </Link>
     </li>
@@ -46,6 +48,12 @@ function NavItem({title, href}: {title: string; href: string}) {
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
   const [isScrolling, setIsScrolling] = React.useState(false);
+  const pathname = usePathname();
+  
+  // Pages with light backgrounds that need dark navbar from the start
+  const lightBackgroundPages = ['/ueber-mich', '/kontakt', '/angebote-preise', '/impressum'];
+  const hasLightBackground = lightBackgroundPages.includes(pathname);
+  
   function handleOpen() {
     setOpen((cur) => !cur);
   }
@@ -75,38 +83,43 @@ export function Navbar() {
       color='transparent'
       className={
         isScrolling
-          ? 'fixed top-0 z-50 border-0 bg-outer-space-800 transition-all duration-200'
+          ? 'fixed top-0 z-50 border-0 bg-cream-100/95 backdrop-blur-sm transition-all duration-200'
           : 'fixed top-0 z-50 border-0 bg-transparent transition-all duration-500'
       }>
       <div className='container mx-auto flex items-center justify-between'>
         <div className='flex items-center gap-4'>
           <Link href={'/'}>
-            <Image src={logo} height='55' alt='logo' className='antialiased' />
+            <Image 
+              src={isScrolling || hasLightBackground ? logoDark : logoLight} 
+              height='55' 
+              alt='logo' 
+              className='antialiased' 
+            />
           </Link>
         </div>
         <ul
-          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling ? 'text-white' : 'text-white'}`}>
+          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling || hasLightBackground ? 'text-taupe-800' : 'text-white'}`}>
           {NAV_MENU.map((item) => (
-            <NavItem key={item.title} href={item.href} title={item.title} />
+            <NavItem key={item.title} href={item.href} title={item.title} isScrolling={isScrolling || hasLightBackground} />
           ))}
         </ul>
         <IconButton
           variant='text'
           onClick={handleOpen}
-          color={isScrolling ? 'white' : 'white'}
+          color={isScrolling || hasLightBackground ? 'gray' : 'white'}
           className='ml-auto inline-block lg:hidden'>
           {open ? (
-            <XMarkIcon strokeWidth={2} className='h-6 w-6' />
+            <XMarkIcon strokeWidth={2} className={`h-6 w-6 ${isScrolling || hasLightBackground ? 'text-taupe-800' : 'text-white'}`} />
           ) : (
-            <Bars3Icon strokeWidth={2} className='h-6 w-6' />
+            <Bars3Icon strokeWidth={2} className={`h-6 w-6 ${isScrolling || hasLightBackground ? 'text-taupe-800' : 'text-white'}`} />
           )}
         </IconButton>
       </div>
       <Collapse open={open}>
-        <div className='container mx-auto mt-3 rounded-md bg-outer-space-800 px-6 py-4 text-white'>
+        <div className='container mx-auto mt-3 rounded-md bg-cream-100/95 backdrop-blur-sm px-6 py-4 text-taupe-800 warm-shadow'>
           <ul className='flex flex-col gap-4'>
             {NAV_MENU.map((item) => (
-              <NavItem key={item.title} href={item.href} title={item.title} />
+              <NavItem key={item.title} href={item.href} title={item.title} isScrolling={true} />
             ))}
           </ul>
         </div>

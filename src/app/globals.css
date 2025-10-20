@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream-50 text-taupe-800;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-taupe-900;
+  }
+}
+
+@layer components {
+  .therapeutic-gradient {
+    @apply bg-gradient-to-br from-cream-100 via-sage-50 to-therapeutic-100;
+  }
+  
+  .warm-shadow {
+    box-shadow: 0 4px 6px -1px rgb(166 130 112 / 0.1), 0 2px 4px -2px rgb(166 130 112 / 0.1);
+  }
+  
+  .sage-accent {
+    @apply text-sage-600 hover:text-sage-700 transition-colors duration-200;
+  }
+}
