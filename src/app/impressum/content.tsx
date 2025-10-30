@@ -18,9 +18,9 @@ function Content() {
         <Typography className="my-5 font-normal text-taupe-700 font-inter">
           <ul>
             <li>Stefanie Kaindl</li>
-            <li>Name</li>
-            <li>Adresse 1</li>
-            <li>Adresse 2</li>
+            <li>Bahnstraße 2a</li>
+            <li>85276 Pfaffenhofen a.d. Ilm</li>
+            <li>Ortsteil Uttenhofen</li>
           </ul>
         </Typography>
         </div>
@@ -31,8 +31,8 @@ function Content() {
         </Typography>
         <Typography className="my-5 font-normal text-taupe-700 font-inter">
           <ul>
-            <li>Telefon: 00000000</li>
-            <li>E-Mail: email@email.com</li>
+            <li>Telefon: 0176 63094476</li>
+            <li>E-Mail: info@stefanie-kaindl-cranio.de</li>
           </ul>
         </Typography>
         </div>
