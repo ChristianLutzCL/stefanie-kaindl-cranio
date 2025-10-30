@@ -11,8 +11,8 @@ const mainServices = [
   {
     id: 'adults',
     title: 'Cranio für Erwachsene',
-    duration: '60 - 90 Minuten',
-    price: '90€',
+    duration: 'ca. 60 Minuten',
+    price: '73€',
     image: img2,
     alt: 'Craniosacrale Behandlung für Erwachsene',
     badge: { text: 'Beliebt', color: 'bg-[#67B1B1]' },
@@ -23,18 +23,20 @@ const mainServices = [
       'Schlafstörungen und innerer Unruhe',
       'Migräne und Kopfschmerzen',
       'Trauma-Verarbeitung',
-      'Allgemeiner Entspannung und Prävention'
+      'Allgemeiner Entspannung und Prävention',
+      'Beschwerden in der Schwangerschaft'
     ],
-    buttonColor: 'bg-[#67B1B1] hover:bg-[#5a9999]'
+    buttonColor: 'bg-[#67B1B1] hover:bg-[#5a9999]',
+    bookingLink: 'https://calendly.com/stefanie-kaindl-cranio/cranio_session'
   },
   {
     id: 'children',
     title: 'Cranio für Kinder',
-    duration: '30 - 45 Minuten',
-    price: '70€',
+    duration: '20 - 40 Minuten',
+    price: '53€',
     image: img1,
     alt: 'Craniosacrale Behandlung für Kinder',
-    badge: { text: 'Sanft', color: 'bg-sage-600' },
+    badge: { text: 'Sanft', color: 'bg-[#8B9A7C]' },
     description: 'Einfühlsame Behandlung für Kinder jeden Alters. Die Therapie erfolgt spielerisch und altersgerecht.',
     benefits: [
       'Schlafproblemen und Unruhe',
@@ -44,7 +46,8 @@ const mainServices = [
       'Entwicklungsverzögerungen',
       'Emotionalen Belastungen'
     ],
-    buttonColor: 'bg-sage-600 hover:bg-sage-700'
+    buttonColor: 'bg-[#8B9A7C] hover:bg-[#7A8A6B]',
+    bookingLink: 'https://calendly.com/stefanie-kaindl-cranio/cranio-kinder'
   }
 ];
 
@@ -87,23 +90,22 @@ const policies = {
     'Termine können auch online gebucht werden'
   ],
   payment: [
-    'Zahlung in bar oder per EC-Karte möglich',
+    'Zahlung in bar oder per Paypal möglich',
     'Rechnung für Steuer/Krankenkasse auf Wunsch',
-    'Manche Zusatzversicherungen übernehmen Kosten',
-    'Ratenzahlung bei Paketen möglich'
+    'Manche Zusatzversicherungen übernehmen Kosten'
   ]
 };
 
 function ServiceCard({ service }: { service: typeof mainServices[0] }) {
   return (
-    <div className='bg-white rounded-2xl overflow-hidden warm-shadow border border-cream-200'>
+    <div className='bg-white rounded-2xl overflow-hidden warm-shadow border border-cream-200 flex flex-col h-full'>
       <div className='relative h-64'>
         <Image src={service.image} alt={service.alt} className='w-full h-full object-cover' />
         <div className={`absolute top-4 right-4 ${service.badge.color} text-white px-3 py-1 rounded-full text-sm font-medium`}>
           {service.badge.text}
         </div>
       </div>
-      <div className='p-8'>
+      <div className='p-8 flex flex-col flex-grow'>
         <Typography variant='h3' className='font-inter mb-3 text-taupe-800 text-2xl font-medium'>
           {service.title}
         </Typography>
@@ -119,7 +121,7 @@ function ServiceCard({ service }: { service: typeof mainServices[0] }) {
           {service.description}
         </Typography>
         
-        <div className='mb-6'>
+        <div className='mb-6 flex-grow'>
           <Typography className='font-inter font-medium text-taupe-800 mb-3'>
             Besonders hilfreich bei:
           </Typography>
@@ -135,8 +137,8 @@ function ServiceCard({ service }: { service: typeof mainServices[0] }) {
           </div>
         </div>
 
-        <Link href="/kontakt">
-          <Button className={`w-full ${service.buttonColor} text-white font-inter py-3 rounded-full`}>
+        <Link href={service.bookingLink} className='mt-auto' target={service.bookingLink.startsWith('http') ? '_blank' : '_self'} rel={service.bookingLink.startsWith('http') ? 'noopener noreferrer' : undefined}>
+          <Button className={`w-full ${service.buttonColor} text-white font-inter py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300`}>
             Termin vereinbaren
           </Button>
         </Link>
@@ -166,43 +168,6 @@ function Content() {
           {mainServices.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}
-        </section>
-
-        {/* Additional Services */}
-        <section className='mb-16'>
-          <Typography variant='h2' className='font-inter mb-8 text-taupe-800 text-2xl md:text-3xl font-light text-center'>
-            Weitere Angebote
-          </Typography>
-          <div className='grid md:grid-cols-3 gap-6'>
-            {additionalServices.map((service, index) => (
-              <div key={index} className='bg-cream-50 rounded-xl p-6 warm-shadow border border-cream-200'>
-                <Typography variant='h4' className='font-inter mb-2 text-taupe-800 text-lg font-medium'>
-                  {service.title}
-                </Typography>
-                <div className='flex items-center justify-between mb-3'>
-                  <Typography className='font-inter text-therapeutic-700 text-sm'>
-                    {service.duration}
-                  </Typography>
-                  <Typography className='font-inter text-lg font-bold text-taupe-800'>
-                    {service.price}
-                  </Typography>
-                </div>
-                <Typography className='font-inter text-taupe-700 text-sm leading-relaxed mb-4'>
-                  {service.description}
-                </Typography>
-                <div className='space-y-2'>
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className='flex items-center space-x-2'>
-                      <div className='w-1.5 h-1.5 bg-therapeutic-600 rounded-full flex-shrink-0'></div>
-                      <Typography className='font-inter text-taupe-600 text-xs'>
-                        {feature}
-                      </Typography>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
         </section>
 
         {/* Treatment Process */}
@@ -252,7 +217,7 @@ function Content() {
 
         {/* Important Information */}
         <div className='mb-16'>
-          <div className='bg-cream-100 rounded-2xl p-8 warm-shadow border border-cream-300'>
+          <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200'>
             <Typography variant='h3' className='font-inter mb-6 text-taupe-800 text-xl font-medium'>
               Wichtige Informationen
             </Typography>
@@ -269,7 +234,7 @@ function Content() {
                     'Termine können auch online gebucht werden'
                   ].map((item, index) => (
                     <div key={index} className='flex items-start space-x-2'>
-                      <div className='w-2 h-2 bg-therapeutic-600 rounded-full mt-2 flex-shrink-0'></div>
+                      <div className='w-2 h-2 bg-[#67B1B1] rounded-full mt-2 flex-shrink-0'></div>
                       <Typography className='font-inter text-taupe-700 text-sm'>
                         {item}
                       </Typography>
@@ -283,13 +248,12 @@ function Content() {
                 </Typography>
                 <div className='space-y-2'>
                   {[
-                    'Zahlung in bar oder per EC-Karte möglich',
+                    'Zahlung in bar oder per Paypal möglich',
                     'Rechnung für Steuer/Krankenkasse auf Wunsch',
-                    'Manche Zusatzversicherungen übernehmen Kosten',
-                    'Ratenzahlung bei Paketen möglich'
+                    'Manche Zusatzversicherungen übernehmen Kosten'
                   ].map((item, index) => (
                     <div key={index} className='flex items-start space-x-2'>
-                      <div className='w-2 h-2 bg-sage-600 rounded-full mt-2 flex-shrink-0'></div>
+                      <div className='w-2 h-2 bg-[#67B1B1] rounded-full mt-2 flex-shrink-0'></div>
                       <Typography className='font-inter text-taupe-700 text-sm'>
                         {item}
                       </Typography>

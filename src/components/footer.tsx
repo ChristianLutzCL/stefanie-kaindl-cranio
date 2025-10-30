@@ -14,12 +14,20 @@ const footerData = {
     impressum: {
       href: '/impressum',
       text: 'Impressum'
+    },
+    datenschutz: {
+      href: '/datenschutz',
+      text: 'Datenschutz'
+    },
+    cookies: {
+      href: '/cookie-einstellungen',
+      text: 'Cookie-Einstellungen'
     }
   },
   developer: {
     text: 'Created by',
     name: 'Christian Lutz',
-    email: 'chris@inspiredprogrammer.com'
+    email: 'hello@seventeenlabs.io'
   }
 };
 
@@ -27,33 +35,45 @@ export function Footer() {
   return (
     <footer className="w-full bg-cream-100 mt-auto">
       <div className="container mx-auto px-8">
-        <div className="border-t border-therapeutic-200 py-8">
+        <div className="py-8">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:justify-between">
             
             {/* Copyright */}
             <div className="text-center md:text-left">
-              <Typography className="font-inter text-sm text-taupe-700">
+              <Typography className="font-inter text-xs text-taupe-600">
                 {footerData.copyright.text}
               </Typography>
             </div>
 
             {/* Legal Links */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
               <Link
                 href={footerData.links.impressum.href}
-                className="font-inter text-sm text-taupe-700 hover:text-[#67B1B1] transition-colors"
+                className="font-inter text-xs text-taupe-600 hover:text-taupe-800 transition-colors"
               >
                 {footerData.links.impressum.text}
+              </Link>
+              <Link
+                href={footerData.links.datenschutz.href}
+                className="font-inter text-xs text-taupe-600 hover:text-taupe-800 transition-colors"
+              >
+                {footerData.links.datenschutz.text}
+              </Link>
+              <Link
+                href={footerData.links.cookies.href}
+                className="font-inter text-xs text-taupe-600 hover:text-taupe-800 transition-colors"
+              >
+                {footerData.links.cookies.text}
               </Link>
             </div>
 
             {/* Developer Credit */}
             <div className="text-center md:text-right">
-              <Typography className="font-inter text-sm text-taupe-700">
+              <Typography className="font-inter text-xs text-taupe-600">
                 {footerData.developer.text}{' '}
                 <Link
                   href={`mailto:${footerData.developer.email}`}
-                  className="text-[#67B1B1] hover:text-[#5a9999] transition-colors"
+                  className="text-taupe-600 hover:text-taupe-800 transition-colors underline"
                 >
                   {footerData.developer.name}
                 </Link>

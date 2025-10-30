@@ -38,7 +38,11 @@ function NavItem({title, href, isScrolling}: {title: string; href: string; isScr
     <li>
       <Link
         href={href}
-        className='font-inter flex items-center gap-2 font-light decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 hover:text-[#67B1B1] hover:decoration-[#67B1B1] hover:underline hover:decoration-2 hover:underline-offset-4'>
+        className={`font-inter flex items-center gap-2 font-light decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 ${
+          isScrolling 
+            ? 'text-taupe-800 hover:text-[#5a9999] hover:decoration-[#5a9999]' 
+            : 'hover:text-[#67B1B1] hover:decoration-[#67B1B1]'
+        } hover:underline hover:decoration-2 hover:underline-offset-4`}>
         {title}
       </Link>
     </li>
@@ -98,7 +102,7 @@ export function Navbar() {
           </Link>
         </div>
         <ul
-          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling || hasLightBackground ? 'text-taupe-800' : 'text-white'}`}>
+          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling ? 'text-taupe-800' : hasLightBackground ? 'text-taupe-800' : 'text-white'}`}>
           {NAV_MENU.map((item) => (
             <NavItem key={item.title} href={item.href} title={item.title} isScrolling={isScrolling || hasLightBackground} />
           ))}
