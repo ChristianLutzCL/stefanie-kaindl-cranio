@@ -117,10 +117,10 @@ function Content() {
         {/* Hero Image */}
         <div className="relative flex-1 w-full overflow-hidden bg-cream-50">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-cover bg-no-repeat"
             style={{
               backgroundImage: "url('/image/kontakt.png')",
-              backgroundPosition: "center center",
+              backgroundPosition: "center 33%",
               backgroundSize: "cover"
             }}
           >

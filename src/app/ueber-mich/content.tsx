@@ -14,17 +14,13 @@ function Content() {
         {/* Hero Section */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20 pt-20">
           <div className="order-2 lg:order-1">
-            <Typography variant="h1" className="font-inter text-taupe-800 text-3xl md:text-4xl font-light mb-6">
+            <Typography variant="h1" className="font-inter text-taupe-800 text-3xl md:text-4xl font-light mb-8">
               Über mich
             </Typography>
-            <Typography variant="h2" className="font-inter text-therapeutic-700 text-xl md:text-2xl font-light mb-8">
-              Stefanie Kaindl
-            </Typography>
             <Typography className="font-inter text-taupe-700 text-lg leading-relaxed mb-6">
-              Mein Name ist Stefanie Kaindl und ich begleite Menschen auf ihrem Weg zu mehr 
-              Wohlbefinden und innerer Balance. Als zertifizierte Craniosacrale Therapeutin 
-              bringe ich nicht nur fachliche Kompetenz mit, sondern auch die persönliche 
-              Erfahrung der heilsamen Wirkung dieser besonderen Therapieform.
+              Mein Name ist Stefanie Kaindl – ich bin Craniosacral-Praktikerin aus Leidenschaft.
+              Mit 34 Jahren habe ich meine Berufung gefunden: Menschen dabei zu begleiten, in Kontakt 
+              mit ihrer inneren Kraft, Ruhe und Balance zu kommen.
             </Typography>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/kontakt">
@@ -66,34 +62,48 @@ function Content() {
         <div className="mb-20">
           <div className="bg-white rounded-2xl p-8 md:p-12 warm-shadow border border-cream-200">
             <Typography variant="h3" className="font-inter text-taupe-800 text-2xl md:text-3xl font-light mb-8 text-center">
-              Mein persönlicher Weg zur Cranio
+              Mein Weg
             </Typography>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <Typography className="font-inter text-taupe-700 leading-relaxed mb-6">
-                  Vor einigen Jahren führten meine persönlichen Lebensumstände dazu, dass ich 
-                  mich intensiv mit alternativen Heilmethoden beschäftigte. Über viele Jahre 
-                  hinweg suchte ich nach Möglichkeiten, körperliche und emotionale Beschwerden 
-                  zu lindern – jedoch zunächst ohne nachhaltigen Erfolg.
+            <div className="space-y-6 max-w-4xl mx-auto">
+              <Typography className="font-inter text-taupe-700 leading-relaxed">
+                Meine fundierte Ausbildung bei Katharina Bähner in Stuttgart, die ich im März 2024 
+                abgeschlossen habe, war für mich ein intensiver Transformationsprozess – fachlich wie 
+                auch persönlich. Ergänzend dazu habe ich eine Weiterbildung in Kinder-Cranio absolviert, 
+                um auch Babys und Kinder mit besonderer Achtsamkeit und Einfühlungsvermögen begleiten zu können.
+              </Typography>
+              
+              <Typography className="font-inter text-taupe-700 leading-relaxed">
+                Derzeit vertiefe ich mein Verständnis für Körper, Atem und Energie durch eine 
+                300-Stunden-Vinyasa-Yogalehrerausbildung bei Lovelysita in Prien, die ich im Januar 2026 
+                abschließen werde. Yoga und Craniosacralarbeit ergänzen sich für mich auf wunderbare 
+                Weise – beide schaffen Raum für Präsenz, Bewusstsein und Heilung auf allen Ebenen.
+              </Typography>
+              
+              <Typography className="font-inter text-taupe-700 leading-relaxed">
+                Als zweifache Mama weiß ich aus eigener Erfahrung, wie wertvoll es ist, Körper und 
+                Seele mit Respekt und Sanftheit zu begegnen. Die Craniosacrale Arbeit ist für mich 
+                weit mehr als eine Technik – sie ist eine Begegnung auf Augenhöhe, eine Einladung zum 
+                Loslassen, zur inneren Ruhe und Selbstheilung.
+              </Typography>
+              
+              <Typography className="font-inter text-taupe-700 leading-relaxed">
+                In meiner Praxis möchte ich einen Raum schaffen, in dem du dich sicher und geborgen 
+                fühlst – einen Ort, an dem du zur Ruhe kommen und wieder in Verbindung mit deinem eigenen 
+                Rhythmus treten kannst. Mit großer Leidenschaft bilde ich mich kontinuierlich weiter, 
+                um mein Wissen zu vertiefen und dir die bestmögliche Erfahrung zu ermöglichen.
+              </Typography>
+              
+              <Typography className="font-inter text-taupe-700 leading-relaxed">
+                Ich freue mich darauf, dich auf deinem Weg zu mehr Klarheit, Lebenskraft und innerer 
+                Balance zu begleiten.
+              </Typography>
+              
+              <div className="mt-12 pt-6">
+                <Typography className="font-inter text-taupe-600 text-base italic mb-1">
+                  Von Herzen,
                 </Typography>
-                <Typography className="font-inter text-taupe-700 leading-relaxed">
-                  Als ich dann erstmals eine Craniosacrale Behandlung erhielt, erlebte ich 
-                  zum ersten Mal seit langem positive Veränderungen in meinem Wohlbefinden. 
-                  Die sanfte, aber tiefgreifende Wirkung dieser Methode beeindruckte mich so sehr, 
-                  dass der Wunsch entstand, mehr über diese besondere Form der Körperarbeit zu erfahren.
-                </Typography>
-              </div>
-              <div>
-                <Typography className="font-inter text-taupe-700 leading-relaxed mb-6">
-                  Diese persönliche Erfahrung motivierte mich dazu, mich an der renommierten 
-                  Cranio-Schule in Stuttgart anzumelden. Die fundierte Ausbildung dort hat 
-                  nicht nur mein Verständnis für die Craniosacrale Arbeit vertieft, sondern 
-                  auch meine eigene Heilungsreise unterstützt.
-                </Typography>
-                <Typography className="font-inter text-taupe-700 leading-relaxed">
-                  Heute bin ich dankbar für diesen Weg, denn diese Arbeit bereichert mein Leben 
-                  auf vielfältige Weise und ermöglicht es mir, andere Menschen bei ihrer 
-                  Heilungsreise zu begleiten.
+                <Typography className="font-inter text-therapeutic-700 text-xl font-light italic tracking-wide" style={{ fontFamily: 'cursive' }}>
+                  Steffi
                 </Typography>
               </div>
             </div>
@@ -113,14 +123,14 @@ function Content() {
                 </div>
                 <div>
                   <Typography className="font-inter font-medium text-taupe-800 text-lg mb-2">
-                    Craniosacrale Therapie
+                    Craniosacrale Körperarbeit
                   </Typography>
                   <Typography className="font-inter text-taupe-600 mb-2">
-                    Cranio-Schule Stuttgart
+                    Katharina Bähner, Stuttgart – Abschluss März 2024
                   </Typography>
                   <Typography className="font-inter text-taupe-700 text-sm">
-                    Umfassende Ausbildung in Craniosacraler Körperarbeit mit Fokus auf 
-                    ganzheitliche Behandlungsansätze und Traumaintegration.
+                    Fundierte Ausbildung in Craniosacraler Körperarbeit mit intensivem 
+                    Transformationsprozess auf fachlicher und persönlicher Ebene.
                   </Typography>
                 </div>
               </div>
@@ -129,6 +139,46 @@ function Content() {
             <div className="bg-white rounded-2xl p-6 warm-shadow border border-cream-200">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-sage-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Typography className="text-white font-bold">KC</Typography>
+                </div>
+                <div>
+                  <Typography className="font-inter font-medium text-taupe-800 text-lg mb-2">
+                    Kinder-Cranio
+                  </Typography>
+                  <Typography className="font-inter text-taupe-600 mb-2">
+                    Weiterbildung
+                  </Typography>
+                  <Typography className="font-inter text-taupe-700 text-sm">
+                    Spezialisierung auf die achtsame Begleitung von Babys und Kindern 
+                    mit besonderem Einfühlungsvermögen.
+                  </Typography>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 warm-shadow border border-cream-200">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-therapeutic-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Typography className="text-white font-bold">YL</Typography>
+                </div>
+                <div>
+                  <Typography className="font-inter font-medium text-taupe-800 text-lg mb-2">
+                    Vinyasa-Yogalehrerin (in Ausbildung)
+                  </Typography>
+                  <Typography className="font-inter text-taupe-600 mb-2">
+                    Lovelysita, Prien – Abschluss Januar 2026
+                  </Typography>
+                  <Typography className="font-inter text-taupe-700 text-sm">
+                    300-Stunden-Ausbildung zur Vertiefung des Verständnisses für 
+                    Körper, Atem und Energie.
+                  </Typography>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-cream-50 rounded-2xl p-6 warm-shadow border border-cream-200">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-[#8B9A7C] rounded-full flex items-center justify-center flex-shrink-0">
                   <Typography className="text-white font-bold">WB</Typography>
                 </div>
                 <div>
@@ -136,11 +186,11 @@ function Content() {
                     Kontinuierliche Weiterbildung
                   </Typography>
                   <Typography className="font-inter text-taupe-600 mb-2">
-                    Verschiedene Institute
+                    Laufend
                   </Typography>
                   <Typography className="font-inter text-taupe-700 text-sm">
-                    Regelmäßige Fortbildungen in speziellen Techniken und 
-                    aktuellen Entwicklungen der Craniosacralen Therapie.
+                    Mit großer Leidenschaft kontinuierliche Weiterbildung zur 
+                    Vertiefung des Wissens und bestmöglicher Begleitung.
                   </Typography>
                 </div>
               </div>
@@ -155,24 +205,23 @@ function Content() {
               Meine Behandlungsphilosophie
             </Typography>
             <div className="max-w-4xl mx-auto">
-              <Typography className="font-inter text-taupe-700 text-lg leading-relaxed mb-6 text-center">
-                "Jeder Mensch trägt in sich die Fähigkeit zur Heilung. Meine Aufgabe ist es, 
-                einen sicheren Raum zu schaffen, in dem diese natürlichen Heilungsprozesse 
-                aktiviert werden können."
+              <Typography className="font-inter text-taupe-700 text-lg leading-relaxed mb-6 text-center italic">
+                "Die Craniosacrale Arbeit ist für mich weit mehr als eine Technik – sie ist eine 
+                Begegnung auf Augenhöhe, eine Einladung zum Loslassen, zur inneren Ruhe und Selbstheilung."
               </Typography>
               <div className="grid md:grid-cols-3 gap-6 mt-12">
                 {[
                   {
-                    title: "Individuell",
-                    desc: "Jede Behandlung wird an Ihre persönlichen Bedürfnisse angepasst"
+                    title: "Sicher & Geborgen",
+                    desc: "Ein Raum, in dem du zur Ruhe kommen und in Verbindung mit deinem eigenen Rhythmus treten kannst"
                   },
                   {
-                    title: "Ganzheitlich", 
-                    desc: "Körper, Geist und Seele werden als Einheit betrachtet"
+                    title: "Achtsam & Einfühlsam", 
+                    desc: "Respektvolle Begegnung mit Körper und Seele in sanfter, liebevoller Begleitung"
                   },
                   {
-                    title: "Respektvoll",
-                    desc: "Ihre Grenzen und Ihr Tempo werden stets respektiert"
+                    title: "Präsenz & Bewusstsein",
+                    desc: "Raum für Heilung auf allen Ebenen – körperlich, emotional und energetisch"
                   }
                 ].map((principle, index) => (
                   <div key={index} className="text-center">
@@ -195,11 +244,11 @@ function Content() {
         {/* Contact CTA */}
         <div className="text-center bg-cream-100 rounded-2xl p-12 warm-shadow border border-cream-300">
           <Typography variant="h3" className="font-inter text-taupe-800 text-2xl font-light mb-4">
-            Lassen Sie uns sprechen
+            Lass uns sprechen
           </Typography>
           <Typography className="font-inter text-taupe-700 mb-8 max-w-2xl mx-auto">
-            Haben Sie Fragen zur Craniosacralen Therapie oder möchten Sie einen Termin vereinbaren? 
-            Ich freue mich darauf, Sie kennenzulernen und Sie auf Ihrem Weg zu begleiten.
+            Hast du Fragen zur Craniosacralen Körperarbeit oder möchtest du einen Termin vereinbaren? 
+            Ich freue mich darauf, dich kennenzulernen und dich auf deinem Weg zu begleiten.
           </Typography>
           <Link href="/kontakt">
             <Button 
