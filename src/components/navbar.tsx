@@ -55,8 +55,8 @@ export function Navbar() {
   const pathname = usePathname();
   
   // Pages with light backgrounds that need dark navbar from the start
-  const lightBackgroundPages = ['/ueber-mich', '/kontakt', '/angebote-preise', '/impressum'];
-  const hasLightBackground = lightBackgroundPages.includes(pathname);
+  const lightBackgroundPages = ['/ueber-mich', '/kontakt', '/angebote-preise', '/impressum', '/datenschutz', '/cookie-einstellungen'];
+  const hasLightBackground = lightBackgroundPages.some(page => pathname === page || pathname === `${page}/`);
   
   function handleOpen() {
     setOpen((cur) => !cur);

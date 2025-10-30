@@ -4,7 +4,7 @@ import { Typography, Button } from '@material-tailwind/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import img1 from '../../../public/image/4.jpg';
-import img2 from '../../../public/image/5.jpg';
+import img2 from '../../../public/image/erwachsene.png';
 
 // Service data
 const mainServices = [

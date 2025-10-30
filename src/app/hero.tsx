@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function Hero() {
   return (
-    <div className="relative min-h-screen w-full bg-[url('/image/8.jpg')] bg-cover bg-center bg-no-repeat">
+    <div className="relative min-h-screen w-full bg-[url('/image/hero.png')] bg-cover bg-no-repeat bg-[33%_center] md:bg-center">
       <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-taupe-900/40 via-taupe-900/60 to-taupe-900/70" />
       <div className="grid min-h-screen px-8">
         <div className="container relative z-10 my-auto mx-auto grid place-items-center text-center max-w-4xl">

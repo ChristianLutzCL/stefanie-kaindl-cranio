@@ -3,7 +3,7 @@
 import { Typography, Button } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../public/image/3.jpg";
+import logo from "../../../public/image/ueber-mich.png";
 
 
 function Content() {
@@ -43,7 +43,7 @@ function Content() {
             </div>
           </div>
           <div className="order-1 lg:order-2">
-            <div className="relative">
+            <div className="relative max-w-md mx-auto">
               <div className="rounded-2xl overflow-hidden warm-shadow">
                 <Image 
                   src={logo} 
