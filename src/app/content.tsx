@@ -162,7 +162,7 @@ export function Content() {
         <div className='mb-16 -mx-4'>
           <div className='relative h-64 md:h-80 overflow-hidden md:rounded-2xl'>
             <Image 
-              src='/image/behandlung.png' 
+              src='/image/behandlung.webp' 
               alt='Craniosacrale Behandlung' 
               fill
               className='object-cover object-[50%_30%]'
@@ -226,7 +226,7 @@ export function Content() {
         <div className='mb-16 -mx-4'>
           <div className='relative h-48 md:h-64 overflow-hidden md:rounded-2xl'>
             <Image 
-              src='/image/behandlung_2.png' 
+              src='/image/behandlung_2.webp' 
               alt='Behandlungsraum' 
               fill
               className='object-cover'
@@ -313,7 +313,7 @@ export function Content() {
         <div className='mb-16 -mx-4'>
           <div className='relative h-56 md:h-72 overflow-hidden md:rounded-2xl'>
             <Image 
-              src='/image/behandlung_3.png' 
+              src='/image/behandlung_3.webp' 
               alt='Craniosacrale Körperarbeit' 
               fill
               className='object-cover'

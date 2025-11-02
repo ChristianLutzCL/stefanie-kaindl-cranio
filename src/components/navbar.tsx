@@ -9,8 +9,8 @@ import {
 } from '@material-tailwind/react';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import logoDark from '../../public/logos/sk_logo_dark.png';
-import logoLight from '../../public/logos/sk_logo_light.png';
+import logoDark from '../../public/logos/sk_logo_dark.webp';
+import logoLight from '../../public/logos/sk_logo_light.webp';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

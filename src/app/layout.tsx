@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: 'Stefanie Kaindl - Craniosacrale Körperarbeit',
     images: [
       {
-        url: '/image/hero.png',
+        url: '/image/hero.webp',
         width: 1200,
         height: 630,
         alt: 'Craniosacrale Körperarbeit Stefanie Kaindl',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Craniosacrale Körperarbeit | Stefanie Kaindl',
     description: 'Sanfte, ganzheitliche Behandlung für Erwachsene, Kinder und Babys. Schmerzlinderung, Stressreduktion und tiefe Entspannung.',
-    images: ['/image/hero.png'],
+    images: ['/image/hero.webp'],
   },
   robots: {
     index: true,

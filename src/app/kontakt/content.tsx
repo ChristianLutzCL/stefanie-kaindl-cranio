@@ -170,7 +170,7 @@ function Content() {
           <div 
             className="absolute inset-0 bg-cover bg-no-repeat"
             style={{
-              backgroundImage: "url('/image/kontakt.png')",
+              backgroundImage: "url('/image/kontakt.webp')",
               backgroundPosition: "center 33%",
               backgroundSize: "cover"
             }}

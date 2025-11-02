@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function Hero() {
   return (
-    <div className="relative min-h-screen w-full bg-[url('/image/hero.png')] bg-cover bg-no-repeat bg-[33%_center] md:bg-center">
+    <div className="relative min-h-screen w-full bg-[url('/image/hero.webp')] bg-cover bg-no-repeat bg-[33%_center] md:bg-center">
       <div className="absolute inset-0 h-full w-full bg-gradient-to-b from-taupe-900/40 via-taupe-900/60 to-taupe-900/70" />
       <div className="absolute inset-0 h-full w-full bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_40%,rgba(0,0,0,0.4)_100%)]" />
       <div className="grid min-h-screen px-8">

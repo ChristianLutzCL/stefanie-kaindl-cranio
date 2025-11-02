@@ -3,7 +3,7 @@
 import { Typography, Button } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../public/image/ueber-mich.png";
+import logo from "../../../public/image/ueber-mich.webp";
 
 
 function Content() {
