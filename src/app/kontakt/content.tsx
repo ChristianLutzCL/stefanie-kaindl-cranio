@@ -11,11 +11,49 @@ function ContactForm() {
     phone: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('https://n8n.srv1010269.hstgr.cloud/webhook-test/stefanie-kaindl-cranio/kontakt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Vielen Dank für Ihre Nachricht! Ich melde mich in Kürze bei Ihnen.'
+        });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: ''
+        });
+      } else {
+        throw new Error('Fehler beim Senden');
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie mich direkt per E-Mail.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -96,12 +134,25 @@ function ContactForm() {
           </Typography>
         </div>
 
+        {submitStatus.type && (
+          <div className={`p-4 rounded-lg border ${
+            submitStatus.type === 'success' 
+              ? 'bg-green-50 border-green-200 text-green-800' 
+              : 'bg-red-50 border-red-200 text-red-800'
+          }`}>
+            <Typography className="font-inter text-sm text-center">
+              {submitStatus.message}
+            </Typography>
+          </div>
+        )}
+
         <div className="text-center pt-2">
           <button
             type="submit"
-            className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter font-medium px-12 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+            disabled={isSubmitting}
+            className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter font-medium px-12 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Absenden
+            {isSubmitting ? 'Wird gesendet...' : 'Absenden'}
           </button>
         </div>
       </form>

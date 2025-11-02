@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer, Layout, Navbar, CookieBanner } from "@/components";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -88,6 +89,36 @@ export default function RootLayout({
         <meta name="theme-color" content="#67B1B1" />
       </head>
       <body className={inter.className}>
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-CV0R2VE8F2`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            
+            // Check cookie consent before initializing
+            const consent = localStorage.getItem('cookieConsent');
+            const preferences = consent ? JSON.parse(consent) : null;
+            
+            if (preferences?.analytics) {
+              gtag('config', 'G-CV0R2VE8F2', {
+                page_path: window.location.pathname,
+              });
+            } else {
+              // Disable analytics if not consented
+              gtag('config', 'G-CV0R2VE8F2', {
+                'anonymize_ip': true,
+                'storage': 'none',
+                'client_storage': 'none'
+              });
+            }
+          `}
+        </Script>
+        
         <Layout>
           <Navbar />
           {children}
