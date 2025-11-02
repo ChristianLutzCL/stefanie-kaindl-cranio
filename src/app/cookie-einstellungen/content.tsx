@@ -1,18 +1,38 @@
 'use client';
 
 import { Typography } from "@material-tailwind/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+interface CookiePreferences {
+  necessary: boolean;
+  functional: boolean;
+  analytics: boolean;
+  marketing: boolean;
+}
 
 function Content() {
-  const [preferences, setPreferences] = useState({
-    necessary: true, // Always true, can't be disabled
+  const [preferences, setPreferences] = useState<CookiePreferences>({
+    necessary: true,
     functional: false,
     analytics: false,
     marketing: false
   });
 
-  const handleToggle = (category: keyof typeof preferences) => {
-    if (category === 'necessary') return; // Can't disable necessary cookies
+  // Load saved preferences on mount
+  useEffect(() => {
+    const savedPreferences = localStorage.getItem('cookiePreferences');
+    if (savedPreferences) {
+      try {
+        const parsed = JSON.parse(savedPreferences);
+        setPreferences({ ...parsed, necessary: true }); // Ensure necessary is always true
+      } catch (error) {
+        console.error('Error loading cookie preferences:', error);
+      }
+    }
+  }, []);
+
+  const handleToggle = (category: keyof CookiePreferences) => {
+    if (category === 'necessary') return;
     
     setPreferences(prev => ({
       ...prev,
@@ -20,27 +40,38 @@ function Content() {
     }));
   };
 
+  const saveToStorage = (prefs: CookiePreferences) => {
+    localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
+    localStorage.setItem('cookieConsentGiven', 'true');
+    localStorage.setItem('cookieConsentTimestamp', new Date().toISOString());
+  };
+
   const handleAcceptAll = () => {
-    setPreferences({
+    const newPrefs = {
       necessary: true,
       functional: true,
       analytics: true,
       marketing: true
-    });
+    };
+    setPreferences(newPrefs);
+    saveToStorage(newPrefs);
+    alert('Alle Cookies wurden akzeptiert.');
   };
 
   const handleRejectAll = () => {
-    setPreferences({
+    const newPrefs = {
       necessary: true,
       functional: false,
       analytics: false,
       marketing: false
-    });
+    };
+    setPreferences(newPrefs);
+    saveToStorage(newPrefs);
+    alert('Nur notwendige Cookies werden verwendet.');
   };
 
   const handleSavePreferences = () => {
-    // In a real implementation, you would save these preferences to localStorage or cookies
-    console.log('Saved preferences:', preferences);
+    saveToStorage(preferences);
     alert('Ihre Cookie-Einstellungen wurden gespeichert.');
   };
 

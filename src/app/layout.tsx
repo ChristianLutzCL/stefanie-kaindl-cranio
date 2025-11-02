@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Footer, Layout, Navbar } from "@/components";
+import { Footer, Layout, Navbar, CookieBanner } from "@/components";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -92,6 +92,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <CookieBanner />
         </Layout>
       </body>
     </html>
