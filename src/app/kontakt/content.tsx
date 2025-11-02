@@ -86,10 +86,10 @@ function ContactForm() {
           />
         </div>
 
-        <div className="text-sm">
-          <Typography className="font-inter text-taupe-600">
+        <div className="text-center opacity-60">
+          <Typography className="font-inter text-taupe-500 text-[10px]">
             Es gilt unsere{' '}
-            <Link href="/datenschutz" className="text-[#67B1B1] underline hover:text-[#5a9999]">
+            <Link href="/datenschutz" className="text-taupe-500 hover:text-[#67B1B1] transition-colors underline underline-offset-2">
               Datenschutzerklärung
             </Link>
             .
