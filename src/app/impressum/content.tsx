@@ -58,6 +58,28 @@ function Content() {
         </Typography>
        </div>
 
+        <div>
+        <Typography variant="h5" className="font-inter text-therapeutic-700">
+        Bildnachweis
+        </Typography>
+        <Typography className="my-5 font-normal text-taupe-700 font-inter">
+          Die auf dieser Website verwendeten Fotos wurden erstellt von:
+        </Typography>
+        <Typography className="my-5 font-normal text-taupe-700 font-inter">
+          Andrea Kieferl<br />
+          Kapellenweg 12<br />
+          85301 Schweitenkirchen
+        </Typography>
+        <Typography className="my-5 font-normal text-taupe-700 font-inter">
+          E-Mail:{' '}
+          <a href="mailto:hallo@andrea-kieferl.de" className="text-[#67B1B1] hover:text-[#5a9999] underline">
+            hallo@andrea-kieferl.de
+          </a>
+          <br />
+          Telefon: 0163 9047817
+        </Typography>
+        </div>
+
 
         <Typography className="my-10 font-normal text-xs text-taupe-600 font-inter">
         Quelle: https://www.e-recht24.de
