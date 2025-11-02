@@ -104,7 +104,7 @@ export function Content() {
         <div className='grid md:grid-cols-2 gap-8 mb-16'>
           {/* Applications Section */}
           <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200 h-full'>
-            <Typography variant='h4' className='font-inter mb-6 text-[#67B1B1] text-xl font-medium'>
+            <Typography variant='h3' className='font-inter mb-6 text-[#67B1B1] text-xl font-medium'>
               Anwendungsbereiche
             </Typography>
             <div className='space-y-3'>
@@ -132,7 +132,7 @@ export function Content() {
 
           {/* Benefits Section */}
           <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200 h-full'>
-            <Typography variant='h4' className='font-inter mb-6 text-[#67B1B1] text-xl font-medium'>
+            <Typography variant='h3' className='font-inter mb-6 text-[#67B1B1] text-xl font-medium'>
               Deine Vorteile
             </Typography>
             <div className='space-y-3'>
@@ -165,7 +165,7 @@ export function Content() {
               src='/image/behandlung.png' 
               alt='Craniosacrale Behandlung' 
               fill
-              className='object-cover'
+              className='object-cover object-[50%_30%]'
               sizes='(max-width: 768px) 100vw, 1200px'
             />
             <div className='absolute inset-0 bg-gradient-to-t from-black/30 to-transparent'></div>
@@ -175,7 +175,7 @@ export function Content() {
         {/* How it Works Section */}
         <div className='mb-16'>
           <div className='text-center mb-10'>
-            <Typography variant='h3' className='font-inter mb-3 text-taupe-800 text-2xl md:text-3xl font-light'>
+            <Typography variant='h2' className='font-inter mb-3 text-taupe-800 text-2xl md:text-3xl font-light'>
               Wie funktioniert Craniosacrale Körperarbeit?
             </Typography>
             <Typography className='font-inter text-taupe-700 max-w-2xl mx-auto leading-relaxed'>
@@ -239,7 +239,7 @@ export function Content() {
         {/* Testimonials Section */}
         <div className='mb-16'>
           <div className='text-center mb-10'>
-            <Typography variant='h3' className='font-inter mb-3 text-taupe-800 text-2xl md:text-3xl font-light'>
+            <Typography variant='h2' className='font-inter mb-3 text-taupe-800 text-2xl md:text-3xl font-light'>
               Erfahrungen
             </Typography>
             <Typography className='font-inter text-taupe-700 max-w-2xl mx-auto leading-relaxed'>
@@ -327,7 +327,7 @@ export function Content() {
         <div className='mb-16'>
           <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200'>
             <div className='max-w-3xl mx-auto text-center'>
-              <Typography variant='h4' className='font-inter mb-4 text-[#67B1B1] text-xl font-medium'>
+              <Typography variant='h2' className='font-inter mb-4 text-[#67B1B1] text-xl font-medium'>
                 Wissenschaftlich fundiert
               </Typography>
               <Typography className='font-inter text-taupe-700 leading-relaxed mb-6'>
@@ -367,7 +367,7 @@ export function Content() {
 
         {/* Call to Action */}
         <div className='text-center bg-white rounded-2xl p-12 warm-shadow border border-cream-200'>
-          <Typography variant='h3' className='font-inter mb-4 text-taupe-800 text-2xl md:text-3xl font-light'>
+          <Typography variant='h2' className='font-inter mb-4 text-taupe-800 text-2xl md:text-3xl font-light'>
             Bereit für deine Auszeit?
           </Typography>
           <Typography className='font-inter text-taupe-700 mb-8 max-w-2xl mx-auto leading-relaxed'>
