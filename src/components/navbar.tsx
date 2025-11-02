@@ -33,11 +33,12 @@ const NAV_MENU = [
   },
 ];
 
-function NavItem({title, href, isScrolling}: {title: string; href: string; isScrolling?: boolean}) {
+function NavItem({title, href, isScrolling, onClick}: {title: string; href: string; isScrolling?: boolean; onClick?: () => void}) {
   return (
     <li>
       <Link
         href={href}
+        onClick={onClick}
         className={`font-inter flex items-center gap-2 font-light decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 ${
           isScrolling 
             ? 'text-taupe-800 hover:text-[#5a9999] hover:decoration-[#5a9999]' 
@@ -123,7 +124,7 @@ export function Navbar() {
         <div className='container mx-auto mt-3 rounded-md bg-cream-100/95 backdrop-blur-sm px-6 py-4 text-taupe-800 warm-shadow'>
           <ul className='flex flex-col gap-4'>
             {NAV_MENU.map((item) => (
-              <NavItem key={item.title} href={item.href} title={item.title} isScrolling={true} />
+              <NavItem key={item.title} href={item.href} title={item.title} isScrolling={true} onClick={() => setOpen(false)} />
             ))}
           </ul>
         </div>

@@ -6,43 +6,108 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export function Content() {
+  const [showMoreTestimonials, setShowMoreTestimonials] = React.useState(false);
+  
+  const testimonials = [
+    {
+      text: "Die Behandlung bei Steffi ist eine Wohltat für Körper, Geist und Seele.\n\nDurch ihre empathische Art zaubert sie eine Wohlfühlatmosphäre und man kommt ganz bei sich an.\n\nNach der Cranio fühle ich mich viel leichter und meine Gedanken kommen zur Ruhe.",
+      name: "Kathi P.",
+      condition: "Stress & Verspannungen"
+    },
+    {
+      text: "Einfühlsam, sensibel, mitfühlend, intensiv, wohltuend, geborgen – das sind die Eindrücke, die ich bei Steffi mit ihrer Cranio Körperarbeit jedes Mal erlebe.\n\nHier fühle ich mich beschützt und von Herzen willkommen.",
+      name: "Regina",
+      condition: "Emotionale Belastung"
+    },
+    {
+      text: "Die Cranio Sacrale Körperarbeit hat mir und meinen Kindern geholfen, wieder ins Gleichgewicht zu kommen – ob körperlich oder seelisch.\n\nBei Stefanie findet man einen sicheren Raum.",
+      name: "Kathi G.",
+      condition: "Mutter mit Kindern"
+    },
+    {
+      text: "Nach jahrelangen Kopfschmerzen habe ich endlich Linderung gefunden. Die Behandlungen haben mir geholfen, wieder schmerzfrei zu leben.",
+      name: "Maria S.",
+      condition: "Chronische Kopfschmerzen"
+    },
+    {
+      text: "Meine Tochter war nach der Geburt sehr unruhig. Die Cranio-Behandlung hat ihr geholfen, besser zu schlafen und ausgeglichener zu sein.",
+      name: "Julia M.",
+      condition: "Baby (3 Monate)"
+    },
+    {
+      text: "Bei Stefanie fühle ich mich verstanden und aufgehoben. Die Behandlungen helfen mir, meinen Stress abzubauen und zu entspannen.",
+      name: "Thomas K.",
+      condition: "Stressbedingte Beschwerden"
+    },
+    {
+      text: "Meine Migräne-Attacken sind deutlich weniger geworden. Ich bin so dankbar für diese sanfte Therapieform.",
+      name: "Lisa H.",
+      condition: "Migräne"
+    },
+    {
+      text: "Nach einem Schleudertrauma hatte ich starke Nackenschmerzen. Die Cranio-Behandlung hat mir sehr geholfen.",
+      name: "Michael R.",
+      condition: "Schleudertrauma"
+    },
+    {
+      text: "Mein Sohn ist ruhiger geworden und kann sich besser konzentrieren. Die Behandlung bei Stefanie war ein Segen für uns.",
+      name: "Sandra B.",
+      condition: "Kind (8 Jahre) - ADHS"
+    },
+    {
+      text: "Die Behandlung hilft mir bei meinen Verdauungsproblemen und ich fühle mich insgesamt ausgeglichener.",
+      name: "Anna W.",
+      condition: "Verdauungsbeschwerden"
+    },
+    {
+      text: "Stefanie hat ein wunderbares Gespür für die Bedürfnisse meines Babys. Die Behandlung war sehr sanft und effektiv.",
+      name: "Laura D.",
+      condition: "Baby (6 Monate) - Schlafprobleme"
+    },
+    {
+      text: "Nach der Behandlung fühle ich mich wie neugeboren. Die Verspannungen sind weg und ich kann wieder frei atmen.",
+      name: "Peter L.",
+      condition: "Rückenschmerzen"
+    },
+    {
+      text: "Meine Tochter hatte Probleme nach der Geburt. Dank Stefanie geht es ihr jetzt viel besser.",
+      name: "Christina F.",
+      condition: "Baby (4 Monate) - Dreimonatskoliken"
+    },
+    {
+      text: "Die Cranio-Behandlung hat mir geholfen, mein Trauma zu verarbeiten. Ich bin Stefanie sehr dankbar.",
+      name: "Sophie M.",
+      condition: "Traumaverarbeitung"
+    },
+    {
+      text: "Nach Jahren mit Tinnitus habe ich endlich Ruhe gefunden. Die Behandlung war ein Wendepunkt für mich.",
+      name: "Robert H.",
+      condition: "Tinnitus"
+    }
+  ];
+  
   return (
     <section className='py-20 bg-gradient-to-b from-cream-50 to-cream-100'>
       <div className='container mx-auto px-4 max-w-6xl'>
         {/* Introduction Section */}
-        <div className='text-center mb-20'>
-          <Typography variant='h2' className='font-inter mb-6 text-taupe-800 text-3xl md:text-4xl font-light'>
+        <div className='text-center mb-16'>
+          <Typography variant='h2' className='font-inter mb-4 text-taupe-800 text-3xl md:text-4xl font-light'>
             Warum Craniosacrale Körperarbeit?
           </Typography>
-          <Typography className='font-inter text-lg text-taupe-700 max-w-3xl mx-auto leading-relaxed mb-8'>
+          <Typography className='font-inter text-lg text-taupe-700 max-w-3xl mx-auto leading-relaxed'>
             Eine sanfte, aber äußerst wirkungsvolle Methode zur Linderung von Blockaden 
-            und zur Wiederherstellung Ihrer inneren Balance.
+            und zur Wiederherstellung deiner inneren Balance.
           </Typography>
-          <div className='max-w-4xl mx-auto'>
-            <div className='bg-white rounded-2xl p-8 warm-shadow'>
-              <div className='h-64 bg-cream-200 rounded-xl mb-6 flex items-center justify-center'>
-                {/* Placeholder for hero image */}
-                <Typography className='text-sage-600 font-inter'>
-                  Entspannende Craniosacrale Behandlung
-                </Typography>
-              </div>
-              <Typography className='font-inter text-taupe-700 leading-relaxed'>
-                Die Craniosacrale Körperarbeit ist eine sanfte, manuelle Therapieform, die durch 
-                achtsame Berührungen das craniosacrale System - bestehend aus Schädel, Wirbelsäule 
-                und Kreuzbein - harmonisiert und die körpereigenen Heilungsprozesse aktiviert.
-              </Typography>
-            </div>
-          </div>
         </div>
 
         {/* Benefits Grid */}
-        <div className='grid md:grid-cols-2 gap-12 mb-20'>
+        <div className='grid md:grid-cols-2 gap-8 mb-16'>
           {/* Applications Section */}
-          <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200'>
-            <Typography variant='h4' className='font-inter mb-6 text-therapeutic-700 text-xl font-medium'>
+          <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200 h-full'>
+            <Typography variant='h4' className='font-inter mb-6 text-[#67B1B1] text-xl font-medium'>
               Anwendungsbereiche
             </Typography>
-            <div className='space-y-4'>
+            <div className='space-y-3'>
               {[
                 { title: 'Schmerzlinderung', desc: 'Kopf-, Migräne-, Nacken- und Rückenschmerzen' },
                 { title: 'Stressreduktion', desc: 'Ängste, Traumata und emotionale Belastungen' },
@@ -51,12 +116,12 @@ export function Content() {
                 { title: 'Balance', desc: 'Hyperaktivität und Konzentrationsschwierigkeiten' }
               ].map((item, index) => (
                 <div key={index} className='flex items-start space-x-3'>
-                  <div className='w-2 h-2 bg-sage-600 rounded-full mt-2 flex-shrink-0'></div>
+                  <div className='w-2 h-2 bg-[#67B1B1] rounded-full mt-2 flex-shrink-0'></div>
                   <div>
                     <Typography className='font-inter font-medium text-taupe-800 text-base'>
                       {item.title}
                     </Typography>
-                    <Typography className='font-inter text-taupe-600 text-sm'>
+                    <Typography className='font-inter text-taupe-600 text-sm leading-relaxed'>
                       {item.desc}
                     </Typography>
                   </div>
@@ -66,11 +131,11 @@ export function Content() {
           </div>
 
           {/* Benefits Section */}
-          <div className='bg-cream-50 rounded-2xl p-8 warm-shadow border border-cream-200'>
-            <Typography variant='h4' className='font-inter mb-6 text-therapeutic-700 text-xl font-medium'>
-              Ihre Vorteile
+          <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200 h-full'>
+            <Typography variant='h4' className='font-inter mb-6 text-[#67B1B1] text-xl font-medium'>
+              Deine Vorteile
             </Typography>
-            <div className='space-y-4'>
+            <div className='space-y-3'>
               {[
                 { title: 'Sanfte Methode', desc: 'Effektive Linderung durch behutsame Berührungen' },
                 { title: 'Ganzheitlich', desc: 'Wirkt auf körperlicher und emotionaler Ebene' },
@@ -78,12 +143,12 @@ export function Content() {
                 { title: 'Nachhaltig', desc: 'Tiefgreifende und dauerhafte Veränderungen' }
               ].map((item, index) => (
                 <div key={index} className='flex items-start space-x-3'>
-                  <div className='w-2 h-2 bg-therapeutic-600 rounded-full mt-2 flex-shrink-0'></div>
+                  <div className='w-2 h-2 bg-[#67B1B1] rounded-full mt-2 flex-shrink-0'></div>
                   <div>
                     <Typography className='font-inter font-medium text-taupe-800 text-base'>
                       {item.title}
                     </Typography>
-                    <Typography className='font-inter text-taupe-600 text-sm'>
+                    <Typography className='font-inter text-taupe-600 text-sm leading-relaxed'>
                       {item.desc}
                     </Typography>
                   </div>
@@ -93,18 +158,32 @@ export function Content() {
           </div>
         </div>
 
+        {/* Image Break 1 */}
+        <div className='mb-16 -mx-4'>
+          <div className='relative h-64 md:h-80 overflow-hidden md:rounded-2xl'>
+            <Image 
+              src='/image/behandlung.png' 
+              alt='Craniosacrale Behandlung' 
+              fill
+              className='object-cover'
+              sizes='(max-width: 768px) 100vw, 1200px'
+            />
+            <div className='absolute inset-0 bg-gradient-to-t from-black/30 to-transparent'></div>
+          </div>
+        </div>
+
         {/* How it Works Section */}
-        <div className='mb-20'>
-          <div className='text-center mb-12'>
-            <Typography variant='h3' className='font-inter mb-4 text-taupe-800 text-2xl md:text-3xl font-light'>
+        <div className='mb-16'>
+          <div className='text-center mb-10'>
+            <Typography variant='h3' className='font-inter mb-3 text-taupe-800 text-2xl md:text-3xl font-light'>
               Wie funktioniert Craniosacrale Körperarbeit?
             </Typography>
-            <Typography className='font-inter text-taupe-700 max-w-2xl mx-auto'>
+            <Typography className='font-inter text-taupe-700 max-w-2xl mx-auto leading-relaxed'>
               Ein sanfter Weg zu tiefer Entspannung und natürlicher Heilung
             </Typography>
           </div>
           
-          <div className='grid md:grid-cols-3 gap-8 mb-12'>
+          <div className='grid md:grid-cols-3 gap-6'>
             {[
               {
                 step: '1',
@@ -125,141 +204,161 @@ export function Content() {
                 detail: 'Tiefe Entspannung ermöglicht regenerative Prozesse'
               }
             ].map((item, index) => (
-              <div key={index} className='text-center bg-white rounded-xl p-6 warm-shadow border border-cream-200'>
-                <div className='w-16 h-16 bg-[#67B1B1] text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4'>
+              <div key={index} className='text-center bg-white rounded-2xl p-6 warm-shadow border border-cream-200'>
+                <div className='w-14 h-14 bg-[#67B1B1] text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4'>
                   {item.step}
                 </div>
                 <Typography className='font-inter font-medium text-taupe-800 text-lg mb-2'>
                   {item.title}
                 </Typography>
-                <Typography className='font-inter text-taupe-600 text-sm leading-relaxed mb-3'>
+                <Typography className='font-inter text-taupe-600 text-sm leading-relaxed mb-2'>
                   {item.desc}
                 </Typography>
-                <Typography className='font-inter text-sage-600 text-xs italic'>
+                <Typography className='font-inter text-[#67B1B1] text-xs italic'>
                   {item.detail}
                 </Typography>
               </div>
             ))}
           </div>
+        </div>
 
-          {/* Process Image */}
-          <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200'>
-            <div className='grid md:grid-cols-2 gap-8 items-center'>
-              <div>
-                <Typography variant='h4' className='font-inter mb-4 text-therapeutic-700 text-xl font-medium'>
-                  Der craniosacrale Rhythmus
-                </Typography>
-                <Typography className='font-inter text-taupe-700 leading-relaxed mb-4'>
-                  Jeder Körper hat einen eigenen, subtilen Rhythmus - den craniosacralen Rhythmus. 
-                  Dieser entsteht durch die Bewegung der Gehirn-Rückenmarks-Flüssigkeit und ist 
-                  unabhängig von Herzschlag und Atmung.
-                </Typography>
-                <Typography className='font-inter text-taupe-600 text-sm'>
-                  Durch geschulte Hände kann dieser Rhythmus ertastet und Unregelmäßigkeiten 
-                  erkannt werden, die auf Blockaden oder Spannungen hinweisen.
-                </Typography>
-              </div>
-              <div className='h-64 bg-cream-200 rounded-xl flex items-center justify-center'>
-                {/* Placeholder for process illustration */}
-                <Typography className='text-taupe-600 font-inter text-center'>
-                  Illustration des <br />craniosacralen Systems
-                </Typography>
-              </div>
-            </div>
+        {/* Image Break 2 */}
+        <div className='mb-16 -mx-4'>
+          <div className='relative h-48 md:h-64 overflow-hidden md:rounded-2xl'>
+            <Image 
+              src='/image/behandlung_2.png' 
+              alt='Behandlungsraum' 
+              fill
+              className='object-cover'
+              sizes='(max-width: 768px) 100vw, 1200px'
+            />
+            <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent'></div>
           </div>
         </div>
 
         {/* Testimonials Section */}
-        <div className='mb-20'>
-          <div className='text-center mb-12'>
-            <Typography variant='h3' className='font-inter mb-4 text-taupe-800 text-2xl md:text-3xl font-light'>
-              Was Klienten sagen
+        <div className='mb-16'>
+          <div className='text-center mb-10'>
+            <Typography variant='h3' className='font-inter mb-3 text-taupe-800 text-2xl md:text-3xl font-light'>
+              Erfahrungen
             </Typography>
-            <Typography className='font-inter text-taupe-700 max-w-2xl mx-auto'>
-              Erfahrungen und Erfolgsgeschichten aus der Praxis
+            <Typography className='font-inter text-taupe-700 max-w-2xl mx-auto leading-relaxed'>
+              Was meine Klienten sagen
             </Typography>
           </div>
 
-          <div className='grid md:grid-cols-3 gap-8'>
-            {[
-              {
-                text: "Nach Jahren chronischer Kopfschmerzen habe ich endlich Linderung gefunden. Die sanfte Behandlung hat mir geholfen, wieder schmerzfrei zu leben.",
-                name: "Maria K.",
-                condition: "Chronische Migräne"
-              },
-              {
-                text: "Ich war skeptisch, aber die Cranio-Behandlung hat mir bei meinen Schlafproblemen sehr geholfen. Ich fühle mich ausgeglichener und entspannter.",
-                name: "Thomas M.",
-                condition: "Schlafstörungen"
-              },
-              {
-                text: "Die einfühlsame Art und die sanften Berührungen haben mir geholfen, nach einem Trauma wieder Vertrauen in meinen Körper zu finden.",
-                name: "Sandra L.",
-                condition: "Trauma-Verarbeitung"
-              }
-            ].map((testimonial, index) => (
-              <div key={index} className='bg-white rounded-xl p-6 warm-shadow border border-cream-200'>
-                <Typography className='font-inter text-taupe-700 italic mb-4 leading-relaxed'>
-                  "{testimonial.text}"
-                </Typography>
-                <div className='flex items-center space-x-3'>
-                  <div className='w-10 h-10 bg-sage-200 rounded-full flex items-center justify-center'>
-                    <Typography className='font-inter font-bold text-sage-700 text-sm'>
-                      {testimonial.name.charAt(0)}
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography className='font-inter font-medium text-taupe-800 text-sm'>
-                      {testimonial.name}
-                    </Typography>
-                    <Typography className='font-inter text-sage-600 text-xs'>
+          <div className='grid md:grid-cols-3 gap-6'>
+            {testimonials.slice(0, 3).map((testimonial, index) => (
+              <div key={index} className='bg-white rounded-2xl p-6 warm-shadow border border-cream-200 flex flex-col hover:shadow-xl transition-shadow duration-300'>
+                <div className='mb-4 flex-grow'>
+                  <svg className='w-8 h-8 text-[#67B1B1] mb-3' fill='currentColor' viewBox='0 0 24 24'>
+                    <path d='M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z' />
+                  </svg>
+                  <Typography className='font-inter text-taupe-700 leading-relaxed text-sm whitespace-pre-line'>
+                    {testimonial.text}
+                  </Typography>
+                </div>
+                <div className='pt-3 border-t border-cream-200'>
+                  <Typography className='font-inter font-medium text-taupe-800 text-sm'>
+                    {testimonial.name}
+                  </Typography>
+                  {testimonial.condition && (
+                    <Typography className='font-inter text-[#67B1B1] text-xs mt-1'>
                       {testimonial.condition}
                     </Typography>
-                  </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
+
+          {showMoreTestimonials && (
+            <div className='grid md:grid-cols-3 gap-6 mt-6'>
+              {testimonials.slice(3).map((testimonial, index) => (
+                <div key={index + 3} className='bg-white rounded-2xl p-6 warm-shadow border border-cream-200 flex flex-col hover:shadow-xl transition-shadow duration-300'>
+                  <div className='mb-4 flex-grow'>
+                    <svg className='w-8 h-8 text-[#67B1B1] mb-3' fill='currentColor' viewBox='0 0 24 24'>
+                      <path d='M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z' />
+                    </svg>
+                    <Typography className='font-inter text-taupe-700 leading-relaxed text-sm whitespace-pre-line'>
+                      {testimonial.text}
+                    </Typography>
+                  </div>
+                  <div className='pt-3 border-t border-cream-200'>
+                    <Typography className='font-inter font-medium text-taupe-800 text-sm'>
+                      {testimonial.name}
+                    </Typography>
+                    {testimonial.condition && (
+                      <Typography className='font-inter text-[#67B1B1] text-xs mt-1'>
+                        {testimonial.condition}
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className='text-center mt-6'>
+            <Button
+              onClick={() => setShowMoreTestimonials(!showMoreTestimonials)}
+              className='bg-[#67B1B1] hover:bg-[#5a9a9a] text-white px-8 py-3 rounded-full font-inter font-medium transition-all duration-300 hover:shadow-lg'
+            >
+              {showMoreTestimonials ? 'Weniger anzeigen' : 'Mehr Erfahrungen'}
+            </Button>
+          </div>
+        </div>
+
+        {/* Image Break 3 */}
+        <div className='mb-16 -mx-4'>
+          <div className='relative h-56 md:h-72 overflow-hidden md:rounded-2xl'>
+            <Image 
+              src='/image/behandlung_3.png' 
+              alt='Craniosacrale Körperarbeit' 
+              fill
+              className='object-cover'
+              sizes='(max-width: 768px) 100vw, 1200px'
+            />
+            <div className='absolute inset-0 bg-gradient-to-t from-black/25 to-transparent'></div>
+          </div>
         </div>
 
         {/* Science Section */}
-        <div className='mb-20'>
+        <div className='mb-16'>
           <div className='bg-white rounded-2xl p-8 warm-shadow border border-cream-200'>
-            <div className='grid md:grid-cols-2 gap-8 items-center'>
-              <div className='h-64 bg-cream-200 rounded-xl flex items-center justify-center'>
-                {/* Placeholder for scientific illustration */}
-                <Typography className='text-taupe-600 font-inter text-center'>
-                  Wissenschaftliche Grundlagen <br />der Cranio-Therapie
-                </Typography>
-              </div>
-              <div>
-                <Typography variant='h4' className='font-inter mb-4 text-therapeutic-700 text-xl font-medium'>
-                  Wissenschaftlich fundiert
-                </Typography>
-                <Typography className='font-inter text-taupe-700 leading-relaxed mb-4'>
-                  Die Craniosacrale Therapie basiert auf den Erkenntnissen des Osteopathen 
-                  Dr. William Sutherland und wurde von Dr. John Upledger weiterentwickelt. 
-                  Studien zeigen positive Effekte bei verschiedenen Beschwerdebildern.
-                </Typography>
-                <div className='space-y-2'>
-                  <div className='flex items-center space-x-2'>
-                    <div className='w-2 h-2 bg-therapeutic-600 rounded-full'></div>
-                    <Typography className='font-inter text-taupe-600 text-sm'>
-                      Evidenzbasierte Behandlungsmethode
-                    </Typography>
+            <div className='max-w-3xl mx-auto text-center'>
+              <Typography variant='h4' className='font-inter mb-4 text-[#67B1B1] text-xl font-medium'>
+                Wissenschaftlich fundiert
+              </Typography>
+              <Typography className='font-inter text-taupe-700 leading-relaxed mb-6'>
+                Die Craniosacrale Therapie basiert auf den Erkenntnissen des Osteopathen 
+                Dr. William Sutherland und wurde von Dr. John Upledger weiterentwickelt. 
+                Studien zeigen positive Effekte bei verschiedenen Beschwerdebildern.
+              </Typography>
+              <div className='grid md:grid-cols-3 gap-4 mt-6'>
+                <div className='flex flex-col items-center'>
+                  <div className='w-12 h-12 bg-[#67B1B1]/10 rounded-full flex items-center justify-center mb-2'>
+                    <div className='w-3 h-3 bg-[#67B1B1] rounded-full'></div>
                   </div>
-                  <div className='flex items-center space-x-2'>
-                    <div className='w-2 h-2 bg-therapeutic-600 rounded-full'></div>
-                    <Typography className='font-inter text-taupe-600 text-sm'>
-                      Kontinuierliche Weiterbildung und Zertifizierung
-                    </Typography>
+                  <Typography className='font-inter text-taupe-700 text-sm text-center'>
+                    Evidenzbasierte Behandlungsmethode
+                  </Typography>
+                </div>
+                <div className='flex flex-col items-center'>
+                  <div className='w-12 h-12 bg-[#67B1B1]/10 rounded-full flex items-center justify-center mb-2'>
+                    <div className='w-3 h-3 bg-[#67B1B1] rounded-full'></div>
                   </div>
-                  <div className='flex items-center space-x-2'>
-                    <div className='w-2 h-2 bg-therapeutic-600 rounded-full'></div>
-                    <Typography className='font-inter text-taupe-600 text-sm'>
-                      Anerkannt von führenden Gesundheitsorganisationen
-                    </Typography>
+                  <Typography className='font-inter text-taupe-700 text-sm text-center'>
+                    Kontinuierliche Weiterbildung
+                  </Typography>
+                </div>
+                <div className='flex flex-col items-center'>
+                  <div className='w-12 h-12 bg-[#67B1B1]/10 rounded-full flex items-center justify-center mb-2'>
+                    <div className='w-3 h-3 bg-[#67B1B1] rounded-full'></div>
                   </div>
+                  <Typography className='font-inter text-taupe-700 text-sm text-center'>
+                    International anerkannt
+                  </Typography>
                 </div>
               </div>
             </div>
@@ -267,28 +366,26 @@ export function Content() {
         </div>
 
         {/* Call to Action */}
-        <div className='text-center bg-cream-100 rounded-2xl p-12 warm-shadow border border-cream-300'>
-          <Typography variant='h3' className='font-inter mb-4 text-taupe-800 text-2xl font-light'>
-            Bereit für Ihre Auszeit?
+        <div className='text-center bg-white rounded-2xl p-12 warm-shadow border border-cream-200'>
+          <Typography variant='h3' className='font-inter mb-4 text-taupe-800 text-2xl md:text-3xl font-light'>
+            Bereit für deine Auszeit?
           </Typography>
-          <Typography className='font-inter text-taupe-700 mb-8 max-w-2xl mx-auto'>
-            Erleben Sie die transformative Kraft der Craniosacralen Körperarbeit und 
-            investieren Sie in Ihr Wohlbefinden.
+          <Typography className='font-inter text-taupe-700 mb-8 max-w-2xl mx-auto leading-relaxed'>
+            Investiere in dein Wohlbefinden und erlebe die transformative Kraft der Craniosacralen Körperarbeit.
           </Typography>
-          <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+          <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
             <Link href="/kontakt">
               <Button 
                 size="lg" 
-                className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-[#67B1B1] hover:bg-[#5a9a9a] text-white font-inter px-10 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
               >
-                Jetzt Termin vereinbaren
+                Termin vereinbaren
               </Button>
             </Link>
             <Link href="/angebote-preise">
               <Button 
-                variant="outlined" 
                 size="lg" 
-                className="border-2 border-taupe-400 text-taupe-700 hover:bg-taupe-100 font-inter px-8 py-3 rounded-full transition-all duration-300"
+                className="bg-cream-200 hover:bg-cream-300 text-taupe-800 font-inter px-10 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Angebote & Preise
               </Button>
