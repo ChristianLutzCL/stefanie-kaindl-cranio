@@ -28,6 +28,10 @@ const NAV_MENU = [
     href: '/angebote-preise',
   },
   {
+    title: 'Yoga',
+    href: '/yoga',
+  },
+  {
     title: 'Kontakt',
     href: '/kontakt',
   },
@@ -56,7 +60,7 @@ export function Navbar() {
   const pathname = usePathname();
   
   // Pages with light backgrounds that need dark navbar from the start
-  const lightBackgroundPages = ['/ueber-mich', '/kontakt', '/angebote-preise', '/impressum', '/datenschutz', '/cookie-einstellungen'];
+  const lightBackgroundPages = ['/ueber-mich', '/kontakt', '/angebote-preise', '/impressum', '/datenschutz', '/cookie-einstellungen', '/yoga'];
   const hasLightBackground = lightBackgroundPages.some(page => pathname === page || pathname === `${page}/`);
   
   function handleOpen() {

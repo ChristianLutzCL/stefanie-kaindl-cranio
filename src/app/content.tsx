@@ -365,6 +365,37 @@ export function Content() {
           </div>
         </div>
 
+        {/* Yoga Teaser */}
+        <div className='grid lg:grid-cols-2 gap-8 items-center mb-16 rounded-3xl bg-gradient-to-r from-[#67B1B1] via-[#5a9a9a] to-[#4f8e8e] text-white p-8 md:p-12 warm-shadow border border-cream-200'>
+          <div>
+            <Typography className='font-inter text-sm uppercase tracking-[0.3em] text-white/80 mb-2'>
+              Neu ab Januar
+            </Typography>
+            <Typography variant='h2' className='font-inter text-2xl md:text-3xl font-light mb-4'>
+              Donnerstags-Yoga um 17:30 & 19:00 Uhr
+            </Typography>
+            <Typography className='font-inter text-white/90 mb-6 leading-relaxed'>
+              Zwei Termine pro Abend, kleine Gruppen und craniosacrale Stillpoints, die dich geerdet durch die
+              Woche tragen. Sichere dir deinen Platz für die frühe Session zum Ankommen oder den Flow zum
+              tieferen Eintauchen.
+            </Typography>
+            <Link href='/yoga'>
+              <Button className='bg-white text-[#5a9a9a] hover:bg-white/90 border border-transparent font-inter px-6 py-3 rounded-full'>
+                Zum Yoga-Angebot
+              </Button>
+            </Link>
+          </div>
+          <div className='relative h-64 md:h-80 rounded-2xl overflow-hidden'>
+            <Image 
+              src='/image/yoga.webp'
+              alt='Yoga mit Stefanie Kaindl'
+              fill
+              className='object-cover'
+              sizes='(max-width: 768px) 100vw, 600px'
+            />
+          </div>
+        </div>
+
         {/* Call to Action */}
         <div className='text-center bg-white rounded-2xl p-12 warm-shadow border border-cream-200'>
           <Typography variant='h2' className='font-inter mb-4 text-taupe-800 text-2xl md:text-3xl font-light'>
