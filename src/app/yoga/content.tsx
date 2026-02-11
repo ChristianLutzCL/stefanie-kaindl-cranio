@@ -3,6 +3,7 @@
 import { Typography, Button } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import heroImage from "../../../public/image/yoga.webp";
 import practiceImage from "../../../public/image/yoga_raum.webp";
 
@@ -37,19 +38,6 @@ const scheduleHighlights = [
   },
 ];
 
-const upcomingDates = [
-  "08.01.2025",
-  "15.01.2025",
-  "22.01.2025",
-  "29.01.2025",
-  "05.02.2025",
-  "12.02.2025",
-  "26.02.2025",
-  "05.03.2025",
-  "12.03.2025",
-  "19.03.2025",
-];
-
 const monthNames: Record<string, string> = {
   "01": "Januar",
   "02": "Februar",
@@ -66,6 +54,40 @@ const monthNames: Record<string, string> = {
 };
 
 function Content() {
+  const [dates, setDates] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDates = async () => {
+      try {
+        // Fetch from n8n webhook - replace with your n8n webhook URL
+        const webhookUrl = process.env.NEXT_PUBLIC_YOGA_DATES_WEBHOOK || 'https://your-n8n-instance.com/webhook/yoga-dates';
+        const response = await fetch(webhookUrl);
+        const data = await response.json();
+        
+        if (data.dates && Array.isArray(data.dates)) {
+          // Additional client-side filtering for future dates only
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          
+          const futureDates = data.dates.filter((dateStr: string) => {
+            const [day, month, year] = dateStr.split('.');
+            const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+            return date >= today;
+          });
+          
+          setDates(futureDates);
+        }
+      } catch (error) {
+        console.error('Error fetching yoga dates:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDates();
+  }, []);
+
   return (
     <section className="pt-28 pb-16 bg-gradient-to-b from-cream-50 to-cream-100 min-h-screen">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -273,26 +295,40 @@ function Content() {
               </Link>
             </div>
             <div className="p-8 md:p-12">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {upcomingDates.map((date) => {
-                  const [day, month, year] = date.split(".");
-                  const monthLabel = monthNames[month] ?? month;
-                  const dayNumber = parseInt(day, 10);
-                  return (
-                    <div key={date} className="rounded-2xl border border-cream-200 bg-cream-50/70 px-4 py-5 text-center">
-                      <Typography className="font-inter text-4xl font-light text-[#67B1B1]">
-                        {dayNumber}
-                      </Typography>
-                      <Typography className="font-inter text-base text-taupe-700">
-                        {monthLabel}
-                      </Typography>
-                      <Typography className="font-inter text-xs uppercase tracking-[0.4em] text-taupe-400 mt-1">
-                        {year}
-                      </Typography>
-                    </div>
-                  );
-                })}
-              </div>
+              {isLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Typography className="font-inter text-taupe-500">
+                    Termine werden geladen...
+                  </Typography>
+                </div>
+              ) : dates.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {dates.map((date) => {
+                    const [day, month, year] = date.split(".");
+                    const monthLabel = monthNames[month] ?? month;
+                    const dayNumber = parseInt(day, 10);
+                    return (
+                      <div key={date} className="rounded-2xl border border-cream-200 bg-cream-50/70 px-4 py-5 text-center">
+                        <Typography className="font-inter text-4xl font-light text-[#67B1B1]">
+                          {dayNumber}
+                        </Typography>
+                        <Typography className="font-inter text-base text-taupe-700">
+                          {monthLabel}
+                        </Typography>
+                        <Typography className="font-inter text-xs uppercase tracking-[0.4em] text-taupe-400 mt-1">
+                          {year}
+                        </Typography>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="flex items-center justify-center py-12">
+                  <Typography className="font-inter text-taupe-500">
+                    Aktuell keine Termine verfügbar. Bitte kontaktiere mich für weitere Informationen.
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
         </div>
