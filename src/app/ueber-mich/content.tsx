@@ -73,10 +73,10 @@ function Content() {
               </Typography>
               
               <Typography className="font-inter text-taupe-700 leading-relaxed">
-                Derzeit vertiefe ich mein Verständnis für Körper, Atem und Energie durch eine 
-                300-Stunden-Vinyasa-Yogalehrerausbildung bei Lovelysita in Prien, die ich im Januar 2026 
-                abschließen werde. Yoga und Craniosacralarbeit ergänzen sich für mich auf wunderbare 
-                Weise – beide schaffen Raum für Präsenz, Bewusstsein und Heilung auf allen Ebenen.
+                Mit dem erfolgreichen Abschluss meiner 300-Stunden-Vinyasa-Yogalehrerausbildung bei 
+                Lovelysita in Prien am 10.01.2026 hat sich mein Weg mit Körper, Atem und Energie noch 
+                einmal vertieft. Für mich verbinden sich Yoga und Craniosacralarbeit auf besondere 
+                Weise – sie schaffen Raum für achtsame Präsenz, Bewusstsein und ganzheitliche Heilung.
               </Typography>
               
               <Typography className="font-inter text-taupe-700 leading-relaxed">
