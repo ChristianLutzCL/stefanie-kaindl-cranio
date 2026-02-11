@@ -3,7 +3,8 @@
 import { Typography, Button } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+// Uncomment below if using Notion integration
+// import { useState, useEffect } from "react";
 import heroImage from "../../../public/image/yoga.webp";
 import practiceImage from "../../../public/image/yoga_raum.webp";
 
@@ -38,6 +39,20 @@ const scheduleHighlights = [
   },
 ];
 
+// Static dates - manually update these (all Thursdays)
+const upcomingDates = [
+  "12.02.2026",
+  "19.02.2026",
+  "26.02.2026",
+  "05.03.2026",
+  "12.03.2026",
+  "19.03.2026",
+  "26.03.2026",
+  "02.04.2026",
+  "09.04.2026",
+  "16.04.2026",
+];
+
 const monthNames: Record<string, string> = {
   "01": "Januar",
   "02": "Februar",
@@ -54,6 +69,9 @@ const monthNames: Record<string, string> = {
 };
 
 function Content() {
+  // NOTION INTEGRATION CODE (commented out - using static dates instead)
+  // Uncomment below and set NEXT_PUBLIC_YOGA_DATES_WEBHOOK in .env.local to use n8n
+  /*
   const [dates, setDates] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -87,6 +105,7 @@ function Content() {
 
     fetchDates();
   }, []);
+  */
 
   return (
     <section className="pt-28 pb-16 bg-gradient-to-b from-cream-50 to-cream-100 min-h-screen">
@@ -295,15 +314,8 @@ function Content() {
               </Link>
             </div>
             <div className="p-8 md:p-12">
-              {isLoading ? (
-                <div className="flex items-center justify-center py-12">
-                  <Typography className="font-inter text-taupe-500">
-                    Termine werden geladen...
-                  </Typography>
-                </div>
-              ) : dates.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                  {dates.map((date) => {
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {upcomingDates.map((date) => {
                     const [day, month, year] = date.split(".");
                     const monthLabel = monthNames[month] ?? month;
                     const dayNumber = parseInt(day, 10);
@@ -322,13 +334,6 @@ function Content() {
                     );
                   })}
                 </div>
-              ) : (
-                <div className="flex items-center justify-center py-12">
-                  <Typography className="font-inter text-taupe-500">
-                    Aktuell keine Termine verfügbar. Bitte kontaktiere mich für weitere Informationen.
-                  </Typography>
-                </div>
-              )}
             </div>
           </div>
         </div>
