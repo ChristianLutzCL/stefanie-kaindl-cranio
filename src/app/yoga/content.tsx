@@ -41,16 +41,16 @@ const scheduleHighlights = [
 
 // Static dates - manually update these (all Thursdays)
 const upcomingDates = [
-  "12.02.2026",
-  "19.02.2026",
-  "26.02.2026",
-  "05.03.2026",
-  "12.03.2026",
-  "19.03.2026",
-  "26.03.2026",
-  "02.04.2026",
-  "09.04.2026",
   "16.04.2026",
+  "23.04.2026",
+  "30.04.2026",
+  "07.05.2026",
+  "21.05.2026",
+  "11.06.2026",
+  "18.06.2026",
+  "25.06.2026",
+  "02.07.2026",
+  "09.07.2026",
 ];
 
 const monthNames: Record<string, string> = {
@@ -273,6 +273,25 @@ function Content() {
                 <Typography className="font-inter text-taupe-600 text-sm mt-3">
                   Enthalten sind Cranio-Impulse, persönliche Begleitung und eine ruhige Atmosphäre in kleinen Gruppen.
                 </Typography>
+              </div>
+              <div className="mt-6 rounded-2xl border border-white/60 bg-white/70 backdrop-blur-sm p-6 flex flex-col gap-4">
+                <Typography className="font-inter text-xs uppercase tracking-[0.4em] text-taupe-500">
+                  Zahlung möglich
+                </Typography>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                  <div className="flex items-center shrink-0">
+                    <Image
+                      src="/logos/egym-wellpass-logo-dark.svg"
+                      alt="EGYM Wellpass"
+                      width={320}
+                      height={48}
+                      className="h-12 w-auto opacity-90"
+                    />
+                  </div>
+                  <Typography className="font-inter text-taupe-700 text-sm leading-relaxed max-w-md">
+                    Du kannst deine Stunde auch mit EGYM Wellpass bezahlen.
+                  </Typography>
+                </div>
               </div>
             </div>
             <div className="p-8 md:p-12 bg-white">
