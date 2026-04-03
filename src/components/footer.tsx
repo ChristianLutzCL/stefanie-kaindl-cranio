@@ -27,7 +27,7 @@ const footerData = {
   developer: {
     text: 'Created by',
     name: 'Christian Lutz',
-    email: 'hello@seventeenlabs.io'
+    website: 'https://chrislutz.me'
   }
 };
 
@@ -72,7 +72,9 @@ export function Footer() {
               <Typography className="font-inter text-xs text-taupe-600">
                 {footerData.developer.text}{' '}
                 <Link
-                  href={`mailto:${footerData.developer.email}`}
+                  href={footerData.developer.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-taupe-600 hover:text-taupe-800 transition-colors underline"
                 >
                   {footerData.developer.name}

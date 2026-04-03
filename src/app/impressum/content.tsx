@@ -80,6 +80,28 @@ function Content() {
         </Typography>
         </div>
 
+        <div>
+        <Typography variant="h5" className="font-inter text-therapeutic-700">
+        Website / Umsetzung
+        </Typography>
+        <Typography className="my-5 font-normal text-taupe-700 font-inter">
+          Christian Lutz<br />
+          Schulstraße 4<br />
+          85307 Paunzhausen
+        </Typography>
+        <Typography className="my-5 font-normal text-taupe-700 font-inter">
+          E-Mail:{' '}
+          <a href="mailto:hallo@chrislutz.me" className="text-[#67B1B1] hover:text-[#5a9999] underline">
+            hallo@chrislutz.me
+          </a>
+          <br />
+          Website:{' '}
+          <a href="https://chrislutz.me" target="_blank" rel="noopener noreferrer" className="text-[#67B1B1] hover:text-[#5a9999] underline">
+            chrislutz.me
+          </a>
+        </Typography>
+        </div>
+
 
         <Typography className="my-10 font-normal text-xs text-taupe-600 font-inter">
         Quelle: https://www.e-recht24.de

@@ -153,6 +153,77 @@ function Content() {
           </div>
         </div>
 
+        <div className="mb-20 rounded-3xl border border-cream-200 bg-white warm-shadow overflow-hidden">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-0">
+            <div className="relative bg-cream-50 border-b lg:border-b-0 lg:border-r border-cream-200">
+              <Image
+                src="/image/yoga-day-retreat.jpg"
+                alt="Yoga Day Retreat Flyer"
+                width={900}
+                height={1350}
+                className="w-full h-full object-cover"
+                sizes="(max-width: 1024px) 100vw, 540px"
+              />
+            </div>
+            <div className="p-8 md:p-10">
+              <Typography className="font-inter text-sm uppercase tracking-[0.35em] text-taupe-500 mb-2">
+                Special Event
+              </Typography>
+              <Typography variant="h2" className="font-inter text-taupe-800 text-2xl md:text-3xl font-light mb-4">
+                Yoga Day Retreat
+              </Typography>
+              <Typography className="font-inter text-taupe-700 leading-relaxed mb-6">
+                Ein ganzer Tag nur für dich: Entspannung, Bewegung und neue Energie in einer kleinen, achtsamen Gruppe.
+              </Typography>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                <div className="rounded-2xl border border-cream-200 bg-cream-50/70 p-4">
+                  <Typography className="font-inter text-xs uppercase tracking-[0.25em] text-taupe-500 mb-1">
+                    Datum
+                  </Typography>
+                  <Typography className="font-inter text-lg text-taupe-800">
+                    9. Mai 2026
+                  </Typography>
+                </div>
+                <div className="rounded-2xl border border-cream-200 bg-cream-50/70 p-4">
+                  <Typography className="font-inter text-xs uppercase tracking-[0.25em] text-taupe-500 mb-1">
+                    Uhrzeit
+                  </Typography>
+                  <Typography className="font-inter text-lg text-taupe-800">
+                    10:00 - 17:00 Uhr
+                  </Typography>
+                </div>
+                <div className="rounded-2xl border border-cream-200 bg-cream-50/70 p-4">
+                  <Typography className="font-inter text-xs uppercase tracking-[0.25em] text-taupe-500 mb-1">
+                    Kosten
+                  </Typography>
+                  <Typography className="font-inter text-lg text-taupe-800">
+                    111 Euro
+                  </Typography>
+                </div>
+                <div className="rounded-2xl border border-cream-200 bg-cream-50/70 p-4">
+                  <Typography className="font-inter text-xs uppercase tracking-[0.25em] text-taupe-500 mb-1">
+                    Ort
+                  </Typography>
+                  <Typography className="font-inter text-lg text-taupe-800">
+                    Yogaraum Paunzhausen
+                  </Typography>
+                </div>
+              </div>
+
+              <Typography className="font-inter text-taupe-700 leading-relaxed mb-6">
+                Sichere dir deinen Platz rechtzeitig. Ich beantworte dir gerne alle Fragen zur Anmeldung.
+              </Typography>
+
+              <Link href="https://wa.me/4917663094476" target="_blank" rel="noopener noreferrer">
+                <Button className="bg-[#67B1B1] hover:bg-[#5a9a9a] text-white font-inter px-8 py-3 rounded-full">
+                  Retreat-Platz anfragen
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20 pt-10">
           <div>
             <Typography variant="h1" className="font-inter text-taupe-800 text-3xl md:text-4xl font-light mb-6">
