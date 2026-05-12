@@ -5,7 +5,6 @@ import {
   Navbar as MTNavbar,
   Collapse,
   IconButton,
-  Typography,
 } from '@material-tailwind/react';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
 import Image from 'next/image';
@@ -15,10 +14,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const NAV_MENU = [
-  {
-    title: 'Home',
-    href: '/',
-  },
   {
     title: 'Über Mich',
     href: '/ueber-mich',
@@ -32,23 +27,43 @@ const NAV_MENU = [
     href: '/yoga',
   },
   {
+    title: 'Retreat',
+    href: '/retreat',
+    badge: '2026',
+  },
+  {
     title: 'Kontakt',
     href: '/kontakt',
   },
 ];
 
-function NavItem({title, href, isScrolling, onClick}: {title: string; href: string; isScrolling?: boolean; onClick?: () => void}) {
+function NavItem({title, href, badge, isScrolling, onClick}: {title: string; href: string; badge?: string; isScrolling?: boolean; onClick?: () => void}) {
   return (
     <li>
       <Link
         href={href}
         onClick={onClick}
-        className={`font-inter flex items-center gap-2 font-light decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 ${
+        className={`font-inter flex items-center gap-2 font-light transition-all duration-100 ${
           isScrolling 
-            ? 'text-taupe-800 hover:text-[#5a9999] hover:decoration-[#5a9999]' 
-            : 'hover:text-[#67B1B1] hover:decoration-[#67B1B1]'
-        } hover:underline hover:decoration-2 hover:underline-offset-4`}>
-        {title}
+            ? 'text-taupe-800 hover:text-[#5a9999]' 
+            : 'hover:text-[#67B1B1]'
+        }`}>
+        <span className={`decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 ${
+          isScrolling 
+            ? 'hover:underline hover:decoration-[#5a9999] hover:decoration-2 hover:underline-offset-4'
+            : 'hover:underline hover:decoration-[#67B1B1] hover:decoration-2 hover:underline-offset-4'
+        }`}>
+          {title}
+        </span>
+        {badge && (
+          <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] leading-none no-underline transition-colors duration-200 ${
+            isScrolling
+              ? 'bg-[#67B1B1]/12 text-[#4f8e8e] ring-1 ring-[#67B1B1]/25'
+              : 'bg-white/18 text-white ring-1 ring-white/35 backdrop-blur-sm'
+          }`}>
+            {badge}
+          </span>
+        )}
       </Link>
     </li>
   );
@@ -62,6 +77,7 @@ export function Navbar() {
   // Pages with light backgrounds that need dark navbar from the start
   const lightBackgroundPages = ['/ueber-mich', '/kontakt', '/angebote-preise', '/impressum', '/datenschutz', '/cookie-einstellungen', '/yoga'];
   const hasLightBackground = lightBackgroundPages.some(page => pathname === page || pathname === `${page}/`);
+  const isSolidNavbar = isScrolling || hasLightBackground;
   
   function handleOpen() {
     setOpen((cur) => !cur);
@@ -73,33 +89,33 @@ export function Navbar() {
 
   React.useEffect(() => {
     function handleScroll() {
-      if (window.scrollY > 0) {
-        setIsScrolling(true);
-      } else {
-        setIsScrolling(false);
-      }
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      setIsScrolling(scrollTop > 8);
     }
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <MTNavbar
-      fullWidth
-      shadow={false}
-      color='transparent'
+    <div
       className={
-        isScrolling
-          ? 'fixed top-0 z-50 border-0 bg-cream-100/95 backdrop-blur-sm transition-all duration-200'
-          : 'fixed top-0 z-50 border-0 bg-transparent transition-all duration-500'
+        isSolidNavbar
+          ? 'fixed top-0 z-50 w-full bg-cream-100/95 backdrop-blur-sm transition-all duration-200'
+          : 'fixed top-0 z-50 w-full bg-transparent transition-all duration-500'
       }>
+      <MTNavbar
+        fullWidth
+        shadow={false}
+        color='transparent'
+        className='border-0 bg-transparent'>
       <div className='container mx-auto flex items-center justify-between'>
         <div className='flex items-center gap-4'>
           <Link href={'/'}>
             <Image 
-              src={isScrolling || hasLightBackground ? logoDark : logoLight} 
+              src={isSolidNavbar ? logoDark : logoLight} 
               height='55' 
               alt='logo' 
               className='antialiased' 
@@ -107,20 +123,20 @@ export function Navbar() {
           </Link>
         </div>
         <ul
-          className={`ml-10 hidden items-center gap-6 lg:flex ${isScrolling ? 'text-taupe-800' : hasLightBackground ? 'text-taupe-800' : 'text-white'}`}>
+          className={`ml-10 hidden items-center gap-6 lg:flex ${isSolidNavbar ? 'text-taupe-800' : 'text-white'}`}>
           {NAV_MENU.map((item) => (
-            <NavItem key={item.title} href={item.href} title={item.title} isScrolling={isScrolling || hasLightBackground} />
+            <NavItem key={item.title} href={item.href} title={item.title} badge={item.badge} isScrolling={isSolidNavbar} />
           ))}
         </ul>
         <IconButton
           variant='text'
           onClick={handleOpen}
-          color={isScrolling || hasLightBackground ? 'gray' : 'white'}
+          color={isSolidNavbar ? 'gray' : 'white'}
           className='ml-auto inline-block lg:hidden'>
           {open ? (
-            <XMarkIcon strokeWidth={2} className={`h-6 w-6 ${isScrolling || hasLightBackground ? 'text-taupe-800' : 'text-white'}`} />
+            <XMarkIcon strokeWidth={2} className={`h-6 w-6 ${isSolidNavbar ? 'text-taupe-800' : 'text-white'}`} />
           ) : (
-            <Bars3Icon strokeWidth={2} className={`h-6 w-6 ${isScrolling || hasLightBackground ? 'text-taupe-800' : 'text-white'}`} />
+            <Bars3Icon strokeWidth={2} className={`h-6 w-6 ${isSolidNavbar ? 'text-taupe-800' : 'text-white'}`} />
           )}
         </IconButton>
       </div>
@@ -128,12 +144,13 @@ export function Navbar() {
         <div className='container mx-auto mt-3 rounded-md bg-cream-100/95 backdrop-blur-sm px-6 py-4 text-taupe-800 warm-shadow'>
           <ul className='flex flex-col gap-4'>
             {NAV_MENU.map((item) => (
-              <NavItem key={item.title} href={item.href} title={item.title} isScrolling={true} onClick={() => setOpen(false)} />
+              <NavItem key={item.title} href={item.href} title={item.title} badge={item.badge} isScrolling={true} onClick={() => setOpen(false)} />
             ))}
           </ul>
         </div>
       </Collapse>
-    </MTNavbar>
+      </MTNavbar>
+    </div>
   );
 }
 
