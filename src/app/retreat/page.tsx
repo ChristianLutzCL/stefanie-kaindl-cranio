@@ -201,7 +201,7 @@ export default function RetreatPage() {
                   <div
                     key={item}
                     className='flex items-start gap-3 rounded-lg border border-cream-200 bg-white p-4'>
-                    <span className='mt-2 h-2 w-2 rounded-full bg-[#67B1B1]' />
+                    <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#67B1B1]' />
                     <p className='font-inter text-taupe-700'>{item}</p>
                   </div>
                 ))}
@@ -279,7 +279,7 @@ export default function RetreatPage() {
               </p>
               <div className='grid gap-3 sm:grid-cols-2'>
                 {[
-                  'Yoga, Meditation und Sound Bath mit Barbara',
+                  'Yoga, Meditation und Sound Bath mit Barbara und Steffi',
                   'Craniosacrale Impulse und Begleitung mit Steffi',
                   'Ein ruhiger Rahmen ohne Leistungsdruck',
                   'Persönliche Atmosphäre in kleiner Gruppe',
@@ -287,7 +287,7 @@ export default function RetreatPage() {
                   <div
                     key={item}
                     className='flex items-start gap-3 rounded-lg bg-cream-100 p-4'>
-                    <span className='mt-2 h-2 w-2 rounded-full bg-[#67B1B1]' />
+                    <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#67B1B1]' />
                     <p className='font-inter text-sm leading-relaxed text-taupe-700'>
                       {item}
                     </p>
@@ -460,7 +460,7 @@ export default function RetreatPage() {
                 <div
                   key={item}
                   className='flex items-start gap-3 rounded-lg border border-cream-200 bg-white p-4'>
-                  <span className='mt-2 h-2 w-2 rounded-full bg-[#67B1B1]' />
+                  <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#67B1B1]' />
                   <p className='font-inter text-sm leading-relaxed text-taupe-700'>
                     {item}
                   </p>
