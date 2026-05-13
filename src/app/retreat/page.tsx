@@ -247,6 +247,54 @@ export default function RetreatPage() {
 
       <section className='bg-white py-16'>
         <div className='container mx-auto max-w-6xl px-4'>
+          <div className='grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]'>
+            <div className='relative h-80 overflow-hidden rounded-lg md:h-[460px]'>
+              <Image
+                src='/image/retreat/barbara-steffi.png'
+                alt='Barbara und Steffi, die Veranstalterinnen des Retreats'
+                fill
+                className='object-cover object-center'
+                sizes='(max-width: 1024px) 100vw, 520px'
+              />
+            </div>
+
+            <div>
+              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+                Mit Barbara & Steffi
+              </p>
+              <h2 className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
+                Zwei Frauen, ein gemeinsamer Raum für deine Auszeit
+              </h2>
+              <p className='font-inter mb-6 leading-relaxed text-taupe-700'>
+                Barbara und Steffi begleiten dich durch die vier Retreat-Tage am Gardasee.
+                Ihre gemeinsame Haltung verbindet achtsame Yogapraxis, Meditation, Klang
+                und craniosacrale Körperarbeit mit viel Wärme, Natürlichkeit und Raum für
+                das, was gerade entstehen darf.
+              </p>
+              <div className='grid gap-3 sm:grid-cols-2'>
+                {[
+                  'Yoga, Meditation und Sound Bath mit Barbara',
+                  'Craniosacrale Impulse und Begleitung mit Steffi',
+                  'Ein ruhiger Rahmen ohne Leistungsdruck',
+                  'Persönliche Atmosphäre in kleiner Gruppe',
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className='flex items-start gap-3 rounded-lg bg-cream-100 p-4'>
+                    <span className='mt-2 h-2 w-2 rounded-full bg-[#67B1B1]' />
+                    <p className='font-inter text-sm leading-relaxed text-taupe-700'>
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='bg-white py-16'>
+        <div className='container mx-auto max-w-6xl px-4'>
           <div className='grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]'>
             <div>
               <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
