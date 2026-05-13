@@ -141,9 +141,15 @@ export default function RetreatPage() {
         <div className='via-black/15 absolute inset-0 bg-gradient-to-b from-black/5 to-black/50' />
         <div className='container relative z-10 mx-auto flex min-h-[78vh] max-w-6xl items-end px-4 pb-16 pt-24'>
           <div className='max-w-3xl'>
-            <p className='font-inter mb-4 text-sm uppercase tracking-[0.18em] text-cream-100/90 md:text-base'>
-              Gardasee Retreat 2026
-            </p>
+            <div className='mb-5 inline-flex'>
+              <Image
+                src='/image/retreat/golden-summer-logo.png'
+                alt='Golden Summer Retreat Logo'
+                width={512}
+                height={512}
+                className='h-16 w-16 rounded-xl object-cover shadow-lg md:h-20 md:w-20'
+              />
+            </div>
             <h1 className='font-inter mb-5 text-4xl font-light leading-tight text-white md:text-5xl lg:text-6xl'>
               Golden Summer Retreat mit Barbara und Steffi
             </h1>
