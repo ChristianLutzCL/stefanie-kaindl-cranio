@@ -6,20 +6,8 @@
    - Local:        http://localhost:3000
    - Environments: .env.local
 
- ✓ Ready in 3s
- ○ Compiling / ...
- ✓ Compiled / in 4.8s (1225 modules)
- ○ Compiling /not-found ...
- ✓ Compiled /not-found in 2.6s (1230 modules)
- ✓ Compiled in 1139ms (1232 modules)
- ✓ Compiled in 739ms (621 modules)
- ✓ Compiled in 713ms (1227 modules)
- ✓ Compiled in 814ms (1225 modules)
- ✓ Compiled in 1067ms (1225 modules)
- ✓ Compiled in 784ms (1225 modules)
- ○ Compiling /not-found ...
- ✓ Compiled /not-found in 1540ms (1230 modules)
+ ✓ Ready in 3.2s
  ○ Compiling /retreat ...
- ✓ Compiled /retreat in 979ms (1231 modules)
+ ✓ Compiled /retreat in 5.3s (1238 modules)
  ○ Compiling /not-found ...
- ✓ Compiled /not-found in 1832ms (1250 modules)
+ ✓ Compiled /not-found in 843ms (1243 modules)

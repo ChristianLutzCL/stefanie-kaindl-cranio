@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BookingButton from './booking-button';
 import BookingStatus from './booking-status';
+import FloorPlanGallery from './floor-plan-gallery';
 
 const highlights = [
   'Tägliche Yogapraxis',
@@ -17,6 +18,21 @@ const bookingDetails = [
   ['Ort', 'Casa San Tome, Gardasee'],
   ['Preis gesamt', '600€'],
   ['Anzahlung heute', '200€'],
+];
+
+const floorPlanImages = [
+  {
+    src: '/image/retreat/floor-plans/floor-plan-01.png',
+    alt: 'Grundriss der angebotenen Zimmer, Seite 1',
+  },
+  {
+    src: '/image/retreat/floor-plans/floor-plan-02.png',
+    alt: 'Grundriss der angebotenen Zimmer, Seite 2',
+  },
+  {
+    src: '/image/retreat/floor-plans/floor-plan-03.png',
+    alt: 'Grundriss der angebotenen Zimmer, Seite 3',
+  },
 ];
 
 const schedule = [
@@ -618,6 +634,21 @@ export default function RetreatPage() {
                 </p>
               </details>
             ))}
+            <details className='group'>
+              <summary className='font-inter flex cursor-pointer list-none items-center justify-between gap-6 p-5 font-medium text-taupe-800 transition-colors duration-200 hover:text-[#4f8e8e] md:p-6 [&::-webkit-details-marker]:hidden'>
+                <span>Grundrisse der angebotenen Zimmer</span>
+                <span className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream-100 text-[#4f8e8e] transition-transform duration-200 group-open:rotate-45'>
+                  +
+                </span>
+              </summary>
+              <div className='space-y-5 px-5 pb-5 md:px-6 md:pb-6'>
+                <p className='font-inter text-sm leading-relaxed text-taupe-700'>
+                  Hier findest du alle Seiten der Grundrisse der angebotenen
+                  Mehrbettzimmer direkt zur Ansicht.
+                </p>
+                <FloorPlanGallery images={floorPlanImages} />
+              </div>
+            </details>
           </div>
 
           <div className='mt-8 rounded-lg bg-[#67B1B1] p-6 text-white md:flex md:items-center md:justify-between md:gap-8'>
