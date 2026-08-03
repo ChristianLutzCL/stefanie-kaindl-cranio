@@ -481,9 +481,6 @@ export function Content() {
         {/* Yoga Teaser */}
         <div className='warm-shadow mb-16 grid items-center gap-8 rounded-3xl border border-cream-200 bg-gradient-to-r from-[#67B1B1] via-[#5a9a9a] to-[#4f8e8e] p-8 text-white md:p-12 lg:grid-cols-2'>
           <div>
-            <Typography className='font-inter mb-2 text-sm uppercase tracking-[0.3em] text-white/80'>
-              Neu ab Januar
-            </Typography>
             <Typography
               variant='h2'
               className='font-inter mb-4 text-2xl font-light md:text-3xl'>

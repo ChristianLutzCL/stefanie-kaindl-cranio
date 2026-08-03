@@ -168,10 +168,10 @@ function Content() {
           <div className='grid gap-0 lg:grid-cols-[0.9fr_1.1fr]'>
             <div className='border-b border-cream-200 bg-cream-50 lg:border-b-0 lg:border-r'>
               <Image
-                src='/image/summer-yoga-ringana.jpeg'
-                alt='Summer Yoga und Ringana Flyer'
-                width={900}
-                height={1350}
+                src='/image/alpaka-yoga.jpeg'
+                alt='Alpaka Yoga Flyer'
+                width={1054}
+                height={1492}
                 className='h-auto w-full bg-cream-50'
                 sizes='(max-width: 1024px) 100vw, 540px'
               />
@@ -184,12 +184,11 @@ function Content() {
                 <Typography
                   variant='h2'
                   className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
-                  Summer Yoga & Ringana
+                  Alpaka Yoga
                 </Typography>
                 <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                  Nimm dir eine kleine Auszeit vom Alltag und starte mit uns entspannt in
-                  den Tag: mit Sommeryoga, frischen Summer Vibes und Ringana Must-haves
-                  zum Entdecken und Ausprobieren.
+                  Yoga inmitten der Alpaka-Herde: entspannen, lachen und verbinden. Ein
+                  besonderes Erlebnis für Körper, Geist und Herz.
                 </Typography>
 
                 <div className='mb-6 grid gap-4 sm:grid-cols-2'>
@@ -198,7 +197,7 @@ function Content() {
                       Datum
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      18. Juli 2026
+                      13. September 2026
                     </Typography>
                   </div>
                   <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
@@ -206,7 +205,7 @@ function Content() {
                       Uhrzeit
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      09:00 - 11:00 Uhr
+                      10:00 Uhr
                     </Typography>
                   </div>
                   <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
@@ -214,7 +213,7 @@ function Content() {
                       Preis
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      15 Euro
+                      20 Euro
                     </Typography>
                   </div>
                   <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
@@ -222,14 +221,14 @@ function Content() {
                       Ort
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      Schulstr. 4, 85307 Paunzhausen
+                      Eckersberg
                     </Typography>
                   </div>
                 </div>
 
                 <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                  Sichere dir deinen Platz rechtzeitig. Ich beantworte dir gerne alle
-                  Fragen zur Anmeldung.
+                  Für Groß und Klein, auch Anfänger sind willkommen. Bitte bring bequeme
+                  Kleidung, eine Matte und gute Laune mit.
                 </Typography>
               </div>
 
@@ -239,7 +238,7 @@ function Content() {
                   target='_blank'
                   rel='noopener noreferrer'>
                   <Button className='font-inter rounded-full bg-[#67B1B1] px-8 py-3 text-white hover:bg-[#5a9a9a]'>
-                    Platz anfragen
+                    Anmelden & Infos
                   </Button>
                 </Link>
               </div>
