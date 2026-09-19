@@ -166,29 +166,29 @@ function Content() {
 
         <div className='warm-shadow mb-20 overflow-hidden rounded-3xl border border-cream-200 bg-white'>
           <div className='grid gap-0 lg:grid-cols-[0.9fr_1.1fr]'>
-            <div className='border-b border-cream-200 bg-cream-50 lg:border-b-0 lg:border-r'>
+            <div className='relative aspect-[4/5] w-full border-b border-cream-200 lg:aspect-auto lg:self-stretch lg:border-b-0 lg:border-r'>
               <Image
-                src='/image/alpaka-yoga.jpeg'
-                alt='Alpaka Yoga Flyer'
-                width={1054}
-                height={1492}
-                className='h-auto w-full bg-cream-50'
+                src='/image/yoga-day-wurzeln-loslassen-card.webp'
+                alt='Flyer Yoga Day – Wurzeln & Loslassen mit Stefanie Kaindl'
+                fill
+                className='object-cover'
                 sizes='(max-width: 1024px) 100vw, 540px'
               />
             </div>
             <div className='flex h-full flex-col justify-between p-8 md:p-10'>
               <div>
                 <Typography className='font-inter mb-2 text-sm uppercase tracking-[0.35em] text-taupe-500'>
-                  Special Event
+                  Ein Tag nur für dich
                 </Typography>
                 <Typography
                   variant='h2'
                   className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
-                  Alpaka Yoga
+                  Yoga Day – Wurzeln & Loslassen
                 </Typography>
                 <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                  Yoga inmitten der Alpaka-Herde: entspannen, lachen und verbinden. Ein
-                  besonderes Erlebnis für Körper, Geist und Herz.
+                  Ein Tag, um anzukommen, loszulassen und neue Kraft zu schöpfen. Yoga,
+                  Yin, Meditation, Entspannung und Klang – in Verbindung mit dir, mit
+                  deinem Körper, mit dem Leben.
                 </Typography>
 
                 <div className='mb-6 grid gap-4 sm:grid-cols-2'>
@@ -197,7 +197,7 @@ function Content() {
                       Datum
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      13. September 2026
+                      Samstag, 07.11.2026
                     </Typography>
                   </div>
                   <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
@@ -205,7 +205,7 @@ function Content() {
                       Uhrzeit
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      10:00 Uhr
+                      10:00 – 17:00 Uhr
                     </Typography>
                   </div>
                   <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
@@ -213,7 +213,7 @@ function Content() {
                       Preis
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      20 Euro
+                      111 € / 129 €
                     </Typography>
                   </div>
                   <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
@@ -221,14 +221,24 @@ function Content() {
                       Ort
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      Eckersberg
+                      Paunzhausen
                     </Typography>
                   </div>
                 </div>
 
+                <Typography className='font-inter mb-6 text-sm leading-relaxed text-taupe-600'>
+                  Early Bird 111 € bis 30.09.2026 · regulär 129 €
+                </Typography>
+
                 <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                  Für Groß und Klein, auch Anfänger sind willkommen. Bitte bring bequeme
-                  Kleidung, eine Matte und gute Laune mit.
+                  Autumn Vinyasa Flow · Körper &amp; Nervensystem · Vegetarisches
+                  Mittagessen · Yin Yoga · Herzchakra Meditation · Kristallklangschalen
+                </Typography>
+
+                <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
+                  Im Preis enthalten: 7 Stunden Yoga &amp; Entspannung, vegetarisches
+                  Mittagessen, Tee, Wasser und kleine Snacks sowie dein persönliches
+                  Intention-Armband. Maximal 10 Teilnehmer.
                 </Typography>
               </div>
 
