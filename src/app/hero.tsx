@@ -3,56 +3,37 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className='editorial-hero'>
-      <div className='hero-copy'>
-        <p className='eyebrow'>
-          <span /> Craniosacrale Körperarbeit & Yoga
-        </p>
+    <section className='immersive-hero'>
+      <Image
+        className='hero-background'
+        src='/image/hero.webp'
+        alt='Stefanie hält eine Klangschale in ihrer Praxis'
+        fill
+        priority
+        sizes='100vw'
+      />
+      <div className='hero-overlay' aria-hidden='true' />
+      <div className='hero-content'>
+        <p className='eyebrow'>Craniosacrale Körperarbeit & Yoga</p>
         <h1>
           Ein Raum für dich.
           <br />
-          Ein Weg zurück
-          <br />
-          zu <em>deiner Balance.</em>
+          <em>Zurück in deine Balance.</em>
         </h1>
         <p className='hero-description'>
-          Manchmal braucht es nur einen Moment der Ruhe.
-          <br className='desktop-break' /> Und jemanden, der dir mit Achtsamkeit begegnet.
-        </p>
-        <p className='hero-description'>
-          Ich begleite dich mit sanfter Körperarbeit und Yoga –
-          <br className='desktop-break' /> in deinem Tempo, mit Raum für das, was dich
-          bewegt.
+          Sanfte Berührung. Bewusste Bewegung. Zeit zum Durchatmen.
+          <br className='desktop-break' /> Ich begleite dich auf deinem Weg – achtsam und
+          in deinem Tempo.
         </p>
         <div className='hero-actions'>
           <Link className='editorial-button' href='/kontakt'>
             Termin vereinbaren <span aria-hidden='true'>↗</span>
           </Link>
-          <Link className='text-link' href='#angebote'>
-            Meine Angebote <span aria-hidden='true'>↓</span>
+          <Link className='hero-secondary' href='#angebote'>
+            Meine Angebote entdecken <span aria-hidden='true'>↓</span>
           </Link>
         </div>
-        <div className='hero-signoff'>
-          <span className='small-rule' /> Stefanie Kaindl · Pfaffenhofen a. d. Ilm
-        </div>
-      </div>
-      <div className='hero-photo'>
-        <Image
-          src='/image/hero.webp'
-          alt='Stefanie hält eine Klangschale in ihrer hellen Praxis'
-          fill
-          priority
-          sizes='(max-width: 760px) 100vw, 48vw'
-        />
-        <div className='photo-note'>
-          <span aria-hidden='true'>✳</span>
-          <p>
-            Ankommen.
-            <br />
-            Loslassen. Bei dir sein.
-          </p>
-        </div>
-        <span className='photo-caption'>ACHTSAME BERÜHRUNG. NEUE VERBINDUNG.</span>
+        <p className='hero-location'>Stefanie Kaindl · Pfaffenhofen a. d. Ilm</p>
       </div>
     </section>
   );

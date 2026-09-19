@@ -11,10 +11,10 @@ const config: Config = withMT({
       colors: {
         // Warm cream/beige inspired by the reference site
         cream: {
-          '50': '#f7f5ef',
-          '100': '#f0eee5',
-          '200': '#e1dfd3',
-          '300': '#d1cfbf',
+          '50': '#fefcf7',
+          '100': '#fdf7e8',
+          '200': '#fbedc6',
+          '300': '#f7dc9a',
           '400': '#f2c56c',
           '500': '#eeb147',
           '600': '#de9c32',
@@ -45,10 +45,10 @@ const config: Config = withMT({
           '300': '#cab7aa',
           '400': '#b69889',
           '500': '#a68270',
-          '600': '#657063',
-          '700': '#596559',
-          '800': '#344b3d',
-          '900': '#293e35',
+          '600': '#987264',
+          '700': '#7f5e54',
+          '800': '#695049',
+          '900': '#56433d',
           '950': '#2e221f',
         },
         // Soft therapeutic accent color

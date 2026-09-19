@@ -2,6 +2,8 @@
 
 import {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import logo from '../../public/logos/sk_logo_dark.webp';
 import {usePathname} from 'next/navigation';
 
 const links = [
@@ -43,12 +45,12 @@ export function Navbar() {
       </a>
       <div className='header-inner'>
         <Link className='brand' href='/' aria-label='Stefanie Kaindl – Startseite'>
-          <span className='brand-mark' aria-hidden='true'>
-            sk<span>✳</span>
-          </span>
-          <span className='brand-name'>
-            Stefanie Kaindl<small>CRANIO & YOGA</small>
-          </span>
+          <Image
+            src={logo}
+            alt='Stefanie Kaindl – Cranio Sacral'
+            className='brand-logo'
+            priority
+          />
         </Link>
         <button
           ref={toggle}

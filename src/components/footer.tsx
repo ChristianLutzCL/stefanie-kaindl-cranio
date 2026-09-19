@@ -1,11 +1,17 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import logo from '../../public/logos/sk_logo_dark.webp';
 
 export function Footer() {
   return (
     <footer className='site-footer'>
       <div className='footer-top'>
         <Link className='footer-brand' href='/'>
-          Stefanie Kaindl<small>Craniosacrale Körperarbeit & Yoga</small>
+          <Image
+            src={logo}
+            alt='Stefanie Kaindl – Cranio Sacral'
+            className='footer-logo'
+          />
         </Link>
         <p>
           Mit Achtsamkeit verbunden.
