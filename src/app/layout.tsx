@@ -32,14 +32,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Stefanie Kaindl" }],
   creator: "Stefanie Kaindl",
   publisher: "Stefanie Kaindl",
-  metadataBase: new URL('https://stefanie-kaindl-cranio.com'),
+  metadataBase: new URL('https://stefanie-kaindl-cranio.de'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'de_DE',
-    url: 'https://stefanie-kaindl-cranio.com',
+    url: 'https://stefanie-kaindl-cranio.de',
     title: 'Craniosacrale Körperarbeit | Stefanie Kaindl',
     description: 'Craniosacrale Körperarbeit – Sanfte, ganzheitliche Behandlung für Erwachsene, Kinder und Babys. Schmerzlinderung, Stressreduktion und tiefe Entspannung.',
     siteName: 'Stefanie Kaindl - Craniosacrale Körperarbeit',
