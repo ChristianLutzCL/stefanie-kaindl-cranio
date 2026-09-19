@@ -1,20 +1,20 @@
-import type { Config } from "tailwindcss";
-const withMT = require("@material-tailwind/react/utils/withMT");
+import type {Config} from 'tailwindcss';
+const withMT = require('@material-tailwind/react/utils/withMT');
 
 const config: Config = withMT({
   content: [
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
         // Warm cream/beige inspired by the reference site
-        'cream': {
-          '50': '#fefcf7',
-          '100': '#fdf7e8',
-          '200': '#fbedc6',
-          '300': '#f7dc9a',
+        cream: {
+          '50': '#f7f5ef',
+          '100': '#f0eee5',
+          '200': '#e1dfd3',
+          '300': '#d1cfbf',
           '400': '#f2c56c',
           '500': '#eeb147',
           '600': '#de9c32',
@@ -24,7 +24,7 @@ const config: Config = withMT({
           '950': '#422c12',
         },
         // Soft sage green inspired by the therapeutic theme
-        'sage': {
+        sage: {
           '50': '#f7f9f7',
           '100': '#eef2ee',
           '200': '#dde5dd',
@@ -38,21 +38,21 @@ const config: Config = withMT({
           '950': '#1f251f',
         },
         // Warm taupe/brown for deeper elements
-        'taupe': {
+        taupe: {
           '50': '#f8f6f4',
           '100': '#f0ebe6',
           '200': '#dfd5cc',
           '300': '#cab7aa',
           '400': '#b69889',
           '500': '#a68270',
-          '600': '#987264',
-          '700': '#7f5e54',
-          '800': '#695049',
-          '900': '#56433d',
+          '600': '#657063',
+          '700': '#596559',
+          '800': '#344b3d',
+          '900': '#293e35',
           '950': '#2e221f',
         },
         // Soft therapeutic accent color
-        'therapeutic': {
+        therapeutic: {
           '50': '#f6f8f6',
           '100': '#e3ebe4',
           '200': '#c7d6c9',
@@ -65,9 +65,8 @@ const config: Config = withMT({
           '900': '#263529',
           '950': '#141d16',
         },
-         
-      }
-    }
+      },
+    },
   },
   plugins: [],
 });

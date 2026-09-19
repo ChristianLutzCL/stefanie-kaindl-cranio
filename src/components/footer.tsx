@@ -1,92 +1,36 @@
-'use client';
-
-import { Typography } from '@material-tailwind/react';
 import Link from 'next/link';
-
-const CURRENT_YEAR = new Date().getFullYear();
-
-const footerData = {
-  copyright: {
-    text: `© ${CURRENT_YEAR} · Stefanie Kaindl`,
-    name: 'Stefanie Kaindl'
-  },
-  links: {
-    impressum: {
-      href: '/impressum',
-      text: 'Impressum'
-    },
-    datenschutz: {
-      href: '/datenschutz',
-      text: 'Datenschutz'
-    },
-    cookies: {
-      href: '/cookie-einstellungen',
-      text: 'Cookie-Einstellungen'
-    }
-  },
-  developer: {
-    text: 'Created by',
-    name: 'Christian Lutz',
-    website: 'https://chrislutz.me'
-  }
-};
 
 export function Footer() {
   return (
-    <footer className="w-full bg-cream-100 mt-auto">
-      <div className="container mx-auto px-8">
-        <div className="py-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:justify-between">
-            
-            {/* Copyright */}
-            <div className="text-center md:text-left">
-              <Typography className="font-inter text-xs text-taupe-600">
-                {footerData.copyright.text}
-              </Typography>
-            </div>
-
-            {/* Legal Links */}
-            <div className="flex items-center gap-4">
-              <Link
-                href={footerData.links.impressum.href}
-                className="font-inter text-xs text-taupe-600 hover:text-taupe-800 transition-colors"
-              >
-                {footerData.links.impressum.text}
-              </Link>
-              <Link
-                href={footerData.links.datenschutz.href}
-                className="font-inter text-xs text-taupe-600 hover:text-taupe-800 transition-colors"
-              >
-                {footerData.links.datenschutz.text}
-              </Link>
-              <Link
-                href={footerData.links.cookies.href}
-                className="font-inter text-xs text-taupe-600 hover:text-taupe-800 transition-colors"
-              >
-                {footerData.links.cookies.text}
-              </Link>
-            </div>
-
-            {/* Developer Credit */}
-            <div className="text-center md:text-right">
-              <Typography className="font-inter text-xs text-taupe-600">
-                {footerData.developer.text}{' '}
-                <Link
-                  href={footerData.developer.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-taupe-600 hover:text-taupe-800 transition-colors underline"
-                >
-                  {footerData.developer.name}
-                </Link>
-              </Typography>
-            </div>
-
-          </div>
-        </div>
+    <footer className='site-footer'>
+      <div className='footer-top'>
+        <Link className='footer-brand' href='/'>
+          Stefanie Kaindl<small>Craniosacrale Körperarbeit & Yoga</small>
+        </Link>
+        <p>
+          Mit Achtsamkeit verbunden.
+          <br />
+          Mit dir im Mittelpunkt.
+        </p>
+        <Link className='text-link' href='/kontakt'>
+          Kontakt aufnehmen <span aria-hidden='true'>↗</span>
+        </Link>
+      </div>
+      <div className='footer-bottom'>
+        <span>© {new Date().getFullYear()} Stefanie Kaindl</span>
+        <nav aria-label='Rechtliche Informationen'>
+          <Link href='/impressum'>Impressum</Link>
+          <Link href='/datenschutz'>Datenschutz</Link>
+          <Link href='/cookie-einstellungen'>Cookie-Einstellungen</Link>
+        </nav>
+        <span>
+          Created by{' '}
+          <a href='https://chrislutz.me' target='_blank' rel='noopener noreferrer'>
+            Christian Lutz
+          </a>
+        </span>
       </div>
     </footer>
   );
 }
-
 export default Footer;

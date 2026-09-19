@@ -1,157 +1,85 @@
 'use client';
 
-import React from 'react';
-import {
-  Navbar as MTNavbar,
-  Collapse,
-  IconButton,
-} from '@material-tailwind/react';
-import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
-import Image from 'next/image';
-import logoDark from '../../public/logos/sk_logo_dark.webp';
-import logoLight from '../../public/logos/sk_logo_light.webp';
+import {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import {usePathname} from 'next/navigation';
 
-const NAV_MENU = [
-  {
-    title: 'Über Mich',
-    href: '/ueber-mich',
-  },
-  {
-    title: 'Angebote & Preise',
-    href: '/angebote-preise',
-  },
-  {
-    title: 'Yoga',
-    href: '/yoga',
-  },
-  {
-    title: 'Retreat',
-    href: '/retreat',
-    badge: '2026',
-  },
-  {
-    title: 'Kontakt',
-    href: '/kontakt',
-  },
+const links = [
+  ['Über mich', '/ueber-mich'],
+  ['Angebote & Preise', '/angebote-preise'],
+  ['Yoga', '/yoga'],
+  ['Retreat', '/retreat'],
+  ['Kontakt', '/kontakt'],
 ];
 
-function NavItem({title, href, badge, isScrolling, onClick}: {title: string; href: string; badge?: string; isScrolling?: boolean; onClick?: () => void}) {
-  return (
-    <li>
-      <Link
-        href={href}
-        onClick={onClick}
-        className={`font-inter flex items-center gap-2 font-light transition-all duration-100 ${
-          isScrolling 
-            ? 'text-taupe-800 hover:text-[#5a9999]' 
-            : 'hover:text-[#67B1B1]'
-        }`}>
-        <span className={`decoration-transparent decoration-0 underline-offset-1 transition-all duration-100 ${
-          isScrolling 
-            ? 'hover:underline hover:decoration-[#5a9999] hover:decoration-2 hover:underline-offset-4'
-            : 'hover:underline hover:decoration-[#67B1B1] hover:decoration-2 hover:underline-offset-4'
-        }`}>
-          {title}
-        </span>
-        {badge && (
-          <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] leading-none no-underline transition-colors duration-200 ${
-            isScrolling
-              ? 'bg-[#67B1B1]/12 text-[#4f8e8e] ring-1 ring-[#67B1B1]/25'
-              : 'bg-white/18 text-white ring-1 ring-white/35 backdrop-blur-sm'
-          }`}>
-            {badge}
-          </span>
-        )}
-      </Link>
-    </li>
-  );
-}
-
 export function Navbar() {
-  const [open, setOpen] = React.useState(false);
-  const [isScrolling, setIsScrolling] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  
-  // Pages with light backgrounds that need dark navbar from the start
-  const lightBackgroundPages = ['/ueber-mich', '/kontakt', '/angebote-preise', '/impressum', '/datenschutz', '/cookie-einstellungen', '/yoga'];
-  const hasLightBackground = lightBackgroundPages.some(page => pathname === page || pathname === `${page}/`);
-  const isSolidNavbar = isScrolling || hasLightBackground;
-  
-  function handleOpen() {
-    setOpen((cur) => !cur);
-  }
-
-  React.useEffect(() => {
-    window.addEventListener('resize', () => window.innerWidth >= 960 && setOpen(false));
-  }, []);
-
-  React.useEffect(() => {
-    function handleScroll() {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
-      setIsScrolling(scrollTop > 8);
-    }
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+  const toggle = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && open) {
+        setOpen(false);
+        toggle.current?.focus();
+      }
+    };
+    const onResize = () => {
+      if (window.innerWidth >= 1100) setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [open]);
   return (
-    <div
-      className={
-        isSolidNavbar
-          ? 'fixed top-0 z-50 w-full bg-cream-100/95 backdrop-blur-sm transition-all duration-200'
-          : 'fixed top-0 z-50 w-full bg-transparent transition-all duration-500'
-      }>
-      <MTNavbar
-        fullWidth
-        shadow={false}
-        color='transparent'
-        className='border-0 bg-transparent'>
-      <div className='container mx-auto flex items-center justify-between'>
-        <div className='flex items-center gap-4'>
-          <Link href={'/'}>
-            <Image 
-              src={isSolidNavbar ? logoDark : logoLight} 
-              height='55' 
-              alt='logo' 
-              className='antialiased' 
-            />
-          </Link>
-        </div>
-        <ul
-          className={`ml-10 hidden items-center gap-6 lg:flex ${isSolidNavbar ? 'text-taupe-800' : 'text-white'}`}>
-          {NAV_MENU.map((item) => (
-            <NavItem key={item.title} href={item.href} title={item.title} badge={item.badge} isScrolling={isSolidNavbar} />
+    <header className='site-header'>
+      <a className='skip-link' href='#main-content'>
+        Zum Inhalt springen
+      </a>
+      <div className='header-inner'>
+        <Link className='brand' href='/' aria-label='Stefanie Kaindl – Startseite'>
+          <span className='brand-mark' aria-hidden='true'>
+            sk<span>✳</span>
+          </span>
+          <span className='brand-name'>
+            Stefanie Kaindl<small>CRANIO & YOGA</small>
+          </span>
+        </Link>
+        <button
+          ref={toggle}
+          className='menu-toggle'
+          type='button'
+          aria-expanded={open}
+          aria-controls='site-navigation'
+          onClick={() => setOpen(!open)}>
+          {open ? 'Schließen' : 'Menü'}
+          <span aria-hidden='true'>{open ? '×' : '☰'}</span>
+        </button>
+        <nav
+          id='site-navigation'
+          aria-label='Hauptnavigation'
+          className={`site-nav ${open ? 'is-open' : ''}`}>
+          {links.map(([title, href]) => (
+            <Link
+              key={href}
+              href={href}
+              aria-current={pathname.replace(/\/$/, '') === href ? 'page' : undefined}
+              onClick={() => setOpen(false)}>
+              {title}
+              {href === '/retreat' && <sup>2026</sup>}
+            </Link>
           ))}
-        </ul>
-        <IconButton
-          variant='text'
-          onClick={handleOpen}
-          color={isSolidNavbar ? 'gray' : 'white'}
-          className='ml-auto inline-block lg:hidden'>
-          {open ? (
-            <XMarkIcon strokeWidth={2} className={`h-6 w-6 ${isSolidNavbar ? 'text-taupe-800' : 'text-white'}`} />
-          ) : (
-            <Bars3Icon strokeWidth={2} className={`h-6 w-6 ${isSolidNavbar ? 'text-taupe-800' : 'text-white'}`} />
-          )}
-        </IconButton>
+          <Link className='nav-booking' href='/kontakt' onClick={() => setOpen(false)}>
+            Termin vereinbaren <span aria-hidden='true'>↗</span>
+          </Link>
+        </nav>
       </div>
-      <Collapse open={open}>
-        <div className='container mx-auto mt-3 rounded-md bg-cream-100/95 backdrop-blur-sm px-6 py-4 text-taupe-800 warm-shadow'>
-          <ul className='flex flex-col gap-4'>
-            {NAV_MENU.map((item) => (
-              <NavItem key={item.title} href={item.href} title={item.title} badge={item.badge} isScrolling={true} onClick={() => setOpen(false)} />
-            ))}
-          </ul>
-        </div>
-      </Collapse>
-      </MTNavbar>
-    </div>
+    </header>
   );
 }
-
 export default Navbar;

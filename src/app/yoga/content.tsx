@@ -108,9 +108,9 @@ function Content() {
   */
 
   return (
-    <section className='min-h-screen bg-gradient-to-b from-cream-50 to-cream-100 pb-16 pt-28'>
+    <section className='min-h-screen overflow-x-clip bg-gradient-to-b from-cream-50 to-cream-100 pb-16 pt-16'>
       <div className='container mx-auto max-w-6xl px-4'>
-        <div className='warm-shadow relative mb-10 overflow-hidden rounded-3xl bg-gradient-to-br from-[#67B1B1] via-[#5f9f9f] to-[#4f8c8c] p-6 text-white md:p-8'>
+        <div className='warm-shadow relative mb-10 overflow-hidden rounded-md bg-[#354e40] p-6 text-white md:p-8'>
           <div
             className='pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-white/10 opacity-60 blur-3xl'
             aria-hidden='true'></div>
@@ -498,7 +498,7 @@ function Content() {
           </div>
         </div>
 
-        <div className='warm-shadow rounded-3xl border border-cream-200 bg-gradient-to-r from-[#67B1B1] to-[#5a9a9a] p-12 text-white'>
+        <div className='warm-shadow rounded-md border border-cream-200 bg-[#354e40] p-8 text-white md:p-12'>
           <div className='flex flex-col items-start gap-8 lg:flex-row lg:items-center'>
             <div className='flex-1'>
               <Typography className='font-inter mb-2 text-sm uppercase tracking-[0.3em] text-white/80'>

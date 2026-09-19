@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Typography, Button } from '@material-tailwind/react';
+import {useState, useEffect} from 'react';
+import {Typography, Button} from '@material-tailwind/react';
 import Link from 'next/link';
 
 export function CookieBanner() {
@@ -20,7 +20,7 @@ export function CookieBanner() {
       necessary: true,
       functional: true,
       analytics: true,
-      marketing: true
+      marketing: true,
     };
     localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
     localStorage.setItem('cookieConsentGiven', 'true');
@@ -33,7 +33,7 @@ export function CookieBanner() {
       necessary: true,
       functional: false,
       analytics: false,
-      marketing: false
+      marketing: false,
     };
     localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
     localStorage.setItem('cookieConsentGiven', 'true');
@@ -44,40 +44,40 @@ export function CookieBanner() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-cream-300 shadow-lg p-4 animate-slide-up">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <div className="flex-1">
-            <Typography variant="small" className="font-inter text-taupe-800 font-medium mb-1">
-              🍪 Cookie-Einstellungen
+    <div className='animate-slide-up fixed bottom-0 left-0 right-0 z-50 border-t border-cream-300 bg-white p-4 shadow-lg'>
+      <div className='container mx-auto max-w-5xl'>
+        <div className='flex flex-col items-start justify-between gap-3 md:flex-row md:items-center'>
+          <div className='flex-1'>
+            <Typography
+              variant='small'
+              className='font-inter mb-1 font-medium text-taupe-800'>
+              Cookie-Einstellungen
             </Typography>
-            <Typography className="font-inter text-taupe-700 text-xs leading-relaxed">
-              Wir verwenden Cookies für ein optimales Erlebnis. Sie können Ihre Einstellungen jederzeit anpassen.
+            <Typography className='font-inter text-xs leading-relaxed text-taupe-700'>
+              Wir verwenden Cookies für ein optimales Erlebnis. Sie können Ihre
+              Einstellungen jederzeit anpassen.
             </Typography>
           </div>
-          <div className="flex flex-row gap-2 w-full md:w-auto">
-            <Link href="/cookie-einstellungen">
+          <div className='flex w-full flex-row flex-wrap gap-2 md:w-auto'>
+            <Link href='/cookie-einstellungen'>
               <Button
-                variant="outlined"
-                size="sm"
-                className="border border-[#67B1B1] text-[#67B1B1] hover:bg-[#67B1B1]/10 font-inter px-4 py-2 rounded-full text-xs transition-all duration-300"
-              >
+                variant='outlined'
+                size='sm'
+                className='font-inter rounded border border-[#42604c] px-4 py-2 text-xs text-[#42604c] transition-all duration-300 hover:bg-[#42604c]/10'>
                 Einstellungen
               </Button>
             </Link>
             <Button
               onClick={handleRejectAll}
-              variant="outlined"
-              size="sm"
-              className="border border-taupe-400 text-taupe-700 hover:bg-taupe-100 font-inter px-4 py-2 rounded-full text-xs transition-all duration-300"
-            >
+              variant='outlined'
+              size='sm'
+              className='font-inter rounded border border-taupe-400 px-4 py-2 text-xs text-taupe-700 transition-all duration-300 hover:bg-taupe-100'>
               Ablehnen
             </Button>
             <Button
               onClick={handleAcceptAll}
-              size="sm"
-              className="bg-[#67B1B1] hover:bg-[#5a9a9a] text-white font-inter px-4 py-2 rounded-full text-xs shadow-md hover:shadow-lg transition-all duration-300"
-            >
+              size='sm'
+              className='font-inter rounded bg-[#42604c] px-4 py-2 text-xs text-white shadow-md transition-all duration-300 hover:bg-[#2e4637] hover:shadow-lg'>
               Akzeptieren
             </Button>
           </div>
