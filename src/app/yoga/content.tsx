@@ -166,12 +166,12 @@ function Content() {
 
         <div className='warm-shadow mb-20 overflow-hidden rounded-3xl border border-cream-200 bg-white'>
           <div className='grid gap-0 lg:grid-cols-[0.9fr_1.1fr]'>
-            <div className='relative aspect-[4/5] w-full border-b border-cream-200 lg:aspect-auto lg:self-stretch lg:border-b-0 lg:border-r'>
+            <div className='relative aspect-square w-full border-b border-cream-200 bg-cream-50 lg:aspect-auto lg:self-stretch lg:border-b-0 lg:border-r'>
               <Image
-                src='/image/yoga-day-wurzeln-loslassen-card.webp'
+                src='/image/yoga-day-wurzeln-loslassen.jpg'
                 alt='Flyer Yoga Day – Wurzeln & Loslassen mit Stefanie Kaindl'
                 fill
-                className='object-cover'
+                className='object-contain'
                 sizes='(max-width: 1024px) 100vw, 540px'
               />
             </div>
@@ -221,7 +221,10 @@ function Content() {
                       Ort
                     </Typography>
                     <Typography className='font-inter text-lg text-taupe-800'>
-                      Paunzhausen
+                      Yogaraum Paunzhausen
+                    </Typography>
+                    <Typography className='font-inter text-sm text-taupe-600'>
+                      Genauer Ort bei Anmeldung
                     </Typography>
                   </div>
                 </div>
