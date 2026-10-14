@@ -4,9 +4,9 @@ import { ArrowUpRight } from '@/components/icons';
 /**
  * Hero „Editorial Olive" — nach der Referenz:
  * vollflächiges Foto, dahinter eine sehr zurückhaltende „Blume des Lebens" als
- * Linienzeichnung. Mittig: die beiden Disziplinen durch eine Haarlinie
- * getrennt („Cranio | Yoga"), die Serif-Headline in zwei Zeilen und ein
- * hervorgehobener Text-Link. Am unteren Rand nur eine Haarlinie.
+ * Linienzeichnung. Mittig: die beiden Disziplinen durch ein „&" verbunden, die
+ * Serif-Headline in zwei Zeilen und ein hervorgehobener Text-Link. Am unteren
+ * Rand nur eine Haarlinie.
  */
 
 /* Blume des Lebens: 19 Kreise gleichen Radius auf einem hexagonalen Gitter
@@ -62,7 +62,9 @@ export default function Hero() {
         {/* Disziplinen, durch eine Haarlinie getrennt */}
         <p className='flex items-center text-[0.75rem] tracking-[0.06em] text-[rgba(243,240,233,0.95)]'>
           <span>Cranio</span>
-          <span aria-hidden className='mx-3 inline-block h-3 w-px bg-[var(--cream-line)]' />
+          <span aria-hidden className='mx-3 text-[rgba(243,240,233,0.6)]'>
+            &amp;
+          </span>
           <span>Yoga</span>
         </p>
 
