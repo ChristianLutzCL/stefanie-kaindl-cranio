@@ -70,6 +70,26 @@ Karussells mit Pfeilen (Bildband ohne Segmentlinie, Zitate mit Segmentlinie + Z�
 | Emoji-🍪-Banner, Kreise mit Buchstaben (CS/KC/YL/WB), Verlaufs-Hero in Türkis | Ruhige Flächen, ein Bild pro Aussage, Verlauf nur als Bild-Übergang |
 | Startseite ist eine Liste von Abschnitten ohne Rhythmus | Abwechselnde Sektionen mit Label links / Inhalt rechts, vollflächige Bänder |
 
+### Feinheiten aus den Sektions-Screenshots (zweite Runde)
+
+Die Vorlage wurde in elf Sektionen zerlegt und einzeln ausgewertet; daraus kamen:
+
+- **Alle Überschriften in der Serife**, deutlich zurückhaltender als zunächst gebaut
+  (Hero ~48–64 px statt ~90 px, Sektionen ~40 px statt ~56 px).
+- **Story** ist kein Fließtext, sondern ein fast headline-großer Absatz (`.lead-lg`) plus Link.
+- **Bildband**: oben bündig, das mittlere Bild ist rund 2,7× so breit wie die äußeren.
+- **Ablauf-Panel**: Serif-Headline, **rundes Bildelement** auf der Kante zwischen Foto und
+  Olive-Fläche, Punkte nur durch Abstand getrennt (keine Linien), weite Kreisbögen.
+- **Stimmen**: Label links, Zähler auf der Viertellinie, Zitat in der rechten Hälfte,
+  Haarlinie über der Nennung, Hinweistext rechtsbündig, nur zwei Pfeile (keine Segmentlinie).
+- **Studio-Band**: Text auf derselben 41-%-Flucht wie das Zitat, **Hotspot-Pillen**
+  („Warmes Licht", „Weiche Unterlagen" …) und eine Bildunterschrift.
+- **Angebote**: die mittlere Karte ist **breiter und höher**, Link-Zeile mit dem Pfeil rechts,
+  Preis und Einheit in einer Serif-Zeile.
+- **Karten** tragen eine Metazeile („Cranio · 60 Minuten") über einem Serif-Titel.
+- **CTA**: schmale, zentrierte Karte mit zweispaltiger Fußzeile (Hinweis links, Link rechts).
+- **Footer**: Öffnungszeiten als Tag/Zeit-Tabelle, weite Kreisbögen hinter der Wortmarke.
+
 ## 3. Grenzen dieses Tests
 
 - **Fotos**: Der Bestand (ein helles Studio-Shooting) ist klinisch-hell, die
