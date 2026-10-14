@@ -48,21 +48,20 @@ export default function Hero() {
   return (
     <section className='relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#22241a] text-[var(--cream)]'>
       <div aria-hidden className='hero-photo absolute inset-0' />
-      {/* Ein flacher Schleier plus ein weicher, mittiger Verlauf hinter dem
-          Textblock — die zentrierte Headline braucht das. Nach außen läuft der
-          Verlauf aus, oben und unten nur so viel wie für Navigation und Rahmen. */}
-      <span aria-hidden className='absolute inset-0 bg-[#211c15]/30' />
+      {/* Bewusst leicht: das Foto trägt sich selbst. Der Text wird über einen
+          weichen Schatten (`.on-photo`) lesbar gehalten, nicht über mehr Abdunklung. */}
+      <span aria-hidden className='absolute inset-0 bg-[#211c15]/20' />
       <span
         aria-hidden
-        className='absolute inset-0 bg-[radial-gradient(ellipse_66%_64%_at_50%_50%,rgba(29,28,23,0.48)_0%,rgba(29,28,23,0.36)_55%,rgba(29,28,23,0.14)_80%,rgba(29,28,23,0)_100%)]'
+        className='absolute inset-0 bg-[radial-gradient(ellipse_66%_64%_at_50%_50%,rgba(29,28,23,0.36)_0%,rgba(29,28,23,0.26)_55%,rgba(29,28,23,0.09)_80%,rgba(29,28,23,0)_100%)]'
       />
       <span
         aria-hidden
-        className='absolute inset-x-0 top-0 h-[22%] bg-[linear-gradient(to_bottom,rgba(29,28,23,0.38)_0%,rgba(29,28,23,0)_100%)]'
+        className='absolute inset-x-0 top-0 h-[22%] bg-[linear-gradient(to_bottom,rgba(29,28,23,0.28)_0%,rgba(29,28,23,0)_100%)]'
       />
       <span
         aria-hidden
-        className='absolute inset-x-0 bottom-0 h-[36%] bg-[linear-gradient(to_top,rgba(29,28,23,0.35)_0%,rgba(29,28,23,0)_100%)]'
+        className='absolute inset-x-0 bottom-0 h-[36%] bg-[linear-gradient(to_top,rgba(29,28,23,0.26)_0%,rgba(29,28,23,0)_100%)]'
       />
 
       {/* Blume des Lebens als Zeichnung hinter der Überschrift — größer als der
