@@ -6,12 +6,16 @@ import { usePathname } from 'next/navigation';
 import { RETREAT_ENABLED } from '@/site-config';
 
 /**
- * Kopfzeile „Editorial Olive" (siehe research/design-brief-editorial-olive.md).
+ * Kopfzeile „Editorial Olive" — nach der Referenz:
  *
- * Auf der Startseite liegt sie transparent über dem Hero; auf Unterseiten und
- * im gescrollten Zustand bekommt sie die Papierfläche mit Haarlinie. Die
- * Wortmarke sitzt in der Mitte, die Navigation fächert sich links und rechts
- * davon auf — wie in der Referenz.
+ *   ┌─────────────── Wortmarke (zentriert), Termin-Link rechts ─────────────┐
+ *   ├──────────────┬──────────────┬──────────────┬─────────────────────────┤
+ *   │ Über mich    │ Angebote …   │ Yoga         │ Kontakt                 │
+ *   └──────────────┴──────────────┴──────────────┴─────────────────────────┘
+ *
+ * Die Navigationszeile ist ein randloses Vier-Spalten-Raster mit Haarlinien an
+ * jeder Kante (`.colgrid`); dieselben Linien laufen im Hero weiter. Auf der
+ * Startseite transparent über dem Hero, sonst auf Papier.
  */
 const NAV_MENU = [
   { title: 'Über mich', href: '/ueber-mich' },
@@ -20,29 +24,6 @@ const NAV_MENU = [
   { title: 'Retreat', href: '/retreat' },
   { title: 'Kontakt', href: '/kontakt' },
 ].filter((item) => RETREAT_ENABLED || item.href !== '/retreat');
-
-const LEFT = NAV_MENU.slice(0, 2);
-const RIGHT = NAV_MENU.slice(2);
-
-function NavLink({
-  href,
-  title,
-  inverse,
-}: {
-  href: string;
-  title: string;
-  inverse: boolean;
-}) {
-  return (
-    <Link
-      href={href}
-      className={`text-[0.8125rem] transition-colors duration-200 ${
-        inverse ? 'text-[var(--cream-70)] hover:text-[var(--cream)]' : 'text-ink-700 hover:text-ink'
-      }`}>
-      {title}
-    </Link>
-  );
-}
 
 export function Navbar() {
   const pathname = usePathname();
@@ -83,17 +64,13 @@ export function Navbar() {
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         solid ? 'nav-solid' : 'bg-transparent'
       }`}>
-      <div className={`h-px w-full ${solid ? 'bg-[var(--line)]' : 'bg-transparent'}`} />
-      <div className='shell flex h-[76px] items-center justify-between gap-6 md:h-[88px]'>
-        <nav aria-label='Hauptnavigation' className='hidden flex-1 items-center gap-8 lg:flex'>
-          {LEFT.map((item) => (
-            <NavLink key={item.href} href={item.href} title={item.title} inverse={inverse} />
-          ))}
-        </nav>
-
-        <div className='flex items-center lg:flex-none'>
-          {/* Logo-Lockup: Wortmarke + „Cranio Sacrale" in eigener Farbe */}
-          <Link href='/' aria-label='Stefanie Kaindl — Cranio Sacrale, zur Startseite' className='block text-center'>
+      {/* Wortmarke */}
+      <div className='relative'>
+        <div className='shell flex h-[66px] items-center justify-center md:h-[80px]'>
+          <Link
+            href='/'
+            aria-label='Stefanie Kaindl — Cranio Sacrale, zur Startseite'
+            className='block text-center'>
             <span
               className={`serif block uppercase leading-none tracking-[0.18em] text-[1.05rem] transition-colors duration-300 md:text-[1.3rem] ${
                 inverse ? 'text-[var(--cream)]' : 'text-ink'
@@ -107,20 +84,13 @@ export function Navbar() {
               Cranio Sacrale
             </span>
           </Link>
-        </div>
 
-        <div className='flex flex-1 items-center justify-end gap-8'>
-          <nav aria-label='Weitere Navigation' className='hidden items-center gap-8 lg:flex'>
-            {RIGHT.map((item) => (
-              <NavLink key={item.href} href={item.href} title={item.title} inverse={inverse} />
-            ))}
-          </nav>
           <Link
             href='/kontakt'
-            className={`hidden text-[0.8125rem] transition-colors duration-200 lg:inline-flex ${
+            className={`absolute right-6 top-1/2 hidden -translate-y-1/2 text-[0.8125rem] transition-colors duration-200 md:right-14 lg:inline-flex ${
               inverse
-                ? 'text-[var(--cream)] hover:text-[var(--olive-soft)]'
-                : 'text-ink hover:text-[var(--olive)]'
+                ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
+                : 'text-ink-700 hover:text-ink'
             }`}>
             Termin buchen <span aria-hidden className='ml-1'>↗</span>
           </Link>
@@ -130,7 +100,7 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
-            className={`text-[0.8125rem] lg:hidden ${
+            className={`absolute right-6 top-1/2 -translate-y-1/2 text-[0.8125rem] lg:hidden ${
               inverse ? 'text-[var(--cream)]' : 'text-ink'
             }`}>
             {open ? 'Schließen' : 'Menü'}
@@ -138,9 +108,27 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile-Menü */}
+      {/* Navigationszeile: vier Spalten mit Haarlinien, randlos */}
+      <nav
+        aria-label='Hauptnavigation'
+        className={`colgrid ${inverse ? 'colgrid-inverse' : 'colgrid-ink'} hidden lg:grid`}>
+        {NAV_MENU.slice(0, 4).map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={`px-8 py-4 text-[0.8125rem] transition-colors duration-200 xl:px-12 ${
+              inverse
+                ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
+                : 'text-ink-700 hover:text-ink'
+            }`}>
+            {item.title}
+          </Link>
+        ))}
+      </nav>
+
+      {/* Mobil-Menü */}
       {open && (
-        <div className='fixed inset-x-0 top-[76px] bottom-0 z-40 overflow-y-auto bg-[var(--paper)] md:top-[89px]'>
+        <div className='fixed inset-x-0 top-[66px] bottom-0 z-40 overflow-y-auto bg-[var(--paper)] md:top-[80px]'>
           <div className='shell flex min-h-full flex-col justify-between py-10'>
             <nav aria-label='Navigation (mobil)' className='flex flex-col'>
               {NAV_MENU.map((item) => (
@@ -148,7 +136,7 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className='hairline display leading-[1.1] py-4 text-[2rem] text-ink'>
+                  className='hairline display leading-[1.1] py-4 text-[1.9rem] text-ink'>
                   {item.title}
                 </Link>
               ))}

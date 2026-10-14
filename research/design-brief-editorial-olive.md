@@ -14,7 +14,7 @@ Marken-Sprache. Alles Sichtbare wird mit den echten Inhalten der Praxis
 
 | Abschnitt | Device |
 |---|---|
-| Hero | Vollbild-Foto, Wortmarke zentriert oben, Navigation links/rechts davon aufgefächert, **Eyebrow als Pille**, zentrierte zweizeilige Display-Headline mit einem *kursiven* Wort, Pfeil-Link darunter |
+| Hero | Vollbild-Foto, zentrierte Wortmarke oben, darunter eine **randlose Navigationszeile aus vier gleich breiten Spalten mit Haarlinien** an jeder Kante; dieselben Linien laufen durch den Hero. Mittig: **Segment-Pillen** der Disziplinen, große **Serif**-Headline (zwei Zeilen, ein *kursives* Wort), schlichter Pfeil-Link. Dekor: großer dünner Kreis, Haarlinienraster, Meta-Zeile auf einer Haarlinie am unteren Rand |
 | Story | zentriertes Label, darunter eine Display-Zeile, ein zentrierter Absatz und ein zentrierter Pfeil-Link |
 | Bildband | randloses Karussell: mittleres Bild größer, äußere angeschnitten, **Pfeile zentriert darunter** |
 | Praxis | zentriertes Label + zentrierte Headline, drei Fotokarten mit Titel und zwei Zeilen Text **unter** dem Bild (keine Overlays) |
