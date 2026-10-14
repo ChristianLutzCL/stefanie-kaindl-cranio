@@ -269,6 +269,11 @@ div[id] {
 .cta-link:hover .icon-arrow {
   transform: translate(2px, -2px);
 }
+/* Hover: die Linie wird dicker, ohne das Layout zu bewegen (box-shadow statt
+   border-width, sonst rutscht der Link um 1 px). */
+.cta-link:hover {
+  box-shadow: 0 1px 0 0 currentColor;
+}
 /* Dieselbe Auszeichnung auf Papier statt auf Foto */
 .cta-link-ink {
   color: var(--ink);
