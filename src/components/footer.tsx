@@ -133,38 +133,48 @@ export function Footer() {
 
             <div className='space-y-3'>
               <p className='text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--cream-45)]'>
-                Zeiten
+                Öffnungszeiten
               </p>
-              <dl className='space-y-2 text-[0.875rem] text-[var(--cream-70)]'>
-                <div className='flex justify-between gap-4'>
-                  <dt>Mo – Fr</dt>
-                  <dd>nach Vereinbarung</dd>
-                </div>
-                <div className='flex justify-between gap-4'>
-                  <dt>Yoga</dt>
-                  <dd>Do 17:30 &amp; 19:00</dd>
-                </div>
-              </dl>
+              {/* Tage als Kopf, Zeiten darunter — wie die Öffnungszeiten-Tabelle der Referenz */}
+              <div className='grid grid-cols-2 gap-4'>
+                {[
+                  ['Termine', 'Mo – Fr nach Vereinbarung'],
+                  ['Yoga', 'Do 17:30 & 19:00'],
+                ].map(([day, time]) => (
+                  <div key={day}>
+                    <p className='font-serif text-[0.9375rem] text-[var(--cream-70)]'>{day}</p>
+                    <p className='mt-1 text-[0.8125rem] text-[var(--cream-45)]'>{time}</p>
+                  </div>
+                ))}
+              </div>
               <a
                 href='https://instagram.com/stefanie_kaindl_cranio'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-block text-[0.875rem] text-[var(--cream-70)] transition-colors hover:text-[var(--cream)]'>
+                className='inline-block pt-1 text-[0.875rem] text-[var(--cream-70)] transition-colors hover:text-[var(--cream)]'>
                 Instagram ↗
               </a>
             </div>
           </div>
         </div>
 
-        {/* Wortmarke */}
+        {/* Wortmarke mit weiten Kreisbögen */}
         <div className='relative mt-16 select-none pt-6 md:mt-20'>
           <div className='hairline-inverse absolute inset-x-0 top-0' />
+          <span
+            aria-hidden
+            className='pointer-events-none absolute -bottom-[22rem] left-1/2 aspect-square w-[46rem] -translate-x-1/2 rounded-full border border-[var(--cream-line)]'
+          />
+          <span
+            aria-hidden
+            className='pointer-events-none absolute -bottom-[30rem] left-1/2 aspect-square w-[62rem] -translate-x-1/2 rounded-full border border-[var(--cream-15)]'
+          />
           <p
             aria-hidden
-            className='font-serif whitespace-nowrap uppercase leading-[0.8] tracking-[0.01em] text-[var(--cream)] text-[clamp(4rem,18vw,16.5rem)]'>
+            className='font-serif relative whitespace-nowrap uppercase leading-[0.8] tracking-[0.01em] text-[var(--cream)] text-[clamp(4rem,18vw,16.5rem)]'>
             Stefanie
           </p>
-          <p className='mt-4 text-[0.5625rem] uppercase tracking-[0.4em] text-[var(--cream-45)] md:text-[0.625rem]'>
+          <p className='relative mt-4 text-[0.5625rem] uppercase tracking-[0.4em] text-[var(--cream-45)] md:text-[0.625rem]'>
             Cranio Sacrale · Yoga · Pfaffenhofen an der Ilm
           </p>
         </div>

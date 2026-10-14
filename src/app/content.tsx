@@ -5,18 +5,18 @@ import Link from 'next/link';
 import React from 'react';
 
 /**
- * Startseite „Editorial Olive" — Aufbau und Devices folgen der Referenz
- * (siehe research/design-brief-editorial-olive.md):
+ * Startseite „Editorial Olive" — Aufbau und Details folgen der Referenz
+ * (siehe research/design-brief-editorial-olive.md). Die Feinheiten, die aus
+ * den Sektions-Screenshots der Vorlage übernommen wurden:
  *
- *   1 Story        — zentriertes Label, zentrierter Absatz, Pfeil-Link
- *   2 Bildband     — randloses Karussell mit Pfeilen
- *   3 Praxis       — Label + zentrierte Headline + drei Fotokarten mit Bildunterschrift
- *   4 Ablauf       — olivgrüne Fläche: Foto links, drei Punkt-Positionen rechts
- *   5 Stimmen      — Zitat-Slider mit Zähler, Pfeilen und Segmentlinie
- *   6 Raum         — dunkles Bildband mit Overlay-Text und Bildunterschrift-Karten
- *   7 Angebote     — drei Olivkarten, mittlere erhöht
- *   8 Für dich     — drei Karten mit Bild, Titel, Text
- *   9 CTA          — dunkles Band, Papierkarte mittig
+ *   · Alle Überschriften stehen in der Serife, in zurückhaltender Größe.
+ *   · Der Story-Absatz ist fast headline-groß (`.lead-lg`), nicht Fließtext.
+ *   · Das Bildband ist oben bündig, das mittlere Bild ist deutlich größer.
+ *   · Das Studio-Band hat Hotspot-Pillen und eine Bildunterschrift.
+ *   · Das Zitat sitzt in der rechten Spalte, darüber eine Haarlinie, Zähler
+ *     links daneben, darunter nur zwei Pfeile (keine Segmentlinie).
+ *   · Die mittlere Preiskarte ist breiter UND höher.
+ *   · Die Karten der Referenz tragen eine Metazeile („Movement · 6 min").
  *
  * Alle Preise, Zeiten, Adressen und Zitate stammen aus der echten Praxis.
  */
@@ -57,7 +57,18 @@ function Photo({
   );
 }
 
-/** Ein Karussell-Zustand für beide Slider (Bildband und Stimmen). */
+/** Weite, dünne Kreisbögen über dunklen Flächen (wie in der Referenz). */
+function Arcs({ className = '', style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    <span
+      aria-hidden
+      className={`pointer-events-none absolute aspect-square rounded-full border border-[var(--cream-line)] ${className}`}
+      style={style}
+    />
+  );
+}
+
+/** Zustand beider Slider (Bildband und Stimmen). */
 function useScroller(count: number) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [progress, setProgress] = React.useState(0);
@@ -86,54 +97,19 @@ function useScroller(count: number) {
   return { ref, progress, onScroll, step, goTo, active: Math.round(progress * (count - 1)) };
 }
 
-function Arrow({ dir }: { dir: 'left' | 'right' }) {
-  return <span aria-hidden>{dir === 'left' ? '←' : '→'}</span>;
-}
-
-function SliderControls({
-  progress,
-  count,
-  onStep,
-  onGoTo,
-  rail = true,
-  className = '',
-}: {
-  progress: number;
-  count: number;
-  onStep: (dir: number) => void;
-  onGoTo: (i: number) => void;
-  rail?: boolean;
-  className?: string;
-}) {
-  const active = Math.round(progress * (count - 1));
+function Arrows({ onStep, className = '' }: { onStep: (dir: number) => void; className?: string }) {
   return (
     <div className={`flex items-center gap-6 ${className}`}>
-      <div className='flex items-center gap-4'>
-        {(['left', 'right'] as const).map((dir) => (
-          <button
-            key={dir}
-            type='button'
-            onClick={() => onStep(dir === 'left' ? -1 : 1)}
-            aria-label={dir === 'left' ? 'Zurück' : 'Weiter'}
-            className='text-[0.9375rem] text-ink-500 transition-colors hover:text-ink'>
-            <Arrow dir={dir} />
-          </button>
-        ))}
-      </div>
-      {rail && (
-        <div className='flex flex-1 gap-2 text-ink'>
-          {Array.from({ length: count }).map((_, i) => (
-            <button
-              key={i}
-              type='button'
-              aria-label={`Zu ${i + 1}`}
-              data-active={active === i}
-              onClick={() => onGoTo(i)}
-              className='rail-seg'
-            />
-          ))}
-        </div>
-      )}
+      {(['left', 'right'] as const).map((dir) => (
+        <button
+          key={dir}
+          type='button'
+          onClick={() => onStep(dir === 'left' ? -1 : 1)}
+          aria-label={dir === 'left' ? 'Zurück' : 'Weiter'}
+          className='text-[1rem] text-ink-500 transition-colors hover:text-ink'>
+          <span aria-hidden>{dir === 'left' ? '←' : '→'}</span>
+        </button>
+      ))}
     </div>
   );
 }
@@ -213,15 +189,12 @@ function Story() {
       <div className='shell'>
         <div className='mx-auto max-w-3xl text-center'>
           <span className='label'>Über mich</span>
-          <p className='display d2 mt-7' data-reveal>
-            Ich höre mit den Händen zu — dort, wo Worte aufhören.
-          </p>
-          <p className='body-copy mx-auto mt-7 max-w-2xl' data-reveal>
+          <p className='lead-lg mt-7' data-reveal>
             Craniosacrale Körperarbeit ist eine sanfte und zugleich tief wirksame Methode: Über
-            achtsame Berührung findet dein Körper zurück in seinen eigenen Rhythmus. Ich begleite dich
-            dabei — ohne Eile, ohne Druck, in einem Raum, in dem du dich sicher und geborgen fühlst.
+            achtsame Berührung findet dein Körper zurück in seinen eigenen Rhythmus — bei Schmerzen
+            und Stress, nach der Geburt, oder einfach, um zur Ruhe zu kommen.
           </p>
-          <Link href='/ueber-mich' className='arrow-link mt-8'>
+          <Link href='/ueber-mich' className='cta-link cta-link-ink mt-8'>
             Mehr über mich <span aria-hidden>↗</span>
           </Link>
         </div>
@@ -239,26 +212,39 @@ const BAND = [
 ];
 
 function ImageBand() {
-  const { ref, progress, onScroll, step, goTo } = useScroller(BAND.length);
+  const { ref, onScroll, step } = useScroller(BAND.length);
+
+  /* Beim Laden das mittlere Bild zentrieren — in der Referenz sind die äußeren
+     Bilder dadurch angeschnitten und der Blick liegt sofort in der Mitte. */
+  React.useEffect(() => {
+    const track = ref.current;
+    if (!track) return;
+    const middle = track.querySelectorAll('[data-card]')[1] as HTMLElement | undefined;
+    if (!middle) return;
+    if (window.innerWidth < 768) return;
+    track.scrollLeft = middle.offsetLeft - (track.clientWidth - middle.offsetWidth) / 2;
+  }, [ref]);
 
   return (
     <section className='section-tight'>
+      {/* Oben bündig, mittleres Bild deutlich größer — wie in der Referenz */}
       <div
         ref={ref}
         onScroll={onScroll}
-        className='scroller items-center gap-4 px-6 md:gap-6 md:px-14'>
+        className='scroller items-start gap-3 md:gap-4'
+        style={{ paddingInline: 'max(1.5rem, calc((100vw - 1560px) / 2 + 3.5rem))' }}>
         {BAND.map((image, i) => (
           <figure
             key={image.src}
             data-card
-            className={`ph aspect-[4/5] rounded-[6px] ${
-              i === 1 ? 'w-[84vw] md:w-[40vw]' : 'w-[62vw] md:w-[26vw]'
+            className={`ph relative aspect-[4/3] rounded-[4px] ${
+              i === 1 ? 'w-[80vw] md:w-[52vw]' : 'w-[52vw] md:w-[19vw]'
             }`}>
             <Image
               src={image.src}
               alt={image.alt}
               fill
-              sizes='(max-width: 768px) 84vw, 40vw'
+              sizes='(max-width: 768px) 80vw, 52vw'
               className='object-cover'
             />
             <span
@@ -269,14 +255,7 @@ function ImageBand() {
         ))}
       </div>
       <div className='shell'>
-        <SliderControls
-          progress={progress}
-          count={BAND.length}
-          onStep={step}
-          onGoTo={goTo}
-          rail={false}
-          className='mt-8 justify-center'
-        />
+        <Arrows onStep={step} className='mt-8 justify-center' />
       </div>
     </section>
   );
@@ -309,14 +288,14 @@ function Practice() {
   return (
     <section className='section' id='arbeit'>
       <div className='shell'>
-        <div className='mx-auto max-w-3xl text-center'>
+        <div className='mx-auto max-w-2xl text-center'>
           <span className='label'>Meine Arbeit</span>
-          <p className='display d2 mt-7'>
+          <p className='display display-serif d2 mt-7'>
             Finde, was dich bewegt.
           </p>
         </div>
 
-        <div className='mt-14 grid gap-8 md:grid-cols-3 md:gap-6'>
+        <div className='mt-14 grid gap-8 md:grid-cols-3 md:gap-5'>
           {PRACTICE.map((item) => (
             <article key={item.title} data-reveal>
               <Photo
@@ -325,8 +304,8 @@ function Practice() {
                 ratio='aspect-[4/5]'
                 sizes='(max-width: 768px) 100vw, 33vw'
               />
-              <h3 className='mt-6 text-[1rem] text-ink'>{item.title}</h3>
-              <p className='body-copy mt-2'>{item.body}</p>
+              <h3 className='mt-4 text-[0.9375rem] text-ink'>{item.title}</h3>
+              <p className='mt-1.5 text-[0.8125rem] leading-relaxed text-ink-600'>{item.body}</p>
             </article>
           ))}
         </div>
@@ -354,39 +333,60 @@ const STEPS = [
 
 function Method() {
   return (
-    <section className='bg-[var(--olive)] text-[var(--cream)]'>
-      <div className='shell py-[clamp(4rem,8vw,8.5rem)]'>
-        <div className='max-w-2xl'>
+    <section className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+      {/* Sehr zurückhaltende Kreisbögen im Olive-Bereich */}
+      <Arcs className='-right-40 top-10 hidden h-[34rem] w-[34rem] md:block' />
+      <Arcs className='-left-32 bottom-[-14rem] hidden h-[30rem] w-[30rem] md:block' />
+
+      <div className='relative'>
+        <div className='shell pt-[clamp(3.5rem,7vw,7rem)] pb-[clamp(2.5rem,4vw,4rem)]'>
           <span className='label label-inverse'>Ablauf</span>
-          <p className='display d2 mt-7 text-[var(--cream)]'>
+          <p className='display display-serif d2 mt-6 max-w-2xl text-[var(--cream)]'>
             Was in einer Sitzung passiert.
           </p>
         </div>
 
-        <div className='mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16'>
-          <Photo
-            src='/image/behandlung.webp'
-            alt='Behandlungsraum mit Liege und warmem Licht'
-            ratio='aspect-[4/3]'
-            sizes='(max-width: 1024px) 100vw, 50vw'
-          />
+        <div className='grid lg:grid-cols-2'>
+          {/* Bild links, randlos — mit rundem Bildelement auf der Kante */}
+          <div className='relative'>
+            <Photo
+              src='/image/behandlung.webp'
+              alt='Behandlungsraum mit Liege und warmem Licht'
+              ratio='aspect-[4/3] lg:aspect-[5/4]'
+              sizes='(max-width: 1024px) 100vw, 50vw'
+            />
+            <span className='absolute -bottom-10 right-[-4.5rem] hidden h-56 w-56 overflow-hidden rounded-full border border-[var(--cream-line)] lg:block'>
+              <span className='ph ph-deep absolute inset-0'>
+                <Image
+                  src='/image/4.webp'
+                  alt='Klangschale und Kerzen im Behandlungsraum'
+                  fill
+                  sizes='224px'
+                  className='object-cover'
+                />
+              </span>
+            </span>
+          </div>
 
-          <div>
-            {STEPS.map((step) => (
-              <div key={step.title} className='hairline-inverse py-6 first:border-t-0 first:pt-0'>
-                <span className='label label-inverse'>{step.title}</span>
-                <p className='mt-3 max-w-md text-[0.9375rem] leading-relaxed text-[var(--cream-70)]'>
-                  {step.body}
-                </p>
-              </div>
-            ))}
-            <a
-              href={CALENDLY}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='btn btn-cream mt-4'>
-              Termin vereinbaren <span aria-hidden>↗</span>
-            </a>
+          {/* Punkte rechts */}
+          <div className='shell lg:pl-[clamp(2.5rem,5vw,5rem)]'>
+            <div className='pb-[clamp(3.5rem,7vw,7rem)] pt-[clamp(3.5rem,6vw,6rem)]'>
+              {STEPS.map((step) => (
+                <div key={step.title} className='mb-10 last:mb-0'>
+                  <span className='label label-inverse'>{step.title}</span>
+                  <p className='mt-3 max-w-md text-[0.9375rem] leading-relaxed text-[var(--cream-70)]'>
+                    {step.body}
+                  </p>
+                </div>
+              ))}
+              <a
+                href={CALENDLY}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='cta-link mt-4'>
+                Termin vereinbaren <span aria-hidden>↗</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -425,51 +425,53 @@ function withAccents(text: string) {
 }
 
 function Perspectives() {
-  const { ref, progress, onScroll, step, goTo, active } = useScroller(QUOTES.length);
+  const { ref, onScroll, step, active } = useScroller(QUOTES.length);
 
   return (
     <section className='section'>
       <div className='shell'>
-        <div className='hairline flex items-center justify-between pt-6'>
-          <span className='label'>Stimmen</span>
-          <span className='text-[0.75rem] text-ink-500'>
-            {String(active + 1).padStart(2, '0')} / {String(QUOTES.length).padStart(2, '0')}
-          </span>
+        {/* Label links, Zähler im zweiten Viertel, Zitat in der rechten Hälfte */}
+        <div className='grid gap-8 lg:grid-cols-4 lg:gap-0'>
+          <div className='lg:col-span-1'>
+            <span className='label'>Stimmen</span>
+          </div>
+          <div className='hidden lg:col-span-1 lg:block'>
+            <span className='text-[0.8125rem] text-ink-500'>
+              {String(active + 1).padStart(2, '0')} / {String(QUOTES.length).padStart(2, '0')}
+            </span>
+          </div>
+
+          <div className='lg:col-span-2 min-w-0'>
+            <div ref={ref} onScroll={onScroll} className='scroller'>
+              {QUOTES.map((quote) => (
+                <blockquote key={quote.name} data-card className='slide-full'>
+                  <p className='quote'>
+                    &bdquo;{withAccents(quote.text)}&ldquo;
+                  </p>
+                  <div className='hairline mt-9' />
+                  <footer className='mt-4 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2'>
+                    <p className='font-serif text-[1.0625rem] text-ink'>
+                      {quote.name} <span className='text-ink-500'>· {quote.role}</span>
+                    </p>
+                    <p className='max-w-[15rem] text-[0.75rem] leading-relaxed text-ink-500'>
+                      Echte Rückmeldungen aus der Praxis. Namen sind gekürzt.
+                    </p>
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div ref={ref} onScroll={onScroll} className='scroller mt-10'>
-          {QUOTES.map((quote) => (
-            <blockquote key={quote.name} data-card className='w-full md:pr-24'>
-              <p className='quote max-w-5xl'>&bdquo;{withAccents(quote.text)}&ldquo;</p>
-              <footer className='font-serif mt-8 flex flex-wrap items-center gap-x-3 gap-y-1'>
-                <span className='text-[1.0625rem] text-ink'>{quote.name}</span>
-                <span aria-hidden className='text-ink-400'>
-                  ·
-                </span>
-                <span className='text-[0.9375rem] text-ink-500'>{quote.role}</span>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-
-        <div className='mt-12 flex flex-col gap-6 md:flex-row md:items-center'>
-          <SliderControls
-            progress={progress}
-            count={QUOTES.length}
-            onStep={step}
-            onGoTo={goTo}
-            className='md:max-w-xs'
-          />
-          <p className='text-[0.8125rem] text-ink-500 md:ml-auto md:text-right'>
-            Echte Rückmeldungen aus meiner Praxis. Namen sind gekürzt.
-          </p>
-        </div>
+        <Arrows onStep={step} className='mt-12' />
       </div>
     </section>
   );
 }
 
 /* --- 6 Raum --------------------------------------------------------------- */
+
+const STUDIO_FACTS = ['Warmes Licht', 'Weiche Unterlagen', 'Klangschalen', 'Zeit ohne Eile'];
 
 function StudioBand() {
   return (
@@ -482,57 +484,54 @@ function StudioBand() {
         sizes='100vw'
         className='ph-deep object-cover'
       />
-      <span aria-hidden className='absolute inset-0 bg-[#20221a]/60' />
+      <span aria-hidden className='absolute inset-0 bg-[#20221a]/62' />
       <span aria-hidden className='absolute inset-0 bg-[#6b7250] mix-blend-multiply opacity-30' />
-      <div
-        aria-hidden
-        className='arcs'
-        style={{
-          background:
-            'radial-gradient(circle at 78% 30%, transparent 0 34%, rgba(243,240,233,.16) 34.1% 34.3%, transparent 34.4% 52%, rgba(243,240,233,.12) 52.1% 52.3%, transparent 52.4%)',
-        }}
-      />
+      <Arcs className='-left-40 bottom-[-18rem] h-[42rem] w-[42rem]' />
+      <Arcs className='right-[-10rem] top-[-12rem] hidden h-[34rem] w-[34rem] md:block' />
 
-      <div className='shell relative z-10 py-[clamp(4.5rem,9vw,9rem)]'>
-        <div className='max-w-xl'>
-          <span className='label label-inverse'>Mein Raum</span>
-          <p className='mt-6 text-[0.9375rem] leading-relaxed text-[var(--cream)] md:text-[1.0625rem]'>
-            Ein ruhiger Raum im Ortsteil Uttenhofen: warmes Licht, weiche Unterlagen und Zeit ohne
-            Eile. Kein Wartezimmer, keine Hektik — nur du und dein eigenes Tempo.
-          </p>
-          <Link href='/kontakt' className='arrow-link arrow-link-inverse mt-8'>
-            Kontakt &amp; Anfahrt <span aria-hidden>↗</span>
-          </Link>
+      <div className='shell relative z-10 py-[clamp(4rem,8vw,8rem)]'>
+        {/* Text in der rechten Hälfte, auf derselben Flucht wie das Zitat */}
+        <div className='grid gap-14 lg:grid-cols-4 lg:gap-0'>
+          <div className='lg:col-span-2 lg:col-start-2'>
+            <span className='label label-inverse'>Mein Raum</span>
+            <p className='mt-6 max-w-xl text-[0.9375rem] leading-relaxed text-[var(--cream)] md:text-[1.0625rem]'>
+              Ein ruhiger Raum im Ortsteil Uttenhofen: warmes Licht, weiche Unterlagen und Zeit ohne
+              Eile. Kein Wartezimmer, keine Hektik — nur du und dein eigenes Tempo.
+            </p>
+            <Link href='/kontakt' className='cta-link mt-8'>
+              Kontakt &amp; Anfahrt <span aria-hidden>↗</span>
+            </Link>
+          </div>
         </div>
 
-        <div className='mt-16 grid gap-6 sm:grid-cols-2 md:gap-8 lg:max-w-3xl'>
-          {[
-            {
-              src: '/image/kopf.webp',
-              alt: 'Anatomisches Modell in der Praxis',
-              caption: 'Anatomie & Rhythmus',
-              note: 'Die Grundlage der Arbeit — fein, ruhig, aufmerksam.',
-            },
-            {
-              src: '/image/ueber-mich.webp',
-              alt: 'Stefanie Kaindl in ihrer Praxis',
-              caption: 'Begleitung',
-              note: 'Cranio-Ausbildung 2024 · Yogalehrerin (300 h)',
-            },
-          ].map((item) => (
-            <figure key={item.src}>
+        {/* Hotspot-Pillen und Bildunterschrift */}
+        <div className='mt-16 max-w-2xl lg:ml-[25%]'>
+          <div className='flex flex-wrap gap-2'>
+            {STUDIO_FACTS.map((fact) => (
+              <span
+                key={fact}
+                className='rounded-full border border-[var(--cream-line)] bg-[#1d1c17]/35 px-3 py-1.5 text-[0.6875rem] text-[var(--cream-70)] backdrop-blur-sm'>
+                {fact}
+              </span>
+            ))}
+          </div>
+          <div className='mt-8 grid gap-6 sm:grid-cols-[14rem_1fr] sm:items-end'>
+            <figure>
               <Photo
-                src={item.src}
-                alt={item.alt}
+                src='/image/kopf.webp'
+                alt='Anatomisches Modell in der Praxis'
                 ratio='aspect-[4/3]'
-                sizes='(max-width: 640px) 100vw, 33vw'
+                sizes='224px'
               />
-              <figcaption className='mt-3 text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--cream-60)]'>
-                {item.caption}
+              <figcaption className='meta-line mt-3 text-[var(--cream-45)]'>
+                Behandlungsliege · Uttenhofen
               </figcaption>
-              <p className='mt-2 text-[0.875rem] text-[var(--cream-70)]'>{item.note}</p>
             </figure>
-          ))}
+            <p className='text-[0.875rem] leading-relaxed text-[var(--cream-70)]'>
+              Ein Raum, der sich dem Tempo des Tages anpasst: warmes Holz, natürliche Materialien,
+              nichts Lautes. Die Berührung darf hier leicht bleiben.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -553,7 +552,7 @@ const PLANS = [
       'Termin nach Vereinbarung',
     ],
     price: '73 €',
-    unit: 'pro Behandlung',
+    unit: ' / Behandlung',
     cta: 'Termin buchen',
     href: CALENDLY,
     featured: false,
@@ -569,7 +568,7 @@ const PLANS = [
       'Rechnung für Kasse & Steuer',
     ],
     price: '400 €',
-    unit: 'Paket',
+    unit: ' / Paket',
     cta: 'Paket buchen',
     href: CALENDLY_OVERVIEW,
     featured: true,
@@ -585,7 +584,7 @@ const PLANS = [
       'Für Babys ab der Geburt',
     ],
     price: '53 €',
-    unit: 'pro Behandlung',
+    unit: ' / Behandlung',
     cta: 'Termin buchen',
     href: CALENDLY_KIDS,
     featured: false,
@@ -596,55 +595,55 @@ function Membership() {
   return (
     <section className='section'>
       <div className='shell'>
-        <div className='mx-auto max-w-3xl text-center'>
+        <div className='mx-auto max-w-2xl text-center'>
           <span className='label'>Angebote</span>
-          <p className='display d2 mt-7'>
+          <p className='display display-serif d2 mt-7'>
             Ein Rhythmus, der zu dir passt.
           </p>
         </div>
 
-        <div className='mt-14 grid items-start gap-6 lg:grid-cols-3'>
+        {/* Die mittlere Karte ist breiter und höher */}
+        <div className='mt-14 grid items-start gap-5 lg:grid-cols-[1fr_1.08fr_1fr]'>
           {PLANS.map((plan) => (
             <div
               key={plan.name}
               data-reveal
-              className={`flex h-full flex-col rounded-[8px] border border-[var(--cream-line)] bg-[var(--olive)] p-7 text-[var(--cream)] md:p-8 ${
-                plan.featured ? 'lg:-mt-10 lg:pb-10' : ''
+              className={`flex h-full flex-col rounded-[4px] border border-[var(--cream-line)] bg-[var(--olive)] p-7 text-[var(--cream)] md:p-8 ${
+                plan.featured ? 'lg:-mt-9 lg:pb-12' : ''
               }`}>
-              <span className={`label label-inverse ${plan.featured ? '' : 'invisible'}`}>
+              <span
+                className={`label label-inverse mb-5 ${plan.featured ? '' : 'invisible'}`}>
                 Empfohlen
               </span>
-              <h3 className='serif mt-5 text-[clamp(1.4rem,1.9vw,1.85rem)] leading-tight'>
+              <h3 className='serif text-[clamp(1.4rem,1.9vw,1.75rem)] leading-tight'>
                 {plan.name} <span className='text-[var(--cream-45)]'>{plan.meta}</span>
               </h3>
-              <p className='mt-4 text-[0.875rem] leading-relaxed text-[var(--cream-70)]'>
+              <p className='mt-4 text-[0.8125rem] leading-relaxed text-[var(--cream-70)]'>
                 {plan.intro}
               </p>
               <ul className='mt-6 flex-1 space-y-2.5'>
                 {plan.features.map((feature) => (
                   <li
                     key={feature}
-                    className='flex items-start gap-2.5 text-[0.875rem] text-[var(--cream-70)]'>
-                    <span aria-hidden className='mt-[0.15rem] text-[0.75rem] text-[var(--cream-70)]'>
+                    className='flex items-start gap-2.5 text-[0.8125rem] text-[var(--cream-70)]'>
+                    <span aria-hidden className='mt-[0.1rem] text-[0.6875rem] text-[var(--cream-70)]'>
                       ✓
                     </span>
                     {feature}
                   </li>
                 ))}
               </ul>
-              <div className='hairline-inverse mt-7' />
+              <div className='hairline-inverse mt-8' />
               <a
                 href={plan.href}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='mt-4 inline-flex items-center gap-2 text-[0.875rem] text-[var(--cream)] transition-opacity hover:opacity-75'>
+                className='mt-4 flex items-center justify-between text-[0.75rem] text-[var(--cream)] transition-opacity hover:opacity-75'>
                 {plan.cta} <span aria-hidden>↗</span>
               </a>
-              <p className='mt-8 flex items-baseline gap-2'>
-                <span className='serif text-[clamp(2.1rem,3vw,2.9rem)] leading-none'>
-                  {plan.price}
-                </span>
-                <span className='font-serif text-[0.8125rem] text-[var(--cream-45)]'>{plan.unit}</span>
+              <p className='mt-7 font-serif text-[clamp(1.6rem,2.3vw,2.1rem)] leading-none'>
+                {plan.price}
+                <span className='text-[var(--cream-45)]'>{plan.unit}</span>
               </p>
             </div>
           ))}
@@ -664,7 +663,7 @@ function Membership() {
             </div>
           ))}
         </div>
-        <Link href='/angebote-preise' className='arrow-link mt-8'>
+        <Link href='/angebote-preise' className='cta-link cta-link-ink mt-8'>
           Alle Angebote &amp; Preise <span aria-hidden>↗</span>
         </Link>
       </div>
@@ -676,6 +675,7 @@ function Membership() {
 
 const FOR_YOU = [
   {
+    meta: 'Cranio · 60 Minuten',
     title: 'Cranio für Erwachsene',
     body: 'Für alle, die ihrem Körper etwas zurückgeben wollen — bei Schmerzen, Stress oder einfach zur Ruhe zu kommen.',
     href: '/angebote-preise',
@@ -683,13 +683,15 @@ const FOR_YOU = [
     alt: 'Craniosacrale Behandlung eines Erwachsenen',
   },
   {
-    title: 'Cranio für Kinder & Babys',
-    body: 'Sanfte Begleitung von den ersten Wochen an — bei Unruhe, Schlafproblemen und nach der Geburt.',
+    meta: 'Cranio · Babys & Kinder',
+    title: 'Sanfte Begleitung von Anfang an',
+    body: 'Von den ersten Wochen an — bei Unruhe, Schlafproblemen und nach der Geburt, mit viel Zeit und Ruhe.',
     href: '/angebote-preise',
     src: '/image/behandlung_2.webp',
     alt: 'Sanfte Berührung während einer Behandlung',
   },
   {
+    meta: 'Yoga · Donnerstag',
     title: 'Yoga am Donnerstag',
     body: 'Zwei Kurse, kleine Gruppen: Bewegung, Atmung und Entspannung — 17:30 und 19:00 Uhr.',
     href: '/yoga',
@@ -702,28 +704,31 @@ function ForYou() {
   return (
     <section className='section bg-[var(--paper-deep)]'>
       <div className='shell'>
-        <div className='mx-auto max-w-3xl text-center'>
+        <div className='mx-auto max-w-2xl text-center'>
           <span className='label'>Für dich</span>
-          <p className='display d2 mt-7'>
+          <p className='display display-serif d2 mt-7'>
             Wo möchtest du ansetzen?
           </p>
+          <Link href='/angebote-preise' className='cta-link cta-link-ink mt-6'>
+            Alle Angebote ansehen <span aria-hidden>↗</span>
+          </Link>
         </div>
 
-        <div className='mt-14 grid gap-8 md:grid-cols-3 md:gap-6'>
+        <div className='mt-14 grid gap-8 md:grid-cols-3 md:gap-5'>
           {FOR_YOU.map((item) => (
             <article key={item.title} data-reveal>
-              <Link href={item.href} className='group block'>
+              <Link href={item.href} className='block'>
                 <Photo
                   src={item.src}
                   alt={item.alt}
-                  ratio='aspect-[4/5]'
+                  ratio='aspect-[4/3]'
                   sizes='(max-width: 768px) 100vw, 33vw'
                 />
-                <h3 className='mt-6 text-[1rem] text-ink'>{item.title}</h3>
-                <p className='body-copy mt-2'>{item.body}</p>
-                <span className='arrow-link mt-4'>
-                  Mehr dazu <span aria-hidden>↗</span>
-                </span>
+                <p className='meta-line mt-4'>{item.meta}</p>
+                <h3 className='font-serif mt-2 text-[clamp(1.25rem,1.7vw,1.6rem)] leading-tight text-ink'>
+                  {item.title}
+                </h3>
+                <p className='mt-2 text-[0.8125rem] leading-relaxed text-ink-600'>{item.body}</p>
               </Link>
             </article>
           ))}
@@ -748,32 +753,23 @@ function ClosingCta() {
       />
       <span aria-hidden className='absolute inset-0 bg-[#20221a]/70' />
       <span aria-hidden className='absolute inset-0 bg-[#6b7250] mix-blend-multiply opacity-30' />
-      <div
-        aria-hidden
-        className='arcs'
-        style={{
-          background:
-            'radial-gradient(circle at 50% 120%, transparent 0 30%, rgba(243,240,233,.14) 30.1% 30.3%, transparent 30.4% 46%, rgba(243,240,233,.1) 46.1% 46.3%, transparent 46.4%)',
-        }}
-      />
+      <Arcs className='-left-24 top-[-16rem] h-[40rem] w-[40rem]' />
+      <Arcs className='right-[-8rem] bottom-[-20rem] h-[44rem] w-[44rem]' />
 
       <div className='shell relative z-10 py-[clamp(5rem,10vw,10rem)]'>
-        <div className='max-w-2xl rounded-[8px] bg-[var(--paper)] p-8 text-ink md:p-12'>
+        {/* Karte schmal und zentriert, Fußzeile zweispaltig */}
+        <div className='mx-auto max-w-[34rem] rounded-[4px] bg-[var(--paper)] p-8 text-ink md:p-10'>
           <span className='label'>Beginne, wo du gerade bist</span>
-          <p className='display display-serif d2 mt-7'>
+          <p className='display display-serif d2 mt-6'>
             Dein Körper weiß es bereits. Gib ihm Raum.
           </p>
-          <p className='body-copy mt-5'>
-            Du musst nicht in Bestform kommen. Es reicht, wenn du anfängst — der Rest entsteht in der
-            Behandlung.
-          </p>
-          <div className='mt-8 flex flex-wrap items-center gap-4'>
-            <a href={CALENDLY} target='_blank' rel='noopener noreferrer' className='btn btn-olive'>
+          <div className='mt-9 flex flex-wrap items-end justify-between gap-x-8 gap-y-4'>
+            <p className='max-w-[15rem] text-[0.8125rem] leading-relaxed text-ink-600'>
+              Deine Praxis muss nicht perfekt sein. Sie muss nur beginnen.
+            </p>
+            <a href={CALENDLY} target='_blank' rel='noopener noreferrer' className='cta-link cta-link-ink'>
               Termin vereinbaren <span aria-hidden>↗</span>
             </a>
-            <Link href='/kontakt' className='arrow-link'>
-              Erst einmal schreiben <span aria-hidden>↗</span>
-            </Link>
           </div>
         </div>
       </div>
