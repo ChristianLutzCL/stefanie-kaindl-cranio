@@ -552,16 +552,21 @@ div[id] {
     rgba(42, 28, 17, 0.12) 100%
   );
 }
-/* Mobil sitzt die Person hinter der Schrift — dort nur eine milde Neigung statt
-   des kräftigen Verlaufs von links nach rechts. Muss NACH der Basisregel
-   stehen, sonst gewinnt bei gleicher Spezifität die spätere. */
+/* Mobil sitzt die Person hinter der Schrift, ein Verlauf von links nach rechts
+   kann sie also nicht freistellen. Stattdessen ein dunkles Band genau dort, wo
+   Badge, Überschrift und Link liegen — Gesicht (oben) und Beine (unten) bleiben
+   frei. Die Werte sind so gewählt, dass die Schrift über 4,5:1 bleibt. */
 @media (max-width: 767px) {
   .hero-scrim {
     background-image: linear-gradient(
-      to right,
-      rgba(40, 27, 16, 0.5) 0%,
-      rgba(40, 27, 16, 0.46) 55%,
-      rgba(41, 28, 17, 0.32) 100%
+      to bottom,
+      rgba(40, 27, 16, 0.26) 0%,
+      rgba(40, 27, 16, 0.14) 14%,
+      rgba(40, 27, 16, 0.2) 32%,
+      rgba(40, 27, 16, 0.54) 44%,
+      rgba(40, 27, 16, 0.54) 62%,
+      rgba(40, 27, 16, 0.24) 74%,
+      rgba(40, 27, 16, 0.13) 100%
     );
   }
 }
