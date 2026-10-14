@@ -69,45 +69,61 @@ function Arcs({ className = '', style }: { className?: string; style?: React.CSS
   );
 }
 
-/** Zustand beider Slider (Bildband und Stimmen). */
+/** Zustand beider Slider (Bildband und Stimmen).
+ *  Der Zielindex wird in einem Ref geführt, damit schnelles Klicken nicht
+ *  verloren geht: während der Scroll-Animation liefert `scrollLeft` noch
+ *  Zwischenwerte, und daraus abgeleitete Schritte landeten auf der
+ *  falschen Karte. Manuelles Scrollen wird erst nach dem Auslaufen
+ *  (120 ms ohne Scroll-Event) übernommen. */
 function useScroller(count: number) {
   const ref = React.useRef<HTMLDivElement>(null);
+  const targetRef = React.useRef(0);
+  const settleTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const [progress, setProgress] = React.useState(0);
+
+  const cardsOf = () =>
+    ref.current ? (Array.from(ref.current.querySelectorAll('[data-card]')) as HTMLElement[]) : [];
+
+  const scrollToIndex = (index: number) => {
+    const el = ref.current;
+    const cards = cardsOf();
+    if (!el || !cards.length) return;
+    const next = Math.min(cards.length - 1, Math.max(0, index));
+    targetRef.current = next;
+    el.scrollTo({ left: cards[next].offsetLeft - el.offsetLeft, behavior: 'smooth' });
+  };
 
   const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const max = el.scrollWidth - el.clientWidth;
     setProgress(max > 0 ? Math.min(1, Math.max(0, el.scrollLeft / max)) : 0);
+
+    if (settleTimer.current) clearTimeout(settleTimer.current);
+    settleTimer.current = setTimeout(() => {
+      const cards = cardsOf();
+      if (!cards.length) return;
+      const left = el.getBoundingClientRect().left;
+      const current = cards.findIndex((c) => c.getBoundingClientRect().left >= left - 8);
+      if (current >= 0) targetRef.current = current;
+    }, 120);
   };
 
-  const step = (dir: number) => {
-    const el = ref.current;
-    if (!el) return;
-    const card = el.querySelector('[data-card]') as HTMLElement | null;
-    const width = (card?.offsetWidth ?? 360) + 24;
-    el.scrollBy({ left: dir * width, behavior: 'smooth' });
-  };
-
-  const goTo = (index: number) => {
-    const el = ref.current;
-    if (!el) return;
-    const card = el.querySelectorAll('[data-card]')[index] as HTMLElement | undefined;
-    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: 'smooth' });
-  };
+  const step = (dir: number) => scrollToIndex(targetRef.current + dir);
+  const goTo = (index: number) => scrollToIndex(index);
 
   return { ref, progress, onScroll, step, goTo, active: Math.round(progress * (count - 1)) };
 }
 
 function Arrows({ onStep, className = '' }: { onStep: (dir: number) => void; className?: string }) {
   return (
-    <div className={`flex items-center gap-6 ${className}`}>
+    <div className={`flex items-center gap-9 ${className}`}>
       {(['left', 'right'] as const).map((dir) => (
         <button
           key={dir}
           type='button'
           onClick={() => onStep(dir === 'left' ? -1 : 1)}
           aria-label={dir === 'left' ? 'Zurück' : 'Weiter'}
-          className='text-[1.2rem] text-ink-500 transition-colors hover:text-ink'>
+          className='text-[1.75rem] text-ink-500 transition-colors hover:text-ink'>
           {dir === 'left' ? <ArrowLeft /> : <ArrowRight />}
         </button>
       ))}
@@ -401,21 +417,25 @@ const QUOTES = [
   {
     text: 'Die Behandlung bei Steffi ist eine Wohltat für Körper, Geist und Seele. Nach der Cranio fühle ich mich viel *leichter* und meine Gedanken kommen zur Ruhe.',
     name: 'Kathi P.',
+    initials: 'KP',
     role: 'Stress & Verspannungen',
   },
   {
     text: 'Einfühlsam, sensibel, mitfühlend, intensiv, wohltuend, geborgen — hier fühle ich mich beschützt und von Herzen *willkommen*.',
     name: 'Regina',
+    initials: 'R',
     role: 'Emotionale Belastung',
   },
   {
     text: 'Nach jahrelangen Kopfschmerzen habe ich endlich Linderung gefunden. Die Behandlungen haben mir geholfen, wieder *schmerzfrei* zu leben.',
     name: 'Maria S.',
+    initials: 'MS',
     role: 'Chronische Kopfschmerzen',
   },
   {
     text: 'Die Cranio Sacrale Körperarbeit hat mir und meinen Kindern geholfen, wieder ins Gleichgewicht zu kommen. Bei Stefanie findet man einen *sicheren Raum*.',
     name: 'Kathi G.',
+    initials: 'KG',
     role: 'Mutter mit Kindern',
   },
 ];
@@ -431,31 +451,39 @@ function Perspectives() {
   return (
     <section className='section'>
       <div className='shell'>
-        {/* Label links, Zähler im zweiten Viertel, Zitat in der rechten Hälfte */}
-        <div className='grid gap-8 lg:grid-cols-4 lg:gap-0'>
-          <div className='lg:col-span-1'>
+        {/* Label links (3/12), Zähler im zweiten Feld (2/12), Zitat rechts (7/12)
+            — dieselbe Flucht wie in der Referenz. */}
+        <div className='grid gap-8 lg:grid-cols-12 lg:gap-0'>
+          <div className='lg:col-span-3'>
             <span className='label'>Stimmen</span>
           </div>
-          <div className='hidden lg:col-span-1 lg:block'>
-            <span className='text-[0.8125rem] text-ink-500'>
-              {String(active + 1).padStart(2, '0')} / {String(QUOTES.length).padStart(2, '0')}
+          <div className='lg:col-span-2'>
+            <span className='text-[1.25rem] font-light text-ink-400'>
+              {String(active + 1).padStart(2, '0')}/{String(QUOTES.length).padStart(2, '0')}
             </span>
           </div>
 
-          <div className='lg:col-span-2 min-w-0'>
+          <div className='min-w-0 lg:col-span-7'>
             <div ref={ref} onScroll={onScroll} className='scroller'>
               {QUOTES.map((quote) => (
                 <blockquote key={quote.name} data-card className='slide-full'>
-                  <p className='quote'>
-                    &bdquo;{withAccents(quote.text)}&ldquo;
-                  </p>
-                  <div className='hairline mt-9' />
-                  <footer className='mt-4 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2'>
-                    <p className='font-serif text-[1.0625rem] text-ink'>
-                      {quote.name} <span className='text-ink-500'>· {quote.role}</span>
-                    </p>
-                    <p className='max-w-[15rem] text-[0.75rem] leading-relaxed text-ink-500'>
-                      Echte Rückmeldungen aus der Praxis. Namen sind gekürzt.
+                  <p className='quote'>&bdquo;{withAccents(quote.text)}&ldquo;</p>
+
+                  <div className='hairline mt-16' />
+                  <footer className='mt-5 flex flex-wrap items-center justify-between gap-x-10 gap-y-4'>
+                    <div className='flex items-center gap-3'>
+                      <span aria-hidden className='initials'>
+                        {quote.initials}
+                      </span>
+                      <span>
+                        <span className='block text-[0.9375rem] text-ink'>{quote.name}</span>
+                        <span className='mt-0.5 block text-[0.75rem] text-ink-500'>
+                          {quote.role}
+                        </span>
+                      </span>
+                    </div>
+                    <p className='text-right text-[0.75rem] leading-relaxed text-ink-500 md:max-w-[16rem]'>
+                      Echte Rückmeldungen aus der Praxis.
                     </p>
                   </footer>
                 </blockquote>
@@ -464,7 +492,7 @@ function Perspectives() {
           </div>
         </div>
 
-        <Arrows onStep={step} className='mt-12' />
+        <Arrows onStep={step} className='mt-14' />
       </div>
     </section>
   );

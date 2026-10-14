@@ -235,13 +235,13 @@ div[id] {
   flex: none;
 }
 
-/* Zitat — in der Serife, kursiver Akzent bleibt kursiv */
+/* Zitat — in der Sans (wie in der Referenz), ruhig und groß */
 .quote {
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(1.5rem, 2.9vw, 2.6rem);
-  line-height: 1.28;
-  letter-spacing: 0;
+  font-family: var(--font-sans), ui-sans-serif, sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.45rem, 2.9vw, 2.7rem);
+  line-height: 1.26;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 .quote em {
@@ -292,6 +292,23 @@ div[id] {
   flex: none;
   display: inline-block;
   overflow: visible;
+}
+
+/* Kachel mit Initialen als Platzhalter für ein Porträt (die Zitate stammen von
+   Klient:innen, für die keine Bildrechte vorliegen). */
+.initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  flex: none;
+  background-color: var(--olive);
+  color: var(--cream);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.8125rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
 }
 
 .hairline {
