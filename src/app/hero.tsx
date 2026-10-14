@@ -60,7 +60,7 @@ export default function Hero() {
 
       <div className='on-photo shell relative z-10 flex flex-1 flex-col items-center justify-center pb-24 pt-32 text-center'>
         {/* Disziplinen, durch eine Haarlinie getrennt */}
-        <p className='flex items-center text-[0.75rem] tracking-[0.06em] text-[var(--cream-70)]'>
+        <p className='flex items-center text-[0.75rem] tracking-[0.06em] text-[rgba(243,240,233,0.88)]'>
           <span>Cranio</span>
           <span aria-hidden className='mx-3 inline-block h-3 w-px bg-[var(--cream-line)]' />
           <span>Yoga</span>

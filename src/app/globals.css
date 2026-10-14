@@ -280,14 +280,13 @@ div[id] {
 }
 
 /* Schrift über Foto: ein weicher Schatten hebt den Kontrast, ohne das Bild
-   weiter abzudunkeln (wird auf dem Hero-Textblock gesetzt). Der weite Radius
-   legt einen dunklen Hof um die Buchstaben, damit helle Bildstellen die
-   cremefarbene Schrift nicht schlucken. */
+   weiter abzudunkeln. Seit das Hero-Foto dunkel abgestimmt ist, genügt ein
+   zurückhaltender Hof — der starke Schatten war nur ein Ausgleich für das
+   helle Tageslichtfoto. */
 .on-photo {
   text-shadow:
-    0 1px 26px rgba(18, 14, 10, 0.8),
-    0 1px 10px rgba(18, 14, 10, 0.6),
-    0 1px 3px rgba(18, 14, 10, 0.45);
+    0 1px 14px rgba(18, 14, 10, 0.5),
+    0 1px 3px rgba(18, 14, 10, 0.35);
 }
 
 /* Pfeil-Icons: erben die Schriftgröße über `em` und sitzen auf der Grundlinie */
