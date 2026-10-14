@@ -280,9 +280,14 @@ div[id] {
 }
 
 /* Schrift über Foto: ein weicher Schatten hebt den Kontrast, ohne das Bild
-   weiter abzudunkeln (wird auf dem Hero-Textblock gesetzt). */
+   weiter abzudunkeln (wird auf dem Hero-Textblock gesetzt). Der weite Radius
+   legt einen dunklen Hof um die Buchstaben, damit helle Bildstellen die
+   cremefarbene Schrift nicht schlucken. */
 .on-photo {
-  text-shadow: 0 1px 18px rgba(20, 19, 15, 0.62), 0 1px 4px rgba(20, 19, 15, 0.42);
+  text-shadow:
+    0 1px 26px rgba(18, 14, 10, 0.8),
+    0 1px 10px rgba(18, 14, 10, 0.6),
+    0 1px 3px rgba(18, 14, 10, 0.45);
 }
 
 /* Pfeil-Icons: erben die Schriftgröße über `em` und sitzen auf der Grundlinie */
@@ -524,6 +529,11 @@ div[id] {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 38% 50%;
+  /* Das Foto ist ein helles Tageslichtporträt, die Referenz ist ein dunkler
+     Innenraum. Helligkeit herunter, Sättigung leicht hoch: Farbton und
+     Rot/Grün-Verhältnis bleiben, die Helligkeit kommt in den Bereich der
+     Referenz (mittlere Luma ≈ 0.12). */
+  filter: brightness(0.76) saturate(0.96) contrast(1.08);
 }
 @media (max-width: 767px) {
   .hero-photo {

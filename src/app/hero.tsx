@@ -33,7 +33,7 @@ function FlowerOfLife({ className = '' }: { className?: string }) {
       viewBox={`${-3 * R} ${-3 * R} ${6 * R} ${6 * R}`}
       className={className}
       fill='none'
-      stroke='rgba(243, 240, 233, 0.06)'
+      stroke='rgba(245, 235, 222, 0.06)'
       strokeWidth={1}>
       <g>
         {CENTERS.map(([cx, cy], i) => (
@@ -47,23 +47,11 @@ function FlowerOfLife({ className = '' }: { className?: string }) {
 
 export default function Hero() {
   return (
-    <section className='relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#22241a] text-[var(--cream)]'>
+    <section className='relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#241a11] text-[var(--cream)]'>
       <div aria-hidden className='hero-photo absolute inset-0' />
-      {/* Bewusst leicht: das Foto trägt sich selbst. Der Text wird über einen
-          weichen Schatten (`.on-photo`) lesbar gehalten, nicht über mehr Abdunklung. */}
-      <span aria-hidden className='absolute inset-0 bg-[#211c15]/20' />
-      <span
-        aria-hidden
-        className='absolute inset-0 bg-[radial-gradient(ellipse_66%_64%_at_50%_50%,rgba(29,28,23,0.36)_0%,rgba(29,28,23,0.26)_55%,rgba(29,28,23,0.09)_80%,rgba(29,28,23,0)_100%)]'
-      />
-      <span
-        aria-hidden
-        className='absolute inset-x-0 top-0 h-[22%] bg-[linear-gradient(to_bottom,rgba(29,28,23,0.28)_0%,rgba(29,28,23,0)_100%)]'
-      />
-      <span
-        aria-hidden
-        className='absolute inset-x-0 bottom-0 h-[36%] bg-[linear-gradient(to_top,rgba(29,28,23,0.26)_0%,rgba(29,28,23,0)_100%)]'
-      />
+      {/* Dunkler, warmer Schleier — der Hero liegt wie die Referenz in einem
+          tiefen Braun (dort mittlere Helligkeit ≈ 0.12, Rot/Grün ≈ 1.15). */}
+      <span aria-hidden className='absolute inset-0 bg-[rgba(40,27,16,0.4)]' />
 
       {/* Blume des Lebens als Zeichnung hinter der Überschrift — größer als der
           Viewport und mit einer Maske nach außen zu transparent ausblendend,
