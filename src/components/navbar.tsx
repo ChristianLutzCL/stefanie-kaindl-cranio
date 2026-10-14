@@ -4,24 +4,18 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { RETREAT_ENABLED } from '@/site-config';
-import { ArrowUpRight } from '@/components/icons';
 
 /**
- * Kopfzeile „Editorial Olive" — nach der Referenz:
+ * Kopfzeile „Editorial Olive" — eine Zeile:
  *
- *   ┌─────────────── Wortmarke (zentriert), Termin-Link rechts ─────────────┐
- *   │    Über mich     ·    Cranio    ·     Yoga     ·     Kontakt      │
- *   └──────────────────────────────────────────────────────────────────────┘
+ *      Über mich   Cranio          STEFANIE KAINDL          Yoga   Kontakt     Menü
  *
- * Die Navigationszeile liegt mittig unter der Wortmarke: vier gleich breite
- * Spalten mit zentriertem Text, an den Spaltengrenzen nur ein subtiler Punkt —
- * keine Linien. Auf der Startseite transparent über dem Hero, sonst auf Papier.
+ * Die Wortmarke sitzt in der Mitte, die Navigation fächert sich links und
+ * rechts davon auf. Ein Drei-Spalten-Raster (`1fr auto 1fr`) hält die
+ * Wortmarke exakt mittig, ohne absolute Positionierung — auch auf Mobil, wo
+ * nur die Wortmarke und der Menü-Schalter sichtbar sind.
  *
- * Benennung: vier gleichartige, kurze Substantive — „Angebote & Preise" fiel
- * raus, weil ein Und-Zeichen und zwei Substantive in einer Vierspalten-Zeile
- * wie ein Fremdkörper wirken. „Cranio" spiegelt die Disziplin-Zeile des Heros
- * („Cranio | Yoga") und ist ihrer Zielgruppe geläufig; die Seite darunter
- * trägt weiterhin den Titel „Angebote & Preise".
+ * Auf der Startseite transparent über dem Hero, sonst auf Papier.
  */
 const NAV_MENU = [
   { title: 'Über mich', href: '/ueber-mich' },
@@ -30,6 +24,14 @@ const NAV_MENU = [
   { title: 'Kontakt', href: '/kontakt' },
   { title: 'Retreat', href: '/retreat' },
 ].filter((item) => RETREAT_ENABLED || item.href !== '/retreat');
+
+const NAV_ITEMS = NAV_MENU.slice(0, 4).map((item, i) => ({
+  ...item,
+  /* Ausrichtung innerhalb der Viertelzellen: die äußeren Punkte liegen an den
+     Rändern, die inneren an der Außenkante ihrer Zelle — so bleibt zur
+     Wortmarke in der Mitte bewusst Abstand. */
+  align: i === 0 || i === 1 ? 'lg:justify-self-start' : 'lg:justify-self-end',
+}));
 
 export function Navbar() {
   const pathname = usePathname();
@@ -65,100 +67,69 @@ export function Navbar() {
     };
   }, [open]);
 
+  const navLinkClass = (href: string) => {
+    const active = pathname === href || pathname === `${href}/`;
+    const base = 'text-[0.8125rem] whitespace-nowrap transition-colors duration-200';
+    if (active) {
+      return `${base} [&>span]:border-b [&>span]:border-current [&>span]:pb-1 ${
+        inverse ? 'text-[var(--cream)]' : 'text-ink'
+      }`;
+    }
+    return `${base} ${
+      inverse ? 'text-[var(--cream-70)] hover:text-[var(--cream)]' : 'text-ink-700 hover:text-ink'
+    }`;
+  };
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         solid ? 'nav-solid' : 'bg-transparent'
       }`}>
-      {/* Wortmarke */}
-      <div className='relative'>
-        <div className='shell flex h-[66px] items-center justify-center md:h-[80px]'>
-          <Link
-            href='/'
-            aria-label='Stefanie Kaindl — Cranio Sacrale, zur Startseite'
-            className='block text-center'>
-            <span
-              className={`serif block uppercase leading-none tracking-[0.18em] text-[1.05rem] transition-colors duration-300 md:text-[1.3rem] ${
-                inverse ? 'text-[var(--cream)]' : 'text-ink'
-              }`}>
-              Stefanie Kaindl
-            </span>
-            <span
-              className={`serif mt-[0.34rem] block text-[0.5rem] uppercase leading-none tracking-[0.34em] transition-colors duration-300 md:text-[0.5625rem] ${
-                inverse ? 'text-[var(--cream-60)]' : 'text-[var(--olive)]'
-              }`}>
-              Cranio Sacrale
-            </span>
-          </Link>
+      <div className='shell relative flex h-[74px] items-center md:h-[86px]'>
+        {/* Vier gleich breite Zellen über die volle Breite: die Menüpunkte
+            sitzen dadurch auf 12,5 / 37,5 / 62,5 / 87,5 %, die Wortmarke
+            dazwischen exakt in der Mitte. */}
+        <nav aria-label='Hauptnavigation' className='hidden w-full grid-cols-4 lg:grid'>
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${item.align} ${navLinkClass(item.href)}`}>
+              <span>{item.title}</span>
+            </Link>
+          ))}
+        </nav>
 
-          <Link
-            href='/kontakt'
-            className={`absolute right-6 top-1/2 hidden -translate-y-1/2 text-[0.8125rem] transition-colors duration-200 md:right-14 lg:inline-flex ${
-              inverse
-                ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
-                : 'text-ink-700 hover:text-ink'
-            }`}>
-            Termin buchen <ArrowUpRight />
-          </Link>
-
-          <button
-            type='button'
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
-            className={`absolute right-6 top-1/2 -translate-y-1/2 text-[0.8125rem] lg:hidden ${
+        {/* Wortmarke, exakt mittig */}
+        <Link
+          href='/'
+          aria-label='Stefanie Kaindl — Cranio Sacrale, zur Startseite'
+          className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center'>
+          <span
+            className={`serif block uppercase leading-none tracking-[0.18em] text-[1.05rem] transition-colors duration-300 md:text-[1.3rem] ${
               inverse ? 'text-[var(--cream)]' : 'text-ink'
             }`}>
-            {open ? 'Schließen' : 'Menü'}
-          </button>
-        </div>
+            Stefanie Kaindl
+          </span>
+          <span
+            className={`serif mt-[0.34rem] block text-[0.5rem] uppercase leading-none tracking-[0.34em] transition-colors duration-300 md:text-[0.5625rem] ${
+              inverse ? 'text-[var(--cream-60)]' : 'text-[var(--olive)]'
+            }`}>
+            Cranio Sacrale
+          </span>
+        </Link>
+
+        <button
+          type='button'
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
+          className={`ml-auto text-[0.8125rem] lg:hidden ${
+            inverse ? 'text-[var(--cream)]' : 'text-ink'
+          }`}>
+          {open ? 'Schließen' : 'Menü'}
+        </button>
       </div>
-
-      {/* Navigationszeile: vier gleich breite Spalten, Text zentriert,
-          an den Spaltengrenzen nur ein subtiler Punkt statt Linien */}
-      <nav aria-label='Hauptnavigation' className='relative hidden lg:block'>
-        <div className='grid grid-cols-4'>
-          {NAV_MENU.slice(0, 4).map((item) => {
-            const active = pathname === item.href || pathname === `${item.href}/`;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? 'page' : undefined}
-                className={`flex items-center justify-center py-4 text-[0.8125rem] transition-colors duration-200 ${
-                  active
-                    ? inverse
-                      ? 'text-[var(--cream)]'
-                      : 'text-ink'
-                    : inverse
-                      ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
-                      : 'text-ink-700 hover:text-ink'
-                }`}>
-                <span
-                  className={`border-b pb-1 ${
-                    active ? 'border-current' : 'border-transparent'
-                  }`}>
-                  {item.title}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Punkte an den Spaltengrenzen (25 / 50 / 75 %) — flach und zurückhaltend */}
-        <div aria-hidden className='pointer-events-none absolute inset-0'>
-          {[25, 50, 75].map((position) => (
-            <span
-              key={position}
-              className='absolute top-1/2 h-[5px] w-[5px] -translate-x-1/2 -translate-y-1/2 rounded-full'
-              style={{
-                left: `${position}%`,
-                backgroundColor: inverse ? 'rgba(243,240,233,0.3)' : 'rgba(29,28,23,0.22)',
-              }}
-            />
-          ))}
-        </div>
-      </nav>
 
       {/* Abschlusslinie der festen Kopfzeile (nur wenn sie auf Papier liegt) */}
       <div
@@ -169,7 +140,7 @@ export function Navbar() {
 
       {/* Mobil-Menü */}
       {open && (
-        <div className='fixed inset-x-0 top-[66px] bottom-0 z-40 overflow-y-auto bg-[var(--paper)] md:top-[80px]'>
+        <div className='fixed inset-x-0 top-[74px] bottom-0 z-40 overflow-y-auto bg-[var(--paper)] md:top-[86px]'>
           <div className='shell flex min-h-full flex-col justify-between py-10'>
             <nav aria-label='Navigation (mobil)' className='flex flex-col'>
               {NAV_MENU.map((item) => (
