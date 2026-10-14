@@ -51,7 +51,7 @@ export default function Hero() {
       <div aria-hidden className='hero-photo absolute inset-0' />
       {/* Dunkler, warmer Schleier — der Hero liegt wie die Referenz in einem
           tiefen Braun (dort mittlere Helligkeit ≈ 0.12, Rot/Grün ≈ 1.15). */}
-      <span aria-hidden className='absolute inset-0 bg-[rgba(40,27,16,0.4)]' />
+      <span aria-hidden className='absolute inset-0 bg-[rgba(40,27,16,0.46)]' />
 
       {/* Blume des Lebens als Zeichnung hinter der Überschrift — größer als der
           Viewport und mit einer Maske nach außen zu transparent ausblendend,
@@ -60,7 +60,7 @@ export default function Hero() {
 
       <div className='on-photo shell relative z-10 flex flex-1 flex-col items-center justify-center pb-24 pt-32 text-center'>
         {/* Disziplinen, durch eine Haarlinie getrennt */}
-        <p className='flex items-center text-[0.75rem] tracking-[0.06em] text-[rgba(243,240,233,0.88)]'>
+        <p className='flex items-center text-[0.75rem] tracking-[0.06em] text-[rgba(243,240,233,0.95)]'>
           <span>Cranio</span>
           <span aria-hidden className='mx-3 inline-block h-3 w-px bg-[var(--cream-line)]' />
           <span>Yoga</span>
