@@ -112,7 +112,7 @@ function Content() {
                 </Typography>
               </div>
               <div className="ml-4">
-                <div className="w-12 h-6 bg-[#67B1B1] rounded-full flex items-center px-1 cursor-not-allowed">
+                <div className="w-12 h-6 bg-[#616949] rounded-full flex items-center px-1 cursor-not-allowed">
                   <div className="w-4 h-4 bg-white rounded-full transform translate-x-6 transition-transform"></div>
                 </div>
               </div>
@@ -138,7 +138,7 @@ function Content() {
                 <button
                   onClick={() => handleToggle('functional')}
                   className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                    preferences.functional ? 'bg-[#67B1B1]' : 'bg-gray-300'
+                    preferences.functional ? 'bg-[#616949]' : 'bg-gray-300'
                   }`}
                 >
                   <div
@@ -168,7 +168,7 @@ function Content() {
                 <button
                   onClick={() => handleToggle('analytics')}
                   className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                    preferences.analytics ? 'bg-[#67B1B1]' : 'bg-gray-300'
+                    preferences.analytics ? 'bg-[#616949]' : 'bg-gray-300'
                   }`}
                 >
                   <div
@@ -198,7 +198,7 @@ function Content() {
                 <button
                   onClick={() => handleToggle('marketing')}
                   className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                    preferences.marketing ? 'bg-[#67B1B1]' : 'bg-gray-300'
+                    preferences.marketing ? 'bg-[#616949]' : 'bg-gray-300'
                   }`}
                 >
                   <div
@@ -217,7 +217,7 @@ function Content() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
           <button
             onClick={handleAcceptAll}
-            className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
+            className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
           >
             Alle akzeptieren
           </button>

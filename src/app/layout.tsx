@@ -1,14 +1,31 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Hanken_Grotesk, Cormorant_Garamond } from "next/font/google";
 import { Footer, Layout, Navbar, CookieBanner } from "@/components";
 import Script from "next/script";
 
-const inter = Inter({
+// Zwei Rollen, ein System (siehe research/design-brief-editorial-olive.md):
+// Hanken Grotesk = alles Lesbare (Display, Text, Labels, Navigation),
+// Cormorant Garamond = Wortmarke, Zitate, CTA- und Footer-Zeile, Preise,
+// kursive Akzente in Überschriften.
+//
+// Cormorant Garamond ist feingliedrig und hat eine kleine x-Höhe: große Grade
+// brauchen sie, kleine Textgrade nicht. Deshalb stehen die Serif-Rollen auf
+// 400/500 und sind gegenüber der Sans-Größe angehoben (siehe globals.css).
+const sans = Hanken_Grotesk({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-sans",
+});
+
+const serif = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
@@ -86,9 +103,9 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#67B1B1" />
+        <meta name="theme-color" content="#616949" />
       </head>
-      <body className={inter.className}>
+      <body className={`${sans.variable} ${serif.variable} font-sans`}>
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-CV0R2VE8F2`}

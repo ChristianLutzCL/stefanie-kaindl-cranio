@@ -207,7 +207,7 @@ export default function RetreatPage() {
           <BookingStatus />
           <div className='grid items-start gap-8 lg:grid-cols-[1.45fr_0.9fr]'>
             <div>
-              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#616949]'>
                 Retreat Überblick
               </p>
               <h2 className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
@@ -224,7 +224,7 @@ export default function RetreatPage() {
                   <div
                     key={item}
                     className='flex items-start gap-3 rounded-lg border border-cream-200 bg-white p-4'>
-                    <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#67B1B1]' />
+                    <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#616949]' />
                     <p className='font-inter text-taupe-700'>{item}</p>
                   </div>
                 ))}
@@ -233,7 +233,7 @@ export default function RetreatPage() {
 
             <aside className='warm-shadow overflow-hidden rounded-lg border border-cream-200 bg-white'>
               <div className='border-b border-cream-200 bg-cream-100 px-6 py-6'>
-                <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#4f8e8e]'>
+                <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#3f4530]'>
                   Buchung
                 </p>
                 <h2 className='font-inter text-2xl font-light text-taupe-800'>
@@ -288,7 +288,7 @@ export default function RetreatPage() {
             </div>
 
             <div>
-              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#616949]'>
                 Mit Barbara & Steffi
               </p>
               <h2 className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
@@ -310,7 +310,7 @@ export default function RetreatPage() {
                   <div
                     key={item}
                     className='flex items-start gap-3 rounded-lg bg-cream-100 p-4'>
-                    <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#67B1B1]' />
+                    <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#616949]' />
                     <p className='font-inter text-sm leading-relaxed text-taupe-700'>
                       {item}
                     </p>
@@ -326,7 +326,7 @@ export default function RetreatPage() {
         <div className='container mx-auto max-w-6xl px-4'>
           <div className='grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]'>
             <div>
-              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#616949]'>
                 Leistungen
               </p>
               <h2 className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
@@ -365,7 +365,7 @@ export default function RetreatPage() {
               ))}
             </div>
           </div>
-          <div className='mt-5 rounded-lg border border-[#67B1B1]/25 bg-[#67B1B1]/10 p-5'>
+          <div className='mt-5 rounded-lg border border-[#616949]/25 bg-[#616949]/10 p-5'>
             <p className='font-inter mb-1 font-medium text-taupe-800'>
               Optional buchbar: Cranio Sacral Session mit Steffi
             </p>
@@ -381,7 +381,7 @@ export default function RetreatPage() {
       <section className='bg-cream-50 py-20'>
         <div className='container mx-auto max-w-6xl px-4'>
           <div className='mb-10 max-w-3xl'>
-            <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+            <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#616949]'>
               Ablauf
             </p>
             <h2 className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
@@ -402,14 +402,14 @@ export default function RetreatPage() {
                 className='group rounded-lg border border-cream-200 bg-white shadow-sm'>
                 <summary className='flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 md:px-7 [&::-webkit-details-marker]:hidden'>
                   <div>
-                    <p className='font-inter mb-2 text-xs uppercase tracking-[0.16em] text-[#67B1B1]'>
+                    <p className='font-inter mb-2 text-xs uppercase tracking-[0.16em] text-[#616949]'>
                       {step.day} · {step.date}
                     </p>
                     <h3 className='font-inter text-xl font-light text-taupe-800 md:text-2xl'>
                       {step.title}
                     </h3>
                   </div>
-                  <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cream-100 text-[#4f8e8e] transition-transform duration-200 group-open:rotate-45'>
+                  <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cream-100 text-[#3f4530] transition-transform duration-200 group-open:rotate-45'>
                     +
                   </span>
                 </summary>
@@ -419,7 +419,7 @@ export default function RetreatPage() {
                     <div
                       key={`${step.day}-${time}-${activity}`}
                       className='rounded-md bg-cream-50 px-4 py-3 md:flex md:items-baseline md:gap-4'>
-                      <p className='font-inter mb-1 text-sm font-medium text-[#4f8e8e] md:mb-0 md:w-32 md:shrink-0'>
+                      <p className='font-inter mb-1 text-sm font-medium text-[#3f4530] md:mb-0 md:w-32 md:shrink-0'>
                         {time}
                       </p>
                       <p className='font-inter text-sm leading-relaxed text-taupe-700'>
@@ -448,7 +448,7 @@ export default function RetreatPage() {
         </div>
       </section>
 
-      <section className='bg-[#67B1B1] py-14'>
+      <section className='bg-[#616949] py-14'>
         <div className='container mx-auto max-w-4xl px-4 text-center'>
           <p className='font-inter text-xl font-light leading-relaxed text-white md:text-2xl'>
             Verlängere das Prickeln des Sommers und lade dich noch einmal auf, bevor es in
@@ -461,7 +461,7 @@ export default function RetreatPage() {
         <div className='container mx-auto max-w-6xl px-4'>
           <div className='grid items-start gap-8 md:grid-cols-2'>
             <div>
-              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#616949]'>
                 Für dich
               </p>
               <h2 className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
@@ -483,7 +483,7 @@ export default function RetreatPage() {
                 <div
                   key={item}
                   className='flex items-start gap-3 rounded-lg border border-cream-200 bg-white p-4'>
-                  <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#67B1B1]' />
+                  <span className='mt-2 block h-2 w-2 shrink-0 rounded-full bg-[#616949]' />
                   <p className='font-inter text-sm leading-relaxed text-taupe-700'>
                     {item}
                   </p>
@@ -528,7 +528,7 @@ export default function RetreatPage() {
         <div className='container mx-auto max-w-6xl px-4'>
           <div className='mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'>
             <div className='max-w-3xl'>
-              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+              <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#616949]'>
                 Location & Anreise
               </p>
               <h2 className='font-inter mb-3 text-2xl font-light text-taupe-800 md:text-3xl'>
@@ -545,7 +545,7 @@ export default function RetreatPage() {
               href='https://www.google.com/maps?q=VWJ3%2B965%20Mori%2C%20Autonome%20Provinz%20Trient%2C%20Italien'
               target='_blank'
               rel='noopener noreferrer'
-              className='font-inter inline-flex items-center justify-center rounded-full bg-[#67B1B1] px-5 py-2.5 text-white transition-all duration-300 hover:bg-[#5a9999]'>
+              className='font-inter inline-flex items-center justify-center rounded-full bg-[#616949] px-5 py-2.5 text-white transition-all duration-300 hover:bg-[#4d5438]'>
               Route in Google Maps öffnen
             </Link>
           </div>
@@ -620,7 +620,7 @@ export default function RetreatPage() {
       <section className='py-16'>
         <div className='container mx-auto max-w-6xl px-4'>
           <div className='mb-8 max-w-3xl'>
-            <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#67B1B1]'>
+            <p className='font-inter mb-2 text-sm uppercase tracking-[0.15em] text-[#616949]'>
               Gut zu wissen
             </p>
             <h2 className='font-inter text-2xl font-light text-taupe-800 md:text-3xl'>
@@ -630,9 +630,9 @@ export default function RetreatPage() {
           <div className='divide-y divide-cream-200 rounded-lg border border-cream-200 bg-white'>
             {faqs.map(([question, answer]) => (
               <details key={question} className='group'>
-                <summary className='font-inter flex cursor-pointer list-none items-center justify-between gap-6 p-5 font-medium text-taupe-800 transition-colors duration-200 hover:text-[#4f8e8e] md:p-6 [&::-webkit-details-marker]:hidden'>
+                <summary className='font-inter flex cursor-pointer list-none items-center justify-between gap-6 p-5 font-medium text-taupe-800 transition-colors duration-200 hover:text-[#3f4530] md:p-6 [&::-webkit-details-marker]:hidden'>
                   <span>{question}</span>
-                  <span className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream-100 text-[#4f8e8e] transition-transform duration-200 group-open:rotate-45'>
+                  <span className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream-100 text-[#3f4530] transition-transform duration-200 group-open:rotate-45'>
                     +
                   </span>
                 </summary>
@@ -642,9 +642,9 @@ export default function RetreatPage() {
               </details>
             ))}
             <details className='group'>
-              <summary className='font-inter flex cursor-pointer list-none items-center justify-between gap-6 p-5 font-medium text-taupe-800 transition-colors duration-200 hover:text-[#4f8e8e] md:p-6 [&::-webkit-details-marker]:hidden'>
+              <summary className='font-inter flex cursor-pointer list-none items-center justify-between gap-6 p-5 font-medium text-taupe-800 transition-colors duration-200 hover:text-[#3f4530] md:p-6 [&::-webkit-details-marker]:hidden'>
                 <span>Grundrisse der angebotenen Zimmer</span>
-                <span className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream-100 text-[#4f8e8e] transition-transform duration-200 group-open:rotate-45'>
+                <span className='flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream-100 text-[#3f4530] transition-transform duration-200 group-open:rotate-45'>
                   +
                 </span>
               </summary>
@@ -658,7 +658,7 @@ export default function RetreatPage() {
             </details>
           </div>
 
-          <div className='mt-8 rounded-lg bg-[#67B1B1] p-6 text-white md:flex md:items-center md:justify-between md:gap-8'>
+          <div className='mt-8 rounded-lg bg-[#616949] p-6 text-white md:flex md:items-center md:justify-between md:gap-8'>
             <div className='mb-5 md:mb-0'>
               <p className='font-inter mb-1 text-xl font-light'>
                 Bereit für vier Tage am Gardasee?
@@ -671,7 +671,7 @@ export default function RetreatPage() {
               href='https://book.stripe.com/7sY4gy43abxQ27N6x8aEE00'
               target='_blank'
               rel='noopener noreferrer'
-              className='font-inter inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3 text-[#4f8e8e] shadow-md transition-all duration-300 hover:bg-cream-50 md:w-auto'>
+              className='font-inter inline-flex w-full items-center justify-center rounded-full bg-white px-8 py-3 text-[#3f4530] shadow-md transition-all duration-300 hover:bg-cream-50 md:w-auto'>
               Retreat jetzt buchen
             </Link>
           </div>

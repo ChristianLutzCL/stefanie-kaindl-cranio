@@ -26,7 +26,7 @@ function Content() {
               <Link href="/kontakt">
                 <Button 
                   size="lg" 
-                  className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter px-6 py-3 rounded-full"
+                  className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter px-6 py-3 rounded-full"
                 >
                   Termin vereinbaren
                 </Button>
@@ -52,7 +52,7 @@ function Content() {
                   priority
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#67B1B1] rounded-full opacity-20"></div>
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#616949] rounded-full opacity-20"></div>
               <div className="absolute -top-6 -left-6 w-16 h-16 bg-sage-300 rounded-full opacity-30"></div>
             </div>
           </div>
@@ -118,7 +118,7 @@ function Content() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-cream-50 rounded-2xl p-6 warm-shadow border border-cream-200">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-[#67B1B1] rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-[#616949] rounded-full flex items-center justify-center flex-shrink-0">
                   <Typography className="text-white font-bold">CS</Typography>
                 </div>
                 <div>
@@ -178,7 +178,7 @@ function Content() {
 
             <div className="bg-cream-50 rounded-2xl p-6 warm-shadow border border-cream-200">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-[#8B9A7C] rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-[#8d9375] rounded-full flex items-center justify-center flex-shrink-0">
                   <Typography className="text-white font-bold">WB</Typography>
                 </div>
                 <div>
@@ -253,7 +253,7 @@ function Content() {
           <Link href="/kontakt">
             <Button 
               size="lg" 
-              className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Jetzt Kontakt aufnehmen
             </Button>

@@ -48,7 +48,7 @@ export default function NotFound() {
         <div className='flex flex-col items-center gap-3 sm:flex-row md:gap-4'>
           <Link
             href='/'
-            className='font-inter inline-flex items-center justify-center rounded-full bg-[#67B1B1] px-7 py-3.5 text-base font-medium text-white shadow-lg transition-all duration-300 hover:bg-[#5a9999] hover:shadow-xl md:px-8 md:py-4 md:text-lg'>
+            className='font-inter inline-flex items-center justify-center rounded-full bg-[#616949] px-7 py-3.5 text-base font-medium text-white shadow-lg transition-all duration-300 hover:bg-[#4d5438] hover:shadow-xl md:px-8 md:py-4 md:text-lg'>
             Zur Startseite
           </Link>
           <Link

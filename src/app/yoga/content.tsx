@@ -110,7 +110,7 @@ function Content() {
   return (
     <section className='min-h-screen bg-gradient-to-b from-cream-50 to-cream-100 pb-16 pt-28'>
       <div className='container mx-auto max-w-6xl px-4'>
-        <div className='warm-shadow relative mb-10 overflow-hidden rounded-3xl bg-gradient-to-br from-[#67B1B1] via-[#5f9f9f] to-[#4f8c8c] p-6 text-white md:p-8'>
+        <div className='warm-shadow relative mb-10 overflow-hidden rounded-3xl bg-gradient-to-br from-[#616949] via-[#4d5438] to-[#3f4530] p-6 text-white md:p-8'>
           <div
             className='pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-white/10 opacity-60 blur-3xl'
             aria-hidden='true'></div>
@@ -156,7 +156,7 @@ function Content() {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='w-full sm:w-auto lg:w-full'>
-                <Button className='font-inter w-full rounded-full border border-transparent bg-white px-5 py-3 text-base text-[#5a9a9a] hover:bg-white/90 sm:w-auto lg:w-full'>
+                <Button className='font-inter w-full rounded-full border border-transparent bg-white px-5 py-3 text-base text-[#4d5438] hover:bg-white/90 sm:w-auto lg:w-full'>
                   Platz reservieren
                 </Button>
               </Link>
@@ -250,7 +250,7 @@ function Content() {
                   href='https://wa.me/4917663094476'
                   target='_blank'
                   rel='noopener noreferrer'>
-                  <Button className='font-inter rounded-full bg-[#67B1B1] px-8 py-3 text-white hover:bg-[#5a9a9a]'>
+                  <Button className='font-inter rounded-full bg-[#616949] px-8 py-3 text-white hover:bg-[#4d5438]'>
                     Anmelden & Infos
                   </Button>
                 </Link>
@@ -286,7 +286,7 @@ function Content() {
                 rel='noopener noreferrer'>
                 <Button
                   size='lg'
-                  className='font-inter rounded-full bg-[#67B1B1] px-8 py-3 text-white hover:bg-[#5a9a9a]'>
+                  className='font-inter rounded-full bg-[#616949] px-8 py-3 text-white hover:bg-[#4d5438]'>
                   Meine Yogazeit buchen
                 </Button>
               </Link>
@@ -302,7 +302,7 @@ function Content() {
                   priority
                 />
               </div>
-              <div className='absolute -bottom-6 -left-6 h-20 w-20 rounded-full bg-[#67B1B1] opacity-30'></div>
+              <div className='absolute -bottom-6 -left-6 h-20 w-20 rounded-full bg-[#616949] opacity-30'></div>
               <div className='absolute -right-10 -top-6 h-28 w-28 rounded-full bg-cream-200 opacity-60'></div>
             </div>
           </div>
@@ -313,7 +313,7 @@ function Content() {
             <div
               key={pillar.title}
               className='group h-full rounded-2xl border border-cream-200 bg-gradient-to-b from-cream-50 to-white p-6 transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg'>
-              <span className='mb-4 inline-flex items-center justify-center rounded-full bg-[#67B1B1]/10 px-4 py-1 text-sm font-semibold tracking-[0.2em] text-[#67B1B1]'>
+              <span className='mb-4 inline-flex items-center justify-center rounded-full bg-[#616949]/10 px-4 py-1 text-sm font-semibold tracking-[0.2em] text-[#616949]'>
                 0{index + 1}
               </span>
               <Typography className='font-inter mb-3 text-xl text-taupe-900'>
@@ -363,7 +363,7 @@ function Content() {
               ].map((item) => (
                 <div key={item} className='flex items-start gap-3'>
                   <span
-                    className='mt-2 h-1.5 w-1.5 rounded-full bg-[#67B1B1]'
+                    className='mt-2 h-1.5 w-1.5 rounded-full bg-[#616949]'
                     aria-hidden='true'></span>
                   <Typography className='font-inter leading-relaxed text-taupe-700'>
                     {item}
@@ -397,7 +397,7 @@ function Content() {
                 <Typography className='font-inter mb-2 text-xs uppercase tracking-[0.4em] text-taupe-500'>
                   Preis pro Stunde
                 </Typography>
-                <Typography className='font-inter text-5xl font-light text-[#67B1B1]'>
+                <Typography className='font-inter text-5xl font-light text-[#616949]'>
                   14€
                 </Typography>
                 <Typography className='font-inter mt-3 text-sm text-taupe-600'>
@@ -434,7 +434,7 @@ function Content() {
                     <Typography className='font-inter mb-1 text-sm uppercase tracking-[0.3em] text-taupe-500'>
                       {entry.title}
                     </Typography>
-                    <Typography className='font-inter mb-2 text-2xl font-light text-[#67B1B1]'>
+                    <Typography className='font-inter mb-2 text-2xl font-light text-[#616949]'>
                       {entry.time}
                     </Typography>
                     <Typography className='font-inter leading-relaxed text-taupe-700'>
@@ -466,7 +466,7 @@ function Content() {
                 href='https://wa.me/4917663094476'
                 target='_blank'
                 rel='noopener noreferrer'>
-                <Button className='font-inter rounded-full bg-[#67B1B1] px-6 py-3 text-white hover:bg-[#5a9a9a]'>
+                <Button className='font-inter rounded-full bg-[#616949] px-6 py-3 text-white hover:bg-[#4d5438]'>
                   Termin anfragen
                 </Button>
               </Link>
@@ -481,7 +481,7 @@ function Content() {
                     <div
                       key={date}
                       className='rounded-2xl border border-cream-200 bg-cream-50/70 px-4 py-5 text-center'>
-                      <Typography className='font-inter text-4xl font-light text-[#67B1B1]'>
+                      <Typography className='font-inter text-4xl font-light text-[#616949]'>
                         {dayNumber}
                       </Typography>
                       <Typography className='font-inter text-base text-taupe-700'>
@@ -498,7 +498,7 @@ function Content() {
           </div>
         </div>
 
-        <div className='warm-shadow rounded-3xl border border-cream-200 bg-gradient-to-r from-[#67B1B1] to-[#5a9a9a] p-12 text-white'>
+        <div className='warm-shadow rounded-3xl border border-cream-200 bg-gradient-to-r from-[#616949] to-[#4d5438] p-12 text-white'>
           <div className='flex flex-col items-start gap-8 lg:flex-row lg:items-center'>
             <div className='flex-1'>
               <Typography className='font-inter mb-2 text-sm uppercase tracking-[0.3em] text-white/80'>
@@ -522,7 +522,7 @@ function Content() {
                 className='flex-1'>
                 <Button
                   size='lg'
-                  className='font-inter w-full rounded-full bg-white px-10 py-4 text-[#5a9a9a] hover:bg-white/90'>
+                  className='font-inter w-full rounded-full bg-white px-10 py-4 text-[#4d5438] hover:bg-white/90'>
                   Jetzt buchen
                 </Button>
               </Link>

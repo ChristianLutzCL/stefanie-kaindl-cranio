@@ -72,7 +72,7 @@ function Content() {
         </Typography>
         <Typography className="my-5 font-normal text-taupe-700 font-inter">
           E-Mail:{' '}
-          <a href="mailto:hallo@andrea-kieferl.de" className="text-[#67B1B1] hover:text-[#5a9999] underline">
+          <a href="mailto:hallo@andrea-kieferl.de" className="text-[#616949] hover:text-[#4d5438] underline">
             hallo@andrea-kieferl.de
           </a>
           <br />
@@ -91,12 +91,12 @@ function Content() {
         </Typography>
         <Typography className="my-5 font-normal text-taupe-700 font-inter">
           E-Mail:{' '}
-          <a href="mailto:hallo@chrislutz.me" className="text-[#67B1B1] hover:text-[#5a9999] underline">
+          <a href="mailto:hallo@chrislutz.me" className="text-[#616949] hover:text-[#4d5438] underline">
             hallo@chrislutz.me
           </a>
           <br />
           Website:{' '}
-          <a href="https://chrislutz.me" target="_blank" rel="noopener noreferrer" className="text-[#67B1B1] hover:text-[#5a9999] underline">
+          <a href="https://chrislutz.me" target="_blank" rel="noopener noreferrer" className="text-[#616949] hover:text-[#4d5438] underline">
             chrislutz.me
           </a>
         </Typography>

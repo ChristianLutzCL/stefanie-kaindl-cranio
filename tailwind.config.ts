@@ -1,6 +1,14 @@
 import type { Config } from "tailwindcss";
 const withMT = require("@material-tailwind/react/utils/withMT");
 
+/**
+ * Farbwelt „Editorial Olive" (siehe research/design-brief-editorial-olive.md).
+ *
+ * `paper` / `ink` / `olive` sind die neuen Namen für das Redesign.
+ * `cream` / `sage` / `taupe` / `therapeutic` bleiben bestehen, sind aber auf
+ * dieselben Werte umgestimmt, damit die noch nicht umgebauten Unterseiten im
+ * neuen Ton erscheinen, ohne dass dort jede Klasse angepasst werden muss.
+ */
 const config: Config = withMT({
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,65 +17,96 @@ const config: Config = withMT({
   theme: {
     extend: {
       colors: {
-        // Warm cream/beige inspired by the reference site
-        'cream': {
-          '50': '#fefcf7',
-          '100': '#fdf7e8',
-          '200': '#fbedc6',
-          '300': '#f7dc9a',
-          '400': '#f2c56c',
-          '500': '#eeb147',
-          '600': '#de9c32',
-          '700': '#b97f2b',
-          '800': '#94652a',
-          '900': '#785528',
-          '950': '#422c12',
+        paper: {
+          DEFAULT: "#f3f0e9",
+          soft: "#f8f6f1",
+          deep: "#eae6db",
+          dark: "#ded9cb",
         },
-        // Soft sage green inspired by the therapeutic theme
-        'sage': {
-          '50': '#f7f9f7',
-          '100': '#eef2ee',
-          '200': '#dde5dd',
-          '300': '#c3d2c3',
-          '400': '#a1b8a1',
-          '500': '#829e82',
-          '600': '#6a836a',
-          '700': '#566856',
-          '800': '#475447',
-          '900': '#3d463d',
-          '950': '#1f251f',
+        ink: {
+          DEFAULT: "#1d1c17",
+          900: "#1d1c17",
+          800: "#3a3830",
+          700: "#57554d",
+          600: "#75736a",
+          500: "#8f8d84",
+          400: "#a9a69a",
+          100: "#efece4",
         },
-        // Warm taupe/brown for deeper elements
-        'taupe': {
-          '50': '#f8f6f4',
-          '100': '#f0ebe6',
-          '200': '#dfd5cc',
-          '300': '#cab7aa',
-          '400': '#b69889',
-          '500': '#a68270',
-          '600': '#987264',
-          '700': '#7f5e54',
-          '800': '#695049',
-          '900': '#56433d',
-          '950': '#2e221f',
+        olive: {
+          DEFAULT: "#616949",
+          50: "#f4f5ef",
+          100: "#e5e7db",
+          200: "#cfd3bb",
+          300: "#b0b697",
+          400: "#8d9375",
+          500: "#77805c",
+          600: "#616949",
+          700: "#4d5438",
+          800: "#3f4530",
+          900: "#333827",
         },
-        // Soft therapeutic accent color
-        'therapeutic': {
-          '50': '#f6f8f6',
-          '100': '#e3ebe4',
-          '200': '#c7d6c9',
-          '300': '#9fb8a3',
-          '400': '#739679',
-          '500': '#567a5c',
-          '600': '#426147',
-          '700': '#364e3a',
-          '800': '#2d4030',
-          '900': '#263529',
-          '950': '#141d16',
+
+        /* --- Legacy-Namen, neu eingefärbt --- */
+        cream: {
+          50: "#f8f6f1",
+          100: "#f3f0e9",
+          200: "#eae6db",
+          300: "#ded9cb",
+          400: "#cfc8b6",
+          500: "#bdb5a1",
+          600: "#a49b86",
+          700: "#7f7767",
+          800: "#5b554a",
+          900: "#3a362f",
+          950: "#1d1c17",
         },
-         
-      }
-    }
+        sage: {
+          50: "#f4f5ef",
+          100: "#e5e7db",
+          200: "#d2d5c1",
+          300: "#b4b8a0",
+          400: "#949a7e",
+          500: "#77805c",
+          600: "#616949",
+          700: "#4d5438",
+          800: "#3f4530",
+          900: "#333827",
+          950: "#1d1c17",
+        },
+        taupe: {
+          50: "#f8f6f1",
+          100: "#efece4",
+          200: "#e4e0d5",
+          300: "#cbc7ba",
+          400: "#a9a69a",
+          500: "#8f8d84",
+          600: "#75736a",
+          700: "#57554d",
+          800: "#3a3830",
+          900: "#1d1c17",
+          950: "#141310",
+        },
+        therapeutic: {
+          50: "#f4f5ef",
+          100: "#e5e7db",
+          200: "#cfd3bb",
+          300: "#b0b697",
+          400: "#8d9375",
+          500: "#77805c",
+          600: "#616949",
+          700: "#4d5438",
+          800: "#3f4530",
+          900: "#333827",
+          950: "#1d1c17",
+        },
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+      },
+    },
   },
   plugins: [],
 });

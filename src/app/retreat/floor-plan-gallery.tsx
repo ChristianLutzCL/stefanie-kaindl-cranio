@@ -23,12 +23,12 @@ export default function FloorPlanGallery({images}: FloorPlanGalleryProps) {
             key={plan.src}
             type='button'
             onClick={() => setActivePlan(plan)}
-            className='overflow-hidden rounded-lg border border-cream-200 bg-cream-50 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#67B1B1]/50 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#67B1B1] focus:ring-offset-2'>
+            className='overflow-hidden rounded-lg border border-cream-200 bg-cream-50 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#616949]/50 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#616949] focus:ring-offset-2'>
             <div className='flex items-center justify-between gap-3 border-b border-cream-200 px-4 py-3'>
               <p className='font-inter text-sm font-medium text-taupe-800'>
                 Grundriss Seite {index + 1}
               </p>
-              <span className='font-inter text-xs text-[#4f8e8e]'>Vergrößern</span>
+              <span className='font-inter text-xs text-[#3f4530]'>Vergrößern</span>
             </div>
             <Image
               src={plan.src}

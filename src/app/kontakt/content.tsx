@@ -77,13 +77,13 @@ function ContactForm() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#67B1B1] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all"
             />
           </div>
 
           <div>
             <label className="font-inter text-taupe-800 text-sm font-medium mb-2 block">
-              E-Mail Adresse <span className="text-[#67B1B1]">*</span>
+              E-Mail Adresse <span className="text-[#616949]">*</span>
             </label>
             <input
               type="email"
@@ -91,7 +91,7 @@ function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#67B1B1] focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all"
             />
           </div>
         </div>
@@ -106,13 +106,13 @@ function ContactForm() {
             value={formData.phone}
             onChange={handleChange}
             placeholder="+49"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#67B1B1] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all"
           />
         </div>
 
         <div>
           <label className="font-inter text-taupe-800 text-sm font-medium mb-2 block">
-            Nachricht <span className="text-[#67B1B1]">*</span>
+            Nachricht <span className="text-[#616949]">*</span>
           </label>
           <textarea
             name="message"
@@ -120,14 +120,14 @@ function ContactForm() {
             onChange={handleChange}
             required
             rows={6}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#67B1B1] focus:border-transparent transition-all resize-none"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all resize-none"
           />
         </div>
 
         <div className="text-center opacity-60">
           <Typography className="font-inter text-taupe-500 text-[10px]">
             Es gilt unsere{' '}
-            <Link href="/datenschutz" className="text-taupe-500 hover:text-[#67B1B1] transition-colors underline underline-offset-2">
+            <Link href="/datenschutz" className="text-taupe-500 hover:text-[#616949] transition-colors underline underline-offset-2">
               Datenschutzerklärung
             </Link>
             .
@@ -150,7 +150,7 @@ function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter font-medium px-12 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter font-medium px-12 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Wird gesendet...' : 'Absenden'}
           </button>
@@ -212,12 +212,12 @@ function Content() {
             </Typography>
             <div className="space-y-1">
               <Link href="mailto:info@stefanie-kaindl-cranio.de" className="block">
-                <Typography className="font-inter text-[#67B1B1] hover:text-[#5a9999] transition-colors text-sm md:text-base underline">
+                <Typography className="font-inter text-[#616949] hover:text-[#4d5438] transition-colors text-sm md:text-base underline">
                   info@stefanie-kaindl-cranio.de
                 </Typography>
               </Link>
               <Link href="https://instagram.com/stefanie_kaindl_cranio" target="_blank" rel="noopener noreferrer" className="block">
-                <Typography className="font-inter text-[#67B1B1] hover:text-[#5a9999] transition-colors text-sm md:text-base underline">
+                <Typography className="font-inter text-[#616949] hover:text-[#4d5438] transition-colors text-sm md:text-base underline">
                   Instagram.com/stefanie_kaindl_cranio
                 </Typography>
               </Link>
@@ -234,7 +234,7 @@ function Content() {
                 Mo – Fr nach Terminvereinbarung
               </Typography>
               <Link href="https://calendly.com/stefanie-kaindl-cranio" target="_blank" rel="noopener noreferrer" className="block mt-3">
-                <span className="font-inter text-white bg-[#67B1B1] hover:bg-[#5a9999] transition-colors font-medium text-sm md:text-base px-4 py-2 rounded-lg inline-flex items-center gap-2">
+                <span className="font-inter text-white bg-[#616949] hover:bg-[#4d5438] transition-colors font-medium text-sm md:text-base px-4 py-2 rounded-lg inline-flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                   </svg>

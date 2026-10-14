@@ -15,7 +15,7 @@ const mainServices = [
     price: '73€',
     image: img2,
     alt: 'Craniosacrale Behandlung für Erwachsene',
-    badge: { text: 'Beliebt', color: 'bg-[#67B1B1]' },
+    badge: { text: 'Beliebt', color: 'bg-[#616949]' },
     description: 'Eine tiefgreifende Behandlung für Erwachsene, die bei Stress, Verspannungen, Schmerzen und emotionalen Belastungen unterstützt.',
     benefits: [
       'Chronischen Schmerzen und Verspannungen',
@@ -26,7 +26,7 @@ const mainServices = [
       'Allgemeiner Entspannung und Prävention',
       'Beschwerden in der Schwangerschaft'
     ],
-    buttonColor: 'bg-[#67B1B1] hover:bg-[#5a9999]',
+    buttonColor: 'bg-[#616949] hover:bg-[#4d5438]',
     bookingLink: 'https://calendly.com/stefanie-kaindl-cranio/cranio_session'
   },
   {
@@ -36,7 +36,7 @@ const mainServices = [
     price: '53€',
     image: img1,
     alt: 'Craniosacrale Behandlung für Kinder',
-    badge: { text: 'Sanft', color: 'bg-[#8B9A7C]' },
+    badge: { text: 'Sanft', color: 'bg-[#8d9375]' },
     description: 'Einfühlsame Behandlung für Kinder jeden Alters. Die Therapie erfolgt spielerisch und altersgerecht.',
     benefits: [
       'Schlafproblemen und Unruhe',
@@ -46,7 +46,7 @@ const mainServices = [
       'Entwicklungsverzögerungen',
       'Emotionalen Belastungen'
     ],
-    buttonColor: 'bg-[#8B9A7C] hover:bg-[#7A8A6B]',
+    buttonColor: 'bg-[#8d9375] hover:bg-[#77805c]',
     bookingLink: 'https://calendly.com/stefanie-kaindl-cranio/cranio-kinder'
   }
 ];
@@ -128,7 +128,7 @@ function ServiceCard({ service }: { service: typeof mainServices[0] }) {
           <div className='grid grid-cols-1 gap-2'>
             {service.benefits.map((benefit, index) => (
               <div key={index} className='flex items-center space-x-2'>
-                <div className='w-2 h-2 bg-[#67B1B1] rounded-full flex-shrink-0'></div>
+                <div className='w-2 h-2 bg-[#616949] rounded-full flex-shrink-0'></div>
                 <Typography className='font-inter text-taupe-600 text-sm'>
                   {benefit}
                 </Typography>
@@ -200,7 +200,7 @@ function Content() {
                 }
               ].map((step, index) => (
                 <div key={index} className='text-center'>
-                  <div className='w-16 h-16 bg-[#67B1B1] text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4'>
+                  <div className='w-16 h-16 bg-[#616949] text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4'>
                     {step.step}
                   </div>
                   <Typography className='font-inter font-medium text-taupe-800 mb-2'>
@@ -234,7 +234,7 @@ function Content() {
                     'Termine können auch online gebucht werden'
                   ].map((item, index) => (
                     <div key={index} className='flex items-start space-x-2'>
-                      <div className='w-2 h-2 bg-[#67B1B1] rounded-full mt-2 flex-shrink-0'></div>
+                      <div className='w-2 h-2 bg-[#616949] rounded-full mt-2 flex-shrink-0'></div>
                       <Typography className='font-inter text-taupe-700 text-sm'>
                         {item}
                       </Typography>
@@ -253,7 +253,7 @@ function Content() {
                     'Manche Zusatzversicherungen übernehmen Kosten'
                   ].map((item, index) => (
                     <div key={index} className='flex items-start space-x-2'>
-                      <div className='w-2 h-2 bg-[#67B1B1] rounded-full mt-2 flex-shrink-0'></div>
+                      <div className='w-2 h-2 bg-[#616949] rounded-full mt-2 flex-shrink-0'></div>
                       <Typography className='font-inter text-taupe-700 text-sm'>
                         {item}
                       </Typography>
@@ -278,7 +278,7 @@ function Content() {
             <Link href="/kontakt">
               <Button 
                 size="lg" 
-                className="bg-[#67B1B1] hover:bg-[#5a9999] text-white font-inter px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 Jetzt Termin buchen
               </Button>

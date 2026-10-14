@@ -60,7 +60,7 @@ export function CookieBanner() {
               <Button
                 variant="outlined"
                 size="sm"
-                className="border border-[#67B1B1] text-[#67B1B1] hover:bg-[#67B1B1]/10 font-inter px-4 py-2 rounded-full text-xs transition-all duration-300"
+                className="border border-[#616949] text-[#616949] hover:bg-[#616949]/10 font-inter px-4 py-2 rounded-full text-xs transition-all duration-300"
               >
                 Einstellungen
               </Button>
@@ -76,7 +76,7 @@ export function CookieBanner() {
             <Button
               onClick={handleAcceptAll}
               size="sm"
-              className="bg-[#67B1B1] hover:bg-[#5a9a9a] text-white font-inter px-4 py-2 rounded-full text-xs shadow-md hover:shadow-lg transition-all duration-300"
+              className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter px-4 py-2 rounded-full text-xs shadow-md hover:shadow-lg transition-all duration-300"
             >
               Akzeptieren
             </Button>

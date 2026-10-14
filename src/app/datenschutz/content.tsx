@@ -209,7 +209,7 @@ function Content() {
               href="https://calendly.com/privacy" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-[#67B1B1] hover:text-[#5a9999] underline"
+              className="text-[#616949] hover:text-[#4d5438] underline"
             >
               https://calendly.com/privacy
             </Link>
@@ -217,7 +217,7 @@ function Content() {
         </div>
 
         <Typography className="my-10 font-normal text-xs text-taupe-600 font-inter">
-          Quelle: <Link href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer" className="text-[#67B1B1] hover:text-[#5a9999] underline">https://www.e-recht24.de</Link>
+          Quelle: <Link href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer" className="text-[#616949] hover:text-[#4d5438] underline">https://www.e-recht24.de</Link>
         </Typography>
       </div>
     </section>
