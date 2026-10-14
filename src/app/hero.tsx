@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import { ArrowUpRight } from '@/components/icons';
 
 /**
- * Hero „Editorial Olive" — nach der Referenz, ohne Spaltenlinien:
+ * Hero „Editorial Olive" — nach der Referenz:
  * vollflächiges Foto, dahinter eine sehr zurückhaltende „Blume des Lebens" als
  * Linienzeichnung. Mittig: die beiden Disziplinen durch eine Haarlinie
  * getrennt („Cranio | Yoga"), die Serif-Headline in zwei Zeilen und ein
@@ -88,7 +89,7 @@ export default function Hero() {
           target='_blank'
           rel='noopener noreferrer'
           className='cta-link mt-9'>
-          Termin vereinbaren <span aria-hidden>↗</span>
+          Termin vereinbaren <ArrowUpRight />
         </a>
       </div>
     </section>

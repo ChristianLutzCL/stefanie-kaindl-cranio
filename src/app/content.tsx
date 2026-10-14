@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from '@/components/icons';
 
 /**
  * Startseite „Editorial Olive" — Aufbau und Details folgen der Referenz
@@ -106,8 +107,8 @@ function Arrows({ onStep, className = '' }: { onStep: (dir: number) => void; cla
           type='button'
           onClick={() => onStep(dir === 'left' ? -1 : 1)}
           aria-label={dir === 'left' ? 'Zurück' : 'Weiter'}
-          className='text-[1rem] text-ink-500 transition-colors hover:text-ink'>
-          <span aria-hidden>{dir === 'left' ? '←' : '→'}</span>
+          className='text-[1.2rem] text-ink-500 transition-colors hover:text-ink'>
+          {dir === 'left' ? <ArrowLeft /> : <ArrowRight />}
         </button>
       ))}
     </div>
@@ -195,7 +196,7 @@ function Story() {
             und Stress, nach der Geburt, oder einfach, um zur Ruhe zu kommen.
           </p>
           <Link href='/ueber-mich' className='cta-link cta-link-ink mt-8'>
-            Mehr über mich <span aria-hidden>↗</span>
+            Mehr über mich <ArrowUpRight />
           </Link>
         </div>
       </div>
@@ -384,7 +385,7 @@ function Method() {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='cta-link mt-4'>
-                Termin vereinbaren <span aria-hidden>↗</span>
+                Termin vereinbaren <ArrowUpRight />
               </a>
             </div>
           </div>
@@ -499,7 +500,7 @@ function StudioBand() {
               Eile. Kein Wartezimmer, keine Hektik — nur du und dein eigenes Tempo.
             </p>
             <Link href='/kontakt' className='cta-link mt-8'>
-              Kontakt &amp; Anfahrt <span aria-hidden>↗</span>
+              Kontakt &amp; Anfahrt <ArrowUpRight />
             </Link>
           </div>
         </div>
@@ -639,7 +640,7 @@ function Membership() {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='mt-4 flex items-center justify-between text-[0.75rem] text-[var(--cream)] transition-opacity hover:opacity-75'>
-                {plan.cta} <span aria-hidden>↗</span>
+                {plan.cta} <ArrowUpRight />
               </a>
               <p className='mt-7 font-serif text-[clamp(1.6rem,2.3vw,2.1rem)] leading-none'>
                 {plan.price}
@@ -664,7 +665,7 @@ function Membership() {
           ))}
         </div>
         <Link href='/angebote-preise' className='cta-link cta-link-ink mt-8'>
-          Alle Angebote &amp; Preise <span aria-hidden>↗</span>
+          Alle Angebote &amp; Preise <ArrowUpRight />
         </Link>
       </div>
     </section>
@@ -710,7 +711,7 @@ function ForYou() {
             Wo möchtest du ansetzen?
           </p>
           <Link href='/angebote-preise' className='cta-link cta-link-ink mt-6'>
-            Alle Angebote ansehen <span aria-hidden>↗</span>
+            Alle Angebote ansehen <ArrowUpRight />
           </Link>
         </div>
 
@@ -768,7 +769,7 @@ function ClosingCta() {
               Deine Praxis muss nicht perfekt sein. Sie muss nur beginnen.
             </p>
             <a href={CALENDLY} target='_blank' rel='noopener noreferrer' className='cta-link cta-link-ink'>
-              Termin vereinbaren <span aria-hidden>↗</span>
+              Termin vereinbaren <ArrowUpRight />
             </a>
           </div>
         </div>

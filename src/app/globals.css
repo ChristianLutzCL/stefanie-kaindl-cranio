@@ -250,20 +250,24 @@ div[id] {
   font-size: 1em;
 }
 
-/* Hervorgehobener Text-Link (Hero) — prominent, mit Unterstreichung */
+/* Hervorgehobener Text-Link: die Linie kommt aus einem Rahmen, nicht aus
+   `text-decoration` — sonst entsteht über dem `gap` zum Pfeil-Icon eine Lücke. */
 .cta-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.45rem;
   font-size: 1rem;
   color: var(--cream);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.42em;
-  transition: text-decoration-thickness 0.2s ease, color 0.2s ease;
+  padding-bottom: 0.12rem;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
-.cta-link:hover {
-  text-decoration-thickness: 2px;
+.cta-link .icon-arrow {
+  transition: transform 0.25s ease;
+}
+.cta-link:hover .icon-arrow {
+  transform: translate(2px, -2px);
 }
 /* Dieselbe Auszeichnung auf Papier statt auf Foto */
 .cta-link-ink {
@@ -274,6 +278,15 @@ div[id] {
    weiter abzudunkeln (wird auf dem Hero-Textblock gesetzt). */
 .on-photo {
   text-shadow: 0 1px 18px rgba(20, 19, 15, 0.62), 0 1px 4px rgba(20, 19, 15, 0.42);
+}
+
+/* Pfeil-Icons: erben die Schriftgröße über `em` und sitzen auf der Grundlinie */
+.icon-arrow {
+  width: 0.68em;
+  height: 0.68em;
+  flex: none;
+  display: inline-block;
+  overflow: visible;
 }
 
 .hairline {

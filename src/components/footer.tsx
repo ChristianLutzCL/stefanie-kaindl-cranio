@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ArrowUpRight } from '@/components/icons';
 
 /**
  * Fußbereich „Editorial Olive": olivgrüne Fläche, Laufschrift am oberen Rand,
@@ -91,7 +92,7 @@ export function Footer() {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='btn btn-cream'>
-                Termin vereinbaren <span aria-hidden>↗</span>
+                Termin vereinbaren <ArrowUpRight />
               </a>
               <a
                 href='mailto:info@stefanie-kaindl-cranio.de'
@@ -152,7 +153,7 @@ export function Footer() {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='inline-block pt-1 text-[0.875rem] text-[var(--cream-70)] transition-colors hover:text-[var(--cream)]'>
-                Instagram ↗
+                Instagram <ArrowUpRight />
               </a>
             </div>
           </div>

@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { RETREAT_ENABLED } from '@/site-config';
+import { ArrowUpRight } from '@/components/icons';
 
 /**
  * Kopfzeile „Editorial Olive" — nach der Referenz:
@@ -97,7 +98,7 @@ export function Navbar() {
                 ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
                 : 'text-ink-700 hover:text-ink'
             }`}>
-            Termin buchen <span aria-hidden className='ml-1'>↗</span>
+            Termin buchen <ArrowUpRight />
           </Link>
 
           <button
