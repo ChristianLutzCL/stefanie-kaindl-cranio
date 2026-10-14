@@ -32,7 +32,7 @@ function FlowerOfLife({ className = '' }: { className?: string }) {
       viewBox={`${-3 * R} ${-3 * R} ${6 * R} ${6 * R}`}
       className={className}
       fill='none'
-      stroke='rgba(243, 240, 233, 0.11)'
+      stroke='rgba(243, 240, 233, 0.06)'
       strokeWidth={1}>
       <g>
         {CENTERS.map(([cx, cy], i) => (
@@ -47,30 +47,30 @@ function FlowerOfLife({ className = '' }: { className?: string }) {
 export default function Hero() {
   return (
     <section className='relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#22241a] text-[var(--cream)]'>
-      <div
-        aria-hidden
-        className='absolute inset-0 bg-cover bg-no-repeat'
-        style={{
-          backgroundImage: "url('/image/hero.webp')",
-          backgroundPosition: '50% 38%',
-        }}
-      />
-      <span aria-hidden className='absolute inset-0 bg-[#211c15]/45' />
-      <span aria-hidden className='absolute inset-0 bg-[#6b7250] mix-blend-multiply opacity-20' />
+      <div aria-hidden className='hero-photo absolute inset-0' />
+      {/* Ein flacher Schleier plus ein weicher, mittiger Verlauf hinter dem
+          Textblock — die zentrierte Headline braucht das. Nach außen läuft der
+          Verlauf aus, oben und unten nur so viel wie für Navigation und Rahmen. */}
+      <span aria-hidden className='absolute inset-0 bg-[#211c15]/30' />
       <span
         aria-hidden
-        className='absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,rgba(29,28,23,0.55)_0%,rgba(29,28,23,0.3)_48%,rgba(29,28,23,0.12)_72%,rgba(29,28,23,0.05)_100%)]'
+        className='absolute inset-0 bg-[radial-gradient(ellipse_66%_64%_at_50%_50%,rgba(29,28,23,0.48)_0%,rgba(29,28,23,0.36)_55%,rgba(29,28,23,0.14)_80%,rgba(29,28,23,0)_100%)]'
       />
       <span
         aria-hidden
-        className='absolute inset-0 bg-gradient-to-b from-[#1d1c17]/45 via-[#1d1c17]/10 to-[#1d1c17]/85'
+        className='absolute inset-x-0 top-0 h-[22%] bg-[linear-gradient(to_bottom,rgba(29,28,23,0.38)_0%,rgba(29,28,23,0)_100%)]'
+      />
+      <span
+        aria-hidden
+        className='absolute inset-x-0 bottom-0 h-[36%] bg-[linear-gradient(to_top,rgba(29,28,23,0.35)_0%,rgba(29,28,23,0)_100%)]'
       />
 
       {/* Blume des Lebens als Zeichnung hinter der Überschrift — größer als der
-          Viewport, damit die Kreise an allen Kanten angeschnitten werden */}
-      <FlowerOfLife className='pointer-events-none absolute left-1/2 top-1/2 w-[min(150vw,2100px)] -translate-x-1/2 -translate-y-1/2' />
+          Viewport und mit einer Maske nach außen zu transparent ausblendend,
+          damit sie das Bild und das Gesicht nicht überlagert */}
+      <FlowerOfLife className='flower-fade pointer-events-none absolute left-1/2 top-1/2 w-[min(150vw,2100px)] -translate-x-1/2 -translate-y-1/2' />
 
-      <div className='shell relative z-10 flex flex-1 flex-col items-center justify-center pb-24 pt-32 text-center md:pt-40'>
+      <div className='on-photo shell relative z-10 flex flex-1 flex-col items-center justify-center pb-24 pt-32 text-center'>
         {/* Disziplinen, durch eine Haarlinie getrennt */}
         <p className='flex items-center text-[0.75rem] tracking-[0.06em] text-[var(--cream-70)]'>
           <span>Cranio</span>

@@ -270,6 +270,12 @@ div[id] {
   color: var(--ink);
 }
 
+/* Schrift über Foto: ein weicher Schatten hebt den Kontrast, ohne das Bild
+   weiter abzudunkeln (wird auf dem Hero-Textblock gesetzt). */
+.on-photo {
+  text-shadow: 0 1px 14px rgba(20, 19, 15, 0.55), 0 1px 3px rgba(20, 19, 15, 0.35);
+}
+
 .hairline {
   border-top: 1px solid var(--line);
 }
@@ -474,6 +480,28 @@ div[id] {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+
+/* Hero-Foto: das Motiv sitzt rechts, damit die zentrierte Überschrift Platz
+   auf der ruhigen linken Bildhälfte hat. Auf schmalen Viewports wird das Bild
+   stark beschnitten, dort muss der Ausschnitt auf die Person wandern. */
+.hero-photo {
+  background-image: url('/image/hero-stefanie.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 38% 50%;
+}
+@media (max-width: 767px) {
+  .hero-photo {
+    background-position: 74% 50%;
+  }
+}
+/* Blume des Lebens: nach außen hin zu transparent ausblenden, damit die
+   Zeichnung das Foto nicht überlagert (im Viewport sichtbarer Auslauf). */
+.flower-fade {
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.5) 30%, transparent 48%);
+  mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.5) 30%, transparent 48%);
+}
+
 .scroller > * {
   scroll-snap-align: start;
   flex: none;
