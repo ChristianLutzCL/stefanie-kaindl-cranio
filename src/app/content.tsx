@@ -4,6 +4,7 @@ import React from 'react';
 import {Button, Typography} from '@material-tailwind/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import {RETREAT_ENABLED} from '@/site-config';
 
 export function Content() {
   const [showMoreTestimonials, setShowMoreTestimonials] = React.useState(false);
@@ -410,7 +411,9 @@ export function Content() {
           </div>
         </div>
 
-        {/* Retreat Teaser */}
+        {/* Retreat Teaser — only while the retreat is switched on in
+            src/site-config.ts. Kept in place, not deleted. */}
+        {RETREAT_ENABLED && (
         <div className='warm-shadow mb-16 overflow-hidden rounded-3xl border border-cream-200 bg-white'>
           <div className='grid lg:grid-cols-[0.95fr_1.05fr]'>
             <div className='relative min-h-[280px] lg:min-h-[440px]'>
@@ -477,6 +480,7 @@ export function Content() {
             </div>
           </div>
         </div>
+        )}
 
         {/* Yoga Teaser */}
         <div className='warm-shadow mb-16 grid items-center gap-8 rounded-3xl border border-cream-200 bg-gradient-to-r from-[#67B1B1] via-[#5a9a9a] to-[#4f8e8e] p-8 text-white md:p-12 lg:grid-cols-2'>

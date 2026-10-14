@@ -12,6 +12,7 @@ import logoDark from '../../public/logos/sk_logo_dark.webp';
 import logoLight from '../../public/logos/sk_logo_light.webp';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import {RETREAT_ENABLED} from '@/site-config';
 
 const NAV_MENU = [
   {
@@ -35,7 +36,9 @@ const NAV_MENU = [
     title: 'Kontakt',
     href: '/kontakt',
   },
-];
+  // The retreat entry is dropped from the menu (and the mobile drawer) while the
+  // retreat is switched off in src/site-config.ts. Nothing here is deleted.
+].filter((item) => RETREAT_ENABLED || item.href !== '/retreat');
 
 function NavItem({title, href, badge, isScrolling, onClick}: {title: string; href: string; badge?: string; isScrolling?: boolean; onClick?: () => void}) {
   return (

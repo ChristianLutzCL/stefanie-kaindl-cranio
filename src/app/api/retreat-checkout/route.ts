@@ -1,7 +1,17 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { RETREAT_ENABLED } from "@/site-config";
 
 export async function POST(request: Request) {
+  // No new deposits once the retreat is over (src/site-config.ts). The endpoint
+  // and its Stripe logic stay in the repository for the next edition.
+  if (!RETREAT_ENABLED) {
+    return NextResponse.json(
+      { error: "Retreat booking is closed" },
+      { status: 410 },
+    );
+  }
+
   try {
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
     if (!stripeSecretKey) {

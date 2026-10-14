@@ -2,6 +2,7 @@
 
 import {Typography, Button} from '@material-tailwind/react';
 import Link from 'next/link';
+import {RETREAT_ENABLED} from '@/site-config';
 
 function Hero() {
   return (
@@ -45,6 +46,9 @@ function Hero() {
           </div>
         </div>
       </div>
+      {/* Retreat promo bar — only while the retreat is switched on in
+          src/site-config.ts. Kept in place, not deleted. */}
+      {RETREAT_ENABLED && (
       <div className='absolute inset-x-0 bottom-0 z-10 px-4 pb-5 md:pb-6'>
         <div className='container mx-auto max-w-6xl'>
           <div className='bg-white/15 rounded-2xl border border-white/25 p-4 text-white shadow-xl backdrop-blur-md md:flex md:items-center md:justify-between md:gap-6 md:p-5'>
@@ -78,6 +82,7 @@ function Hero() {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }

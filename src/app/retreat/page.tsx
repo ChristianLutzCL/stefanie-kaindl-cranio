@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import {notFound} from 'next/navigation';
 import BookingButton from './booking-button';
 import BookingStatus from './booking-status';
 import FloorPlanGallery from './floor-plan-gallery';
+import {RETREAT_ENABLED} from '@/site-config';
 
 const highlights = [
   'Tägliche Yogapraxis',
@@ -143,6 +145,11 @@ const faqs = [
 ];
 
 export default function RetreatPage() {
+  // The retreat is switched off while it is over (src/site-config.ts): this page
+  // answers 404 instead of rendering. Flip the flag back to true for the next
+  // edition — the whole page below is kept as it is.
+  if (!RETREAT_ENABLED) notFound();
+
   return (
     <main className='bg-cream-50'>
       <section className='relative min-h-[78vh] w-full'>
