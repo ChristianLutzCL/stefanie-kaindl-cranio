@@ -14,13 +14,13 @@ const COLUMNS = [
     title: 'Praxis',
     links: [
       { text: 'Über mich', href: '/ueber-mich' },
-      { text: 'Angebote & Preise', href: '/angebote-preise' },
+      { text: 'Cranio', href: '/angebote-preise' },
       { text: 'Yoga', href: '/yoga' },
       { text: 'Kontakt', href: '/kontakt' },
     ],
   },
   {
-    title: 'Behandlungen',
+    title: 'Angebote',
     links: [
       { text: 'Cranio für Erwachsene', href: '/angebote-preise' },
       { text: 'Cranio für Kinder & Babys', href: '/angebote-preise' },

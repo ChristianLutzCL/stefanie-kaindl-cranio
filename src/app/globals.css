@@ -94,28 +94,6 @@
   .shell { padding-inline: 3.5rem; }
 }
 
-/* Vier-Spalten-Raster mit Haarlinien an jeder Kante — randlos, damit die Linien
-   in Kopfzeile, Hero und Meta-Zeile exakt übereinander liegen.
-   Bewusst OHNE `display`: die Sichtbarkeit steuern die Tailwind-Klassen
-   (`hidden lg:grid`), sonst schlägt dieses unlayered CSS das `hidden`. */
-.colgrid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.colgrid > * {
-  border-left: 1px solid var(--line);
-}
-.colgrid > *:last-child {
-  border-right: 1px solid var(--line);
-}
-.colgrid-inverse > *,
-.colgrid-inverse > *:last-child {
-  border-color: var(--cream-line);
-}
-.colgrid-ink > *,
-.colgrid-ink > *:last-child {
-  border-color: var(--line);
-}
-
 .section {
   padding-block: clamp(4rem, 8vw, 8.5rem);
 }

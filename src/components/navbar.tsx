@@ -9,20 +9,25 @@ import { RETREAT_ENABLED } from '@/site-config';
  * Kopfzeile „Editorial Olive" — nach der Referenz:
  *
  *   ┌─────────────── Wortmarke (zentriert), Termin-Link rechts ─────────────┐
- *   ├──────────────┬──────────────┬──────────────┬─────────────────────────┤
- *   │ Über mich    │ Angebote …   │ Yoga         │ Kontakt                 │
- *   └──────────────┴──────────────┴──────────────┴─────────────────────────┘
+ *   │    Über mich     ·    Cranio    ·     Yoga     ·     Kontakt      │
+ *   └──────────────────────────────────────────────────────────────────────┘
  *
- * Die Navigationszeile ist ein randloses Vier-Spalten-Raster mit Haarlinien an
- * jeder Kante (`.colgrid`); dieselben Linien laufen im Hero weiter. Auf der
- * Startseite transparent über dem Hero, sonst auf Papier.
+ * Die Navigationszeile liegt mittig unter der Wortmarke: vier gleich breite
+ * Spalten mit zentriertem Text, an den Spaltengrenzen nur ein subtiler Punkt —
+ * keine Linien. Auf der Startseite transparent über dem Hero, sonst auf Papier.
+ *
+ * Benennung: vier gleichartige, kurze Substantive — „Angebote & Preise" fiel
+ * raus, weil ein Und-Zeichen und zwei Substantive in einer Vierspalten-Zeile
+ * wie ein Fremdkörper wirken. „Cranio" spiegelt die Disziplin-Zeile des Heros
+ * („Cranio | Yoga") und ist ihrer Zielgruppe geläufig; die Seite darunter
+ * trägt weiterhin den Titel „Angebote & Preise".
  */
 const NAV_MENU = [
   { title: 'Über mich', href: '/ueber-mich' },
-  { title: 'Angebote & Preise', href: '/angebote-preise' },
+  { title: 'Cranio', href: '/angebote-preise' },
   { title: 'Yoga', href: '/yoga' },
-  { title: 'Retreat', href: '/retreat' },
   { title: 'Kontakt', href: '/kontakt' },
+  { title: 'Retreat', href: '/retreat' },
 ].filter((item) => RETREAT_ENABLED || item.href !== '/retreat');
 
 export function Navbar() {
@@ -108,22 +113,50 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Navigationszeile: vier Spalten mit Haarlinien, randlos */}
-      <nav
-        aria-label='Hauptnavigation'
-        className={`colgrid ${inverse ? 'colgrid-inverse' : 'colgrid-ink'} hidden lg:grid`}>
-        {NAV_MENU.slice(0, 4).map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`px-8 py-4 text-[0.8125rem] transition-colors duration-200 xl:px-12 ${
-              inverse
-                ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
-                : 'text-ink-700 hover:text-ink'
-            }`}>
-            {item.title}
-          </Link>
-        ))}
+      {/* Navigationszeile: vier gleich breite Spalten, Text zentriert,
+          an den Spaltengrenzen nur ein subtiler Punkt statt Linien */}
+      <nav aria-label='Hauptnavigation' className='relative hidden lg:block'>
+        <div className='grid grid-cols-4'>
+          {NAV_MENU.slice(0, 4).map((item) => {
+            const active = pathname === item.href || pathname === `${item.href}/`;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? 'page' : undefined}
+                className={`flex items-center justify-center py-4 text-[0.8125rem] transition-colors duration-200 ${
+                  active
+                    ? inverse
+                      ? 'text-[var(--cream)]'
+                      : 'text-ink'
+                    : inverse
+                      ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
+                      : 'text-ink-700 hover:text-ink'
+                }`}>
+                <span
+                  className={`border-b pb-1 ${
+                    active ? 'border-current' : 'border-transparent'
+                  }`}>
+                  {item.title}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Punkte an den Spaltengrenzen (25 / 50 / 75 %) — flach und zurückhaltend */}
+        <div aria-hidden className='pointer-events-none absolute inset-0'>
+          {[25, 50, 75].map((position) => (
+            <span
+              key={position}
+              className='absolute top-1/2 h-[5px] w-[5px] -translate-x-1/2 -translate-y-1/2 rounded-full'
+              style={{
+                left: `${position}%`,
+                backgroundColor: inverse ? 'rgba(243,240,233,0.3)' : 'rgba(29,28,23,0.22)',
+              }}
+            />
+          ))}
+        </div>
       </nav>
 
       {/* Abschlusslinie der festen Kopfzeile (nur wenn sie auf Papier liegt) */}
@@ -143,7 +176,7 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className='hairline display leading-[1.1] py-4 text-[1.9rem] text-ink'>
+                  className='hairline display py-4 text-center text-[1.9rem] leading-[1.1] text-ink'>
                   {item.title}
                 </Link>
               ))}

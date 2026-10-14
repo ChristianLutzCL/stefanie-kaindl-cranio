@@ -66,8 +66,9 @@ export default function Hero() {
         className='absolute inset-0 bg-gradient-to-b from-[#1d1c17]/45 via-[#1d1c17]/10 to-[#1d1c17]/85'
       />
 
-      {/* Blume des Lebens als Zeichnung hinter der Überschrift */}
-      <FlowerOfLife className='pointer-events-none absolute left-1/2 top-1/2 w-[min(140vw,1020px)] -translate-x-1/2 -translate-y-1/2' />
+      {/* Blume des Lebens als Zeichnung hinter der Überschrift — größer als der
+          Viewport, damit die Kreise an allen Kanten angeschnitten werden */}
+      <FlowerOfLife className='pointer-events-none absolute left-1/2 top-1/2 w-[min(150vw,2100px)] -translate-x-1/2 -translate-y-1/2' />
 
       <div className='shell relative z-10 flex flex-1 flex-col items-center justify-center pb-24 pt-32 text-center md:pt-40'>
         {/* Disziplinen, durch eine Haarlinie getrennt */}
@@ -90,11 +91,6 @@ export default function Hero() {
           className='cta-link mt-9'>
           Termin vereinbaren <span aria-hidden>↗</span>
         </a>
-      </div>
-
-      {/* Untere Haarlinie */}
-      <div className='shell relative z-10 pb-10'>
-        <div className='hairline-inverse' />
       </div>
     </section>
   );
