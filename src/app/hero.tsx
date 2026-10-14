@@ -49,9 +49,9 @@ export default function Hero() {
   return (
     <section className='relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#241a11] text-[var(--cream)]'>
       <div aria-hidden className='hero-photo absolute inset-0' />
-      {/* Dunkler, warmer Schleier — der Hero liegt wie die Referenz in einem
-          tiefen Braun (dort mittlere Helligkeit ≈ 0.12, Rot/Grün ≈ 1.15). */}
-      <span aria-hidden className='absolute inset-0 bg-[rgba(40,27,16,0.46)]' />
+      {/* Verlauf statt flächigem Schleier: links kräftig (dort steht die
+          Schrift), nach rechts über der Person zurückgenommen. */}
+      <span aria-hidden className='hero-scrim absolute inset-0' />
 
       {/* Blume des Lebens als Zeichnung hinter der Überschrift — größer als der
           Viewport und mit einer Maske nach außen zu transparent ausblendend,

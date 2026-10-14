@@ -539,6 +539,33 @@ div[id] {
     background-position: 74% 50%;
   }
 }
+/* Hero-Schleier: links kräftig, weil dort die Schrift sitzt; nach rechts über
+   der Person läuft er aus, damit das Gesicht nicht zugedeckt wird. Die Werte
+   sind so gewählt, dass die Schrift in der Mitte noch über 4,5:1 bleibt. */
+.hero-scrim {
+  background-image: linear-gradient(
+    to right,
+    rgba(40, 27, 16, 0.52) 0%,
+    rgba(40, 27, 16, 0.5) 38%,
+    rgba(40, 27, 16, 0.46) 54%,
+    rgba(40, 27, 16, 0.2) 70%,
+    rgba(42, 28, 17, 0.12) 100%
+  );
+}
+/* Mobil sitzt die Person hinter der Schrift — dort nur eine milde Neigung statt
+   des kräftigen Verlaufs von links nach rechts. Muss NACH der Basisregel
+   stehen, sonst gewinnt bei gleicher Spezifität die spätere. */
+@media (max-width: 767px) {
+  .hero-scrim {
+    background-image: linear-gradient(
+      to right,
+      rgba(40, 27, 16, 0.5) 0%,
+      rgba(40, 27, 16, 0.46) 55%,
+      rgba(41, 28, 17, 0.32) 100%
+    );
+  }
+}
+
 /* Blume des Lebens: nach außen hin zu transparent ausblenden, damit die
    Zeichnung das Foto nicht überlagert (im Viewport sichtbarer Auslauf). */
 .flower-fade {
