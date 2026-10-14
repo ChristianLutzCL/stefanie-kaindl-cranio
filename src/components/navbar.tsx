@@ -78,7 +78,7 @@ export function Navbar() {
               Stefanie Kaindl
             </span>
             <span
-              className={`mt-[0.3rem] block text-[0.5rem] uppercase leading-none tracking-[0.36em] transition-colors duration-300 md:text-[0.5625rem] ${
+              className={`serif mt-[0.34rem] block text-[0.5rem] uppercase leading-none tracking-[0.34em] transition-colors duration-300 md:text-[0.5625rem] ${
                 inverse ? 'text-[var(--cream-60)]' : 'text-[var(--olive)]'
               }`}>
               Cranio Sacrale
@@ -125,6 +125,13 @@ export function Navbar() {
           </Link>
         ))}
       </nav>
+
+      {/* Abschlusslinie der festen Kopfzeile (nur wenn sie auf Papier liegt) */}
+      <div
+        className={`h-px w-full transition-colors duration-300 ${
+          solid ? 'bg-[var(--line)]' : 'bg-transparent'
+        }`}
+      />
 
       {/* Mobil-Menü */}
       {open && (

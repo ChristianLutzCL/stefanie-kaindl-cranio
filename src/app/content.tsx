@@ -214,7 +214,7 @@ function Story() {
         <div className='mx-auto max-w-3xl text-center'>
           <span className='label'>Über mich</span>
           <p className='display d2 mt-7' data-reveal>
-            Ich höre mit den Händen zu — dort, wo <em>Worte</em> aufhören.
+            Ich höre mit den Händen zu — dort, wo Worte aufhören.
           </p>
           <p className='body-copy mx-auto mt-7 max-w-2xl' data-reveal>
             Craniosacrale Körperarbeit ist eine sanfte und zugleich tief wirksame Methode: Über
@@ -312,7 +312,7 @@ function Practice() {
         <div className='mx-auto max-w-3xl text-center'>
           <span className='label'>Meine Arbeit</span>
           <p className='display d2 mt-7'>
-            Finde, was dich <em>bewegt</em>.
+            Finde, was dich bewegt.
           </p>
         </div>
 
@@ -359,7 +359,7 @@ function Method() {
         <div className='max-w-2xl'>
           <span className='label label-inverse'>Ablauf</span>
           <p className='display d2 mt-7 text-[var(--cream)]'>
-            Was in einer Sitzung <em>passiert</em>.
+            Was in einer Sitzung passiert.
           </p>
         </div>
 
@@ -441,12 +441,12 @@ function Perspectives() {
           {QUOTES.map((quote) => (
             <blockquote key={quote.name} data-card className='w-full md:pr-24'>
               <p className='quote max-w-5xl'>&bdquo;{withAccents(quote.text)}&ldquo;</p>
-              <footer className='mt-8 flex flex-wrap items-center gap-x-3 gap-y-1'>
-                <span className='text-[0.9375rem] text-ink'>{quote.name}</span>
+              <footer className='font-serif mt-8 flex flex-wrap items-center gap-x-3 gap-y-1'>
+                <span className='text-[1.0625rem] text-ink'>{quote.name}</span>
                 <span aria-hidden className='text-ink-400'>
                   ·
                 </span>
-                <span className='text-[0.8125rem] text-ink-500'>{quote.role}</span>
+                <span className='text-[0.9375rem] text-ink-500'>{quote.role}</span>
               </footer>
             </blockquote>
           ))}
@@ -599,7 +599,7 @@ function Membership() {
         <div className='mx-auto max-w-3xl text-center'>
           <span className='label'>Angebote</span>
           <p className='display d2 mt-7'>
-            Ein Rhythmus, der zu dir <em>passt</em>.
+            Ein Rhythmus, der zu dir passt.
           </p>
         </div>
 
@@ -644,7 +644,7 @@ function Membership() {
                 <span className='serif text-[clamp(2.1rem,3vw,2.9rem)] leading-none'>
                   {plan.price}
                 </span>
-                <span className='text-[0.75rem] text-[var(--cream-45)]'>{plan.unit}</span>
+                <span className='font-serif text-[0.8125rem] text-[var(--cream-45)]'>{plan.unit}</span>
               </p>
             </div>
           ))}
@@ -705,7 +705,7 @@ function ForYou() {
         <div className='mx-auto max-w-3xl text-center'>
           <span className='label'>Für dich</span>
           <p className='display d2 mt-7'>
-            Wo möchtest du <em>ansetzen</em>?
+            Wo möchtest du ansetzen?
           </p>
         </div>
 
@@ -761,7 +761,7 @@ function ClosingCta() {
         <div className='max-w-2xl rounded-[8px] bg-[var(--paper)] p-8 text-ink md:p-12'>
           <span className='label'>Beginne, wo du gerade bist</span>
           <p className='display display-serif d2 mt-7'>
-            Dein Körper weiß es bereits. Gib ihm <em>Raum</em>.
+            Dein Körper weiß es bereits. Gib ihm Raum.
           </p>
           <p className='body-copy mt-5'>
             Du musst nicht in Bestform kommen. Es reicht, wenn du anfängst — der Rest entsteht in der

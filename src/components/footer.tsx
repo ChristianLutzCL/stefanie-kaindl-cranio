@@ -105,7 +105,7 @@ export function Footer() {
           <div className='grid gap-10 sm:grid-cols-2'>
             <div className='sm:col-span-2'>
               <p className='display display-serif text-[clamp(1.75rem,3.2vw,3rem)] text-[var(--cream)]'>
-                Bewegung für <em>jeden Tag</em>.
+                Bewegung für jeden Tag.
               </p>
               <p className='mt-5 max-w-md text-[0.875rem] leading-relaxed text-[var(--cream-70)]'>
                 Craniosacrale Körperarbeit und Yoga in Pfaffenhofen an der Ilm. Ein ruhiger Raum, Zeit

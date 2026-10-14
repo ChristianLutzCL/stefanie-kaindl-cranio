@@ -138,16 +138,14 @@ div[id] {
   line-height: 1.06;
   text-wrap: balance;
 }
+/* Kursive Akzente erben die Schriftfamilie ihres Textes — in einer Überschrift
+   steht nie eine zweite Familie, nur die kursive Auszeichnung derselben. */
 .display em,
 .accent {
-  font-family: var(--font-serif), Georgia, serif;
   font-style: italic;
-  font-weight: 400;
-  /* Cormorant Garamond hat eine kleine x-Höhe und feine Striche — der kursive
-     Akzent in einer Grotesk-Zeile braucht daher mehr als nur optischen Ausgleich. */
-  font-size: 1.14em;
-  letter-spacing: 0;
-  line-height: 0.82;
+  font-weight: inherit;
+  font-size: 1em;
+  line-height: inherit;
 }
 /* Display-Zeile in der Serife — wie die Zitat-, CTA- und Footer-Zeile der Referenz */
 .display-serif {
@@ -257,10 +255,25 @@ div[id] {
   color: var(--ink);
 }
 .quote em {
-  font-family: var(--font-serif), Georgia, serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: inherit;
   font-size: 1em;
+}
+
+/* Hervorgehobener Text-Link (Hero) — prominent, mit Unterstreichung */
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1rem;
+  color: var(--cream);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.42em;
+  transition: text-decoration-thickness 0.2s ease, color 0.2s ease;
+}
+.cta-link:hover {
+  text-decoration-thickness: 2px;
 }
 
 .hairline {
