@@ -618,22 +618,50 @@ textarea.field {
     rgba(42, 28, 17, 0.12) 100%
   );
 }
-/* Mobil sitzt die Person hinter der Schrift, ein Verlauf von links nach rechts
-   kann sie also nicht freistellen. Stattdessen ein dunkles Band genau dort, wo
-   Badge, Überschrift und Link liegen — Gesicht (oben) und Beine (unten) bleiben
-   frei. Die Werte sind so gewählt, dass die Schrift über 4,5:1 bleibt. */
+/* Mobil KEIN Schleier über dem ganzen Bild. Stattdessen ein weich auslaufendes
+   Band genau hinter dem Textblock (Markup: .hero-text-band in hero.tsx) — das
+   Foto bleibt oben und unten unverdeckt, und das Band folgt dem Text, statt an
+   Viewport-Prozenten zu hängen. */
+.hero-text-band {
+  position: relative;
+}
 @media (max-width: 767px) {
   .hero-scrim {
+    background-image: none;
+  }
+  /* Vertikale Luft über und unter dem Text (der Block ist unten verankert,
+     wächst also nach oben). */
+  .hero-text-band {
+    padding-block: 1.75rem;
+  }
+  /* Randlos: als ::before über die volle Viewportbreite gezogen. Ein negatives
+     margin würde die Innenabstände der .shell nicht aufheben — dort blieben
+     links und rechts sichtbare Kanten. */
+  .hero-text-band::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    pointer-events: none;
     background-image: linear-gradient(
       to bottom,
-      rgba(40, 27, 16, 0.26) 0%,
-      rgba(40, 27, 16, 0.14) 14%,
-      rgba(40, 27, 16, 0.2) 32%,
-      rgba(40, 27, 16, 0.54) 44%,
-      rgba(40, 27, 16, 0.54) 62%,
-      rgba(40, 27, 16, 0.24) 74%,
-      rgba(40, 27, 16, 0.13) 100%
+      rgba(40, 27, 16, 0) 0%,
+      rgba(40, 27, 16, 0.09) 14%,
+      rgba(40, 27, 16, 0.2) 36%,
+      rgba(40, 27, 16, 0.2) 78%,
+      rgba(40, 27, 16, 0.11) 92%,
+      rgba(40, 27, 16, 0) 100%
     );
+  }
+  /* Sehr zurückhaltendes Band — die Lesbarkeit trägt vor allem der Schatten,
+     der nur hinter den Buchstaben dunkel wird und das Foto nicht verdeckt. */
+  .on-photo {
+    text-shadow:
+      0 2px 26px rgba(18, 14, 10, 0.85),
+      0 1px 9px rgba(18, 14, 10, 0.72),
+      0 0 3px rgba(18, 14, 10, 0.5);
   }
 }
 
