@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const quickLinks = [
-  {href: '/angebote-preise', label: 'Angebote & Preise'},
+  {href: '/cranio/', label: 'Cranio'},
   {href: '/yoga', label: 'Yoga'},
   {href: '/ueber-mich', label: 'Über Mich'},
   {href: '/kontakt', label: 'Kontakt'},

@@ -14,7 +14,7 @@ const COLUMNS = [
   {
     title: 'Praxis',
     links: [
-      { text: 'Cranio', href: '/angebote-preise' },
+      { text: 'Cranio', href: '/cranio/' },
       { text: 'Yoga', href: '/yoga' },
       { text: 'Über mich', href: '/ueber-mich' },
       { text: 'Kontakt', href: '/kontakt' },
@@ -23,10 +23,10 @@ const COLUMNS = [
   {
     title: 'Angebote',
     links: [
-      { text: 'Cranio für Erwachsene', href: '/angebote-preise' },
-      { text: 'Cranio für Kinder & Babys', href: '/angebote-preise' },
-      { text: 'Erstberatung & Pakete', href: '/angebote-preise' },
-      { text: 'Hausbesuche', href: '/kontakt' },
+      { text: 'Cranio für Erwachsene', href: '/cranio/#preise' },
+      { text: 'Cranio für Kinder & Babys', href: '/cranio/#preise' },
+      { text: 'Erstberatung & Pakete', href: '/cranio/#preise' },
+      { text: 'Hausbesuche', href: '/cranio/#preise' },
     ],
   },
 ];

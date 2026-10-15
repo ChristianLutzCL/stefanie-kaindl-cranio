@@ -29,12 +29,14 @@ const serif = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Craniosacrale Körperarbeit | Stefanie Kaindl",
-  description: "Craniosacrale Körperarbeit – Sanfte, ganzheitliche Behandlung für Erwachsene, Kinder und Babys. Schmerzlinderung, Stressreduktion und tiefe Entspannung.",
+  title: "Craniosacrale Körperarbeit & Yoga | Stefanie Kaindl",
+  description: "Craniosacrale Körperarbeit und Yoga in Pfaffenhofen an der Ilm: sanfte Behandlung für Erwachsene, Babys und Kinder, dazu Yoga donnerstags in Paunzhausen. Preise, Termine und Buchung.",
   keywords: [
     "Craniosacrale Therapie",
     "Craniosacrale Körperarbeit",
-    "Salzburg",
+    "Cranio Pfaffenhofen",
+    "Yoga Paunzhausen",
+    "Yoga Pfaffenhofen",
     "Stefanie Kaindl",
     "Schmerztherapie",
     "Stressreduktion",
@@ -43,7 +45,6 @@ export const metadata: Metadata = {
     "Baby Cranio",
     "Kinder Cranio",
     "Entspannung",
-    "Alternative Heilmethode",
     "Ganzheitliche Behandlung"
   ],
   authors: [{ name: "Stefanie Kaindl" }],
@@ -57,9 +58,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'de_DE',
     url: 'https://stefanie-kaindl-cranio.de',
-    title: 'Craniosacrale Körperarbeit | Stefanie Kaindl',
-    description: 'Craniosacrale Körperarbeit – Sanfte, ganzheitliche Behandlung für Erwachsene, Kinder und Babys. Schmerzlinderung, Stressreduktion und tiefe Entspannung.',
-    siteName: 'Stefanie Kaindl - Craniosacrale Körperarbeit',
+    title: 'Craniosacrale Körperarbeit & Yoga | Stefanie Kaindl',
+    description: 'Craniosacrale Körperarbeit und Yoga in Pfaffenhofen an der Ilm: sanfte Behandlung für Erwachsene, Babys und Kinder, dazu Yoga donnerstags in Paunzhausen. Preise, Termine und Buchung.',
+    siteName: 'Stefanie Kaindl — Craniosacrale Körperarbeit & Yoga',
     images: [
       {
         url: '/image/hero.webp',
@@ -71,8 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Craniosacrale Körperarbeit | Stefanie Kaindl',
-    description: 'Sanfte, ganzheitliche Behandlung für Erwachsene, Kinder und Babys. Schmerzlinderung, Stressreduktion und tiefe Entspannung.',
+    title: 'Craniosacrale Körperarbeit & Yoga | Stefanie Kaindl',
+    description: 'Sanfte Behandlung für Erwachsene, Babys und Kinder — und Yoga donnerstags in Paunzhausen. Preise, Termine und Buchung.',
     images: ['/image/hero.webp'],
   },
   robots: {

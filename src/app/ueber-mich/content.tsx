@@ -31,7 +31,7 @@ function Content() {
                   Termin vereinbaren
                 </Button>
               </Link>
-              <Link href="/angebote-preise">
+              <Link href="/cranio/">
                 <Button 
                   variant="outlined" 
                   size="lg" 

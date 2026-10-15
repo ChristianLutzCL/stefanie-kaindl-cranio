@@ -16,7 +16,7 @@ import { RETREAT_ENABLED } from '@/site-config';
  * Auf der Startseite transparent über dem Hero, sonst auf Papier.
  */
 const NAV_MENU = [
-  { title: 'Cranio', href: '/angebote-preise' },
+  { title: 'Cranio', href: '/cranio' },
   { title: 'Yoga', href: '/yoga' },
   { title: 'Über mich', href: '/ueber-mich' },
   { title: 'Kontakt', href: '/kontakt' },

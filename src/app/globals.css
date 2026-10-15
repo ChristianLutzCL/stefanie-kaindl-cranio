@@ -139,6 +139,9 @@ div[id] {
 .serif {
   font-family: var(--font-serif), Georgia, serif;
   font-weight: 500;
+  /* Cormorant setzt standardmäßig Mediävalziffern (3, 4, 5, 7, 9 mit Unterlänge).
+     Für Preise, Zeiten und Datumszahlen sind Versalziffern ruhiger. */
+  font-variant-numeric: lining-nums;
 }
 .d1 {
   font-size: clamp(2.35rem, 6vw, 5.5rem);

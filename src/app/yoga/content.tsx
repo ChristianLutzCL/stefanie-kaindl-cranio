@@ -1,32 +1,19 @@
 'use client';
 
-import {Typography, Button} from '@material-tailwind/react';
-import Image from 'next/image';
 import Link from 'next/link';
-// Uncomment below if using Notion integration
-// import { useState, useEffect } from "react";
-import heroImage from '../../../public/image/yoga.webp';
-import practiceImage from '../../../public/image/yoga_raum.webp';
+import { ArrowUpRight } from '@/components/icons';
+import { BOOKING, Photo, SectionHead, useReveal } from '@/components/editorial';
 
-const pillars = [
-  {
-    title: 'Bewusste Auszeit',
-    description:
-      'Gönn dir eine bewusste Auszeit vom Alltag und finde zurück zu mehr Ruhe, Kraft und Balance.',
-  },
-  {
-    title: 'Ganzheitliche Verbindung',
-    description:
-      'In meinen Yoga-Stunden erwartet dich eine harmonische Verbindung aus Bewegung, Atmung und Entspannung – für mehr Energie, Gelassenheit und Wohlbefinden.',
-  },
-  {
-    title: 'Offener Raum',
-    description:
-      'Egal, ob du Yoga gerade erst für dich entdeckst oder bereits Erfahrung hast: Du bist herzlich willkommen.',
-  },
-];
+/**
+ * Yoga — Angebotsseite: was erwartet wird, die beiden Donnerstagskurse mit
+ * Preis, die nächsten Termine, der Yoga Day und die Platzreservierung.
+ *
+ * Kurszeiten, Preis, Ort (Paunzhausen), EGYM Wellpass und die Terminliste
+ * stammen aus der bestehenden Yoga-Seite. Die Terminliste wird weiterhin von
+ * Hand gepflegt.
+ */
 
-const scheduleHighlights = [
+const COURSES = [
   {
     title: 'Kurs 1',
     time: '17:30 – 18:30 Uhr',
@@ -39,11 +26,16 @@ const scheduleHighlights = [
   },
 ];
 
-// Static dates - manually update these (all Thursdays)
-const upcomingDates = [
-  '17.09.2026',
-  '24.09.2026',
-  '01.10.2026',
+const EXPECT = [
+  'Sanfte bis dynamische Yoga-Einheiten',
+  'Achtsame Atemtechniken',
+  'Tiefenentspannung für mehr innere Ruhe',
+  'Beweglichkeit, Kraft und Körperwahrnehmung',
+  'Für Anfänger und Fortgeschrittene geeignet',
+];
+
+/* Termine von Hand pflegen (jeweils Donnerstage). */
+const YOGA_DATES = [
   '15.10.2026',
   '22.10.2026',
   '29.10.2026',
@@ -53,7 +45,7 @@ const upcomingDates = [
   '10.12.2026',
 ];
 
-const monthNames: Record<string, string> = {
+const MONTHS: Record<string, string> = {
   '01': 'Januar',
   '02': 'Februar',
   '03': 'März',
@@ -68,469 +60,251 @@ const monthNames: Record<string, string> = {
   '12': 'Dezember',
 };
 
-function Content() {
-  // NOTION INTEGRATION CODE (commented out - using static dates instead)
-  // Uncomment below and set NEXT_PUBLIC_YOGA_DATES_WEBHOOK in .env.local to use n8n
-  /*
-  const [dates, setDates] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+const YOGA_DAY = {
+  title: 'Yoga Day – Wurzeln & Loslassen',
+  date: 'Samstag, 07.11.2026',
+  time: '10:00 – 17:00 Uhr',
+  place: 'Yogaraum Paunzhausen · genauer Ort bei Anmeldung',
+  price: '111 € bis 30.09.2026, danach 129 €',
+  body: 'Ein Tag, um anzukommen, loszulassen und neue Kraft zu schöpfen. Autumn Vinyasa Flow, Yin Yoga, Herzchakra-Meditation und Kristallklangschalen — mit vegetarischem Mittagessen, Tee, Wasser und kleinen Snacks sowie deinem persönlichen Intention-Armband. Maximal 10 Teilnehmende.',
+};
 
-  useEffect(() => {
-    const fetchDates = async () => {
-      try {
-        // Fetch from n8n webhook - replace with your n8n webhook URL
-        const webhookUrl = process.env.NEXT_PUBLIC_YOGA_DATES_WEBHOOK || 'https://your-n8n-instance.com/webhook/yoga-dates';
-        const response = await fetch(webhookUrl);
-        const data = await response.json();
-        
-        if (data.dates && Array.isArray(data.dates)) {
-          // Additional client-side filtering for future dates only
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          
-          const futureDates = data.dates.filter((dateStr: string) => {
-            const [day, month, year] = dateStr.split('.');
-            const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-            return date >= today;
-          });
-          
-          setDates(futureDates);
-        }
-      } catch (error) {
-        console.error('Error fetching yoga dates:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchDates();
-  }, []);
-  */
+export function Content() {
+  useReveal();
 
   return (
-    <section className='min-h-screen bg-gradient-to-b from-cream-50 to-cream-100 pb-16 pt-28'>
-      <div className='container mx-auto max-w-6xl px-4'>
-        <div className='warm-shadow relative mb-10 overflow-hidden rounded-3xl bg-gradient-to-br from-[#616949] via-[#4d5438] to-[#3f4530] p-6 text-white md:p-8'>
-          <div
-            className='pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-white/10 opacity-60 blur-3xl'
-            aria-hidden='true'></div>
-          <div className='relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center'>
-            <div className='space-y-5 lg:max-w-2xl'>
-              <div>
-                <Typography className='font-inter mb-1 text-xs uppercase tracking-[0.5em] text-white/70'>
-                  Donnerstag in Paunzhausen
-                </Typography>
-                <Typography
-                  variant='h2'
-                  className='font-inter mb-3 text-2xl font-light md:text-3xl'>
-                  Donnerstags-Yoga mit Steffi
-                </Typography>
-                <Typography className='font-inter leading-relaxed text-white/90'>
-                  Achtsame Gruppen, Cranio-inspirierte Impulse und viel Raum für dich –
-                  genau der Ausklang, den dein Donnerstag verdient.
-                </Typography>
-              </div>
-              <div>
-                <Typography className='font-inter mb-2 text-xs uppercase tracking-[0.4em] text-white/70'>
-                  Kurszeiten
-                </Typography>
-                <div className='flex flex-wrap gap-3'>
-                  {scheduleHighlights.map((entry) => (
-                    <div
-                      key={entry.title}
-                      className='flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2'>
-                      <span className='font-inter text-xs uppercase tracking-[0.3em] text-white/70'>
-                        {entry.title}
-                      </span>
-                      <span className='font-inter text-base font-semibold text-white'>
-                        {entry.time}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className='flex w-full flex-col gap-3 sm:w-auto lg:ml-12 lg:w-64 lg:items-end'>
-              <Link
-                href='https://wa.me/4917663094476'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='w-full sm:w-auto lg:w-full'>
-                <Button className='font-inter w-full rounded-full border border-transparent bg-white px-5 py-3 text-base text-[#4d5438] hover:bg-white/90 sm:w-auto lg:w-full'>
-                  Platz reservieren
-                </Button>
-              </Link>
+    <>
+      {/* Einstieg */}
+      <header className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+        <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
+          <div className='order-2 lg:order-1 lg:col-span-5'>
+            <span className='label'>Yoga</span>
+            <h1 className='display display-serif d1-hero mt-6'>Yoga am Donnerstag</h1>
+            <p className='lead-lg mt-7'>
+              Eine bewusste Auszeit vom Alltag. In meinen Stunden verbinden sich Bewegung, Atmung
+              und Entspannung — sanft bis dynamisch, achtsam an die Gruppe angepasst und offen für
+              alle, die Yoga gerade erst für sich entdecken.
+            </p>
+            <div className='mt-9 flex flex-wrap items-center gap-x-10 gap-y-4'>
+              <a href='#termin' className='cta-link cta-link-ink'>
+                Platz reservieren <ArrowUpRight />
+              </a>
+              <a
+                href='#kurse'
+                className='text-[0.875rem] text-ink-600 transition-colors hover:text-ink'>
+                Kurszeiten ansehen
+              </a>
             </div>
           </div>
-        </div>
 
-        <div className='warm-shadow mb-20 overflow-hidden rounded-3xl border border-cream-200 bg-white'>
-          <div className='grid gap-0 lg:grid-cols-[0.9fr_1.1fr]'>
-            <div className='relative aspect-square w-full border-b border-cream-200 bg-cream-50 lg:aspect-auto lg:self-stretch lg:border-b-0 lg:border-r'>
-              <Image
-                src='/image/yoga-day-wurzeln-loslassen.jpg'
-                alt='Flyer Yoga Day – Wurzeln & Loslassen mit Stefanie Kaindl'
-                fill
-                className='object-contain'
-                sizes='(max-width: 1024px) 100vw, 540px'
-              />
-            </div>
-            <div className='flex h-full flex-col justify-between p-8 md:p-10'>
-              <div>
-                <Typography className='font-inter mb-2 text-sm uppercase tracking-[0.35em] text-taupe-500'>
-                  Ein Tag nur für dich
-                </Typography>
-                <Typography
-                  variant='h2'
-                  className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
-                  Yoga Day – Wurzeln & Loslassen
-                </Typography>
-                <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                  Ein Tag, um anzukommen, loszulassen und neue Kraft zu schöpfen. Yoga,
-                  Yin, Meditation, Entspannung und Klang – in Verbindung mit dir, mit
-                  deinem Körper, mit dem Leben.
-                </Typography>
-
-                <div className='mb-6 grid gap-4 sm:grid-cols-2'>
-                  <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
-                    <Typography className='font-inter mb-1 text-xs uppercase tracking-[0.25em] text-taupe-500'>
-                      Datum
-                    </Typography>
-                    <Typography className='font-inter text-lg text-taupe-800'>
-                      Samstag, 07.11.2026
-                    </Typography>
-                  </div>
-                  <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
-                    <Typography className='font-inter mb-1 text-xs uppercase tracking-[0.25em] text-taupe-500'>
-                      Uhrzeit
-                    </Typography>
-                    <Typography className='font-inter text-lg text-taupe-800'>
-                      10:00 – 17:00 Uhr
-                    </Typography>
-                  </div>
-                  <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
-                    <Typography className='font-inter mb-1 text-xs uppercase tracking-[0.25em] text-taupe-500'>
-                      Preis
-                    </Typography>
-                    <Typography className='font-inter text-lg text-taupe-800'>
-                      111 € / 129 €
-                    </Typography>
-                  </div>
-                  <div className='rounded-2xl border border-cream-200 bg-cream-50/70 p-4'>
-                    <Typography className='font-inter mb-1 text-xs uppercase tracking-[0.25em] text-taupe-500'>
-                      Ort
-                    </Typography>
-                    <Typography className='font-inter text-lg text-taupe-800'>
-                      Yogaraum Paunzhausen
-                    </Typography>
-                    <Typography className='font-inter text-sm text-taupe-600'>
-                      Genauer Ort bei Anmeldung
-                    </Typography>
-                  </div>
-                </div>
-
-                <Typography className='font-inter mb-6 text-sm leading-relaxed text-taupe-600'>
-                  Early Bird 111 € bis 30.09.2026 · regulär 129 €
-                </Typography>
-
-                <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                  Autumn Vinyasa Flow · Körper &amp; Nervensystem · Vegetarisches
-                  Mittagessen · Yin Yoga · Herzchakra Meditation · Kristallklangschalen
-                </Typography>
-
-                <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                  Im Preis enthalten: 7 Stunden Yoga &amp; Entspannung, vegetarisches
-                  Mittagessen, Tee, Wasser und kleine Snacks sowie dein persönliches
-                  Intention-Armband. Maximal 10 Teilnehmer.
-                </Typography>
-              </div>
-
-              <div>
-                <Link
-                  href='https://wa.me/4917663094476'
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <Button className='font-inter rounded-full bg-[#616949] px-8 py-3 text-white hover:bg-[#4d5438]'>
-                    Anmelden & Infos
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='mb-20 grid items-center gap-12 pt-10 lg:grid-cols-2'>
-          <div>
-            <Typography
-              variant='h1'
-              className='font-inter mb-6 text-3xl font-light text-taupe-800 md:text-4xl'>
-              Yoga für Körper & Geist
-            </Typography>
-            <Typography className='font-inter mb-4 text-lg leading-relaxed text-taupe-700'>
-              Gönn dir eine bewusste Auszeit vom Alltag und finde zurück zu mehr Ruhe,
-              Kraft und Balance.
-            </Typography>
-            <Typography className='font-inter mb-4 text-lg leading-relaxed text-taupe-700'>
-              In meinen Yoga-Stunden erwartet dich eine harmonische Verbindung aus
-              Bewegung, Atmung und Entspannung – für mehr Energie, Gelassenheit und
-              Wohlbefinden.
-            </Typography>
-            <Typography className='font-inter mb-6 text-lg leading-relaxed text-taupe-700'>
-              Egal, ob du Yoga gerade erst für dich entdeckst oder bereits Erfahrung hast:
-              Du bist herzlich willkommen.
-            </Typography>
-            <div className='flex flex-col gap-4 sm:flex-row'>
-              <Link
-                href='https://wa.me/4917663094476'
-                target='_blank'
-                rel='noopener noreferrer'>
-                <Button
-                  size='lg'
-                  className='font-inter rounded-full bg-[#616949] px-8 py-3 text-white hover:bg-[#4d5438]'>
-                  Meine Yogazeit buchen
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div>
-            <div className='relative'>
-              <div className='warm-shadow overflow-hidden rounded-3xl border border-cream-200'>
-                <Image
-                  src={heroImage}
-                  alt='Yoga Raum Stefanie Kaindl'
-                  className='h-full w-full object-cover'
-                  priority
-                />
-              </div>
-              <div className='absolute -bottom-6 -left-6 h-20 w-20 rounded-full bg-[#616949] opacity-30'></div>
-              <div className='absolute -right-10 -top-6 h-28 w-28 rounded-full bg-cream-200 opacity-60'></div>
-            </div>
-          </div>
-        </div>
-
-        <div className='mb-20 grid gap-6 md:grid-cols-3'>
-          {pillars.map((pillar, index) => (
-            <div
-              key={pillar.title}
-              className='group h-full rounded-2xl border border-cream-200 bg-gradient-to-b from-cream-50 to-white p-6 transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg'>
-              <span className='mb-4 inline-flex items-center justify-center rounded-full bg-[#616949]/10 px-4 py-1 text-sm font-semibold tracking-[0.2em] text-[#616949]'>
-                0{index + 1}
-              </span>
-              <Typography className='font-inter mb-3 text-xl text-taupe-900'>
-                {pillar.title}
-              </Typography>
-              <Typography className='font-inter leading-relaxed text-taupe-700'>
-                {pillar.description}
-              </Typography>
-            </div>
-          ))}
-        </div>
-
-        <div className='mb-20 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16'>
-          <div className='warm-shadow relative aspect-[4/3] overflow-hidden rounded-3xl border border-cream-200 lg:aspect-[5/4]'>
-            <Image
-              src={practiceImage}
-              alt='Sanfte Yogapraxis'
-              fill
-              className='object-cover'
-              sizes='(max-width: 768px) 100vw, 600px'
+          <div className='order-1 lg:order-2 lg:col-span-6 lg:col-start-7' data-reveal>
+            <Photo
+              src='/image/yoga.webp'
+              alt='Stefanie Kaindl in einer Yoga-Haltung auf der Matte'
+              ratio='aspect-[4/5]'
+              position='38% 50%'
+              sizes='(max-width: 1024px) 100vw, 50vw'
+              priority
             />
           </div>
-          <div className='lg:pl-6'>
-            <Typography
-              variant='h2'
-              className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
-              Donnerstags-Yoga mit Steffi in Paunzhausen
-            </Typography>
-            <Typography className='font-inter mb-4 leading-relaxed text-taupe-700'>
-              Meine Yogastunden am Donnerstagabend bieten dir einen geschützten Raum, um
-              loszulassen, aufzutanken und ganz bei dir anzukommen.
-            </Typography>
-            <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-              Die Einheiten sind sanft bis dynamisch gestaltet und werden achtsam an die
-              Bedürfnisse der Teilnehmenden angepasst.
-            </Typography>
-            <Typography className='font-inter mb-3 text-sm uppercase tracking-[0.2em] text-taupe-600'>
-              Das erwartet dich
-            </Typography>
-            <div className='space-y-3'>
-              {[
-                'Sanfte bis dynamische Yoga-Einheiten',
-                'Achtsame Atemtechniken',
-                'Tiefenentspannung für mehr innere Ruhe',
-                'Förderung von Beweglichkeit, Kraft und Körperwahrnehmung',
-                'Für Anfänger und Fortgeschrittene geeignet',
-              ].map((item) => (
-                <div key={item} className='flex items-start gap-3'>
-                  <span
-                    className='mt-2 h-1.5 w-1.5 rounded-full bg-[#616949]'
-                    aria-hidden='true'></span>
-                  <Typography className='font-inter leading-relaxed text-taupe-700'>
-                    {item}
-                  </Typography>
-                </div>
-              ))}
-            </div>
-            <Typography className='font-inter mt-6 leading-relaxed text-taupe-700'>
-              Ich freue mich darauf, dich auf deinem Yogaweg zu begleiten.
-            </Typography>
-          </div>
         </div>
+      </header>
 
-        <div className='warm-shadow mb-20 overflow-hidden rounded-3xl border border-cream-200'>
-          <div className='grid lg:grid-cols-[1.05fr_0.95fr]'>
-            <div className='border-b border-cream-200 bg-gradient-to-b from-cream-50 to-white p-8 md:p-12 lg:border-b-0 lg:border-r'>
-              <Typography className='font-inter mb-2 text-sm uppercase tracking-[0.3em] text-taupe-500'>
-                Donnerstag
-              </Typography>
-              <Typography
-                variant='h2'
-                className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
-                Kurszeiten & Ablauf
-              </Typography>
-              <Typography className='font-inter leading-relaxed text-taupe-700'>
-                Zwei Slots pro Abend: Entscheide spontan, ob du entspannend ankommen oder
-                mit einem kraftvollen Flow ausklingen möchtest. Beide Kurse finden in
-                Paunzhausen statt.
-              </Typography>
-              <div className='mt-8 rounded-2xl border border-white/60 bg-white/70 p-6 backdrop-blur-sm'>
-                <Typography className='font-inter mb-2 text-xs uppercase tracking-[0.4em] text-taupe-500'>
-                  Preis pro Stunde
-                </Typography>
-                <Typography className='font-inter text-5xl font-light text-[#616949]'>
-                  14€
-                </Typography>
-                <Typography className='font-inter mt-3 text-sm text-taupe-600'>
-                  Enthalten sind Cranio-Impulse, persönliche Begleitung und eine ruhige
-                  Atmosphäre in kleinen Gruppen.
-                </Typography>
-              </div>
-              <div className='mt-6 flex flex-col gap-4 rounded-2xl border border-white/60 bg-white/70 p-6 backdrop-blur-sm'>
-                <Typography className='font-inter text-xs uppercase tracking-[0.4em] text-taupe-500'>
-                  Zahlung möglich
-                </Typography>
-                <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6'>
-                  <div className='flex shrink-0 items-center'>
-                    <Image
-                      src='/logos/egym-wellpass-logo-dark.svg'
-                      alt='EGYM Wellpass'
-                      width={320}
-                      height={48}
-                      className='h-12 w-auto opacity-90'
+      {/* Was dich erwartet */}
+      <section className='section pt-0'>
+        <div className='shell'>
+          <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
+            <div className='lg:col-span-5'>
+              <span className='label'>Deine Stunde</span>
+              <h2 className='display display-serif d2 mt-6'>Yoga für Körper und Geist.</h2>
+              <p className='mt-6 text-[0.9375rem] leading-relaxed text-ink-700'>
+                Die Einheiten sind sanft bis dynamisch gestaltet und werden achtsam an die
+                Bedürfnisse der Teilnehmenden angepasst. Du entscheidest, wie viel du heute brauchst
+                — nichts muss, alles darf.
+              </p>
+            </div>
+
+            <div className='lg:col-span-6 lg:col-start-7'>
+              <ul className='border-t border-[var(--line)]'>
+                {EXPECT.map((item) => (
+                  <li
+                    key={item}
+                    className='flex items-start gap-3 border-b border-[var(--line)] py-4 text-[0.9375rem] text-ink-700'>
+                    <span
+                      aria-hidden
+                      className='mt-[0.6rem] h-1 w-1 flex-none rounded-full bg-ink-500'
                     />
-                  </div>
-                  <Typography className='font-inter max-w-md text-sm leading-relaxed text-taupe-700'>
-                    Du kannst deine Stunde auch mit EGYM Wellpass bezahlen.
-                  </Typography>
-                </div>
-              </div>
-            </div>
-            <div className='bg-white p-8 md:p-12'>
-              <div className='space-y-5'>
-                {scheduleHighlights.map((entry) => (
-                  <div
-                    key={entry.title}
-                    className='rounded-2xl border border-cream-200 p-6'>
-                    <Typography className='font-inter mb-1 text-sm uppercase tracking-[0.3em] text-taupe-500'>
-                      {entry.title}
-                    </Typography>
-                    <Typography className='font-inter mb-2 text-2xl font-light text-[#616949]'>
-                      {entry.time}
-                    </Typography>
-                    <Typography className='font-inter leading-relaxed text-taupe-700'>
-                      {entry.detail}
-                    </Typography>
-                  </div>
+                    {item}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </div>
+      </section>
 
-        <div className='warm-shadow mb-20 overflow-hidden rounded-3xl border border-cream-200 bg-white'>
-          <div className='grid lg:grid-cols-[0.85fr_1.15fr]'>
-            <div className='border-b border-cream-200 bg-gradient-to-b from-cream-50 to-white p-8 md:p-12 lg:border-b-0 lg:border-r'>
-              <Typography className='font-inter mb-3 text-sm uppercase tracking-[0.4em] text-taupe-500'>
-                Termine
-              </Typography>
-              <Typography
-                variant='h2'
-                className='font-inter mb-4 text-2xl font-light text-taupe-800 md:text-3xl'>
-                Nächste Donnerstage in Paunzhausen
-              </Typography>
-              <Typography className='font-inter mb-6 leading-relaxed text-taupe-700'>
-                Kurs 1 startet jeweils um 17:30 Uhr, Kurs 2 um 19:00 Uhr. Wähle den
-                Termin, der dir guttut, und reserviere deinen Platz frühzeitig.
-              </Typography>
-              <Link
-                href='https://wa.me/4917663094476'
-                target='_blank'
-                rel='noopener noreferrer'>
-                <Button className='font-inter rounded-full bg-[#616949] px-6 py-3 text-white hover:bg-[#4d5438]'>
-                  Termin anfragen
-                </Button>
-              </Link>
-            </div>
-            <div className='p-8 md:p-12'>
-              <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
-                {upcomingDates.map((date) => {
-                  const [day, month, year] = date.split('.');
-                  const monthLabel = monthNames[month] ?? month;
-                  const dayNumber = parseInt(day, 10);
-                  return (
-                    <div
-                      key={date}
-                      className='rounded-2xl border border-cream-200 bg-cream-50/70 px-4 py-5 text-center'>
-                      <Typography className='font-inter text-4xl font-light text-[#616949]'>
-                        {dayNumber}
-                      </Typography>
-                      <Typography className='font-inter text-base text-taupe-700'>
-                        {monthLabel}
-                      </Typography>
-                      <Typography className='font-inter mt-1 text-xs uppercase tracking-[0.4em] text-taupe-400'>
-                        {year}
-                      </Typography>
-                    </div>
-                  );
-                })}
+      {/* Kurse */}
+      <section className='section bg-[var(--paper-deep)]' id='kurse'>
+        <div className='shell'>
+          <SectionHead label='Kurse' title='Zwei Kurse am Donnerstag.'>
+            <p className='mt-6 text-[0.9375rem] leading-relaxed text-ink-600'>
+              Beide Kurse finden donnerstags in Paunzhausen statt, in kleinen Gruppen. Entscheide
+              spontan, ob du entspannend ankommen oder mit einem kraftvollen Flow ausklingen
+              möchtest.
+            </p>
+          </SectionHead>
+
+          <div className='mx-auto mt-14 grid max-w-4xl gap-6 sm:grid-cols-2'>
+            {COURSES.map((course) => (
+              <div key={course.title} className='border-t border-[var(--line)] pt-6' data-reveal>
+                <span className='label'>{course.title}</span>
+                <p className='serif mt-4 text-[clamp(1.5rem,2.2vw,2rem)] leading-none text-ink'>
+                  {course.time}
+                </p>
+                <p className='mt-3 text-[0.9375rem] leading-relaxed text-ink-600'>{course.detail}</p>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
 
-        <div className='warm-shadow rounded-3xl border border-cream-200 bg-gradient-to-r from-[#616949] to-[#4d5438] p-12 text-white'>
-          <div className='flex flex-col items-start gap-8 lg:flex-row lg:items-center'>
-            <div className='flex-1'>
-              <Typography className='font-inter mb-2 text-sm uppercase tracking-[0.3em] text-white/80'>
-                Yoga für Körper & Geist
-              </Typography>
-              <Typography
-                variant='h2'
-                className='font-inter mb-4 text-2xl font-light md:text-3xl'>
-                Bereit für mehr Ruhe, Kraft und Balance?
-              </Typography>
-              <Typography className='font-inter max-w-2xl leading-relaxed text-white/90'>
-                Sichere dir deinen Platz und erlebe, wie Bewegung, Atmung und Entspannung
-                dich stärken. Ich melde mich persönlich bei dir mit allen Details.
-              </Typography>
-            </div>
-            <div className='flex w-full lg:w-auto'>
-              <Link
-                href='https://wa.me/4917663094476'
+          <div className='mx-auto mt-14 grid max-w-4xl gap-x-10 gap-y-6 border-t border-[var(--line)] pt-8 sm:grid-cols-3'>
+            {[
+              ['Preis', '14 € pro Stunde'],
+              ['Ort', 'Paunzhausen · kleiner Kursraum'],
+              ['Zahlung', 'Vor Ort oder mit EGYM Wellpass'],
+            ].map(([title, value]) => (
+              <div key={title}>
+                <p className='meta-line'>{title}</p>
+                <p className='mt-1.5 text-[0.9375rem] text-ink'>{value}</p>
+              </div>
+            ))}
+          </div>
+          <p className='mx-auto mt-6 max-w-4xl text-[0.8125rem] text-ink-500'>
+            Enthalten sind Cranio-Impulse, persönliche Begleitung und eine ruhige Atmosphäre in
+            kleinen Gruppen. Matten und Hilfsmittel sind vor Ort.
+          </p>
+        </div>
+      </section>
+
+      {/* Termine */}
+      <section className='section'>
+        <div className='shell'>
+          <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
+            <div className='lg:col-span-5'>
+              <span className='label'>Termine</span>
+              <h2 className='display display-serif d2 mt-6'>Nächste Donnerstage.</h2>
+              <p className='mt-6 text-[0.9375rem] leading-relaxed text-ink-700'>
+                Kurs 1 startet um 17:30 Uhr, Kurs 2 um 19:00 Uhr. Sag mir einfach, welcher Termin
+                und welche Uhrzeit dir passt — ich melde mich persönlich mit allen Details.
+              </p>
+              <a
+                href={BOOKING.yoga}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex-1'>
-                <Button
-                  size='lg'
-                  className='font-inter w-full rounded-full bg-white px-10 py-4 text-[#4d5438] hover:bg-white/90'>
-                  Jetzt buchen
-                </Button>
-              </Link>
+                className='cta-link cta-link-ink mt-8'>
+                Platz reservieren <ArrowUpRight />
+              </a>
+            </div>
+
+            <div className='lg:col-span-6 lg:col-start-7'>
+              <ul className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
+                {YOGA_DATES.map((date) => {
+                  const [day, month, year] = date.split('.');
+                  return (
+                    <li
+                      key={date}
+                      className='border border-[var(--line)] px-4 py-5 text-center'
+                      data-reveal>
+                      <span className='serif block text-[1.75rem] leading-none text-ink'>
+                        {parseInt(day, 10)}
+                      </span>
+                      <span className='mt-2 block text-[0.8125rem] text-ink-600'>
+                        {MONTHS[month] ?? month}
+                      </span>
+                      <span className='meta-line mt-1 block'>{year}</span>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Yoga Day */}
+      <section className='section pt-0'>
+        <div className='shell'>
+          <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
+            <div className='lg:col-span-6' data-reveal>
+              <Photo
+                src='/image/yoga-day-wurzeln-loslassen.jpg'
+                alt='Flyer zum Yoga Day – Wurzeln & Loslassen'
+                ratio='aspect-[3/4]'
+                fit='contain'
+                sizes='(max-width: 1024px) 100vw, 50vw'
+              />
+            </div>
+
+            <div className='lg:col-span-5 lg:col-start-8'>
+              <span className='label'>Ein Tag nur für dich</span>
+              <h2 className='display display-serif d3 mt-5'>{YOGA_DAY.title}</h2>
+              <p className='mt-5 text-[0.9375rem] leading-relaxed text-ink-700'>{YOGA_DAY.body}</p>
+
+              <dl className='mt-8 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-[var(--line)] pt-6'>
+                {[
+                  ['Datum', YOGA_DAY.date],
+                  ['Uhrzeit', YOGA_DAY.time],
+                  ['Ort', YOGA_DAY.place],
+                  ['Preis', YOGA_DAY.price],
+                ].map(([title, value]) => (
+                  <div key={title}>
+                    <dt className='meta-line'>{title}</dt>
+                    <dd className='mt-1.5 text-[0.875rem] leading-snug text-ink'>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <a
+                href={BOOKING.yogaDay}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='cta-link cta-link-ink mt-8'>
+                Zum Yoga Day anmelden <ArrowUpRight />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Termin */}
+      <section id='termin' className='bg-[var(--olive)] text-[var(--cream)]'>
+        <div className='shell py-[clamp(4rem,8vw,8rem)]'>
+          <div className='mx-auto max-w-[40rem] text-center'>
+            <span className='label label-inverse'>Platz reservieren</span>
+            <h2 className='display display-serif d2 mt-6 text-[var(--cream)]'>
+              Komm einfach vorbei.
+            </h2>
+            <p className='lead-lg mt-7 text-[var(--cream-80)]'>
+              Schreib mir kurz per WhatsApp, an welchem Donnerstag und zu welcher Uhrzeit du kommen
+              möchtest — ich melde mich persönlich mit allen Details.
+            </p>
+            <div className='mt-9 flex flex-wrap items-center justify-center gap-x-10 gap-y-4'>
+              <a href={BOOKING.yoga} target='_blank' rel='noopener noreferrer' className='cta-link'>
+                Platz per WhatsApp reservieren <ArrowUpRight />
+              </a>
+              <a href='tel:+4917663094476' className='cta-link'>
+                Anrufen <ArrowUpRight />
+              </a>
+            </div>
+            <p className='mt-12 border-t border-[var(--cream-line)] pt-6 text-[0.8125rem] text-[var(--cream-70)]'>
+              Du findest Yoga auch spannend, möchtest aber persönlich arbeiten?{' '}
+              <Link href='/cranio/' className='text-[var(--cream)] underline underline-offset-4'>
+                Zur Craniosacralen Körperarbeit
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
