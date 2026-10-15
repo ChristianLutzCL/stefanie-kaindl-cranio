@@ -79,7 +79,7 @@ export function Footer() {
                     <li key={link.text}>
                       <Link
                         href={link.href}
-                        className='text-[0.875rem] text-[var(--cream-70)] transition-colors duration-200 hover:text-[var(--cream)]'>
+                        className='block py-1.5 text-[0.875rem] text-[var(--cream-70)] transition-colors duration-200 hover:text-[var(--cream)]'>
                         {link.text}
                       </Link>
                     </li>
@@ -97,7 +97,7 @@ export function Footer() {
               </a>
               <a
                 href='mailto:info@stefanie-kaindl-cranio.de'
-                className='text-[0.875rem] text-[var(--cream-70)] underline decoration-[var(--cream-45)] underline-offset-4 transition-colors hover:text-[var(--cream)]'>
+                className='inline-block py-1.5 text-[0.875rem] text-[var(--cream-70)] underline decoration-[var(--cream-45)] underline-offset-4 transition-colors hover:text-[var(--cream)]'>
                 info@stefanie-kaindl-cranio.de
               </a>
             </div>
@@ -128,7 +128,7 @@ export function Footer() {
               </p>
               <a
                 href='tel:+4917663094476'
-                className='block text-[0.875rem] text-[var(--cream-70)] transition-colors hover:text-[var(--cream)]'>
+                className='block py-1.5 text-[0.875rem] text-[var(--cream-70)] transition-colors hover:text-[var(--cream)]'>
                 0176 63094476
               </a>
             </div>
@@ -153,7 +153,7 @@ export function Footer() {
                 href='https://instagram.com/stefanie_kaindl_cranio'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-block pt-1 text-[0.875rem] text-[var(--cream-70)] transition-colors hover:text-[var(--cream)]'>
+                className='inline-block py-1.5 text-[0.875rem] text-[var(--cream-70)] transition-colors hover:text-[var(--cream)]'>
                 Instagram <ArrowUpRight />
               </a>
             </div>
@@ -180,16 +180,16 @@ export function Footer() {
         </div>
 
         {/* Rechts-Zeile */}
-        <div className='mt-10 flex flex-col gap-4 text-[0.6875rem] text-[var(--cream-45)] md:flex-row md:items-center md:justify-between'>
-          <p>
+        <div className='mt-10 flex flex-col gap-3 text-[0.6875rem] text-[var(--cream-45)] md:flex-row md:items-center md:justify-between'>
+          <p className='py-1.5'>
             © {CURRENT_YEAR} Stefanie Kaindl · Alle Rechte vorbehalten
           </p>
-          <div className='flex flex-wrap items-center gap-x-6 gap-y-2'>
+          <div className='flex flex-wrap items-center gap-x-6'>
             {LEGAL.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className='transition-colors hover:text-[var(--cream)]'>
+                className='py-1.5 transition-colors hover:text-[var(--cream)]'>
                 {item.text}
               </Link>
             ))}
@@ -197,7 +197,7 @@ export function Footer() {
               href='https://chrislutz.me'
               target='_blank'
               rel='noopener noreferrer'
-              className='transition-colors hover:text-[var(--cream)]'>
+              className='py-1.5 transition-colors hover:text-[var(--cream)]'>
               Design: Christian Lutz
             </a>
           </div>

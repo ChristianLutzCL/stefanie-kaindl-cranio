@@ -69,17 +69,6 @@
     box-shadow: 0 1px 2px rgba(29, 28, 23, 0.04), 0 12px 32px -24px rgba(29, 28, 23, 0.35);
   }
 
-  .sage-accent {
-    color: var(--olive);
-    transition: color 0.2s ease;
-  }
-  .sage-accent:hover {
-    color: var(--olive-deep);
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.3s ease-out;
-  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -302,12 +291,21 @@ div[id] {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+  position: relative;
   font-size: 1rem;
   color: var(--cream);
   padding-bottom: 0.12rem;
   border-bottom: 1px solid currentColor;
   text-decoration: none;
   transition: color 0.2s ease;
+}
+/* Trefferfläche vergrößern, ohne die Unterstreichung vom Wort zu lösen: die
+   Linie bleibt am Text, die Fläche wächst unsichtbar auf rund 37 px Höhe
+   (WCAG 2.2 verlangt 24 px für stehende Ziele). */
+.cta-link::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem -0.35rem;
 }
 .cta-link .icon-arrow {
   transition: transform 0.25s ease;
@@ -493,83 +491,8 @@ textarea.field {
 }
 
 /* ---------------------------------------------------------------------------
-   Accordion (grid-template-rows-Trick: animiert ohne Höhenmessung)
-   ------------------------------------------------------------------------ */
-.acc-item {
-  border-top: 1px solid var(--line);
-}
-.acc-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.5rem;
-  width: 100%;
-  padding: 1.2rem 0;
-  text-align: left;
-  cursor: pointer;
-}
-.acc-sign {
-  flex: none;
-  width: 1.1rem;
-  height: 1.1rem;
-  position: relative;
-  margin-top: 0.35rem;
-  color: var(--ink-60);
-}
-.acc-sign::before,
-.acc-sign::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  background: currentColor;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.acc-sign::before {
-  width: 100%;
-  height: 1px;
-}
-.acc-sign::after {
-  width: 1px;
-  height: 100%;
-}
-[data-open="true"] .acc-sign::after {
-  opacity: 0;
-  transform: translate(-50%, -50%) scaleY(0.4);
-}
-.acc-panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.acc-panel[data-open="true"] {
-  grid-template-rows: 1fr;
-}
-.acc-panel > div {
-  overflow: hidden;
-}
-
-/* ---------------------------------------------------------------------------
    Karten-Slider
    ------------------------------------------------------------------------ */
-.rail {
-  height: 1px;
-  background: var(--line);
-}
-.rail-seg {
-  height: 1px;
-  background: currentColor;
-  opacity: 0.25;
-  transition: opacity 0.3s ease;
-  flex: 1;
-}
-.rail-seg:hover {
-  opacity: 0.6;
-}
-.rail-seg[data-active="true"] {
-  opacity: 1;
-}
 .scroller {
   display: flex;
   overflow-x: auto;
@@ -772,20 +695,6 @@ textarea.field {
   }
   .marquee-track {
     animation: none;
-  }
-  .acc-panel {
-    transition: none;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
   }
 }
 

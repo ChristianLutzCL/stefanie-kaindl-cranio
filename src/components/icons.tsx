@@ -46,4 +46,6 @@ export function ArrowLeft({ className = 'icon-arrow' }: IconProps) {
   );
 }
 
-export default { ArrowUpRight, ArrowRight, ArrowLeft };
+const icons = { ArrowUpRight, ArrowRight, ArrowLeft };
+
+export default icons;

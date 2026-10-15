@@ -206,7 +206,7 @@ function CranioFeature() {
               </Link>
               <Link
                 href='/cranio/#termin'
-                className='text-[0.875rem] text-ink-600 transition-colors hover:text-ink'>
+                className='relative text-[0.875rem] text-ink-600 transition-colors after:absolute after:-inset-y-2 after:inset-x-0 hover:text-ink'>
                 Termin buchen
               </Link>
             </div>
@@ -251,7 +251,7 @@ function YogaFeature() {
               </Link>
               <Link
                 href='/yoga/#termin'
-                className='text-[0.875rem] text-[var(--cream-80)] transition-colors hover:text-[var(--cream)]'>
+                className='relative text-[0.875rem] text-[var(--cream-80)] transition-colors after:absolute after:-inset-y-2 after:inset-x-0 hover:text-[var(--cream)]'>
                 Platz reservieren
               </Link>
             </div>

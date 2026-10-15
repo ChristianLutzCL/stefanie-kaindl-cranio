@@ -7,6 +7,12 @@ import type { MetadataRoute } from 'next';
  */
 export const dynamic = 'force-static';
 
+/* Im Export-Modus erwartet Next für Metadata-Routen diese Funktion; ohne sie
+   antwortet der Dev-Server (/sitemap.xml) mit 500 statt der Datei. */
+export function generateStaticParams() {
+  return [];
+}
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
