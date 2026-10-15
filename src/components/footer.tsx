@@ -106,11 +106,11 @@ export function Footer() {
           <div className='grid gap-10 sm:grid-cols-2'>
             <div className='sm:col-span-2'>
               <p className='display display-serif text-[clamp(1.75rem,3.2vw,3rem)] text-[var(--cream)]'>
-                Bewegung für jeden Tag.
+                Zur Ruhe kommen.
               </p>
               <p className='mt-5 max-w-md text-[0.875rem] leading-relaxed text-[var(--cream-70)]'>
-                Craniosacrale Körperarbeit und Yoga in Pfaffenhofen an der Ilm. Ein ruhiger Raum, Zeit
-                ohne Eile und eine Berührung, die nichts erzwingt.
+                Craniosacrale Körperarbeit für Erwachsene, Babys und Kinder, dazu Yoga am Donnerstag —
+                in Pfaffenhofen an der Ilm. Zeit ohne Eile und eine Berührung, die nichts erzwingt.
               </p>
             </div>
 

@@ -6,20 +6,22 @@ import React from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from '@/components/icons';
 
 /**
- * Startseite „Editorial Olive" — Aufbau und Details folgen der Referenz
- * (siehe research/design-brief-editorial-olive.md). Die Feinheiten, die aus
- * den Sektions-Screenshots der Vorlage übernommen wurden:
+ * Startseite — aufgebaut entlang der Fragen, die sich jemand stellt, der zum
+ * ersten Mal hier landet. Gestaltung nach der Editorial-Referenz (Punkt-Label,
+ * zurückhaltende Serif-Überschriften, Olive als einzige Akzentfläche).
  *
- *   · Alle Überschriften stehen in der Serife, in zurückhaltender Größe.
- *   · Der Story-Absatz ist fast headline-groß (`.lead-lg`), nicht Fließtext.
- *   · Das Bildband ist oben bündig, das mittlere Bild ist deutlich größer.
- *   · Das Studio-Band hat Hotspot-Pillen und eine Bildunterschrift.
- *   · Das Zitat sitzt in der rechten Spalte, darüber eine Haarlinie, Zähler
- *     links daneben, darunter nur zwei Pfeile (keine Segmentlinie).
- *   · Die mittlere Preiskarte ist breiter UND höher.
- *   · Die Karten der Referenz tragen eine Metazeile („Movement · 6 min").
+ *   Hero             Was ist das hier?            (hero.tsx)
+ *   1  Einführung    Was ist Craniosacrale Körperarbeit?
+ *   2  Bildband      Wie sieht es dort aus?
+ *   3  Für wen       Ist das etwas für mich?
+ *   4  Sitzung       Was passiert in einer Sitzung?
+ *   5  Über mich     Wer behandelt mich, und ist sie qualifiziert?
+ *   6  Stimmen       Was sagen andere?
+ *   7  Preise        Was kostet es, was muss ich wissen?
+ *   8  Termin        Wo ist die Praxis, und wie buche ich?
  *
- * Alle Preise, Zeiten, Adressen und Zitate stammen aus der echten Praxis.
+ * Alle Preise, Zeiten, Qualifikationen, Adressen und Zitate stammen aus den
+ * bestehenden Seiten der Praxis — nichts davon ist hier neu erfunden.
  */
 
 const CALENDLY = 'https://calendly.com/stefanie-kaindl-cranio/cranio_session';
@@ -37,7 +39,7 @@ function Photo({
   className = '',
   sizes = '(max-width: 1024px) 100vw, 50vw',
   priority = false,
-  deep = false,
+  position,
 }: {
   src: string;
   alt: string;
@@ -45,35 +47,27 @@ function Photo({
   className?: string;
   sizes?: string;
   priority?: boolean;
-  deep?: boolean;
+  position?: string;
 }) {
   return (
-    <div className={`ph ${deep ? 'ph-deep' : ''} ${ratio} ${className}`}>
-      <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className='object-cover' />
-      <span
-        aria-hidden
-        className='pointer-events-none absolute inset-0 bg-[#6b7250] mix-blend-multiply opacity-20'
+    <div className={`ph ${ratio} ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        className='object-cover'
+        style={position ? { objectPosition: position } : undefined}
       />
     </div>
   );
 }
 
-/** Weite, dünne Kreisbögen über dunklen Flächen (wie in der Referenz). */
-function Arcs({ className = '', style }: { className?: string; style?: React.CSSProperties }) {
-  return (
-    <span
-      aria-hidden
-      className={`pointer-events-none absolute aspect-square rounded-full border border-[var(--cream-line)] ${className}`}
-      style={style}
-    />
-  );
-}
-
-/** Zustand beider Slider (Bildband und Stimmen).
+/** Zustand der Slider (Bildband und Stimmen).
  *  Der Zielindex wird in einem Ref geführt, damit schnelles Klicken nicht
  *  verloren geht: während der Scroll-Animation liefert `scrollLeft` noch
- *  Zwischenwerte, und daraus abgeleitete Schritte landeten auf der
- *  falschen Karte. Manuelles Scrollen wird erst nach dem Auslaufen
+ *  Zwischenwerte. Manuelles Scrollen wird erst nach dem Auslaufen
  *  (120 ms ohne Scroll-Event) übernommen. */
 function useScroller(count: number) {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -109,12 +103,19 @@ function useScroller(count: number) {
   };
 
   const step = (dir: number) => scrollToIndex(targetRef.current + dir);
-  const goTo = (index: number) => scrollToIndex(index);
 
-  return { ref, progress, onScroll, step, goTo, active: Math.round(progress * (count - 1)) };
+  return { ref, onScroll, step, active: Math.round(progress * (count - 1)) };
 }
 
-function Arrows({ onStep, className = '' }: { onStep: (dir: number) => void; className?: string }) {
+function Arrows({
+  onStep,
+  className = '',
+  inverse = false,
+}: {
+  onStep: (dir: number) => void;
+  className?: string;
+  inverse?: boolean;
+}) {
   return (
     <div className={`flex items-center gap-9 ${className}`}>
       {(['left', 'right'] as const).map((dir) => (
@@ -123,10 +124,33 @@ function Arrows({ onStep, className = '' }: { onStep: (dir: number) => void; cla
           type='button'
           onClick={() => onStep(dir === 'left' ? -1 : 1)}
           aria-label={dir === 'left' ? 'Zurück' : 'Weiter'}
-          className='text-[1.75rem] text-ink-500 transition-colors hover:text-ink'>
+          className={`text-[1.75rem] transition-colors ${
+            inverse
+              ? 'text-[var(--cream-70)] hover:text-[var(--cream)]'
+              : 'text-ink-500 hover:text-ink'
+          }`}>
           {dir === 'left' ? <ArrowLeft /> : <ArrowRight />}
         </button>
       ))}
+    </div>
+  );
+}
+
+/** Zentrierter Sektionskopf: Punkt-Label, Serif-Überschrift, optional ein Link. */
+function SectionHead({
+  label,
+  title,
+  children,
+}: {
+  label: string;
+  title: React.ReactNode;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className='mx-auto max-w-2xl text-center'>
+      <span className='label'>{label}</span>
+      <h2 className='display display-serif d2 mt-6'>{title}</h2>
+      {children}
     </div>
   );
 }
@@ -185,66 +209,72 @@ export function Content() {
 
   return (
     <>
-      <Story />
+      <Intro />
       <ImageBand />
-      <Practice />
-      <Method />
-      <Perspectives />
-      <StudioBand />
-      <Membership />
-      <ForYou />
-      <ClosingCta />
+      <ForWhom />
+      <Session />
+      <About />
+      <Voices />
+      <Prices />
+      <Booking />
     </>
   );
 }
 
-/* --- 1 Story -------------------------------------------------------------- */
+/* --- 1 Einführung: Was ist Craniosacrale Körperarbeit? -------------------- */
 
-function Story() {
+function Intro() {
   return (
-    <section className='section' id='story'>
+    <section className='section' id='cranio'>
       <div className='shell'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <span className='label'>Über mich</span>
+        <div className='mx-auto max-w-[46rem] text-center'>
+          <span className='label'>Craniosacrale Körperarbeit</span>
           <p className='lead-lg mt-7' data-reveal>
-            Craniosacrale Körperarbeit ist eine sanfte und zugleich tief wirksame Methode: Über
-            achtsame Berührung findet dein Körper zurück in seinen eigenen Rhythmus — bei Schmerzen
-            und Stress, nach der Geburt, oder einfach, um zur Ruhe zu kommen.
+            Eine sanfte, achtsame Berührung — mit einem Druck von nur etwa fünf Gramm. Sie lädt
+            deinen Körper ein, aus der Anspannung zu finden und zurück in seinen eigenen Rhythmus zu
+            kommen. In meiner Praxis in Pfaffenhofen an der Ilm, für Erwachsene, Babys und Kinder.
           </p>
-          <Link href='/ueber-mich' className='cta-link cta-link-ink mt-8'>
-            Mehr über mich <ArrowUpRight />
-          </Link>
+          <a href='#sitzung' className='cta-link cta-link-ink mt-9'>
+            So läuft eine Sitzung ab <ArrowUpRight />
+          </a>
         </div>
       </div>
     </section>
   );
 }
 
-/* --- 2 Bildband ----------------------------------------------------------- */
+/* --- 2 Bildband: Wie sieht es dort aus? ----------------------------------- */
 
 const BAND = [
-  { src: '/image/4.webp', alt: 'Klangschalen, Kerzen und Handtücher im Behandlungsraum' },
-  { src: '/image/yoga.webp', alt: 'Yoga-Haltung im Raum' },
-  { src: '/image/behandlung_2.webp', alt: 'Hände während einer craniosacralen Behandlung' },
+  {
+    src: '/image/behandlung_2.webp',
+    alt: 'Sanfte Berührung an den Füßen während einer Behandlung',
+  },
+  {
+    src: '/image/hero.webp',
+    alt: 'Stefanie Kaindl mit einer Klangschale im hellen Behandlungsraum',
+  },
+  {
+    src: '/image/kopf.webp',
+    alt: 'Stefanie Kaindl erklärt die Schädelknochen an einem anatomischen Modell',
+  },
 ];
 
 function ImageBand() {
   const { ref, onScroll, step } = useScroller(BAND.length);
 
-  /* Beim Laden das mittlere Bild zentrieren — in der Referenz sind die äußeren
-     Bilder dadurch angeschnitten und der Blick liegt sofort in der Mitte. */
+  /* Beim Laden das mittlere Bild zentrieren — die äußeren Bilder sind dadurch
+     angeschnitten und der Blick liegt sofort in der Mitte (wie in der Referenz). */
   React.useEffect(() => {
     const track = ref.current;
-    if (!track) return;
+    if (!track || window.innerWidth < 768) return;
     const middle = track.querySelectorAll('[data-card]')[1] as HTMLElement | undefined;
     if (!middle) return;
-    if (window.innerWidth < 768) return;
     track.scrollLeft = middle.offsetLeft - (track.clientWidth - middle.offsetWidth) / 2;
   }, [ref]);
 
   return (
-    <section className='section-tight'>
-      {/* Oben bündig, mittleres Bild deutlich größer — wie in der Referenz */}
+    <section aria-label='Einblicke in die Praxis' className='pb-[clamp(4rem,8vw,8.5rem)]'>
       <div
         ref={ref}
         onScroll={onScroll}
@@ -254,19 +284,15 @@ function ImageBand() {
           <figure
             key={image.src}
             data-card
-            className={`ph relative aspect-[4/3] rounded-[4px] ${
-              i === 1 ? 'w-[80vw] md:w-[52vw]' : 'w-[52vw] md:w-[19vw]'
+            className={`ph relative ${
+              i === 1 ? 'aspect-[4/3] w-[84vw] md:w-[54vw]' : 'aspect-[4/3] w-[60vw] md:w-[19vw]'
             }`}>
             <Image
               src={image.src}
               alt={image.alt}
               fill
-              sizes='(max-width: 768px) 80vw, 52vw'
+              sizes={i === 1 ? '(max-width: 768px) 84vw, 54vw' : '(max-width: 768px) 60vw, 19vw'}
               className='object-cover'
-            />
-            <span
-              aria-hidden
-              className='pointer-events-none absolute inset-0 bg-[#6b7250] mix-blend-multiply opacity-20'
             />
           </figure>
         ))}
@@ -278,51 +304,67 @@ function ImageBand() {
   );
 }
 
-/* --- 3 Praxis ------------------------------------------------------------- */
+/* --- 3 Für wen: Ist das etwas für mich? ----------------------------------- */
 
-const PRACTICE = [
+const FOR_WHOM = [
   {
-    title: 'Sanfte Berührung',
-    body: 'Ein Druck von nur wenigen Gramm — so leicht wie das Gewicht einer Münze. Der craniosacrale Rhythmus wird ertastet, nicht gedrückt.',
-    src: '/image/behandlung_3.webp',
-    alt: 'Hände ruhen auf dem Kopf während einer Behandlung',
-  },
-  {
-    title: 'Ganzheitlich',
-    body: 'Die Arbeit wirkt körperlich und emotional: bei Schmerzen, Migräne und Verspannungen ebenso wie bei Stress, Schlafproblemen und Belastendem.',
+    title: 'Erwachsene',
+    meta: 'Cranio · ca. 60 Minuten',
+    body: 'Bei Stress und innerer Unruhe, Verspannungen, Kopfschmerzen und Migräne, Schlafproblemen, emotionalen Belastungen — und in der Schwangerschaft.',
+    href: '/angebote-preise',
     src: '/image/erwachsene.webp',
-    alt: 'Craniosacrale Behandlung für Erwachsene',
+    alt: 'Hände ruhen sanft auf der Stirn einer liegenden Person',
+    position: '50% 30%',
   },
   {
-    title: 'Für Babys & Kinder',
-    body: 'Spielerisch und altersgerecht, mit viel Zeit und Ruhe — von den ersten Wochen bis ins Schulalter.',
-    src: '/image/behandlung_2.webp',
-    alt: 'Sanfte Berührung bei einer craniosacralen Behandlung',
+    title: 'Babys & Kinder',
+    meta: 'Cranio · 20 – 40 Minuten',
+    body: 'Spielerisch und altersgerecht, für Kinder jeden Alters: bei Unruhe und Schlafproblemen, nach der Geburt, bei Konzentrationsschwierigkeiten.',
+    href: '/angebote-preise',
+    src: '/image/4.webp',
+    alt: 'Kerzen, Handtücher und eine kleine Pflanze im Behandlungsraum',
+    position: '50% 55%',
+  },
+  {
+    title: 'Yoga',
+    meta: 'Donnerstags · Paunzhausen',
+    body: 'Yoga in kleinen Gruppen, für Anfänger und Fortgeschrittene: Bewegung, Atmung und Tiefenentspannung — um 17:30 und um 19:00 Uhr, 14 € pro Stunde.',
+    href: '/yoga',
+    src: '/image/yoga.webp',
+    alt: 'Stefanie Kaindl in einer Yoga-Haltung auf der Matte',
+    position: '50% 50%',
   },
 ];
 
-function Practice() {
+function ForWhom() {
   return (
-    <section className='section' id='arbeit'>
+    <section className='section pt-0' id='fuer-wen'>
       <div className='shell'>
-        <div className='mx-auto max-w-2xl text-center'>
-          <span className='label'>Meine Arbeit</span>
-          <p className='display display-serif d2 mt-7'>
-            Finde, was dich bewegt.
-          </p>
-        </div>
+        <SectionHead label='Für wen' title='Wobei ich dich begleite.' />
 
-        <div className='mt-14 grid gap-8 md:grid-cols-3 md:gap-5'>
-          {PRACTICE.map((item) => (
+        <div className='mt-14 grid gap-12 md:grid-cols-3 md:gap-5'>
+          {FOR_WHOM.map((item) => (
             <article key={item.title} data-reveal>
-              <Photo
-                src={item.src}
-                alt={item.alt}
-                ratio='aspect-[4/5]'
-                sizes='(max-width: 768px) 100vw, 33vw'
-              />
-              <h3 className='mt-4 text-[0.9375rem] text-ink'>{item.title}</h3>
-              <p className='mt-1.5 text-[0.8125rem] leading-relaxed text-ink-600'>{item.body}</p>
+              <Link href={item.href} className='group block'>
+                <Photo
+                  src={item.src}
+                  alt={item.alt}
+                  ratio='aspect-[4/5]'
+                  position={item.position}
+                  sizes='(max-width: 768px) 100vw, 33vw'
+                  className='transition-opacity duration-300 group-hover:opacity-90'
+                />
+                <p className='meta-line mt-5'>{item.meta}</p>
+                <h3 className='mt-2 flex items-center justify-between gap-4 text-[1.0625rem] text-ink'>
+                  {item.title}
+                  <span className='text-[0.9rem] text-ink-500 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5'>
+                    <ArrowUpRight />
+                  </span>
+                </h3>
+                <p className='mt-2 max-w-[24rem] text-[0.8125rem] leading-relaxed text-ink-600'>
+                  {item.body}
+                </p>
+              </Link>
             </article>
           ))}
         </div>
@@ -331,79 +373,118 @@ function Practice() {
   );
 }
 
-/* --- 4 Ablauf ------------------------------------------------------------- */
+/* --- 4 Sitzung: Was passiert in einer Sitzung? ---------------------------- */
 
 const STEPS = [
   {
     title: 'Vorgespräch',
-    body: 'Ausführliche Anamnese und Klärung deiner Anliegen — in Ruhe, mit so viel Zeit wie nötig.',
+    body: 'Wir sprechen in Ruhe über dein Anliegen, deine Geschichte und das, was du dir wünschst.',
   },
   {
     title: 'Behandlung',
-    body: 'Sanfte craniosacrale Techniken in entspannter Atmosphäre. Du bleibst angezogen, die Berührung bleibt leicht.',
+    body: 'Du liegst bequem auf der Liege. Ich arbeite mit sanften craniosacralen Techniken — die Berührung bleibt leicht.',
   },
   {
     title: 'Nachruhe',
-    body: 'Zeit zum Nachspüren, ohne aufstehen zu müssen. Danach eine kurze Nachbesprechung mit Empfehlungen für zu Hause.',
+    body: 'Danach bleibt Zeit zum Nachspüren, damit die Behandlung in Ruhe nachwirken kann.',
+  },
+  {
+    title: 'Nachbesprechung',
+    body: 'Wir schauen gemeinsam, was du wahrgenommen hast, und ich gebe dir Empfehlungen für zu Hause mit.',
   },
 ];
 
-function Method() {
+function Session() {
+  const [open, setOpen] = React.useState(0);
+
   return (
-    <section className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
-      {/* Sehr zurückhaltende Kreisbögen im Olive-Bereich */}
-      <Arcs className='-right-40 top-10 hidden h-[34rem] w-[34rem] md:block' />
-      <Arcs className='-left-32 bottom-[-14rem] hidden h-[30rem] w-[30rem] md:block' />
-
-      <div className='relative'>
-        <div className='shell pt-[clamp(3.5rem,7vw,7rem)] pb-[clamp(2.5rem,4vw,4rem)]'>
-          <span className='label label-inverse'>Ablauf</span>
-          <p className='display display-serif d2 mt-6 max-w-2xl text-[var(--cream)]'>
-            Was in einer Sitzung passiert.
-          </p>
-        </div>
-
-        <div className='grid lg:grid-cols-2'>
-          {/* Bild links, randlos — mit rundem Bildelement auf der Kante */}
-          <div className='relative'>
-            <Photo
-              src='/image/behandlung.webp'
-              alt='Behandlungsraum mit Liege und warmem Licht'
-              ratio='aspect-[4/3] lg:aspect-[5/4]'
-              sizes='(max-width: 1024px) 100vw, 50vw'
-            />
-            <span className='absolute -bottom-10 right-[-4.5rem] hidden h-56 w-56 overflow-hidden rounded-full border border-[var(--cream-line)] lg:block'>
-              <span className='ph ph-deep absolute inset-0'>
-                <Image
-                  src='/image/4.webp'
-                  alt='Klangschale und Kerzen im Behandlungsraum'
-                  fill
-                  sizes='224px'
-                  className='object-cover'
-                />
-              </span>
-            </span>
+    <section
+      id='sitzung'
+      className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+      <div className='grid lg:grid-cols-2'>
+        {/* Bild links, randlos, die Überschrift liegt oben auf dem Bild */}
+        <div className='relative min-h-[26rem] lg:min-h-[44rem]'>
+          <Image
+            src='/image/behandlung.webp'
+            alt='Stefanie Kaindl während einer Behandlung an der Liege'
+            fill
+            sizes='(max-width: 1024px) 100vw, 50vw'
+            className='object-cover'
+            style={{ objectPosition: '40% 50%' }}
+          />
+          <span
+            aria-hidden
+            className='absolute inset-x-0 top-0 h-2/5 bg-[linear-gradient(to_bottom,rgba(35,30,20,0.55),rgba(35,30,20,0))]'
+          />
+          <div className='relative px-6 pt-10 md:px-10 md:pt-12'>
+            <span className='label label-inverse'>Deine Sitzung</span>
+            <h2 className='display display-serif d2 mt-5 max-w-md text-[var(--cream)] [text-shadow:0_1px_14px_rgba(20,16,10,0.35)]'>
+              Was dich in einer Sitzung erwartet.
+            </h2>
           </div>
 
-          {/* Punkte rechts */}
-          <div className='shell lg:pl-[clamp(2.5rem,5vw,5rem)]'>
-            <div className='pb-[clamp(3.5rem,7vw,7rem)] pt-[clamp(3.5rem,6vw,6rem)]'>
-              {STEPS.map((step) => (
-                <div key={step.title} className='mb-10 last:mb-0'>
-                  <span className='label label-inverse'>{step.title}</span>
-                  <p className='mt-3 max-w-md text-[0.9375rem] leading-relaxed text-[var(--cream-70)]'>
-                    {step.body}
-                  </p>
-                </div>
-              ))}
-              <a
-                href={CALENDLY}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='cta-link mt-4'>
-                Termin vereinbaren <ArrowUpRight />
-              </a>
-            </div>
+          {/* Rundes Bildelement auf der Kante zwischen Foto und Olive */}
+          <span className='absolute right-0 top-1/2 hidden h-48 w-48 -translate-y-1/2 translate-x-1/2 overflow-hidden rounded-full border border-[var(--cream-line)] lg:block xl:h-56 xl:w-56'>
+            <Image
+              src='/image/behandlung_3.webp'
+              alt=''
+              aria-hidden
+              fill
+              sizes='224px'
+              className='object-cover'
+              style={{ objectPosition: '60% 40%' }}
+            />
+          </span>
+        </div>
+
+        {/* Ablauf rechts: aktive Station hell, die übrigen zurückgenommen */}
+        <div className='flex flex-col justify-center px-6 py-14 md:px-10 lg:py-20 lg:pl-[clamp(7rem,10vw,10rem)] lg:pr-[clamp(2.5rem,6vw,6rem)]'>
+          <ol className='max-w-md'>
+            {STEPS.map((step, i) => {
+              const active = i === open;
+              return (
+                <li key={step.title} className='border-t border-[var(--cream-line)] last:border-b'>
+                  <button
+                    type='button'
+                    onClick={() => setOpen(i)}
+                    aria-expanded={active}
+                    className='flex w-full items-center gap-3 py-5 text-left'>
+                    <span
+                      aria-hidden
+                      className={`h-1 w-1 flex-none rounded-full bg-[var(--cream)] transition-opacity duration-300 ${
+                        active ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                    <span
+                      className={`text-[0.9375rem] transition-colors duration-300 ${
+                        active ? 'text-[var(--cream)]' : 'text-[var(--cream-70)] hover:text-[var(--cream)]'
+                      }`}>
+                      {step.title}
+                    </span>
+                    <span className='ml-auto text-[0.6875rem] tabular-nums text-[var(--cream-45)]'>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </button>
+                  <div
+                    className={`grid transition-[grid-template-rows] duration-500 ease-out ${
+                      active ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    }`}>
+                    <p className='overflow-hidden pl-4 text-[0.875rem] leading-relaxed text-[var(--cream-70)]'>
+                      <span className='block pb-6'>{step.body}</span>
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+
+          <div className='mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-3'>
+            <a href={CALENDLY} target='_blank' rel='noopener noreferrer' className='cta-link'>
+              Termin vereinbaren <ArrowUpRight />
+            </a>
+            <span className='text-[0.75rem] text-[var(--cream-70)]'>
+              Erst kennenlernen? Erstberatung, 30 Min · 40 €
+            </span>
           </div>
         </div>
       </div>
@@ -411,55 +492,103 @@ function Method() {
   );
 }
 
-/* --- 5 Stimmen ------------------------------------------------------------ */
+/* --- 5 Über mich: Wer behandelt mich? ------------------------------------- */
+
+const QUALIFICATIONS = [
+  { title: 'Craniosacrale Körperarbeit', detail: 'Katharina Bähner, Stuttgart · 2024' },
+  { title: 'Kinder-Cranio', detail: 'Weiterbildung für Babys & Kinder' },
+  { title: 'Vinyasa-Yogalehrerin, 300 h', detail: 'Lovelysita, Prien · 2026' },
+];
+
+function About() {
+  return (
+    <section className='section' id='ueber-mich'>
+      <div className='shell'>
+        <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
+          <div className='lg:col-span-5' data-reveal>
+            <Photo
+              src='/image/ueber-mich.webp'
+              alt='Stefanie Kaindl sitzt lächelnd auf einem Sessel in ihrer Praxis'
+              ratio='aspect-[4/5]'
+              position='50% 30%'
+              sizes='(max-width: 1024px) 100vw, 40vw'
+            />
+          </div>
+
+          <div className='lg:col-span-6 lg:col-start-7'>
+            <span className='label'>Über mich</span>
+            <h2 className='display display-serif d2 mt-6'>Hallo, ich bin Steffi.</h2>
+            <p className='lead-lg mt-7 max-w-xl'>
+              Craniosacral-Praktikerin aus Leidenschaft und zweifache Mama. Ich begleite Menschen
+              dabei, wieder in Kontakt mit ihrer Ruhe, ihrer Kraft und ihrem eigenen Rhythmus zu
+              kommen — in einem Raum, in dem du dich sicher und geborgen fühlen darfst.
+            </p>
+
+            <dl className='mt-10 max-w-xl'>
+              {QUALIFICATIONS.map((q) => (
+                <div
+                  key={q.title}
+                  className='flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-[var(--line)] py-4 last:border-b'>
+                  <dt className='text-[0.9375rem] text-ink'>{q.title}</dt>
+                  <dd className='text-[0.8125rem] text-ink-500'>{q.detail}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <Link href='/ueber-mich' className='cta-link cta-link-ink mt-9'>
+              Mehr über mich <ArrowUpRight />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --- 6 Stimmen: Was sagen andere? ----------------------------------------- */
 
 const QUOTES = [
   {
-    text: 'Die Behandlung bei Steffi ist eine Wohltat für Körper, Geist und Seele. Nach der Cranio fühle ich mich viel *leichter* und meine Gedanken kommen zur Ruhe.',
+    text: 'Die Behandlung bei Steffi ist eine Wohltat für Körper, Geist und Seele. Nach der Cranio fühle ich mich viel leichter und meine Gedanken kommen zur Ruhe.',
     name: 'Kathi P.',
     initials: 'KP',
     role: 'Stress & Verspannungen',
   },
   {
-    text: 'Einfühlsam, sensibel, mitfühlend, intensiv, wohltuend, geborgen — hier fühle ich mich beschützt und von Herzen *willkommen*.',
-    name: 'Regina',
-    initials: 'R',
-    role: 'Emotionale Belastung',
-  },
-  {
-    text: 'Nach jahrelangen Kopfschmerzen habe ich endlich Linderung gefunden. Die Behandlungen haben mir geholfen, wieder *schmerzfrei* zu leben.',
+    text: 'Nach jahrelangen Kopfschmerzen habe ich endlich Linderung gefunden. Die Behandlungen haben mir geholfen, wieder schmerzfrei zu leben.',
     name: 'Maria S.',
     initials: 'MS',
     role: 'Chronische Kopfschmerzen',
   },
   {
-    text: 'Die Cranio Sacrale Körperarbeit hat mir und meinen Kindern geholfen, wieder ins Gleichgewicht zu kommen. Bei Stefanie findet man einen *sicheren Raum*.',
+    text: 'Die Cranio Sacrale Körperarbeit hat mir und meinen Kindern geholfen, wieder ins Gleichgewicht zu kommen. Bei Stefanie findet man einen sicheren Raum.',
     name: 'Kathi G.',
     initials: 'KG',
     role: 'Mutter mit Kindern',
   },
+  {
+    text: 'Einfühlsam, sensibel, mitfühlend, intensiv, wohltuend, geborgen — hier fühle ich mich beschützt und von Herzen willkommen.',
+    name: 'Regina',
+    initials: 'R',
+    role: 'Emotionale Belastung',
+  },
 ];
 
-/** Wandelt *Hervorhebungen* in kursive Serif-Akzente um. */
-function withAccents(text: string) {
-  return text.split('*').map((part, i) => (i % 2 === 1 ? <em key={i}>{part}</em> : part));
-}
-
-function Perspectives() {
+function Voices() {
   const { ref, onScroll, step, active } = useScroller(QUOTES.length);
 
   return (
-    <section className='section'>
+    <section className='section bg-[var(--paper-deep)]' aria-label='Stimmen'>
       <div className='shell'>
-        {/* Label links (3/12), Zähler im zweiten Feld (2/12), Zitat rechts (7/12)
-            — dieselbe Flucht wie in der Referenz. */}
+        {/* Label (3/12), Zähler (2/12), Zitat (7/12) — dieselbe Flucht wie in der Referenz */}
         <div className='grid gap-8 lg:grid-cols-12 lg:gap-0'>
           <div className='lg:col-span-3'>
             <span className='label'>Stimmen</span>
           </div>
           <div className='lg:col-span-2'>
-            <span className='text-[1.25rem] font-light text-ink-400'>
-              {String(active + 1).padStart(2, '0')}/{String(QUOTES.length).padStart(2, '0')}
+            <span className='text-[1.25rem] font-light tabular-nums text-ink'>
+              {String(active + 1).padStart(2, '0')}
+              <span className='text-ink-400'>/{String(QUOTES.length).padStart(2, '0')}</span>
             </span>
           </div>
 
@@ -467,9 +596,9 @@ function Perspectives() {
             <div ref={ref} onScroll={onScroll} className='scroller'>
               {QUOTES.map((quote) => (
                 <blockquote key={quote.name} data-card className='slide-full'>
-                  <p className='quote'>&bdquo;{withAccents(quote.text)}&ldquo;</p>
+                  <p className='quote'>&bdquo;{quote.text}&ldquo;</p>
 
-                  <div className='hairline mt-16' />
+                  <div className='hairline mt-14' />
                   <footer className='mt-5 flex flex-wrap items-center justify-between gap-x-10 gap-y-4'>
                     <div className='flex items-center gap-3'>
                       <span aria-hidden className='initials'>
@@ -482,7 +611,7 @@ function Perspectives() {
                         </span>
                       </span>
                     </div>
-                    <p className='text-right text-[0.75rem] leading-relaxed text-ink-500 md:max-w-[16rem]'>
+                    <p className='text-[0.75rem] leading-relaxed text-ink-500 md:max-w-[16rem] md:text-right'>
                       Echte Rückmeldungen aus der Praxis.
                     </p>
                   </footer>
@@ -492,162 +621,88 @@ function Perspectives() {
           </div>
         </div>
 
-        <Arrows onStep={step} className='mt-14' />
+        <Arrows onStep={step} className='mt-12' />
       </div>
     </section>
   );
 }
 
-/* --- 6 Raum --------------------------------------------------------------- */
-
-const STUDIO_FACTS = ['Warmes Licht', 'Weiche Unterlagen', 'Klangschalen', 'Zeit ohne Eile'];
-
-function StudioBand() {
-  return (
-    <section className='relative isolate overflow-hidden bg-[#22241a] text-[var(--cream)]'>
-      <Image
-        src='/image/behandlung.webp'
-        alt=''
-        aria-hidden
-        fill
-        sizes='100vw'
-        className='ph-deep object-cover'
-      />
-      <span aria-hidden className='absolute inset-0 bg-[#20221a]/62' />
-      <span aria-hidden className='absolute inset-0 bg-[#6b7250] mix-blend-multiply opacity-30' />
-      <Arcs className='-left-40 bottom-[-18rem] h-[42rem] w-[42rem]' />
-      <Arcs className='right-[-10rem] top-[-12rem] hidden h-[34rem] w-[34rem] md:block' />
-
-      <div className='shell relative z-10 py-[clamp(4rem,8vw,8rem)]'>
-        {/* Text in der rechten Hälfte, auf derselben Flucht wie das Zitat */}
-        <div className='grid gap-14 lg:grid-cols-4 lg:gap-0'>
-          <div className='lg:col-span-2 lg:col-start-2'>
-            <span className='label label-inverse'>Mein Raum</span>
-            <p className='mt-6 max-w-xl text-[0.9375rem] leading-relaxed text-[var(--cream)] md:text-[1.0625rem]'>
-              Ein ruhiger Raum im Ortsteil Uttenhofen: warmes Licht, weiche Unterlagen und Zeit ohne
-              Eile. Kein Wartezimmer, keine Hektik — nur du und dein eigenes Tempo.
-            </p>
-            <Link href='/kontakt' className='cta-link mt-8'>
-              Kontakt &amp; Anfahrt <ArrowUpRight />
-            </Link>
-          </div>
-        </div>
-
-        {/* Hotspot-Pillen und Bildunterschrift */}
-        <div className='mt-16 max-w-2xl lg:ml-[25%]'>
-          <div className='flex flex-wrap gap-2'>
-            {STUDIO_FACTS.map((fact) => (
-              <span
-                key={fact}
-                className='rounded-full border border-[var(--cream-line)] bg-[#1d1c17]/35 px-3 py-1.5 text-[0.6875rem] text-[var(--cream-70)] backdrop-blur-sm'>
-                {fact}
-              </span>
-            ))}
-          </div>
-          <div className='mt-8 grid gap-6 sm:grid-cols-[14rem_1fr] sm:items-end'>
-            <figure>
-              <Photo
-                src='/image/kopf.webp'
-                alt='Anatomisches Modell in der Praxis'
-                ratio='aspect-[4/3]'
-                sizes='224px'
-              />
-              <figcaption className='meta-line mt-3 text-[var(--cream-45)]'>
-                Behandlungsliege · Uttenhofen
-              </figcaption>
-            </figure>
-            <p className='text-[0.875rem] leading-relaxed text-[var(--cream-70)]'>
-              Ein Raum, der sich dem Tempo des Tages anpasst: warmes Holz, natürliche Materialien,
-              nichts Lautes. Die Berührung darf hier leicht bleiben.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* --- 7 Angebote ----------------------------------------------------------- */
+/* --- 7 Preise: Was kostet es? --------------------------------------------- */
 
 const PLANS = [
   {
-    name: 'Cranio',
-    meta: '/ 60 Minuten',
-    intro: 'Für Erwachsene, die ihrem Körper etwas zurückgeben wollen.',
+    name: 'Erwachsene',
+    meta: 'ca. 60 Min.',
+    intro: 'Eine Behandlung mit ausführlichem Vorgespräch und Nachruhe.',
     features: [
-      'Ca. 60 Minuten Behandlung',
-      'Ausführliches Vorgespräch',
-      'Nachruhe zum Ankommen',
-      'Termin nach Vereinbarung',
+      'Vorgespräch & Nachbesprechung inklusive',
+      'Zeit zum Nachspüren',
+      'Online oder telefonisch buchbar',
     ],
     price: '73 €',
-    unit: ' / Behandlung',
+    unit: 'Behandlung',
     cta: 'Termin buchen',
     href: CALENDLY,
     featured: false,
   },
   {
-    name: 'Rhythmus',
-    meta: '/ 5 Sitzungen',
-    intro: 'Für einen Prozess, der sich über mehrere Wochen entfaltet.',
-    features: [
-      '5 Behandlungen im Voraus',
-      '50 € Ersparnis',
-      'Flexible Terminplanung',
-      'Rechnung für Kasse & Steuer',
-    ],
+    name: '5er-Paket',
+    meta: '5 Behandlungen',
+    intro: 'Für einen Prozess, der sich über mehrere Wochen entfalten darf.',
+    features: ['5 Behandlungen für Erwachsene', '50 € gespart', 'Flexible Terminplanung'],
     price: '400 €',
-    unit: ' / Paket',
-    cta: 'Paket buchen',
+    unit: 'Paket',
+    cta: 'Paket anfragen',
     href: CALENDLY_OVERVIEW,
     featured: true,
   },
   {
     name: 'Kinder',
-    meta: '/ 20 – 40 Minuten',
-    intro: 'Sanfte Begleitung für Babys und Kinder jeden Alters.',
-    features: [
-      '20 – 40 Minuten Behandlung',
-      'Altersgerecht und spielerisch',
-      'Kinder-Cranio-Ausbildung',
-      'Für Babys ab der Geburt',
-    ],
+    meta: '20 – 40 Min.',
+    intro: 'Sanft, spielerisch und altersgerecht — mit viel Zeit und Ruhe.',
+    features: ['Für Kinder jeden Alters', 'Weiterbildung in Kinder-Cranio', 'Online buchbar'],
     price: '53 €',
-    unit: ' / Behandlung',
+    unit: 'Behandlung',
     cta: 'Termin buchen',
     href: CALENDLY_KIDS,
     featured: false,
   },
 ];
 
-function Membership() {
-  return (
-    <section className='section'>
-      <div className='shell'>
-        <div className='mx-auto max-w-2xl text-center'>
-          <span className='label'>Angebote</span>
-          <p className='display display-serif d2 mt-7'>
-            Ein Rhythmus, der zu dir passt.
-          </p>
-        </div>
+const GOOD_TO_KNOW = [
+  ['Erstberatung', '30 Minuten · 40 €'],
+  ['Stornierung', 'Kostenfrei bis 24 h vorher'],
+  ['Zahlung', 'Bar oder per PayPal'],
+  ['Rechnung', 'Für Steuer & Krankenkasse auf Wunsch'],
+];
 
-        {/* Die mittlere Karte ist breiter und höher */}
-        <div className='mt-14 grid items-start gap-5 lg:grid-cols-[1fr_1.08fr_1fr]'>
+function Prices() {
+  return (
+    <section className='section' id='preise'>
+      <div className='shell'>
+        <SectionHead label='Preise' title='Was eine Behandlung kostet.' />
+
+        {/* Die mittlere Karte ist breiter und höher — wie in der Referenz */}
+        {/* Alle Karten gleich hoch (Liste wächst, CTA und Preis sitzen auf einer
+            Linie); die mittlere ragt oben und unten um 2rem heraus. */}
+        <div className='mt-16 grid gap-5 lg:grid-cols-[1fr_1.08fr_1fr] lg:py-8'>
           {PLANS.map((plan) => (
             <div
               key={plan.name}
               data-reveal
-              className={`flex h-full flex-col rounded-[4px] border border-[var(--cream-line)] bg-[var(--olive)] p-7 text-[var(--cream)] md:p-8 ${
-                plan.featured ? 'lg:-mt-9 lg:pb-12' : ''
+              className={`flex flex-col bg-[var(--olive)] p-7 text-[var(--cream)] md:p-8 ${
+                plan.featured
+                  ? 'shadow-[0_30px_60px_-30px_rgba(40,36,24,0.55)] lg:-my-8 lg:py-16'
+                  : ''
               }`}>
-              <span
-                className={`label label-inverse mb-5 ${plan.featured ? '' : 'invisible'}`}>
+              <span className={`label label-inverse mb-5 ${plan.featured ? '' : 'invisible'}`}>
                 Empfohlen
               </span>
               <h3 className='serif text-[clamp(1.4rem,1.9vw,1.75rem)] leading-tight'>
-                {plan.name} <span className='text-[var(--cream-45)]'>{plan.meta}</span>
+                {plan.name}
+                <span className='text-[var(--cream-45)]'> / {plan.meta}</span>
               </h3>
-              <p className='mt-4 text-[0.8125rem] leading-relaxed text-[var(--cream-70)]'>
+              <p className='mt-3 text-[0.8125rem] leading-relaxed text-[var(--cream-70)]'>
                 {plan.intro}
               </p>
               <ul className='mt-6 flex-1 space-y-2.5'>
@@ -655,149 +710,104 @@ function Membership() {
                   <li
                     key={feature}
                     className='flex items-start gap-2.5 text-[0.8125rem] text-[var(--cream-70)]'>
-                    <span aria-hidden className='mt-[0.1rem] text-[0.6875rem] text-[var(--cream-70)]'>
+                    <span aria-hidden className='mt-[0.05rem] text-[0.6875rem]'>
                       ✓
                     </span>
                     {feature}
                   </li>
                 ))}
               </ul>
-              <div className='hairline-inverse mt-8' />
               <a
                 href={plan.href}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='mt-4 flex items-center justify-between text-[0.75rem] text-[var(--cream)] transition-opacity hover:opacity-75'>
+                className='mt-10 flex items-center justify-between border-t border-[var(--cream-line)] pt-4 text-[0.75rem] text-[var(--cream)] transition-opacity hover:opacity-75'>
                 {plan.cta} <ArrowUpRight />
               </a>
-              <p className='mt-7 font-serif text-[clamp(1.6rem,2.3vw,2.1rem)] leading-none'>
+              <p className='serif mt-6 text-[clamp(1.6rem,2.3vw,2.1rem)] leading-none'>
                 {plan.price}
-                <span className='text-[var(--cream-45)]'>{plan.unit}</span>
+                <span className='text-[0.55em] text-[var(--cream-70)]'> / {plan.unit}</span>
               </p>
             </div>
           ))}
         </div>
 
-        <div className='hairline mt-16' />
-        <div className='grid gap-6 pt-8 sm:grid-cols-2 lg:grid-cols-4'>
-          {[
-            ['Erstberatung', '30 Minuten · 40 €'],
-            ['Hausbesuche', 'nach Absprache'],
-            ['Stornierung', 'kostenfrei bis 24 h vorher'],
-            ['Zahlung', 'bar oder per PayPal'],
-          ].map(([title, value]) => (
+        {/* Was man vor dem ersten Termin wissen will */}
+        <dl className='mt-16 grid gap-x-8 gap-y-6 border-t border-[var(--line)] pt-8 sm:grid-cols-2 lg:grid-cols-4'>
+          {GOOD_TO_KNOW.map(([title, value]) => (
             <div key={title}>
-              <p className='text-[0.6875rem] uppercase tracking-[0.18em] text-ink-500'>{title}</p>
-              <p className='mt-2 text-[0.875rem] text-ink-700'>{value}</p>
+              <dt className='meta-line'>{title}</dt>
+              <dd className='mt-1.5 text-[0.875rem] text-ink'>{value}</dd>
             </div>
           ))}
-        </div>
-        <Link href='/angebote-preise' className='cta-link cta-link-ink mt-8'>
-          Alle Angebote &amp; Preise <ArrowUpRight />
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-/* --- 8 Für dich ----------------------------------------------------------- */
-
-const FOR_YOU = [
-  {
-    meta: 'Cranio · 60 Minuten',
-    title: 'Cranio für Erwachsene',
-    body: 'Für alle, die ihrem Körper etwas zurückgeben wollen — bei Schmerzen, Stress oder einfach zur Ruhe zu kommen.',
-    href: '/angebote-preise',
-    src: '/image/erwachsene.webp',
-    alt: 'Craniosacrale Behandlung eines Erwachsenen',
-  },
-  {
-    meta: 'Cranio · Babys & Kinder',
-    title: 'Sanfte Begleitung von Anfang an',
-    body: 'Von den ersten Wochen an — bei Unruhe, Schlafproblemen und nach der Geburt, mit viel Zeit und Ruhe.',
-    href: '/angebote-preise',
-    src: '/image/behandlung_2.webp',
-    alt: 'Sanfte Berührung während einer Behandlung',
-  },
-  {
-    meta: 'Yoga · Donnerstag',
-    title: 'Yoga am Donnerstag',
-    body: 'Zwei Kurse, kleine Gruppen: Bewegung, Atmung und Entspannung — 17:30 und 19:00 Uhr.',
-    href: '/yoga',
-    src: '/image/yoga.webp',
-    alt: 'Yoga-Haltung im Raum',
-  },
-];
-
-function ForYou() {
-  return (
-    <section className='section bg-[var(--paper-deep)]'>
-      <div className='shell'>
-        <div className='mx-auto max-w-2xl text-center'>
-          <span className='label'>Für dich</span>
-          <p className='display display-serif d2 mt-7'>
-            Wo möchtest du ansetzen?
+        </dl>
+        <div className='mt-8 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-4'>
+          <p className='text-[0.8125rem] text-ink-600'>
+            Manche Zusatzversicherungen übernehmen die Kosten. Hausbesuche auf Anfrage.
           </p>
-          <Link href='/angebote-preise' className='cta-link cta-link-ink mt-6'>
-            Alle Angebote ansehen <ArrowUpRight />
+          <Link href='/angebote-preise' className='cta-link cta-link-ink'>
+            Alle Angebote &amp; Details <ArrowUpRight />
           </Link>
         </div>
-
-        <div className='mt-14 grid gap-8 md:grid-cols-3 md:gap-5'>
-          {FOR_YOU.map((item) => (
-            <article key={item.title} data-reveal>
-              <Link href={item.href} className='block'>
-                <Photo
-                  src={item.src}
-                  alt={item.alt}
-                  ratio='aspect-[4/3]'
-                  sizes='(max-width: 768px) 100vw, 33vw'
-                />
-                <p className='meta-line mt-4'>{item.meta}</p>
-                <h3 className='font-serif mt-2 text-[clamp(1.25rem,1.7vw,1.6rem)] leading-tight text-ink'>
-                  {item.title}
-                </h3>
-                <p className='mt-2 text-[0.8125rem] leading-relaxed text-ink-600'>{item.body}</p>
-              </Link>
-            </article>
-          ))}
-        </div>
       </div>
     </section>
   );
 }
 
-/* --- 9 CTA ---------------------------------------------------------------- */
+/* --- 8 Termin: Wo ist die Praxis, wie buche ich? -------------------------- */
 
-function ClosingCta() {
+function Booking() {
   return (
-    <section className='relative isolate overflow-hidden bg-[#22241a] text-[var(--cream)]'>
+    <section
+      id='termin'
+      className='relative isolate overflow-hidden bg-[#241a11] text-[var(--cream)]'>
       <Image
         src='/image/behandlung_3.webp'
         alt=''
         aria-hidden
         fill
         sizes='100vw'
-        className='ph-deep object-cover'
+        className='object-cover'
+        style={{ objectPosition: '50% 35%', filter: 'brightness(0.62) saturate(0.9)' }}
       />
-      <span aria-hidden className='absolute inset-0 bg-[#20221a]/70' />
-      <span aria-hidden className='absolute inset-0 bg-[#6b7250] mix-blend-multiply opacity-30' />
-      <Arcs className='-left-24 top-[-16rem] h-[40rem] w-[40rem]' />
-      <Arcs className='right-[-8rem] bottom-[-20rem] h-[44rem] w-[44rem]' />
+      <span aria-hidden className='absolute inset-0 bg-[rgba(36,26,17,0.38)]' />
 
-      <div className='shell relative z-10 py-[clamp(5rem,10vw,10rem)]'>
-        {/* Karte schmal und zentriert, Fußzeile zweispaltig */}
-        <div className='mx-auto max-w-[34rem] rounded-[4px] bg-[var(--paper)] p-8 text-ink md:p-10'>
-          <span className='label'>Beginne, wo du gerade bist</span>
-          <p className='display display-serif d2 mt-6'>
+      <div className='shell relative z-10 py-[clamp(5rem,11vw,10rem)]'>
+        <div className='mx-auto max-w-[36rem] bg-[var(--paper)] p-8 text-ink md:p-10'>
+          <span className='label'>Dein erster Termin</span>
+          <h2 className='display display-serif d2 mt-5'>
             Dein Körper weiß es bereits. Gib ihm Raum.
-          </p>
-          <div className='mt-9 flex flex-wrap items-end justify-between gap-x-8 gap-y-4'>
-            <p className='max-w-[15rem] text-[0.8125rem] leading-relaxed text-ink-600'>
-              Deine Praxis muss nicht perfekt sein. Sie muss nur beginnen.
-            </p>
+          </h2>
+
+          <div className='mt-8 grid gap-6 border-t border-[var(--line)] pt-6 sm:grid-cols-2'>
+            <div>
+              <p className='meta-line'>Praxis</p>
+              <p className='mt-1.5 text-[0.875rem] leading-relaxed text-ink'>
+                Bahnstraße 2a
+                <br />
+                85276 Pfaffenhofen a. d. Ilm
+                <br />
+                <span className='text-ink-500'>Ortsteil Uttenhofen</span>
+              </p>
+            </div>
+            <div>
+              <p className='meta-line'>Termine</p>
+              <p className='mt-1.5 text-[0.875rem] leading-relaxed text-ink'>
+                Mo – Fr nach Vereinbarung
+                <br />
+                <a href='tel:+4917663094476' className='hover:underline'>
+                  0176 63094476
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div className='mt-8 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-4'>
+            <Link href='/kontakt' className='text-[0.8125rem] text-ink-600 hover:text-ink'>
+              Anfahrt &amp; Kontakt
+            </Link>
             <a href={CALENDLY} target='_blank' rel='noopener noreferrer' className='cta-link cta-link-ink'>
-              Termin vereinbaren <ArrowUpRight />
+              Termin online buchen <ArrowUpRight />
             </a>
           </div>
         </div>
