@@ -1,116 +1,128 @@
 'use client';
 
-import { Typography } from "@material-tailwind/react";
+import { PageIntro } from '@/components/editorial';
+import {
+  LegalBody,
+  LegalLines,
+  LegalLink,
+  LegalP,
+  LegalSection,
+  LegalSource,
+} from '@/components/legal';
 
+/**
+ * Impressum — nur das Layout ist neu; jede Angabe steht unverändert wie zuvor.
+ */
+
+const TOC = [
+  { id: 'angaben', title: 'Angaben gemäß § 5 TMG' },
+  { id: 'kontakt', title: 'Kontakt' },
+  { id: 'streitschlichtung', title: 'EU-Streitschlichtung' },
+  { id: 'verbraucher', title: 'Verbraucherstreitbeilegung' },
+  { id: 'bildnachweis', title: 'Bildnachweis' },
+  { id: 'umsetzung', title: 'Website / Umsetzung' },
+];
 
 function Content() {
   return (
-    <section className="pt-40 pb-12 px-12 therapeutic-gradient min-h-screen">
-      <div className="flex flex-col mx-auto max-w-screen-md gap-y-12">
-        <Typography variant="h2" className="mt-8 mb-6 font-inter text-taupe-800">
-        Impressum
-        </Typography>
+    <>
+      <PageIntro
+        label='Impressum'
+        title='Impressum'
+        lead='Wer diese Website betreibt, wer die Fotos gemacht hat und wie du Kontakt aufnimmst.'
+      />
 
-        <div>
-        <Typography variant="h5" className="font-inter text-therapeutic-700">
-        Angaben gemäß § 5 TMG
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-          <ul>
-            <li>Stefanie Kaindl</li>
-            <li>Bahnstraße 2a</li>
-            <li>85276 Pfaffenhofen a.d. Ilm</li>
-            <li>Ortsteil Uttenhofen</li>
-          </ul>
-        </Typography>
-        </div>
+      <LegalBody toc={TOC}>
+        <LegalSection id='angaben' title='Angaben gemäß § 5 TMG'>
+          <LegalLines
+            lines={[
+              'Stefanie Kaindl',
+              'Bahnstraße 2a',
+              '85276 Pfaffenhofen a.d. Ilm',
+              'Ortsteil Uttenhofen',
+            ]}
+          />
+        </LegalSection>
 
-        <div>
-        <Typography variant="h5" className="font-inter text-therapeutic-700">
-        Kontakt
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-          <ul>
-            <li>Telefon: 0176 63094476</li>
-            <li>E-Mail: info@stefanie-kaindl-cranio.de</li>
-          </ul>
-        </Typography>
-        </div>
+        <LegalSection id='kontakt' title='Kontakt'>
+          <LegalLines
+            lines={[
+              <>
+                Telefon: <LegalLink href='tel:+4917663094476'>0176 63094476</LegalLink>
+              </>,
+              <>
+                E-Mail:{' '}
+                <LegalLink href='mailto:info@stefanie-kaindl-cranio.de'>
+                  info@stefanie-kaindl-cranio.de
+                </LegalLink>
+              </>,
+            ]}
+          />
+        </LegalSection>
 
-        <div>
-        <Typography variant="h5" className="font-inter text-therapeutic-700">
-        EU-Streitschlichtung
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
-        https://ec.europa.eu/consumers/odr/.
-        Unsere E-Mail-Adresse finden Sie oben im Impressum.
-        </Typography>
-        </div>
-       
-       <div>
-       <Typography variant="h5" className="font-inter text-therapeutic-700">
-        Verbraucherstreitbeilegung/Universalschlichtungsstelle
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
-        Verbraucherschlichtungsstelle teilzunehmen.
-        </Typography>
-       </div>
+        <LegalSection id='streitschlichtung' title='EU-Streitschlichtung'>
+          <LegalP>
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{' '}
+            <LegalLink href='https://ec.europa.eu/consumers/odr/' external>
+              https://ec.europa.eu/consumers/odr/
+            </LegalLink>
+            . Unsere E-Mail-Adresse finden Sie oben im Impressum.
+          </LegalP>
+        </LegalSection>
 
-        <div>
-        <Typography variant="h5" className="font-inter text-therapeutic-700">
-        Bildnachweis
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-          Die auf dieser Website verwendeten Fotos wurden erstellt von:
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-          Andrea Kieferl<br />
-          Kapellenweg 12<br />
-          85301 Schweitenkirchen
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-          E-Mail:{' '}
-          <a href="mailto:hallo@andrea-kieferl.de" className="text-[#616949] hover:text-[#4d5438] underline">
-            hallo@andrea-kieferl.de
-          </a>
-          <br />
-          Telefon: 0163 9047817
-        </Typography>
-        </div>
+        <LegalSection
+          id='verbraucher'
+          title='Verbraucherstreitbeilegung/Universalschlichtungsstelle'>
+          <LegalP>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+            Verbraucherschlichtungsstelle teilzunehmen.
+          </LegalP>
+        </LegalSection>
 
-        <div>
-        <Typography variant="h5" className="font-inter text-therapeutic-700">
-        Website / Umsetzung
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-          Christian Lutz<br />
-          Schulstraße 4<br />
-          85307 Paunzhausen
-        </Typography>
-        <Typography className="my-5 font-normal text-taupe-700 font-inter">
-          E-Mail:{' '}
-          <a href="mailto:hallo@chrislutz.me" className="text-[#616949] hover:text-[#4d5438] underline">
-            hallo@chrislutz.me
-          </a>
-          <br />
-          Website:{' '}
-          <a href="https://chrislutz.me" target="_blank" rel="noopener noreferrer" className="text-[#616949] hover:text-[#4d5438] underline">
-            chrislutz.me
-          </a>
-        </Typography>
-        </div>
+        <LegalSection id='bildnachweis' title='Bildnachweis'>
+          <LegalP>Die auf dieser Website verwendeten Fotos wurden erstellt von:</LegalP>
+          <LegalLines
+            lines={[
+              'Andrea Kieferl',
+              'Kapellenweg 12',
+              '85301 Schweitenkirchen',
+              <>
+                E-Mail:{' '}
+                <LegalLink href='mailto:hallo@andrea-kieferl.de'>hallo@andrea-kieferl.de</LegalLink>
+              </>,
+              <>Telefon: 0163 9047817</>,
+            ]}
+          />
+        </LegalSection>
 
+        <LegalSection id='umsetzung' title='Website / Umsetzung'>
+          <LegalLines
+            lines={[
+              'Christian Lutz',
+              'Schulstraße 4',
+              '85307 Paunzhausen',
+              <>
+                E-Mail: <LegalLink href='mailto:hallo@chrislutz.me'>hallo@chrislutz.me</LegalLink>
+              </>,
+              <>
+                Website:{' '}
+                <LegalLink href='https://chrislutz.me' external>
+                  chrislutz.me
+                </LegalLink>
+              </>,
+            ]}
+          />
+        </LegalSection>
 
-        <Typography className="my-10 font-normal text-xs text-taupe-600 font-inter">
-        Quelle: https://www.e-recht24.de
-        </Typography>
-
-        
-        </div>
-    </section>
-  )
+        <LegalSource>
+          Quelle:{' '}
+          <LegalLink href='https://www.e-recht24.de' external>
+            https://www.e-recht24.de
+          </LegalLink>
+        </LegalSource>
+      </LegalBody>
+    </>
+  );
 }
 
 export default Content;

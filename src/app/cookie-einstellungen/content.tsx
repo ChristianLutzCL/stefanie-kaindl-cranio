@@ -1,7 +1,15 @@
 'use client';
 
-import { Typography } from "@material-tailwind/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import { PageIntro } from '@/components/editorial';
+
+/**
+ * Cookie-Einstellungen — Layout im neuen System, Verhalten unverändert.
+ *
+ * Die localStorage-Schlüssel (`cookiePreferences`, `cookieConsentGiven`,
+ * `cookieConsentTimestamp`) bleiben exakt gleich, damit Banner, diese Seite und
+ * die Auswertung in Google Analytics weiterhin zusammenpassen.
+ */
 
 interface CookiePreferences {
   necessary: boolean;
@@ -10,34 +18,90 @@ interface CookiePreferences {
   marketing: boolean;
 }
 
+const CATEGORIES = [
+  {
+    key: 'necessary' as const,
+    title: 'Notwendige Cookies',
+    body: 'Diese Cookies sind für den Betrieb der Website unbedingt erforderlich und können nicht deaktiviert werden.',
+    locked: true,
+  },
+  {
+    key: 'functional' as const,
+    title: 'Funktionale Cookies',
+    body: 'Diese Cookies ermöglichen erweiterte Funktionen und Personalisierung. Sie können von uns oder von Drittanbietern gesetzt werden, deren Dienste wir auf unseren Seiten verwenden.',
+    locked: false,
+  },
+  {
+    key: 'analytics' as const,
+    title: 'Analyse-Cookies',
+    body: 'Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem Informationen anonym gesammelt und analysiert werden. Dies hilft uns, die Website kontinuierlich zu verbessern.',
+    locked: false,
+  },
+  {
+    key: 'marketing' as const,
+    title: 'Marketing-Cookies',
+    body: 'Diese Cookies werden verwendet, um Werbung für Sie relevanter zu gestalten. Sie verhindern, dass dieselbe Anzeige kontinuierlich erscheint, und helfen uns, die Effektivität von Werbekampagnen zu messen.',
+    locked: false,
+  },
+];
+
+function Switch({
+  on,
+  locked = false,
+  onClick,
+  label,
+}: {
+  on: boolean;
+  locked?: boolean;
+  onClick?: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type='button'
+      role='switch'
+      aria-checked={on}
+      aria-label={label}
+      disabled={locked}
+      onClick={onClick}
+      className={`relative h-6 w-11 flex-none rounded-full border transition-colors ${
+        on ? 'border-transparent bg-[var(--olive)]' : 'border-[var(--line)] bg-transparent'
+      } ${locked ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}`}>
+      <span
+        aria-hidden
+        className={`absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full transition-all ${
+          on ? 'left-[1.45rem] bg-[var(--cream)]' : 'left-[0.2rem] bg-[var(--ink-45)]'
+        }`}
+      />
+    </button>
+  );
+}
+
 function Content() {
   const [preferences, setPreferences] = useState<CookiePreferences>({
     necessary: true,
     functional: false,
     analytics: false,
-    marketing: false
+    marketing: false,
   });
+  const [status, setStatus] = useState('');
 
-  // Load saved preferences on mount
+  // Gespeicherte Auswahl laden
   useEffect(() => {
-    const savedPreferences = localStorage.getItem('cookiePreferences');
-    if (savedPreferences) {
-      try {
-        const parsed = JSON.parse(savedPreferences);
-        setPreferences({ ...parsed, necessary: true }); // Ensure necessary is always true
-      } catch (error) {
-        console.error('Error loading cookie preferences:', error);
-      }
+    const saved = localStorage.getItem('cookiePreferences');
+    if (!saved) return;
+    try {
+      const parsed = JSON.parse(saved);
+      setPreferences({ ...parsed, necessary: true });
+    } catch (error) {
+      console.error('Error loading cookie preferences:', error);
     }
   }, []);
 
-  const handleToggle = (category: keyof CookiePreferences) => {
-    if (category === 'necessary') return;
-    
-    setPreferences(prev => ({
-      ...prev,
-      [category]: !prev[category]
-    }));
+  const handleToggle = (key: keyof CookiePreferences) => {
+    if (key === 'necessary') return;
+    setPreferences((prev) => ({ ...prev, [key]: !prev[key] }));
+    setStatus('');
   };
 
   const saveToStorage = (prefs: CookiePreferences) => {
@@ -47,204 +111,106 @@ function Content() {
   };
 
   const handleAcceptAll = () => {
-    const newPrefs = {
-      necessary: true,
-      functional: true,
-      analytics: true,
-      marketing: true
-    };
-    setPreferences(newPrefs);
-    saveToStorage(newPrefs);
-    alert('Alle Cookies wurden akzeptiert.');
+    const next = { necessary: true, functional: true, analytics: true, marketing: true };
+    setPreferences(next);
+    saveToStorage(next);
+    setStatus('Alle Cookies sind erlaubt. Du kannst das hier jederzeit ändern.');
   };
 
   const handleRejectAll = () => {
-    const newPrefs = {
-      necessary: true,
-      functional: false,
-      analytics: false,
-      marketing: false
-    };
-    setPreferences(newPrefs);
-    saveToStorage(newPrefs);
-    alert('Nur notwendige Cookies werden verwendet.');
+    const next = { necessary: true, functional: false, analytics: false, marketing: false };
+    setPreferences(next);
+    saveToStorage(next);
+    setStatus('Nur notwendige Cookies sind aktiv.');
   };
 
   const handleSavePreferences = () => {
     saveToStorage(preferences);
-    alert('Ihre Cookie-Einstellungen wurden gespeichert.');
+    setStatus('Deine Auswahl wurde gespeichert.');
   };
 
   return (
-    <section className="pt-40 pb-12 px-12 therapeutic-gradient min-h-screen">
-      <div className="flex flex-col mx-auto max-w-screen-md gap-y-12">
-        <Typography variant="h2" className="mt-8 mb-6 font-inter text-taupe-800">
-          Cookie-Einstellungen
-        </Typography>
+    <>
+      <PageIntro
+        label='Cookies'
+        title='Cookie-Einstellungen'
+        lead='Du entscheidest, welche Cookies diese Website verwenden darf. Deine Auswahl gilt für diesen Browser und lässt sich jederzeit ändern.'
+      />
 
-        <div>
-          <Typography className="my-5 font-normal text-taupe-700 font-inter leading-relaxed">
-            Wir verwenden Cookies, um Ihnen ein optimales Webseiten-Erlebnis zu bieten. Dazu zählen Cookies, die für 
-            den Betrieb der Seite notwendig sind, sowie solche, die zu Statistikzwecken oder zur Anzeige 
-            personalisierter Inhalte genutzt werden. Sie können selbst entscheiden, welche Kategorien Sie zulassen 
-            möchten.
-          </Typography>
-          <Typography className="my-5 font-normal text-taupe-700 font-inter leading-relaxed">
-            Bitte beachten Sie, dass auf Basis Ihrer Einstellungen möglicherweise nicht alle Funktionalitäten der 
-            Seite zur Verfügung stehen.
-          </Typography>
-        </div>
+      <div className='shell pb-[clamp(4rem,8vw,8rem)]'>
+        <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
+          <div className='lg:col-span-4'>
+            <p className='text-[0.9375rem] leading-[1.75] text-ink-600'>
+              Wir verwenden Cookies, um Ihnen ein optimales Webseiten-Erlebnis zu bieten. Dazu zählen
+              Cookies, die für den Betrieb der Seite notwendig sind, sowie solche, die zu
+              Statistikzwecken oder zur Anzeige personalisierter Inhalte genutzt werden. Sie können
+              selbst entscheiden, welche Kategorien Sie zulassen möchten.
+            </p>
+            <p className='mt-4 text-[0.9375rem] leading-[1.75] text-ink-600'>
+              Bitte beachten Sie, dass auf Basis Ihrer Einstellungen möglicherweise nicht alle
+              Funktionalitäten der Seite zur Verfügung stehen.
+            </p>
+            <p className='mt-6 border-t border-[var(--line)] pt-6 text-[0.75rem] leading-relaxed text-ink-45'>
+              Weitere Informationen findest du in der{' '}
+              <a
+                href='/datenschutz'
+                className='text-ink-600 underline decoration-[rgba(29,28,23,0.3)] underline-offset-4 transition-colors hover:text-ink'>
+                Datenschutzerklärung
+              </a>
+              .
+            </p>
+          </div>
 
-        {/* Cookie Categories */}
-        <div className="space-y-6">
-          
-          {/* Necessary Cookies */}
-          <div className="bg-white rounded-xl p-6 border border-cream-200">
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex-1">
-                <Typography variant="h6" className="font-inter text-taupe-800 mb-2">
-                  Notwendige Cookies
-                </Typography>
-                <Typography className="font-normal text-taupe-600 font-inter text-sm leading-relaxed">
-                  Diese Cookies sind für den Betrieb der Website unbedingt erforderlich und können nicht deaktiviert 
-                  werden. Sie werden normalerweise nur als Reaktion auf von Ihnen durchgeführte Aktionen gesetzt, wie 
-                  z.B. das Festlegen Ihrer Datenschutzeinstellungen.
-                </Typography>
-              </div>
-              <div className="ml-4">
-                <div className="w-12 h-6 bg-[#616949] rounded-full flex items-center px-1 cursor-not-allowed">
-                  <div className="w-4 h-4 bg-white rounded-full transform translate-x-6 transition-transform"></div>
+          <div className='lg:col-span-7 lg:col-start-6'>
+            <div className='border-t border-[var(--line)]'>
+              {CATEGORIES.map((category) => (
+                <div
+                  key={category.key}
+                  className='flex items-start justify-between gap-6 border-b border-[var(--line)] py-7'>
+                  <div>
+                    <h2 className='text-[1rem] text-ink'>{category.title}</h2>
+                    <p className='mt-2 max-w-xl text-[0.875rem] leading-relaxed text-ink-600'>
+                      {category.body}
+                    </p>
+                    {category.locked && (
+                      <p className='meta-line mt-3 uppercase'>Immer aktiv</p>
+                    )}
+                  </div>
+                  <Switch
+                    on={preferences[category.key]}
+                    locked={category.locked}
+                    onClick={() => handleToggle(category.key)}
+                    label={category.title}
+                  />
                 </div>
-              </div>
+              ))}
             </div>
-            <Typography className="font-normal text-taupe-500 font-inter text-xs">
-              Immer aktiv
-            </Typography>
-          </div>
 
-          {/* Functional Cookies */}
-          <div className="bg-white rounded-xl p-6 border border-cream-200">
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex-1">
-                <Typography variant="h6" className="font-inter text-taupe-800 mb-2">
-                  Funktionale Cookies
-                </Typography>
-                <Typography className="font-normal text-taupe-600 font-inter text-sm leading-relaxed">
-                  Diese Cookies ermöglichen erweiterte Funktionen und Personalisierung. Sie können von uns oder von 
-                  Drittanbietern gesetzt werden, deren Dienste wir auf unseren Seiten verwenden.
-                </Typography>
-              </div>
-              <div className="ml-4">
-                <button
-                  onClick={() => handleToggle('functional')}
-                  className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                    preferences.functional ? 'bg-[#616949]' : 'bg-gray-300'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 bg-white rounded-full transform transition-transform ${
-                      preferences.functional ? 'translate-x-6' : 'translate-x-0'
-                    }`}
-                  ></div>
-                </button>
-              </div>
+            <div className='mt-9 flex flex-wrap items-center gap-x-8 gap-y-4'>
+              <button type='button' onClick={handleAcceptAll} className='btn btn-olive'>
+                Alle akzeptieren
+              </button>
+              <button type='button' onClick={handleSavePreferences} className='btn btn-ink'>
+                Auswahl speichern
+              </button>
+              <button type='button' onClick={handleRejectAll} className='btn btn-outline-ink'>
+                Nur notwendige
+              </button>
             </div>
-          </div>
 
-          {/* Analytics Cookies */}
-          <div className="bg-white rounded-xl p-6 border border-cream-200">
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex-1">
-                <Typography variant="h6" className="font-inter text-taupe-800 mb-2">
-                  Analyse Cookies
-                </Typography>
-                <Typography className="font-normal text-taupe-600 font-inter text-sm leading-relaxed">
-                  Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem 
-                  Informationen anonym gesammelt und analysiert werden. Dies hilft uns, die Website kontinuierlich 
-                  zu verbessern.
-                </Typography>
-              </div>
-              <div className="ml-4">
-                <button
-                  onClick={() => handleToggle('analytics')}
-                  className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                    preferences.analytics ? 'bg-[#616949]' : 'bg-gray-300'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 bg-white rounded-full transform transition-transform ${
-                      preferences.analytics ? 'translate-x-6' : 'translate-x-0'
-                    }`}
-                  ></div>
-                </button>
-              </div>
-            </div>
+            <p
+              role='status'
+              aria-live='polite'
+              className={`mt-6 text-[0.8125rem] text-olive transition-opacity ${
+                status ? 'opacity-100' : 'opacity-0'
+              }`}>
+              {status || '—'}
+            </p>
           </div>
-
-          {/* Marketing Cookies */}
-          <div className="bg-white rounded-xl p-6 border border-cream-200">
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex-1">
-                <Typography variant="h6" className="font-inter text-taupe-800 mb-2">
-                  Marketing Cookies
-                </Typography>
-                <Typography className="font-normal text-taupe-600 font-inter text-sm leading-relaxed">
-                  Diese Cookies werden verwendet, um Werbung für Sie relevanter zu gestalten. Sie verhindern, dass 
-                  dieselbe Anzeige kontinuierlich erscheint, und helfen uns, die Effektivität von Werbekampagnen zu 
-                  messen.
-                </Typography>
-              </div>
-              <div className="ml-4">
-                <button
-                  onClick={() => handleToggle('marketing')}
-                  className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                    preferences.marketing ? 'bg-[#616949]' : 'bg-gray-300'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 bg-white rounded-full transform transition-transform ${
-                      preferences.marketing ? 'translate-x-6' : 'translate-x-0'
-                    }`}
-                  ></div>
-                </button>
-              </div>
-            </div>
-          </div>
-
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-          <button
-            onClick={handleAcceptAll}
-            className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
-          >
-            Alle akzeptieren
-          </button>
-          <button
-            onClick={handleSavePreferences}
-            className="bg-taupe-600 hover:bg-taupe-700 text-white font-inter font-medium px-8 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
-          >
-            Auswahl speichern
-          </button>
-          <button
-            onClick={handleRejectAll}
-            className="border-2 border-taupe-400 text-taupe-700 hover:bg-taupe-100 font-inter font-medium px-8 py-3 rounded-full transition-all duration-300"
-          >
-            Nur notwendige
-          </button>
-        </div>
-
-        <div className="mt-8">
-          <Typography className="font-normal text-xs text-taupe-600 font-inter leading-relaxed">
-            Sie können Ihre Cookie-Einstellungen jederzeit ändern, indem Sie diese Seite erneut besuchen. 
-            Weitere Informationen finden Sie in unserer Datenschutzerklärung.
-          </Typography>
-        </div>
-
       </div>
-    </section>
-  )
+    </>
+  );
 }
 
 export default Content;

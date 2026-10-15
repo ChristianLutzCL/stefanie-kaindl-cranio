@@ -1,86 +1,72 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Typography, Button } from '@material-tailwind/react';
 import Link from 'next/link';
 
+/**
+ * Cookie-Hinweis — im System des neuen Designs (dunkle Fläche, Cream-Text,
+ * Haarlinie), ohne Material-Tailwind.
+ *
+ * Die localStorage-Schlüssel sind unverändert (`cookiePreferences`,
+ * `cookieConsentGiven`, `cookieConsentTimestamp`).
+ */
 export function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    // Check if user has already given consent
-    const consentGiven = localStorage.getItem('cookieConsentGiven');
-    if (!consentGiven) {
-      setShowBanner(true);
-    }
+    if (!localStorage.getItem('cookieConsentGiven')) setShowBanner(true);
   }, []);
 
-  const handleAcceptAll = () => {
-    const preferences = {
-      necessary: true,
-      functional: true,
-      analytics: true,
-      marketing: true
-    };
+  const save = (preferences: {
+    necessary: boolean;
+    functional: boolean;
+    analytics: boolean;
+    marketing: boolean;
+  }) => {
     localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
     localStorage.setItem('cookieConsentGiven', 'true');
     localStorage.setItem('cookieConsentTimestamp', new Date().toISOString());
     setShowBanner(false);
   };
 
-  const handleRejectAll = () => {
-    const preferences = {
-      necessary: true,
-      functional: false,
-      analytics: false,
-      marketing: false
-    };
-    localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
-    localStorage.setItem('cookieConsentGiven', 'true');
-    localStorage.setItem('cookieConsentTimestamp', new Date().toISOString());
-    setShowBanner(false);
-  };
+  const handleAcceptAll = () =>
+    save({ necessary: true, functional: true, analytics: true, marketing: true });
+
+  const handleRejectAll = () =>
+    save({ necessary: true, functional: false, analytics: false, marketing: false });
 
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-cream-300 shadow-lg p-4 animate-slide-up">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <div className="flex-1">
-            <Typography variant="small" className="font-inter text-taupe-800 font-medium mb-1">
-              🍪 Cookie-Einstellungen
-            </Typography>
-            <Typography className="font-inter text-taupe-700 text-xs leading-relaxed">
-              Wir verwenden Cookies für ein optimales Erlebnis. Sie können Ihre Einstellungen jederzeit anpassen.
-            </Typography>
-          </div>
-          <div className="flex flex-row gap-2 w-full md:w-auto">
-            <Link href="/cookie-einstellungen">
-              <Button
-                variant="outlined"
-                size="sm"
-                className="border border-[#616949] text-[#616949] hover:bg-[#616949]/10 font-inter px-4 py-2 rounded-full text-xs transition-all duration-300"
-              >
-                Einstellungen
-              </Button>
-            </Link>
-            <Button
-              onClick={handleRejectAll}
-              variant="outlined"
-              size="sm"
-              className="border border-taupe-400 text-taupe-700 hover:bg-taupe-100 font-inter px-4 py-2 rounded-full text-xs transition-all duration-300"
-            >
-              Ablehnen
-            </Button>
-            <Button
-              onClick={handleAcceptAll}
-              size="sm"
-              className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter px-4 py-2 rounded-full text-xs shadow-md hover:shadow-lg transition-all duration-300"
-            >
-              Akzeptieren
-            </Button>
-          </div>
+    <div
+      role='dialog'
+      aria-label='Cookie-Hinweis'
+      className='banner-in fixed inset-x-0 bottom-0 z-[60] border-t border-[var(--cream-line)] bg-[rgba(29,28,23,0.95)] backdrop-blur-md'>
+      <div className='shell flex flex-col gap-5 py-5 md:flex-row md:items-center md:justify-between md:gap-10 md:py-6'>
+        <p className='max-w-2xl text-[0.8125rem] leading-relaxed text-[var(--cream-70)]'>
+          <span className='label label-inverse label-caps'>Cookies</span>
+          <span className='mt-2 block'>
+            Diese Website nutzt Cookies. Notwendige sind immer aktiv; Statistik und Marketing nur,
+            wenn du zustimmst. Deine Auswahl kannst du jederzeit ändern.
+          </span>
+        </p>
+
+        <div className='flex flex-none flex-wrap items-center gap-x-8 gap-y-3'>
+          <Link href='/cookie-einstellungen' className='cta-link text-[0.8125rem]'>
+            Einstellungen
+          </Link>
+          <button
+            type='button'
+            onClick={handleRejectAll}
+            className='cta-link text-[0.8125rem] cursor-pointer'>
+            Nur notwendige
+          </button>
+          <button
+            type='button'
+            onClick={handleAcceptAll}
+            className='btn btn-cream !px-6 !py-3.5 text-[0.75rem] font-medium tracking-wide'>
+            Akzeptieren
+          </button>
         </div>
       </div>
     </div>

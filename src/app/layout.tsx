@@ -118,20 +118,31 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             
-            // Check cookie consent before initializing
-            const consent = localStorage.getItem('cookieConsent');
-            const preferences = consent ? JSON.parse(consent) : null;
-            
-            if (preferences?.analytics) {
+            // Einwilligung lesen — Schlüssel wie im Cookie-Banner (cookiePreferences).
+            let analytics = false;
+            try {
+              const prefs = JSON.parse(localStorage.getItem('cookiePreferences'));
+              analytics = !!(prefs && prefs.analytics);
+            } catch (e) {
+              analytics = false;
+            }
+
+            // Consent Mode: ohne Zustimmung bleibt Statistik abgelehnt, erst nach
+            // „Akzeptieren" (oder „Analyse-Cookies" auf der Cookie-Seite) erlaubt.
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: analytics ? 'granted' : 'denied'
+            });
+
+            if (analytics) {
               gtag('config', 'G-CV0R2VE8F2', {
                 page_path: window.location.pathname,
               });
             } else {
-              // Disable analytics if not consented
               gtag('config', 'G-CV0R2VE8F2', {
-                'anonymize_ip': true,
-                'storage': 'none',
-                'client_storage': 'none'
+                'anonymize_ip': true
               });
             }
           `}
