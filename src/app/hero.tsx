@@ -59,26 +59,25 @@ export default function Hero() {
       <FlowerOfLife className='flower-fade pointer-events-none absolute left-1/2 top-1/2 w-[min(150vw,2100px)] -translate-x-1/2 -translate-y-1/2' />
 
       <div className='on-photo shell relative z-10 flex flex-1 flex-col items-center justify-center pb-24 pt-32 text-center'>
-        {/* Disziplinen, durch eine Haarlinie getrennt */}
-        <p className='flex items-center text-[0.75rem] tracking-[0.06em] text-[rgba(243,240,233,0.95)]'>
+        {/* Disziplinen, durch ein „&" verbunden */}
+        <p className='hero-in hero-in-1 flex items-center text-[0.75rem] tracking-[0.08em] text-[rgba(243,240,233,0.95)]'>
           <span>Cranio</span>
-          <span aria-hidden className='mx-3 text-[rgba(243,240,233,0.6)]'>
+          <span aria-hidden className='mx-2.5 text-[rgba(243,240,233,0.6)]'>
             &amp;
           </span>
           <span>Yoga</span>
         </p>
 
-        <h1 className='display display-serif d1-hero mt-8 text-[var(--cream)]'>
-          Raum, um anzukommen.
-          <br />
-          Zeit, um loszulassen.
+        <h1 className='hero-in hero-in-2 display display-serif d1-hero mt-6 text-[var(--cream)]'>
+          <span>Raum, um anzukommen.</span>
+          <span>Zeit, um loszulassen.</span>
         </h1>
 
         <a
           href='https://calendly.com/stefanie-kaindl-cranio'
           target='_blank'
           rel='noopener noreferrer'
-          className='cta-link mt-9'>
+          className='hero-in hero-in-3 cta-link mt-10'>
           Termin vereinbaren <ArrowUpRight />
         </a>
       </div>

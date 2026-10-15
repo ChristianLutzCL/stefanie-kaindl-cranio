@@ -67,29 +67,36 @@ export function Navbar() {
     };
   }, [open]);
 
+  /* Unterstreichung als Pseudo-Linie, die beim Hover von der Mitte aus wächst;
+     die aktive Seite trägt sie dauerhaft. */
   const navLinkClass = (href: string) => {
     const active = pathname === href || pathname === `${href}/`;
-    const base = 'text-[0.8125rem] whitespace-nowrap transition-colors duration-200';
-    if (active) {
-      return `${base} [&>span]:border-b [&>span]:border-current [&>span]:pb-1 ${
-        inverse ? 'text-[var(--cream)]' : 'text-ink'
-      }`;
-    }
+    const base = `nav-link text-[0.8125rem] tracking-[0.01em] whitespace-nowrap transition-colors duration-200 ${
+      active ? 'is-active' : ''
+    }`;
+    if (active) return `${base} ${inverse ? 'text-[var(--cream)]' : 'text-ink'}`;
     return `${base} ${
-      inverse ? 'text-[var(--cream-70)] hover:text-[var(--cream)]' : 'text-ink-700 hover:text-ink'
+      inverse ? 'text-[var(--cream-80)] hover:text-[var(--cream)]' : 'text-ink-700 hover:text-ink'
     }`;
   };
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? 'nav-solid' : 'bg-transparent'
+        solid ? 'nav-solid' : 'nav-clear'
       }`}>
-      <div className='shell relative flex h-[74px] items-center md:h-[86px]'>
-        {/* Vier gleich breite Zellen über die volle Breite: die Menüpunkte
-            sitzen dadurch auf 12,5 / 37,5 / 62,5 / 87,5 %, die Wortmarke
-            dazwischen exakt in der Mitte. */}
-        <nav aria-label='Hauptnavigation' className='hidden w-full grid-cols-4 lg:grid'>
+      {/* Höhe: transparent über dem Hero großzügig, im festen Zustand kompakter */}
+      <div
+        className={`shell relative flex items-center transition-[height] duration-300 ${
+          solid ? 'h-[64px] md:h-[70px]' : 'h-[74px] md:h-[92px]'
+        }`}>
+        {/* Vier gleich breite Zellen über die volle Breite, die Punkte nach außen
+            gerückt; die Wortmarke sitzt unabhängig davon exakt in der Mitte.
+            Die Menüzeile steht auf der Höhe der Hauptzeile der Wortmarke, nicht
+            auf der Mitte des zweizeiligen Blocks. */}
+        <nav
+          aria-label='Hauptnavigation'
+          className='hidden w-full -translate-y-[0.4rem] grid-cols-4 lg:grid'>
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -112,8 +119,8 @@ export function Navbar() {
             Stefanie Kaindl
           </span>
           <span
-            className={`serif mt-[0.34rem] block text-[0.5rem] uppercase leading-none tracking-[0.34em] transition-colors duration-300 md:text-[0.5625rem] ${
-              inverse ? 'text-[var(--cream-60)]' : 'text-[var(--olive)]'
+            className={`serif mt-[0.4rem] block text-[0.5625rem] uppercase leading-none tracking-[0.36em] transition-colors duration-300 md:text-[0.625rem] ${
+              inverse ? 'text-[var(--cream-80)]' : 'text-[var(--olive)]'
             }`}>
             Cranio Sacrale
           </span>
@@ -140,7 +147,10 @@ export function Navbar() {
 
       {/* Mobil-Menü */}
       {open && (
-        <div className='fixed inset-x-0 top-[74px] bottom-0 z-40 overflow-y-auto bg-[var(--paper)] md:top-[86px]'>
+        <div
+          className={`fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-[var(--paper)] ${
+            solid ? 'top-[65px] md:top-[71px]' : 'top-[74px] md:top-[92px]'
+          }`}>
           <div className='shell flex min-h-full flex-col justify-between py-10'>
             <nav aria-label='Navigation (mobil)' className='flex flex-col'>
               {NAV_MENU.map((item) => (
