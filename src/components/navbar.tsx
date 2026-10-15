@@ -3,6 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ArrowRight, ArrowUpRight } from '@/components/icons';
+import { BOOKING, CONTACT } from '@/components/editorial';
 import { RETREAT_ENABLED } from '@/site-config';
 
 /**
@@ -30,6 +32,11 @@ const NAV_ITEMS = NAV_MENU.slice(0, 4).map((item, i) => ({
      Wortmarke in der Mitte bewusst Abstand. */
   align: i === 0 || i === 1 ? 'lg:justify-self-start' : 'lg:justify-self-end',
 }));
+
+/* Im Mobil-Menü zwei Gruppen: erst die Angebote, dann die Praxis. */
+const OFFER_HREFS = ['/cranio', '/yoga', '/retreat'];
+const OFFERS = NAV_MENU.filter((item) => OFFER_HREFS.includes(item.href));
+const PRACTICE = NAV_MENU.filter((item) => !OFFER_HREFS.includes(item.href));
 
 export function Navbar() {
   const pathname = usePathname();
@@ -108,7 +115,7 @@ export function Navbar() {
         {/* Wortmarke, exakt mittig */}
         <Link
           href='/'
-          aria-label='Stefanie Kaindl — Cranio Sacrale, zur Startseite'
+          aria-label='Stefanie Kaindl — Cranio Sacral, zur Startseite'
           className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center'>
           <span
             className={`serif block uppercase leading-none tracking-[0.18em] text-[1.05rem] transition-colors duration-300 md:text-[1.3rem] ${
@@ -120,19 +127,34 @@ export function Navbar() {
             className={`serif mt-[0.4rem] block text-[0.5625rem] uppercase leading-none tracking-[0.36em] transition-colors duration-300 md:text-[0.625rem] ${
               inverse ? 'text-[var(--cream-80)]' : 'text-[var(--olive)]'
             }`}>
-            Cranio Sacrale
+            Cranio Sacral
           </span>
         </Link>
 
+        {/* Menü-Schalter: zwei Haarlinien, die sich zum Kreuz schließen —
+            gleiche Linienstärke wie die Trennlinien, kein Textknopf, der mit
+            der Wortmarke kollidiert */}
         <button
           type='button'
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
+          aria-controls='mobile-menu'
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
-          className={`ml-auto text-[0.8125rem] lg:hidden ${
+          className={`ml-auto flex h-11 w-11 items-center justify-center transition-opacity duration-200 hover:opacity-70 lg:hidden ${
             inverse ? 'text-[var(--cream)]' : 'text-ink'
           }`}>
-          {open ? 'Schließen' : 'Menü'}
+          <span aria-hidden className='relative block h-[11px] w-[22px]'>
+            <span
+              className={`absolute left-0 top-0 h-px w-full bg-current transition-transform duration-300 ${
+                open ? 'translate-y-[5px] rotate-45' : ''
+              }`}
+            />
+            <span
+              className={`absolute bottom-0 left-0 h-px w-full bg-current transition-transform duration-300 ${
+                open ? '-translate-y-[5px] -rotate-45' : ''
+              }`}
+            />
+          </span>
         </button>
       </div>
 
@@ -143,39 +165,92 @@ export function Navbar() {
         }`}
       />
 
-      {/* Mobil-Menü */}
+      {/* Mobil-Menü: erst die Angebote, dann die Praxis, unten der Termin */}
       {open && (
         <div
+          id='mobile-menu'
           className={`fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-[var(--paper)] ${
             solid ? 'top-[65px] md:top-[71px]' : 'top-[74px] md:top-[92px]'
           }`}>
-          <div className='shell flex min-h-full flex-col justify-between py-10'>
-            <nav aria-label='Navigation (mobil)' className='flex flex-col'>
-              {NAV_MENU.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
+          <div className='shell flex min-h-full flex-col justify-between py-9'>
+            <div>
+              <nav aria-label='Angebote (mobil)'>
+                <span className='label'>Angebote</span>
+                <div className='mt-4 border-b border-[var(--line)]'>
+                  {OFFERS.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className='display display-serif flex items-center justify-between border-t border-[var(--line)] py-4 text-[1.75rem] leading-none text-ink'>
+                      {item.title}
+                      <span aria-hidden className='text-[0.9rem] text-ink-400'>
+                        <ArrowRight />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </nav>
+
+              <nav aria-label='Praxis (mobil)' className='mt-8'>
+                <span className='label'>Praxis</span>
+                <div className='mt-4 border-b border-[var(--line)]'>
+                  {PRACTICE.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className='flex items-center justify-between border-t border-[var(--line)] py-3.5 text-[1.0625rem] text-ink'>
+                      {item.title}
+                      <span aria-hidden className='text-[0.75rem] text-ink-400'>
+                        <ArrowRight />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </nav>
+            </div>
+
+            <div className='mt-10 pb-2'>
+              <span className='label'>Termin</span>
+              <div className='mt-4 flex flex-col items-start gap-3'>
+                <a
+                  href={BOOKING.cranioOverview}
+                  target='_blank'
+                  rel='noopener noreferrer'
                   onClick={() => setOpen(false)}
-                  className='hairline display py-4 text-center text-[1.9rem] leading-[1.1] text-ink'>
-                  {item.title}
-                </Link>
-              ))}
-              <div className='hairline' />
-            </nav>
-            <div className='mt-10 space-y-3'>
-              <span className='label'>Kontakt</span>
-              <a href='tel:+4917663094476' className='block text-[0.9375rem] text-ink'>
-                0176 63094476
-              </a>
-              <a
-                href='mailto:info@stefanie-kaindl-cranio.de'
-                className='block text-[0.9375rem] text-ink'>
-                info@stefanie-kaindl-cranio.de
-              </a>
-              <p className='body-copy max-w-sm'>
-                Bahnstraße 2a, 85276 Pfaffenhofen a. d. Ilm — Ortsteil Uttenhofen. Termine Mo – Fr
-                nach Vereinbarung.
-              </p>
+                  className='cta-link cta-link-ink'>
+                  Cranio buchen <ArrowUpRight />
+                </a>
+                <a
+                  href={BOOKING.yoga}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  onClick={() => setOpen(false)}
+                  className='cta-link cta-link-ink'>
+                  Platz reservieren <ArrowUpRight />
+                </a>
+              </div>
+
+              <div className='mt-8 border-t border-[var(--line)] pt-5 text-[0.8125rem] leading-relaxed'>
+                <a
+                  href={CONTACT.phoneHref}
+                  className='block py-1 text-ink transition-colors hover:text-ink-600'>
+                  {CONTACT.phone}
+                </a>
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  className='block py-1 text-ink transition-colors hover:text-ink-600'>
+                  {CONTACT.email}
+                </a>
+                <a
+                  href='https://instagram.com/stefanie_kaindl_cranio'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='block py-1 text-ink transition-colors hover:text-ink-600'>
+                  Instagram
+                </a>
+              </div>
             </div>
           </div>
         </div>

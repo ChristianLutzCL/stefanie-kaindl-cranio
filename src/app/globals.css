@@ -613,6 +613,47 @@ textarea.field {
   transform: scaleX(1);
 }
 
+.flower-fade-soft {
+  -webkit-mask-image: radial-gradient(
+    closest-side,
+    #000 0%,
+    rgba(0, 0, 0, 0.5) 42%,
+    transparent 76%
+  );
+  mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 76%);
+}
+
+.footer-mark-wrap {
+  /* Dieselbe Wortmarke wie in der Kopfzeile, über die volle Inhaltsbreite.
+     Gemessen: „Stefanie Kaindl" in Cormorant 500 braucht 10,982 em ohne die
+     Sperrung nach dem letzten Zeichen (mit ihr 11,162 em). Die Größe ist
+     deshalb Inhaltsbreite / 10,898, und `margin-right: -0.18em` gibt der Zeile
+     die letzte Sperrung zurück — so endet die Marke genau am rechten Rand. */
+  /* Fallback für Browser ohne Container-Queries (bleibt absichtlich etwas
+     schmaler, damit nichts überläuft). */
+  --mark-size: calc((100vw - 5rem) / 10.898);
+  container-type: inline-size;
+}
+/* Die Größe richtet sich nach der echten Inhaltsbreite: `100vw` schließt die
+   Scrollleiste ein und machte die Marke ein paar Pixel zu breit. */
+@supports (font-size: 1cqw) {
+  .footer-mark-wrap {
+    --mark-size: calc(100cqw / 10.898);
+  }
+}
+.footer-mark {
+  font-size: var(--mark-size);
+  letter-spacing: 0.18em;
+  margin-right: -0.18em;
+}
+.footer-mark-sub {
+  font-size: calc(var(--mark-size) * 0.48);
+  letter-spacing: 0.36em;
+  /* Gleicht die Sperrung nach dem letzten Zeichen aus, damit die Zeile
+     optisch wirklich mittig steht. */
+  margin-right: -0.36em;
+}
+
 /* Hero-Foto: das Motiv sitzt rechts, damit die zentrierte Überschrift Platz
    auf der ruhigen linken Bildhälfte hat. Auf schmalen Viewports wird das Bild
    stark beschnitten, dort muss der Ausschnitt auf die Person wandern. */

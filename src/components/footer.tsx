@@ -1,5 +1,6 @@
 'use client';
 
+import { FlowerOfLife } from '@/components/editorial';
 import Link from 'next/link';
 import { ArrowUpRight } from '@/components/icons';
 
@@ -159,25 +160,23 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Wortmarke mit weiten Kreisbögen */}
-        <div className='relative mt-16 select-none pt-6 md:mt-20'>
+        {/* Wortmarke mit weiten Kreisbögen — dieselbe Marke wie in der Kopfzeile,
+            hier über die volle Inhaltsbreite */}
+        <div className='relative mt-16 select-none pt-8 md:mt-20'>
           <div className='hairline-inverse absolute inset-x-0 top-0' />
-          <span
-            aria-hidden
-            className='pointer-events-none absolute -bottom-[22rem] left-1/2 aspect-square w-[46rem] -translate-x-1/2 rounded-full border border-[var(--cream-line)]'
-          />
-          <span
-            aria-hidden
-            className='pointer-events-none absolute -bottom-[30rem] left-1/2 aspect-square w-[62rem] -translate-x-1/2 rounded-full border border-[var(--cream-15)]'
-          />
-          <p
-            aria-hidden
-            className='font-serif relative whitespace-nowrap uppercase leading-[0.8] tracking-[0.01em] text-[var(--cream)] text-[clamp(4rem,18vw,16.5rem)]'>
-            Stefanie
-          </p>
-          <p className='relative mt-4 text-[0.5625rem] uppercase tracking-[0.4em] text-[var(--cream-45)] md:text-[0.625rem]'>
-            Cranio Sacrale · Yoga · Pfaffenhofen an der Ilm
-          </p>
+          {/* Statt zweier Kreisbögen eine sehr zurückhaltende Blume des Lebens,
+              die hinter der Marke liegt und nach außen ausläuft */}
+          <FlowerOfLife className='flower-fade-soft pointer-events-none absolute -bottom-[24rem] left-1/2 w-[min(150vw,1800px)] -translate-x-1/2' />
+          <div className='footer-mark-wrap relative'>
+            <p
+              aria-hidden
+              className='footer-mark serif block whitespace-nowrap uppercase leading-[0.85] text-[var(--cream)]'>
+              Stefanie Kaindl
+            </p>
+            <p className='footer-mark-sub serif mt-[0.6em] block text-center uppercase leading-none text-[var(--cream-70)]'>
+              Cranio Sacral
+            </p>
+          </div>
         </div>
 
         {/* Rechts-Zeile */}

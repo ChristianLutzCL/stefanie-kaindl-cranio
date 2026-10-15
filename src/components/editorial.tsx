@@ -61,6 +61,58 @@ export function Photo({
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Blume des Lebens                                                           */
+/* -------------------------------------------------------------------------- */
+
+/* 19 Kreise gleichen Radius auf einem hexagonalen Gitter (Mittelpunkt, Ring 1
+   bei r, Ring 2 bei r·√3 und 2r) plus Umfassungskreis. Als sehr zurückhaltende
+   Linienzeichnung hinter der Fuß-Wortmarke. */
+const FLOWER_R = 50;
+const FLOWER_CENTERS: [number, number][] = [[0, 0]];
+for (let i = 0; i < 6; i++) {
+  const a = (Math.PI / 3) * i;
+  FLOWER_CENTERS.push([FLOWER_R * Math.cos(a), FLOWER_R * Math.sin(a)]);
+}
+for (let i = 0; i < 6; i++) {
+  const a = (Math.PI / 3) * i + Math.PI / 6;
+  FLOWER_CENTERS.push([
+    Math.sqrt(3) * FLOWER_R * Math.cos(a),
+    Math.sqrt(3) * FLOWER_R * Math.sin(a),
+  ]);
+}
+for (let i = 0; i < 6; i++) {
+  const a = (Math.PI / 3) * i;
+  FLOWER_CENTERS.push([2 * FLOWER_R * Math.cos(a), 2 * FLOWER_R * Math.sin(a)]);
+}
+
+export function FlowerOfLife({
+  className = '',
+  stroke = 'rgba(243, 240, 233, 0.05)',
+}: {
+  className?: string;
+  stroke?: string;
+}) {
+  return (
+    <svg
+      aria-hidden
+      viewBox={`${-3 * FLOWER_R} ${-3 * FLOWER_R} ${6 * FLOWER_R} ${6 * FLOWER_R}`}
+      className={className}
+      fill='none'
+      stroke={stroke}
+      strokeWidth={1}>
+      {FLOWER_CENTERS.map(([cx, cy], i) => (
+        <circle key={i} cx={cx} cy={cy} r={FLOWER_R} vectorEffect='non-scaling-stroke' />
+      ))}
+      <circle r={3 * FLOWER_R} vectorEffect='non-scaling-stroke' />
+    </svg>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Bausteine                                                                  */
+/* -------------------------------------------------------------------------- */
+
 /** Zentrierter Sektionskopf: Punkt-Label, Serif-Überschrift, optional Text darunter. */
 export function SectionHead({
   label,
