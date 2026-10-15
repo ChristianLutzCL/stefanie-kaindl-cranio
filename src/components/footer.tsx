@@ -13,7 +13,7 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 const COLUMNS = [
   {
-    title: 'Praxis',
+    title: 'Seiten',
     links: [
       { text: 'Cranio', href: '/cranio/' },
       { text: 'Yoga', href: '/yoga' },
@@ -25,9 +25,9 @@ const COLUMNS = [
     title: 'Angebote',
     links: [
       { text: 'Cranio für Erwachsene', href: '/cranio/#preise' },
-      { text: 'Cranio für Kinder & Babys', href: '/cranio/#preise' },
-      { text: 'Erstberatung & Pakete', href: '/cranio/#preise' },
-      { text: 'Hausbesuche', href: '/cranio/#preise' },
+      { text: 'Cranio für Babys & Kinder', href: '/cranio/#preise' },
+      { text: 'Erstberatung & 5er-Paket', href: '/cranio/#preise' },
+      { text: 'Yoga am Donnerstag', href: '/yoga/#kurse' },
     ],
   },
 ];
@@ -103,7 +103,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Rechts: Aussage + Praxis-Infos */}
+          {/* Rechts: Aussage + Kontaktdaten */}
           <div className='grid gap-10 sm:grid-cols-2'>
             <div className='sm:col-span-2'>
               <p className='display display-serif text-[clamp(1.75rem,3.2vw,3rem)] text-[var(--cream)]'>
@@ -117,7 +117,7 @@ export function Footer() {
 
             <div className='space-y-3'>
               <p className='text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--cream-45)]'>
-                Praxis
+                Adresse
               </p>
               <p className='text-[0.875rem] leading-relaxed text-[var(--cream-70)]'>
                 Bahnstraße 2a

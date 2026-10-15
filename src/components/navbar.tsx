@@ -12,7 +12,7 @@ import { RETREAT_ENABLED } from '@/site-config';
  *
  *      Cranio   Yoga          STEFANIE KAINDL          Über mich   Kontakt
  *
- * Links die beiden Angebote, rechts die Praxis (wer, wie erreichbar). Die
+ * Links die beiden Angebote, rechts die Person (wer, wie erreichbar). Die
  * Wortmarke sitzt unabhängig davon exakt mittig.
  *
  * Auf der Startseite transparent über dem Hero, sonst auf Papier.
@@ -33,7 +33,7 @@ const NAV_ITEMS = NAV_MENU.slice(0, 4).map((item, i) => ({
   align: i === 0 || i === 1 ? 'lg:justify-self-start' : 'lg:justify-self-end',
 }));
 
-/* Im Mobil-Menü zwei Gruppen: erst die Angebote, dann die Praxis. */
+/* Im Mobil-Menü zwei Gruppen: erst die Angebote, dann Person und Kontakt. */
 const OFFER_HREFS = ['/cranio', '/yoga', '/retreat'];
 const OFFERS = NAV_MENU.filter((item) => OFFER_HREFS.includes(item.href));
 const PRACTICE = NAV_MENU.filter((item) => !OFFER_HREFS.includes(item.href));
@@ -165,7 +165,7 @@ export function Navbar() {
         }`}
       />
 
-      {/* Mobil-Menü: erst die Angebote, dann die Praxis, unten der Termin */}
+      {/* Mobil-Menü: erst die Angebote, dann Person und Kontakt, unten der Termin */}
       {open && (
         <div
           id='mobile-menu'
@@ -192,8 +192,8 @@ export function Navbar() {
                 </div>
               </nav>
 
-              <nav aria-label='Praxis (mobil)' className='mt-8'>
-                <span className='label'>Praxis</span>
+              <nav aria-label='Über mich und Kontakt (mobil)' className='mt-8'>
+                <span className='label'>Über mich &amp; Kontakt</span>
                 <div className='mt-4 border-b border-[var(--line)]'>
                   {PRACTICE.map((item) => (
                     <Link

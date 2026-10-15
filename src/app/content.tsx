@@ -11,16 +11,16 @@ import { BOOKING, CONTACT, Photo, useReveal } from '@/components/editorial';
  *
  *   Hero          Cranio & Yoga, zwei Buchungswege       (hero.tsx)
  *   1 Einstieg    Zwei Wege zur Ruhe
- *   2 Bildband    Drei Aufnahmen aus der Praxis, mit Pfeilen
+ *   2 Bildband    Drei Aufnahmen aus den Räumen, mit Pfeilen
  *   3 Cranio      Was es ist, für wen, Eckdaten   → /cranio
  *   4 Yoga        Was es ist, wann, Eckdaten      → /yoga
  *   5 Arbeitsweise Olive-Fläche mit Akkordeon
  *   6 Über mich   Wer Steffi ist, Ausbildungen
- *   7 Stimmen     Rückmeldungen aus der Praxis
+ *   7 Stimmen     Rückmeldungen von Klientinnen und Klienten
  *   8 Termin      Weiße Karte auf dem Foto, beide Wege
  *
  * Ausführliches (Ablauf, alle Preise, Termine) steht auf /cranio und /yoga.
- * Alle Fakten stammen aus den bestehenden Seiten der Praxis.
+ * Alle Fakten stammen aus den bestehenden Seiten.
  */
 
 export function Content() {
@@ -98,7 +98,7 @@ function ImageBand() {
   }, [ref]);
 
   return (
-    <section aria-label='Einblicke in die Praxis' className='pb-[clamp(4rem,8vw,8.5rem)]'>
+    <section aria-label='Einblicke in die Räume' className='pb-[clamp(4rem,8vw,8.5rem)]'>
       <div
         ref={ref}
         onScroll={onScroll}
@@ -196,7 +196,7 @@ function CranioFeature() {
               items={[
                 ['Erwachsene', 'ca. 60 Min · 73 €'],
                 ['Babys & Kinder', '20 – 40 Min · 53 €'],
-                ['Praxis', 'Pfaffenhofen-Uttenhofen'],
+                ['Ort', 'Pfaffenhofen-Uttenhofen'],
               ]}
             />
 
@@ -289,7 +289,7 @@ const APPROACH = [
   },
   {
     title: 'Yoga und Cranio',
-    body: 'Zwei Wege mit derselben Haltung: achtsame Präsenz. In meinen Yogastunden fließen craniosacrale Impulse in die Praxis ein.',
+    body: 'Zwei Wege mit derselben Haltung: achtsame Präsenz. In meinen Yogastunden fließen craniosacrale Impulse in die Übung ein.',
   },
 ];
 
@@ -402,7 +402,7 @@ function About() {
           <div className='lg:col-span-5' data-reveal>
             <Photo
               src='/image/ueber-mich.webp'
-              alt='Stefanie Kaindl sitzt lächelnd auf einem Sessel in ihrer Praxis'
+              alt='Stefanie Kaindl sitzt lächelnd in ihrem Behandlungsraum'
               ratio='aspect-[4/5]'
               position='50% 30%'
               sizes='(max-width: 1024px) 100vw, 40vw'
@@ -542,7 +542,7 @@ function Voices() {
                       </span>
                     </div>
                     <p className='text-[0.75rem] leading-relaxed text-ink-500 md:max-w-[16rem] md:text-right'>
-                      Echte Rückmeldungen aus der Praxis.
+                      Echte Rückmeldungen von Klientinnen und Klienten.
                     </p>
                   </footer>
                 </blockquote>
@@ -620,7 +620,7 @@ function Booking() {
           <span className='label'>Termin</span>
           <h2 className='display display-serif d2 mt-5'>Dein erster Schritt.</h2>
           <p className='mt-5 max-w-md text-[0.875rem] leading-relaxed text-ink-600'>
-            Deine Praxis muss nicht perfekt sein. Sie muss nur beginnen. Such dir den Weg aus, der
+            Es muss nicht perfekt sein. Es muss nur beginnen. Such dir den Weg aus, der
             gerade passt — oder ruf an, wenn du unsicher bist.
           </p>
 

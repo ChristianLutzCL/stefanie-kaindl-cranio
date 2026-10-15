@@ -17,7 +17,7 @@ const JOURNEY = [
   'Meine fundierte Ausbildung bei Katharina Bähner in Stuttgart, die ich im März 2024 abgeschlossen habe, war für mich ein intensiver Transformationsprozess – fachlich wie auch persönlich. Ergänzend dazu habe ich eine Weiterbildung in Kinder-Cranio absolviert, um auch Babys und Kinder mit besonderer Achtsamkeit und Einfühlungsvermögen begleiten zu können.',
   'Mit dem erfolgreichen Abschluss meiner 300-Stunden-Vinyasa-Yogalehrerausbildung bei Lovelysita in Prien am 10.01.2026 hat sich mein Weg mit Körper, Atem und Energie noch einmal vertieft. Für mich verbinden sich Yoga und Craniosacralarbeit auf besondere Weise – sie schaffen Raum für achtsame Präsenz, Bewusstsein und ganzheitliche Heilung.',
   'Als zweifache Mama weiß ich aus eigener Erfahrung, wie wertvoll es ist, Körper und Seele mit Respekt und Sanftheit zu begegnen. Die Craniosacrale Arbeit ist für mich weit mehr als eine Technik – sie ist eine Begegnung auf Augenhöhe, eine Einladung zum Loslassen, zur inneren Ruhe und Selbstheilung.',
-  'In meiner Praxis möchte ich einen Raum schaffen, in dem du dich sicher und geborgen fühlst – einen Ort, an dem du zur Ruhe kommen und wieder in Verbindung mit deinem eigenen Rhythmus treten kannst. Mit großer Leidenschaft bilde ich mich kontinuierlich weiter, um mein Wissen zu vertiefen und dir die bestmögliche Erfahrung zu ermöglichen.',
+  'Ich möchte einen Ort schaffen, an dem du dich sicher und geborgen fühlst – einen Ort, an dem du zur Ruhe kommen und wieder in Verbindung mit deinem eigenen Rhythmus treten kannst. Mit großer Leidenschaft bilde ich mich kontinuierlich weiter, um mein Wissen zu vertiefen und dir die bestmögliche Erfahrung zu ermöglichen.',
 ];
 
 const QUALIFICATIONS = [
@@ -98,7 +98,7 @@ export function Content() {
           <div className='order-1 lg:order-2 lg:col-span-6 lg:col-start-7' data-reveal>
             <Photo
               src='/image/ueber-mich.webp'
-              alt='Stefanie Kaindl sitzt lächelnd auf einem Sessel in ihrer Praxis'
+              alt='Stefanie Kaindl sitzt lächelnd in ihrem Behandlungsraum'
               ratio='aspect-[4/5]'
               position='50% 30%'
               sizes='(max-width: 1024px) 100vw, 50vw'

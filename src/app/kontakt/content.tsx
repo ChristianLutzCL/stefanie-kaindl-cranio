@@ -20,7 +20,7 @@ const MAPS = `https://www.google.com/maps/search/?api=1&query=${encodeURICompone
 
 const FACTS: { title: string; lines: { text: string; href?: string; external?: boolean }[] }[] = [
   {
-    title: 'Praxis',
+    title: 'Adresse',
     lines: [
       { text: 'Bahnstraße 2a' },
       { text: '85276 Pfaffenhofen a. d. Ilm' },
@@ -219,7 +219,7 @@ export function Content() {
         <div className='shell'>
           <Photo
             src='/image/kontakt.webp'
-            alt='Blick in die Praxis von Stefanie Kaindl'
+            alt='Blick in den Behandlungsraum von Stefanie Kaindl'
             ratio='aspect-[16/9]'
             position='50% 26%'
             sizes='100vw'
@@ -259,7 +259,7 @@ export function Content() {
           </dl>
 
           <p className='mt-12 max-w-xl text-[0.875rem] leading-relaxed text-ink-600'>
-            Die Praxis liegt im Ortsteil Uttenhofen. Wenn du mit dem Auto kommst, nutze die
+            Der Behandlungsraum liegt im Ortsteil Uttenhofen. Wenn du mit dem Auto kommst, nutze die
             Bahnstraße 2a als Ziel — ruf im Zweifel einfach kurz durch.
           </p>
         </div>

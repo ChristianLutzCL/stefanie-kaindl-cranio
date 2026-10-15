@@ -8,7 +8,7 @@ import { BOOKING, Photo, PriceRow, SectionHead, useReveal } from '@/components/e
  * Cranio — Angebotsseite: was Craniosacrale Körperarbeit ist, wobei sie hilft,
  * wie eine Sitzung abläuft, was sie kostet und wie man bucht.
  *
- * Alle Preise, Zeiten und Bedingungen stammen aus der Praxis (vormals
+ * Alle Preise, Zeiten und Bedingungen stammen aus den bestehenden Seiten (vormals
  * /angebote-preise); die Ausbildungen von /ueber-mich.
  */
 
@@ -208,7 +208,6 @@ export function Content() {
                 ['Stornierung', 'Kostenfrei bis 24 h vorher; danach wird die volle Gebühr fällig.'],
                 ['Zahlung', 'Bar oder per PayPal. Rechnung für Steuer und Krankenkasse auf Wunsch.'],
                 ['Kostenerstattung', 'Manche Zusatzversicherungen übernehmen die Kosten.'],
-                ['Hausbesuche', 'In besonderen Situationen nach Absprache möglich.'],
                 ['Qualifikation', 'Ausbildung bei Katharina Bähner (2024) und Weiterbildung Kinder-Cranio.'],
               ].map(([title, value]) => (
                 <div key={title}>
@@ -250,7 +249,7 @@ export function Content() {
 
             <div className='mt-12 grid gap-6 border-t border-[var(--line)] pt-8 text-left sm:grid-cols-2'>
               <div>
-                <p className='meta-line'>Praxis</p>
+                <p className='meta-line'>Adresse</p>
                 <p className='mt-1.5 text-[0.875rem] leading-relaxed text-ink'>
                   Bahnstraße 2a
                   <br />
