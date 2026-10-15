@@ -1,55 +1,91 @@
 'use client';
 
-import { Typography } from "@material-tailwind/react";
-import Link from "next/link";
-import { useState } from "react";
+import Link from 'next/link';
+import React from 'react';
+import { ArrowUpRight } from '@/components/icons';
+import { CONTACT, Photo, useReveal } from '@/components/editorial';
+
+/**
+ * Kontakt — Anfahrt, Erreichbarkeit und das Kontaktformular.
+ *
+ * Das Formular sendet unverändert an denselben n8n-Webhook wie bisher; nur die
+ * Darstellung und die Anrede (durchgehend „du") sind neu.
+ */
+
+const WEBHOOK = 'https://n8n.srv1010269.hstgr.cloud/webhook-test/stefanie-kaindl-cranio/kontakt';
+
+const MAPS = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  'Bahnstraße 2a, 85276 Pfaffenhofen an der Ilm',
+)}`;
+
+const FACTS: { title: string; lines: { text: string; href?: string; external?: boolean }[] }[] = [
+  {
+    title: 'Praxis',
+    lines: [
+      { text: 'Bahnstraße 2a' },
+      { text: '85276 Pfaffenhofen a. d. Ilm' },
+      { text: 'Ortsteil Uttenhofen' },
+      { text: 'Auf Karte ansehen', href: MAPS, external: true },
+    ],
+  },
+  {
+    title: 'Direkt erreichen',
+    lines: [
+      { text: CONTACT.phone, href: CONTACT.phoneHref },
+      { text: CONTACT.email, href: `mailto:${CONTACT.email}` },
+      {
+        text: 'Instagram',
+        href: 'https://instagram.com/stefanie_kaindl_cranio',
+        external: true,
+      },
+    ],
+  },
+  {
+    title: 'Termine',
+    lines: [
+      { text: 'Mo – Fr nach Vereinbarung' },
+      { text: 'Yoga: donnerstags 17:30 & 19:00 Uhr, Paunzhausen' },
+      {
+        text: 'Online-Kalender öffnen',
+        href: 'https://calendly.com/stefanie-kaindl-cranio',
+        external: true,
+      },
+    ],
+  },
+];
 
 function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
+  const [formData, setFormData] = React.useState({ name: '', email: '', phone: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [status, setStatus] = React.useState<{ type: 'success' | 'error' | null; message: string }>({
+    type: null,
+    message: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: 'success' | 'error' | null;
-    message: string;
-  }>({ type: null, message: '' });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
+    setStatus({ type: null, message: '' });
 
     try {
-      const response = await fetch('https://n8n.srv1010269.hstgr.cloud/webhook-test/stefanie-kaindl-cranio/kontakt', {
+      const response = await fetch(WEBHOOK, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setSubmitStatus({
-          type: 'success',
-          message: 'Vielen Dank für Ihre Nachricht! Ich melde mich in Kürze bei Ihnen.'
-        });
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Fehler beim Senden');
-      }
-    } catch (error) {
-      setSubmitStatus({
+      if (!response.ok) throw new Error('Fehler beim Senden');
+
+      setStatus({
+        type: 'success',
+        message: 'Vielen Dank für deine Nachricht! Ich melde mich in Kürze bei dir.',
+      });
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch {
+      setStatus({
         type: 'error',
-        message: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie mich direkt per E-Mail.'
+        message:
+          'Das hat leider nicht geklappt. Bitte schreib mir direkt eine E-Mail oder ruf kurz an.',
       });
     } finally {
       setIsSubmitting(false);
@@ -57,208 +93,208 @@ function ContactForm() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label className="font-inter text-taupe-800 text-sm font-medium mb-2 block">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all"
-            />
-          </div>
-
-          <div>
-            <label className="font-inter text-taupe-800 text-sm font-medium mb-2 block">
-              E-Mail Adresse <span className="text-[#616949]">*</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="font-inter text-taupe-800 text-sm font-medium mb-2 block">
-            Telefonnummer
-          </label>
+    <form onSubmit={handleSubmit} className='space-y-8'>
+      <div className='grid gap-8 sm:grid-cols-2'>
+        <label className='block'>
+          <span className='meta-line'>Name</span>
           <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="+49"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all"
-          />
-        </div>
-
-        <div>
-          <label className="font-inter text-taupe-800 text-sm font-medium mb-2 block">
-            Nachricht <span className="text-[#616949]">*</span>
-          </label>
-          <textarea
-            name="message"
-            value={formData.message}
+            type='text'
+            name='name'
+            value={formData.name}
             onChange={handleChange}
             required
-            rows={6}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg font-inter text-taupe-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#616949] focus:border-transparent transition-all resize-none"
+            className='field mt-2'
           />
-        </div>
+        </label>
 
-        <div className="text-center opacity-60">
-          <Typography className="font-inter text-taupe-500 text-[10px]">
-            Es gilt unsere{' '}
-            <Link href="/datenschutz" className="text-taupe-500 hover:text-[#616949] transition-colors underline underline-offset-2">
-              Datenschutzerklärung
-            </Link>
-            .
-          </Typography>
-        </div>
+        <label className='block'>
+          <span className='meta-line'>E-Mail *</span>
+          <input
+            type='email'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className='field mt-2'
+          />
+        </label>
+      </div>
 
-        {submitStatus.type && (
-          <div className={`p-4 rounded-lg border ${
-            submitStatus.type === 'success' 
-              ? 'bg-green-50 border-green-200 text-green-800' 
-              : 'bg-red-50 border-red-200 text-red-800'
+      <label className='block'>
+        <span className='meta-line'>Telefon (optional)</span>
+        <input
+          type='tel'
+          name='phone'
+          value={formData.phone}
+          onChange={handleChange}
+          placeholder='+49'
+          className='field mt-2'
+        />
+      </label>
+
+      <label className='block'>
+        <span className='meta-line'>Nachricht *</span>
+        <textarea
+          name='message'
+          value={formData.message}
+          onChange={handleChange}
+          required
+          rows={6}
+          className='field mt-2'
+        />
+      </label>
+
+      <p className='text-[0.75rem] leading-relaxed text-ink-500'>
+        Mit dem Absenden stimmst du zu, dass deine Angaben zur Bearbeitung der Anfrage gespeichert
+        werden. Mehr dazu in der{' '}
+        <Link href='/datenschutz/' className='text-ink hover:underline'>
+          Datenschutzerklärung
+        </Link>
+        .
+      </p>
+
+      {status.type && (
+        <p
+          role='status'
+          className={`border-l-2 py-3 pl-4 text-[0.875rem] ${
+            status.type === 'success'
+              ? 'border-[var(--olive)] text-ink'
+              : 'border-red-800 text-red-900'
           }`}>
-            <Typography className="font-inter text-sm text-center">
-              {submitStatus.message}
-            </Typography>
-          </div>
-        )}
+          {status.message}
+        </p>
+      )}
 
-        <div className="text-center pt-2">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter font-medium px-12 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? 'Wird gesendet...' : 'Absenden'}
-          </button>
-        </div>
-      </form>
-    </div>
+      <div className='flex flex-wrap items-center gap-x-8 gap-y-3'>
+        <button
+          type='submit'
+          disabled={isSubmitting}
+          /* `after` vergrößert die Trefferfläche auf dem Handy, ohne dass die
+             Unterstreichung weiter vom Text abrückt. */
+          className="cta-link cta-link-ink relative after:absolute after:-inset-x-3 after:-inset-y-3 after:content-[''] disabled:cursor-not-allowed disabled:opacity-50">
+          {isSubmitting ? 'Wird gesendet …' : 'Nachricht senden'}{' '}
+          <ArrowUpRight />
+        </button>
+      </div>
+    </form>
   );
 }
 
-function Content() {
+export function Content() {
+  useReveal();
+
   return (
-    <section className="bg-gradient-to-b from-cream-50 to-cream-100 min-h-screen">
-      {/* Hero Section - Image + Address Info */}
-      <div className="min-h-screen flex flex-col">
-        {/* Hero Image */}
-        <div className="relative flex-1 w-full overflow-hidden bg-cream-50">
-          <div 
-            className="absolute inset-0 bg-cover bg-no-repeat"
-            style={{
-              backgroundImage: "url('/image/kontakt.webp')",
-              backgroundPosition: "center 33%",
-              backgroundSize: "cover"
-            }}
-          >
-            {/* Optional overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/10"></div>
+    <>
+      {/* Einstieg */}
+      <header className='shell pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+        <div className='mx-auto max-w-3xl text-center'>
+          <span className='label'>Kontakt</span>
+          <h1 className='display display-serif d1-hero mt-6'>Kontakt &amp; Anfahrt.</h1>
+          <p className='lead-lg mt-7'>
+            Ruf an, schreib eine E-Mail oder nutze das Formular — ich melde mich persönlich bei dir.
+            Wenn du schon weißt, wann du kommen möchtest, kannst du deinen Termin auch direkt online
+            buchen.
+          </p>
+          <div className='mt-9 flex flex-wrap items-center justify-center gap-x-10 gap-y-4'>
+            <a
+              href='https://calendly.com/stefanie-kaindl-cranio'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='cta-link cta-link-ink'>
+              Termin online buchen <ArrowUpRight />
+            </a>
+            <a href={CONTACT.phoneHref} className='cta-link cta-link-ink'>
+              {CONTACT.phone}
+            </a>
           </div>
         </div>
+      </header>
 
-        {/* Address Section */}
-        <div className="container mx-auto px-4 max-w-6xl py-12 md:py-16">
-          {/* Three Column Info Section */}
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-          {/* Adresse */}
-          <div>
-            <Typography variant="h3" className="font-inter mb-4 text-taupe-700 text-lg md:text-xl font-normal">
-              Adresse
-            </Typography>
-            <div className="space-y-1">
-              <Typography className="font-inter text-taupe-600 text-sm md:text-base">
-                Bahnstraße 2a
-              </Typography>
-              <Typography className="font-inter text-taupe-600 text-sm md:text-base">
-                85276 Pfaffenhofen a.d. Ilm
-              </Typography>
-              <Typography className="font-inter text-taupe-600 text-sm md:text-base">
-                Ortsteil Uttenhofen
-              </Typography>
-              <Typography className="font-inter text-taupe-600 text-sm md:text-base">
-                0176 63094476
-              </Typography>
+      {/* Bild */}
+      <section className='pb-[clamp(3rem,6vw,5.5rem)]'>
+        <div className='shell'>
+          <Photo
+            src='/image/kontakt.webp'
+            alt='Blick in die Praxis von Stefanie Kaindl'
+            ratio='aspect-[16/9]'
+            position='50% 26%'
+            sizes='100vw'
+          />
+        </div>
+      </section>
+
+      {/* Fakten */}
+      <section className='section pt-0'>
+        <div className='shell'>
+          <dl className='grid gap-x-10 gap-y-10 border-t border-[var(--line)] pt-10 sm:grid-cols-3'>
+            {FACTS.map((fact) => (
+              <div key={fact.title}>
+                <dt className='meta-line'>{fact.title}</dt>
+                <dd className='mt-3 space-y-1.5'>
+                  {fact.lines.map((line) => {
+                    const body = line.href ? (
+                      <a
+                        href={line.href}
+                        target={line.external ? '_blank' : undefined}
+                        rel={line.external ? 'noopener noreferrer' : undefined}
+                        className='text-ink underline decoration-[var(--line)] underline-offset-4 transition-colors hover:decoration-current'>
+                        {line.text}
+                      </a>
+                    ) : (
+                      line.text
+                    );
+                    return (
+                      <p key={line.text} className='text-[0.9375rem] leading-relaxed text-ink-700'>
+                        {body}
+                      </p>
+                    );
+                  })}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <p className='mt-12 max-w-xl text-[0.875rem] leading-relaxed text-ink-600'>
+            Die Praxis liegt im Ortsteil Uttenhofen. Wenn du mit dem Auto kommst, nutze die
+            Bahnstraße 2a als Ziel — ruf im Zweifel einfach kurz durch.
+          </p>
+        </div>
+      </section>
+
+      {/* Formular */}
+      <section className='section bg-[var(--paper-deep)]'>
+        <div className='shell'>
+          <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
+            <div className='lg:col-span-4'>
+              <span className='label'>Schreib mir</span>
+              <h2 className='display display-serif d2 mt-6'>Hast du eine Frage?</h2>
+              <p className='mt-6 max-w-sm text-[0.9375rem] leading-relaxed text-ink-700'>
+                Ich bin gerne für dich da — egal ob es um einen Termin, eine Unsicherheit oder eine
+                Frage zu einer Behandlung geht.
+              </p>
+              <p className='mt-6 text-[0.875rem] leading-relaxed text-ink-600'>
+                Lieber direkt?{' '}
+                <a href={CONTACT.phoneHref} className='text-ink hover:underline'>
+                  {CONTACT.phone}
+                </a>
+                <br />
+                <a href={`mailto:${CONTACT.email}`} className='text-ink hover:underline'>
+                  {CONTACT.email}
+                </a>
+              </p>
             </div>
-          </div>
 
-          {/* Kontakt */}
-          <div>
-            <Typography variant="h3" className="font-inter mb-4 text-taupe-700 text-lg md:text-xl font-normal">
-              Kontakt
-            </Typography>
-            <div className="space-y-1">
-              <Link href="mailto:info@stefanie-kaindl-cranio.de" className="block">
-                <Typography className="font-inter text-[#616949] hover:text-[#4d5438] transition-colors text-sm md:text-base underline">
-                  info@stefanie-kaindl-cranio.de
-                </Typography>
-              </Link>
-              <Link href="https://instagram.com/stefanie_kaindl_cranio" target="_blank" rel="noopener noreferrer" className="block">
-                <Typography className="font-inter text-[#616949] hover:text-[#4d5438] transition-colors text-sm md:text-base underline">
-                  Instagram.com/stefanie_kaindl_cranio
-                </Typography>
-              </Link>
-            </div>
-          </div>
-
-          {/* Öffnungszeiten */}
-          <div>
-            <Typography variant="h3" className="font-inter mb-4 text-taupe-700 text-lg md:text-xl font-normal">
-              Öffnungszeiten
-            </Typography>
-            <div className="space-y-1">
-              <Typography className="font-inter text-taupe-600 text-sm md:text-base">
-                Mo – Fr nach Terminvereinbarung
-              </Typography>
-              <Link href="https://calendly.com/stefanie-kaindl-cranio" target="_blank" rel="noopener noreferrer" className="block mt-3">
-                <span className="font-inter text-white bg-[#616949] hover:bg-[#4d5438] transition-colors font-medium text-sm md:text-base px-4 py-2 rounded-lg inline-flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                  </svg>
-                  Online Terminkalender
-                </span>
-              </Link>
+            <div className='lg:col-span-7 lg:col-start-6'>
+              <ContactForm />
             </div>
           </div>
         </div>
-      </div>
-      </div>
-
-      {/* Contact Form Section - Full Width White Background */}
-      <div className="bg-white py-12 md:py-16">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <Typography variant="h2" className="font-inter mb-8 md:mb-12 text-taupe-800 text-xl md:text-2xl lg:text-3xl font-light text-center leading-relaxed">
-            Hast du eine Frage? Ich bin gerne für dich da!
-          </Typography>
-          
-          <ContactForm />
-        </div>
-      </div>
-
-    </section>
+      </section>
+    </>
   );
 }
 

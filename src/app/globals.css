@@ -276,6 +276,11 @@ div[id] {
   letter-spacing: -0.01em;
   color: var(--ink);
 }
+/* Zitat auf dunkler Fläche: `text-[var(--cream)]` kann `.quote` nicht
+   überschreiben (unlayered CSS schlägt die Utility), daher eigene Klasse. */
+.quote-cream {
+  color: var(--cream);
+}
 .quote em {
   font-style: italic;
   font-weight: inherit;
@@ -349,6 +354,30 @@ div[id] {
 
 .hairline {
   border-top: 1px solid var(--line);
+}
+
+/* Formularfeld im Editorial-Stil: keine Box, nur eine Linie unter dem Feld. */
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+  color: var(--ink);
+  transition: border-color 0.2s ease;
+}
+.field::placeholder {
+  color: var(--ink-45);
+}
+.field:focus {
+  outline: none;
+  border-bottom-color: var(--olive);
+}
+textarea.field {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.6;
 }
 .hairline-inverse {
   border-top: 1px solid var(--cream-line);

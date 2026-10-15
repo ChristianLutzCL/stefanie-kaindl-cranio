@@ -1,268 +1,229 @@
 'use client';
 
-import { Typography, Button } from "@material-tailwind/react";
-import Image from "next/image";
-import Link from "next/link";
-import logo from "../../../public/image/ueber-mich.webp";
+import Link from 'next/link';
+import { ArrowUpRight } from '@/components/icons';
+import { BOOKING, Photo, SectionHead, useReveal } from '@/components/editorial';
 
+/**
+ * Über mich — wer hinter beiden Angeboten steht.
+ *
+ * Die Texte stammen unverändert aus der bisherigen Seite (ihre eigenen Worte),
+ * Ausbildungen und Stationen ebenso. Neu ist nur die Form: eine ruhige
+ * Erzählspalte, eine Faktenliste statt Karten, und die Philosophie als
+ * Zitat mit drei Grundsätzen.
+ */
 
-function Content() {
+const JOURNEY = [
+  'Meine fundierte Ausbildung bei Katharina Bähner in Stuttgart, die ich im März 2024 abgeschlossen habe, war für mich ein intensiver Transformationsprozess – fachlich wie auch persönlich. Ergänzend dazu habe ich eine Weiterbildung in Kinder-Cranio absolviert, um auch Babys und Kinder mit besonderer Achtsamkeit und Einfühlungsvermögen begleiten zu können.',
+  'Mit dem erfolgreichen Abschluss meiner 300-Stunden-Vinyasa-Yogalehrerausbildung bei Lovelysita in Prien am 10.01.2026 hat sich mein Weg mit Körper, Atem und Energie noch einmal vertieft. Für mich verbinden sich Yoga und Craniosacralarbeit auf besondere Weise – sie schaffen Raum für achtsame Präsenz, Bewusstsein und ganzheitliche Heilung.',
+  'Als zweifache Mama weiß ich aus eigener Erfahrung, wie wertvoll es ist, Körper und Seele mit Respekt und Sanftheit zu begegnen. Die Craniosacrale Arbeit ist für mich weit mehr als eine Technik – sie ist eine Begegnung auf Augenhöhe, eine Einladung zum Loslassen, zur inneren Ruhe und Selbstheilung.',
+  'In meiner Praxis möchte ich einen Raum schaffen, in dem du dich sicher und geborgen fühlst – einen Ort, an dem du zur Ruhe kommen und wieder in Verbindung mit deinem eigenen Rhythmus treten kannst. Mit großer Leidenschaft bilde ich mich kontinuierlich weiter, um mein Wissen zu vertiefen und dir die bestmögliche Erfahrung zu ermöglichen.',
+];
+
+const QUALIFICATIONS = [
+  {
+    title: 'Craniosacrale Körperarbeit',
+    detail: 'Katharina Bähner, Stuttgart · Abschluss März 2024',
+    body: 'Fundierte Ausbildung mit intensivem Transformationsprozess auf fachlicher und persönlicher Ebene.',
+  },
+  {
+    title: 'Kinder-Cranio',
+    detail: 'Weiterbildung',
+    body: 'Spezialisierung auf die achtsame Begleitung von Babys und Kindern.',
+  },
+  {
+    title: 'Vinyasa-Yogalehrerin, 300 Stunden',
+    detail: 'Lovelysita, Prien · Abschluss Januar 2026',
+    body: 'Ausbildung zur Vertiefung des Verständnisses für Körper, Atem und Energie.',
+  },
+  {
+    title: 'Kontinuierliche Weiterbildung',
+    detail: 'Laufend',
+    body: 'Weiterbildung zur Vertiefung des Wissens und für eine bessere Begleitung.',
+  },
+];
+
+const PRINCIPLES = [
+  {
+    title: 'Sicher & geborgen',
+    body: 'Ein Raum, in dem du zur Ruhe kommen und in Verbindung mit deinem eigenen Rhythmus treten kannst.',
+  },
+  {
+    title: 'Achtsam & einfühlsam',
+    body: 'Respektvolle Begegnung mit Körper und Seele, in sanfter Begleitung.',
+  },
+  {
+    title: 'Präsenz & Bewusstsein',
+    body: 'Raum für Heilung auf allen Ebenen — körperlich, emotional und energetisch.',
+  },
+];
+
+export function Content() {
+  useReveal();
+
   return (
-    <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100 min-h-screen">
-      <div className="container mx-auto px-4 max-w-6xl">
-        
-        {/* Hero Section */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-20 pt-20">
-          <div className="order-2 lg:order-1">
-            <Typography variant="h1" className="font-inter text-taupe-800 text-3xl md:text-4xl font-light mb-8">
-              Über mich
-            </Typography>
-            <Typography className="font-inter text-taupe-700 text-lg leading-relaxed mb-6">
-              Mein Name ist Stefanie Kaindl – ich bin Craniosacral-Praktikerin aus Leidenschaft.
-              Mit 34 Jahren habe ich meine Berufung gefunden: Menschen dabei zu begleiten, in Kontakt 
+    <>
+      {/* Einstieg */}
+      <header className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+        <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
+          <div className='order-2 lg:order-1 lg:col-span-5'>
+            <span className='label'>Über mich</span>
+            <h1 className='display display-serif d1-hero mt-6'>Hallo, ich bin Steffi.</h1>
+            <p className='lead-lg mt-7'>
+              Mein Name ist Stefanie Kaindl – ich bin Craniosacral-Praktikerin aus Leidenschaft. Mit
+              34 Jahren habe ich meine Berufung gefunden: Menschen dabei zu begleiten, in Kontakt
               mit ihrer inneren Kraft, Ruhe und Balance zu kommen.
-            </Typography>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/kontakt">
-                <Button 
-                  size="lg" 
-                  className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter px-6 py-3 rounded-full"
-                >
-                  Termin vereinbaren
-                </Button>
+            </p>
+            <div className='mt-9 flex flex-wrap items-center gap-x-10 gap-y-4'>
+              <a
+                href={BOOKING.cranioOverview}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='cta-link cta-link-ink'>
+                Termin vereinbaren <ArrowUpRight />
+              </a>
+              <Link
+                href='/cranio/'
+                className='text-[0.875rem] text-ink-600 transition-colors hover:text-ink'>
+                Cranio ansehen
               </Link>
-              <Link href="/cranio/">
-                <Button 
-                  variant="outlined" 
-                  size="lg" 
-                  className="border-2 border-taupe-400 text-taupe-700 hover:bg-taupe-100 font-inter px-6 py-3 rounded-full"
-                >
-                  Meine Angebote
-                </Button>
+              <Link
+                href='/yoga/'
+                className='text-[0.875rem] text-ink-600 transition-colors hover:text-ink'>
+                Yoga ansehen
               </Link>
             </div>
           </div>
-          <div className="order-1 lg:order-2">
-            <div className="relative max-w-md mx-auto">
-              <div className="rounded-2xl overflow-hidden warm-shadow">
-                <Image 
-                  src={logo} 
-                  alt="Stefanie Kaindl - Craniosacrale Therapeutin" 
-                  className="w-full h-auto object-cover"
-                  priority
-                />
+
+          <div className='order-1 lg:order-2 lg:col-span-6 lg:col-start-7' data-reveal>
+            <Photo
+              src='/image/ueber-mich.webp'
+              alt='Stefanie Kaindl sitzt lächelnd auf einem Sessel in ihrer Praxis'
+              ratio='aspect-[4/5]'
+              position='50% 30%'
+              sizes='(max-width: 1024px) 100vw, 50vw'
+              priority
+            />
+          </div>
+        </div>
+      </header>
+
+      {/* Mein Weg */}
+      <section className='section pt-0'>
+        <div className='shell'>
+          <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
+            <div className='lg:col-span-3'>
+              <span className='label'>Mein Weg</span>
+            </div>
+
+            <div className='lg:col-span-8 lg:col-start-5'>
+              <div className='max-w-2xl space-y-5 text-[1.0625rem] leading-relaxed text-ink-700'>
+                {JOURNEY.map((paragraph) => (
+                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                ))}
+                <p>
+                  Ich freue mich darauf, dich auf deinem Weg zu mehr Klarheit, Lebenskraft und
+                  innerer Balance zu begleiten.
+                </p>
               </div>
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#616949] rounded-full opacity-20"></div>
-              <div className="absolute -top-6 -left-6 w-16 h-16 bg-sage-300 rounded-full opacity-30"></div>
+
+              <p className='mt-10 max-w-2xl border-t border-[var(--line)] pt-6 text-[0.9375rem] text-ink-600'>
+                Von Herzen,
+                <span className='serif mt-1 block text-[1.5rem] leading-none text-ink'>Steffi</span>
+              </p>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Personal Journey Section */}
-        <div className="mb-20">
-          <div className="bg-white rounded-2xl p-8 md:p-12 warm-shadow border border-cream-200">
-            <Typography variant="h3" className="font-inter text-taupe-800 text-2xl md:text-3xl font-light mb-8 text-center">
-              Mein Weg
-            </Typography>
-            <div className="space-y-6 max-w-4xl mx-auto">
-              <Typography className="font-inter text-taupe-700 leading-relaxed">
-                Meine fundierte Ausbildung bei Katharina Bähner in Stuttgart, die ich im März 2024 
-                abgeschlossen habe, war für mich ein intensiver Transformationsprozess – fachlich wie 
-                auch persönlich. Ergänzend dazu habe ich eine Weiterbildung in Kinder-Cranio absolviert, 
-                um auch Babys und Kinder mit besonderer Achtsamkeit und Einfühlungsvermögen begleiten zu können.
-              </Typography>
-              
-              <Typography className="font-inter text-taupe-700 leading-relaxed">
-                Mit dem erfolgreichen Abschluss meiner 300-Stunden-Vinyasa-Yogalehrerausbildung bei 
-                Lovelysita in Prien am 10.01.2026 hat sich mein Weg mit Körper, Atem und Energie noch 
-                einmal vertieft. Für mich verbinden sich Yoga und Craniosacralarbeit auf besondere 
-                Weise – sie schaffen Raum für achtsame Präsenz, Bewusstsein und ganzheitliche Heilung.
-              </Typography>
-              
-              <Typography className="font-inter text-taupe-700 leading-relaxed">
-                Als zweifache Mama weiß ich aus eigener Erfahrung, wie wertvoll es ist, Körper und 
-                Seele mit Respekt und Sanftheit zu begegnen. Die Craniosacrale Arbeit ist für mich 
-                weit mehr als eine Technik – sie ist eine Begegnung auf Augenhöhe, eine Einladung zum 
-                Loslassen, zur inneren Ruhe und Selbstheilung.
-              </Typography>
-              
-              <Typography className="font-inter text-taupe-700 leading-relaxed">
-                In meiner Praxis möchte ich einen Raum schaffen, in dem du dich sicher und geborgen 
-                fühlst – einen Ort, an dem du zur Ruhe kommen und wieder in Verbindung mit deinem eigenen 
-                Rhythmus treten kannst. Mit großer Leidenschaft bilde ich mich kontinuierlich weiter, 
-                um mein Wissen zu vertiefen und dir die bestmögliche Erfahrung zu ermöglichen.
-              </Typography>
-              
-              <Typography className="font-inter text-taupe-700 leading-relaxed">
-                Ich freue mich darauf, dich auf deinem Weg zu mehr Klarheit, Lebenskraft und innerer 
-                Balance zu begleiten.
-              </Typography>
-              
-              <div className="mt-12 pt-6">
-                <Typography className="font-inter text-taupe-600 text-base italic mb-1">
-                  Von Herzen,
-                </Typography>
-                <Typography className="font-inter text-therapeutic-700 text-xl font-light italic tracking-wide" style={{ fontFamily: 'cursive' }}>
-                  Steffi
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Qualifications Section */}
-        <div className="mb-20">
-          <Typography variant="h3" className="font-inter text-taupe-800 text-2xl md:text-3xl font-light mb-12 text-center">
-            Ausbildung & Qualifikationen
-          </Typography>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-cream-50 rounded-2xl p-6 warm-shadow border border-cream-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-[#616949] rounded-full flex items-center justify-center flex-shrink-0">
-                  <Typography className="text-white font-bold">CS</Typography>
-                </div>
-                <div>
-                  <Typography className="font-inter font-medium text-taupe-800 text-lg mb-2">
-                    Craniosacrale Körperarbeit
-                  </Typography>
-                  <Typography className="font-inter text-taupe-600 mb-2">
-                    Katharina Bähner, Stuttgart – Abschluss März 2024
-                  </Typography>
-                  <Typography className="font-inter text-taupe-700 text-sm">
-                    Fundierte Ausbildung in Craniosacraler Körperarbeit mit intensivem 
-                    Transformationsprozess auf fachlicher und persönlicher Ebene.
-                  </Typography>
-                </div>
-              </div>
+      {/* Ausbildung */}
+      <section className='section bg-[var(--paper-deep)]'>
+        <div className='shell'>
+          <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
+            <div className='lg:col-span-5'>
+              <span className='label'>Ausbildung</span>
+              <h2 className='display display-serif d2 mt-6'>Ausbildung &amp; Qualifikationen.</h2>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 warm-shadow border border-cream-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-sage-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Typography className="text-white font-bold">KC</Typography>
-                </div>
-                <div>
-                  <Typography className="font-inter font-medium text-taupe-800 text-lg mb-2">
-                    Kinder-Cranio
-                  </Typography>
-                  <Typography className="font-inter text-taupe-600 mb-2">
-                    Weiterbildung
-                  </Typography>
-                  <Typography className="font-inter text-taupe-700 text-sm">
-                    Spezialisierung auf die achtsame Begleitung von Babys und Kindern 
-                    mit besonderem Einfühlungsvermögen.
-                  </Typography>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 warm-shadow border border-cream-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-therapeutic-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Typography className="text-white font-bold">YL</Typography>
-                </div>
-                <div>
-                  <Typography className="font-inter font-medium text-taupe-800 text-lg mb-2">
-                    Vinyasa-Yogalehrerin (in Ausbildung)
-                  </Typography>
-                  <Typography className="font-inter text-taupe-600 mb-2">
-                    Lovelysita, Prien – Abschluss Januar 2026
-                  </Typography>
-                  <Typography className="font-inter text-taupe-700 text-sm">
-                    300-Stunden-Ausbildung zur Vertiefung des Verständnisses für 
-                    Körper, Atem und Energie.
-                  </Typography>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-cream-50 rounded-2xl p-6 warm-shadow border border-cream-200">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-[#8d9375] rounded-full flex items-center justify-center flex-shrink-0">
-                  <Typography className="text-white font-bold">WB</Typography>
-                </div>
-                <div>
-                  <Typography className="font-inter font-medium text-taupe-800 text-lg mb-2">
-                    Kontinuierliche Weiterbildung
-                  </Typography>
-                  <Typography className="font-inter text-taupe-600 mb-2">
-                    Laufend
-                  </Typography>
-                  <Typography className="font-inter text-taupe-700 text-sm">
-                    Mit großer Leidenschaft kontinuierliche Weiterbildung zur 
-                    Vertiefung des Wissens und bestmöglicher Begleitung.
-                  </Typography>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Philosophy Section */}
-        <div className="mb-20">
-          <div className="bg-white rounded-2xl p-8 md:p-12 warm-shadow border border-cream-200">
-            <Typography variant="h3" className="font-inter text-taupe-800 text-2xl md:text-3xl font-light mb-8 text-center">
-              Meine Behandlungsphilosophie
-            </Typography>
-            <div className="max-w-4xl mx-auto">
-              <Typography className="font-inter text-taupe-700 text-lg leading-relaxed mb-6 text-center italic">
-                "Die Craniosacrale Arbeit ist für mich weit mehr als eine Technik – sie ist eine 
-                Begegnung auf Augenhöhe, eine Einladung zum Loslassen, zur inneren Ruhe und Selbstheilung."
-              </Typography>
-              <div className="grid md:grid-cols-3 gap-6 mt-12">
-                {[
-                  {
-                    title: "Sicher & Geborgen",
-                    desc: "Ein Raum, in dem du zur Ruhe kommen und in Verbindung mit deinem eigenen Rhythmus treten kannst"
-                  },
-                  {
-                    title: "Achtsam & Einfühlsam", 
-                    desc: "Respektvolle Begegnung mit Körper und Seele in sanfter, liebevoller Begleitung"
-                  },
-                  {
-                    title: "Präsenz & Bewusstsein",
-                    desc: "Raum für Heilung auf allen Ebenen – körperlich, emotional und energetisch"
-                  }
-                ].map((principle, index) => (
-                  <div key={index} className="text-center">
-                    <div className="w-16 h-16 bg-therapeutic-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <div className="w-8 h-8 bg-therapeutic-600 rounded-full"></div>
-                    </div>
-                    <Typography className="font-inter font-medium text-taupe-800 mb-2">
-                      {principle.title}
-                    </Typography>
-                    <Typography className="font-inter text-taupe-600 text-sm">
-                      {principle.desc}
-                    </Typography>
+            <div className='lg:col-span-6 lg:col-start-7'>
+              <dl>
+                {QUALIFICATIONS.map((q) => (
+                  <div
+                    key={q.title}
+                    className='border-t border-[var(--line)] py-6 last:border-b'
+                    data-reveal>
+                    <dt className='flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1'>
+                      <span className='text-[1.0625rem] text-ink'>{q.title}</span>
+                      <span className='text-[0.8125rem] text-ink-500'>{q.detail}</span>
+                    </dt>
+                    <dd className='mt-2 max-w-lg text-[0.875rem] leading-relaxed text-ink-600'>
+                      {q.body}
+                    </dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Contact CTA */}
-        <div className="text-center bg-cream-100 rounded-2xl p-12 warm-shadow border border-cream-300">
-          <Typography variant="h3" className="font-inter text-taupe-800 text-2xl font-light mb-4">
-            Lass uns sprechen
-          </Typography>
-          <Typography className="font-inter text-taupe-700 mb-8 max-w-2xl mx-auto">
-            Hast du Fragen zur Craniosacralen Körperarbeit oder möchtest du einen Termin vereinbaren? 
-            Ich freue mich darauf, dich kennenzulernen und dich auf deinem Weg zu begleiten.
-          </Typography>
-          <Link href="/kontakt">
-            <Button 
-              size="lg" 
-              className="bg-[#616949] hover:bg-[#4d5438] text-white font-inter px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Jetzt Kontakt aufnehmen
-            </Button>
-          </Link>
+      {/* Philosophie */}
+      <section className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+        <div className='shell py-[clamp(4rem,8vw,8.5rem)]'>
+          <div className='mx-auto max-w-[48rem] text-center'>
+            <span className='label label-inverse'>Meine Haltung</span>
+            <p className='quote quote-cream mt-8'>
+              &bdquo;Die Craniosacrale Arbeit ist für mich weit mehr als eine Technik – sie ist eine
+              Begegnung auf Augenhöhe, eine Einladung zum Loslassen, zur inneren Ruhe und
+              Selbstheilung.&ldquo;
+            </p>
+            <p className='mt-6 text-[0.8125rem] text-[var(--cream-70)]'>Stefanie Kaindl</p>
+          </div>
+
+          <dl className='mt-16 grid gap-x-10 gap-y-10 sm:grid-cols-3'>
+            {PRINCIPLES.map((principle, i) => (
+              <div key={principle.title} className='border-t border-[var(--cream-line)] pt-6'>
+                <span className='text-[0.6875rem] tabular-nums text-[var(--cream-70)]'>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <dt className='serif mt-3 text-[1.25rem] leading-tight text-[var(--cream)]'>
+                  {principle.title}
+                </dt>
+                <dd className='mt-3 text-[0.875rem] leading-relaxed text-[var(--cream-80)]'>
+                  {principle.body}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
+      </section>
 
-      </div>
-    </section>
-  )
+      {/* CTA */}
+      <section className='section'>
+        <div className='shell'>
+          <SectionHead label='Kennenlernen' title='Lass uns sprechen.'>
+            <p className='lead-lg mt-7'>
+              Hast du Fragen zur Craniosacralen Körperarbeit oder möchtest du einen Termin
+              vereinbaren? Ich freue mich darauf, dich kennenzulernen und dich auf deinem Weg zu
+              begleiten.
+            </p>
+            <div className='mt-9 flex flex-wrap items-center justify-center gap-x-10 gap-y-4'>
+              <Link href='/kontakt/' className='cta-link cta-link-ink'>
+                Kontakt aufnehmen <ArrowUpRight />
+              </Link>
+              <a
+                href={BOOKING.cranioOverview}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='cta-link cta-link-ink'>
+                Termin buchen <ArrowUpRight />
+              </a>
+            </div>
+          </SectionHead>
+        </div>
+      </section>
+    </>
+  );
 }
 
 export default Content;
