@@ -71,8 +71,8 @@ function Intro() {
 
 const BAND = [
   {
-    src: '/image/yoga_raum.webp',
-    alt: 'Yogaraum mit Matten und warmem Licht',
+    src: '/image/behandlung_2.webp',
+    alt: 'Hände halten die Füße während einer craniosacralen Behandlung',
   },
   {
     src: '/image/hero.webp',
