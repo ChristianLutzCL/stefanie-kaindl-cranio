@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { PageIntro } from '@/components/editorial';
 import {
   LegalBody,
@@ -21,6 +22,7 @@ const TOC = [
   { id: 'hosting', title: 'Hosting' },
   { id: 'pflicht', title: 'Hinweise und Pflichtinformationen' },
   { id: 'erfassung', title: 'Datenerfassung auf dieser Website' },
+  { id: 'analytics', title: 'Google Analytics' },
   { id: 'tools', title: 'Plugins und Tools' },
 ];
 
@@ -92,16 +94,27 @@ function Content() {
           <LegalSub>Externes Hosting</LegalSub>
           <LegalP>
             Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website
-            erfasst werden, werden auf den Servern des Hosters / der Hoster gespeichert. Hierbei kann
-            es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten,
-            Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine
-            Website generiert werden, handeln.
+            erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v. a.
+            um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten,
+            Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert
+            werden, handeln.
+          </LegalP>
+          <LegalP>
+            Unser Hoster ist die DigitalOcean, LLC, 101 6th Avenue, New York, NY 10013, USA. Die
+            Auslieferung der Website läuft zusätzlich über das Netzwerk der Cloudflare, Inc., 101
+            Townsend St., San Francisco, CA 94107, USA, das Inhalte zwischenspeichert und Anfragen auf
+            schädlichen Verkehr prüft; dabei verarbeitet Cloudflare unter anderem Ihre IP-Adresse.
           </LegalP>
           <LegalP>
             Das externe Hosting erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren
             potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer
             sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen
             professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).
+          </LegalP>
+          <LegalP>
+            Beide Anbieter verarbeiten Daten auch in den USA. Die Übermittlung stützt sich auf die
+            Standardvertragsklauseln der EU-Kommission; mit beiden Anbietern besteht ein Vertrag zur
+            Auftragsverarbeitung.
           </LegalP>
         </LegalSection>
 
@@ -187,7 +200,48 @@ function Content() {
           </LegalP>
         </LegalSection>
 
-        <LegalSection id='tools' title='5. Plugins und Tools'>
+        <LegalSection id='analytics' title='5. Google Analytics'>
+          <LegalP>
+            Diese Website nutzt Google Analytics 4, einen Webanalysedienst der Google Ireland Limited
+            („Google&quot;), Gordon House, Barrow Street, Dublin 4, Irland.
+          </LegalP>
+          <LegalP>
+            Google Analytics ermöglicht es dem Betreiber, das Verhalten der Besucher zu analysieren:
+            aufgerufene Seiten und Verweildauer, ungefährer Standort (aus der IP-Adresse abgeleitet),
+            Gerät, Browser und Betriebssystem sowie die Herkunft des Besuchs. Dazu setzt Google
+            Cookies und vergleichbare Erkennungsmerkmale ein, die eine Wiedererkennung Ihres Geräts
+            über mehrere Besuche hinweg ermöglichen. Ihre IP-Adresse wird zur Standortbestimmung
+            verwendet und nach Angaben von Google nicht dauerhaft gespeichert.
+          </LegalP>
+          <LegalP>
+            Der Einsatz erfolgt ausschließlich auf Grundlage Ihrer Einwilligung nach Art. 6 Abs. 1
+            lit. a DSGVO und § 25 Abs. 1 TTDSG. Ohne Ihre Zustimmung wird Google Analytics nicht
+            geladen; die Einwilligung erteilen Sie im Cookie-Hinweis und können sie jederzeit über
+            die{' '}
+            <Link
+              href='/cookie-einstellungen'
+              className='text-ink underline decoration-[rgba(29,28,23,0.35)] underline-offset-4 transition-colors hover:decoration-[var(--ink)]'>
+              Cookie-Einstellungen
+            </Link>{' '}
+            mit Wirkung für die Zukunft widerrufen.
+          </LegalP>
+          <LegalP>
+            Google verarbeitet die Daten auch auf Servern in den USA. Die Übermittlung stützt sich
+            auf das EU-US Data Privacy Framework bzw., soweit dieses nicht greift, auf die
+            Standardvertragsklauseln der EU-Kommission. Mit Google besteht ein Vertrag zur
+            Auftragsverarbeitung.
+          </LegalP>
+          <LegalP>
+            Die Cookies von Google Analytics haben eine Laufzeit von bis zu zwei Jahren; die
+            Ereignisdaten werden bei Google standardmäßig nach 14 Monaten gelöscht. Weitere
+            Informationen:{' '}
+            <LegalLink href='https://policies.google.com/privacy' external>
+              https://policies.google.com/privacy
+            </LegalLink>
+          </LegalP>
+        </LegalSection>
+
+        <LegalSection id='tools' title='6. Plugins und Tools'>
           <LegalSub>Calendly</LegalSub>
           <LegalP>
             Wir nutzen auf unserer Website Calendly zur Terminvereinbarung. Anbieter ist Calendly
