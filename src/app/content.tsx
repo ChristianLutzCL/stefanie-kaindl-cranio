@@ -14,11 +14,10 @@ import { BOOKING, CONTACT, Photo, useReveal } from '@/components/editorial';
  *   2 Bildband    Drei Aufnahmen aus der Praxis, mit Pfeilen
  *   3 Cranio      Was es ist, für wen, Eckdaten   → /cranio
  *   4 Yoga        Was es ist, wann, Eckdaten      → /yoga
- *   5 Herangehen  Olive-Fläche mit Akkordeon
+ *   5 Arbeitsweise Olive-Fläche mit Akkordeon
  *   6 Über mich   Wer Steffi ist, Ausbildungen
  *   7 Stimmen     Rückmeldungen aus der Praxis
- *   8 Raum        Vollbild-Band mit kleinen Labels
- *   9 Termin      Weiße Karte auf dem Foto, beide Wege
+ *   8 Termin      Weiße Karte auf dem Foto, beide Wege
  *
  * Ausführliches (Ablauf, alle Preise, Termine) steht auf /cranio und /yoga.
  * Alle Fakten stammen aus den bestehenden Seiten der Praxis.
@@ -36,7 +35,6 @@ export function Content() {
       <Approach />
       <About />
       <Voices />
-      <Studio />
       <Booking />
     </>
   );
@@ -73,8 +71,8 @@ function Intro() {
 
 const BAND = [
   {
-    src: '/image/behandlung_2.webp',
-    alt: 'Sanfte Berührung an den Füßen während einer Behandlung',
+    src: '/image/yoga_raum.webp',
+    alt: 'Yogaraum mit Matten und warmem Licht',
   },
   {
     src: '/image/hero.webp',
@@ -274,7 +272,7 @@ function YogaFeature() {
   );
 }
 
-/* --- Herangehensweise: Olive-Fläche mit Akkordeon (Referenz-Device) -------- */
+/* --- Meine Arbeitsweise: Olive-Fläche mit Akkordeon (Referenz-Device) ------ */
 
 const APPROACH = [
   {
@@ -299,24 +297,25 @@ function Approach() {
   const [open, setOpen] = React.useState(0);
 
   return (
-    <section id='herangehensweise' className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+    <section id='arbeitsweise' className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
       <div className='grid lg:grid-cols-2'>
-        {/* Bild links, randlos; Überschrift liegt oben auf dem Bild */}
+        {/* Bild links: echtes Behandlungsmotiv. Bewusst eine Aufnahme ohne
+            Gesicht, damit keine Schrift über einem Gesicht liegt. */}
         <div className='relative min-h-[24rem] lg:min-h-[42rem]'>
           <Image
-            src='/image/behandlung.webp'
-            alt='Behandlungsraum mit Liege und warmem Licht'
+            src='/image/behandlung_2.webp'
+            alt='Hände halten die Füße während einer craniosacralen Behandlung'
             fill
             sizes='(max-width: 1024px) 100vw, 50vw'
             className='object-cover'
-            style={{ objectPosition: '45% 50%' }}
+            style={{ objectPosition: '50% 45%' }}
           />
           <span
             aria-hidden
-            className='absolute inset-x-0 top-0 h-1/2 bg-[linear-gradient(to_bottom,rgba(35,30,20,0.66),rgba(35,30,20,0))]'
+            className='absolute inset-x-0 top-0 h-2/5 bg-[linear-gradient(to_bottom,rgba(35,30,20,0.52),rgba(35,30,20,0))]'
           />
           <div className='relative px-6 pt-10 md:px-10 md:pt-12'>
-            <span className='label label-inverse'>Herangehensweise</span>
+            <span className='label label-inverse'>Meine Arbeitsweise</span>
             <h2 className='display display-serif d2 mt-5 max-w-md text-[var(--cream)] [text-shadow:0_1px_14px_rgba(20,16,10,0.35)]'>
               Was meine Arbeit trägt.
             </h2>
@@ -325,12 +324,12 @@ function Approach() {
           {/* Rundes Bildelement genau auf der Kante zwischen Foto und Olive */}
           <span className='absolute right-0 bottom-[18%] hidden h-52 w-52 translate-x-1/2 overflow-hidden rounded-full border border-[var(--cream-line)] lg:block xl:h-60 xl:w-60'>
             <Image
-              src='/image/4.webp'
-              alt='Klangschalen, Kerzen und Handtücher im Behandlungsraum'
+              src='/image/behandlung_3.webp'
+              alt='Hände während einer craniosacralen Behandlung'
               fill
               sizes='240px'
               className='object-cover'
-              style={{ objectPosition: '50% 45%' }}
+              style={{ objectPosition: '50% 50%' }}
             />
           </span>
         </div>
@@ -381,75 +380,6 @@ function Approach() {
           <Link href='/cranio/' className='cta-link mt-10'>
             Mehr zu Cranio <ArrowUpRight />
           </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* --- Raum: Vollbild-Band mit kleinen Labels (Referenz-Device) -------------- */
-
-const STUDIO_LABELS = [
-  { text: 'Behandlungsliege', position: 'left-[clamp(1.5rem,6vw,5rem)] bottom-[24%]' },
-  { text: 'Klangschalen', position: 'right-[46%] bottom-[30%]' },
-  { text: 'Warmes Licht', position: 'right-[clamp(1.5rem,8vw,6rem)] top-[26%]' },
-];
-
-function Studio() {
-  return (
-    <section aria-label='Die Praxis' className='relative isolate overflow-hidden bg-[#241a11]'>
-      <Image
-        src='/image/kontakt.webp'
-        alt='Blick in die Praxis von Stefanie Kaindl'
-        fill
-        sizes='100vw'
-        className='object-cover'
-        style={{ objectPosition: '50% 42%', filter: 'brightness(0.66) saturate(0.94)' }}
-      />
-      <span aria-hidden className='absolute inset-0 bg-[rgba(36,26,17,0.4)]' />
-      {/* Zusätzlicher Verlauf hinter der Textspalte, damit die helle Wand trägt */}
-      <span
-        aria-hidden
-        className='absolute inset-0 bg-[linear-gradient(to_right,rgba(30,22,14,0.5)_0%,rgba(30,22,14,0.18)_45%,rgba(30,22,14,0)_62%)]'
-      />
-      {/* Sehr weite Kreisbögen, wie in der Referenz */}
-      <span
-        aria-hidden
-        className='pointer-events-none absolute -left-40 -top-40 aspect-square w-[46rem] rounded-full border border-[var(--cream-line)]'
-      />
-      <span
-        aria-hidden
-        className='pointer-events-none absolute -bottom-[24rem] right-[-12rem] aspect-square w-[52rem] rounded-full border border-[var(--cream-15)]'
-      />
-
-      <div className='shell relative z-10 min-h-[32rem] py-[clamp(3rem,7vw,6rem)] lg:min-h-[40rem]'>
-        {/* Text block oben links */}
-        <div className='max-w-md text-[var(--cream)]'>
-          <span className='label label-inverse'>Die Praxis</span>
-          <p className='mt-5 text-[0.9375rem] leading-relaxed text-[var(--cream-80)]'>
-            Ein ruhiger Raum im Ortsteil Uttenhofen: warmes Holz, natürliche Materialien und Zeit
-            ohne Eile. Kein Wartezimmer, keine Hektik — nur du und dein eigenes Tempo.
-          </p>
-          <Link href='/kontakt/' className='cta-link mt-7'>
-            Anfahrt ansehen <ArrowUpRight />
-          </Link>
-        </div>
-
-        {/* Kleine Labels locker über dem Foto */}
-        {STUDIO_LABELS.map((label) => (
-          <span
-            key={label.text}
-            className={`absolute hidden text-[0.6875rem] uppercase tracking-[0.18em] text-[var(--cream-70)] md:block ${label.position}`}>
-            {label.text}
-          </span>
-        ))}
-
-        {/* Fußzeile des Bands */}
-        <div className='absolute inset-x-0 bottom-0'>
-          <div className='shell flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-t border-[var(--cream-line)] py-5 text-[0.75rem] text-[var(--cream-70)]'>
-            <span>Bahnstraße 2a · 85276 Pfaffenhofen a. d. Ilm · Ortsteil Uttenhofen</span>
-            <span>Termine Mo – Fr nach Vereinbarung</span>
-          </div>
         </div>
       </div>
     </section>
@@ -665,15 +595,15 @@ function Booking() {
   return (
     <section id='termin' className='relative isolate overflow-hidden bg-[#241a11]'>
       <Image
-        src='/image/behandlung_3.webp'
+        src='/image/behandlung.webp'
         alt=''
         aria-hidden
         fill
         sizes='100vw'
         className='object-cover'
-        style={{ objectPosition: '50% 40%', filter: 'brightness(0.6) saturate(0.9)' }}
+        style={{ objectPosition: '50% 45%', filter: 'brightness(0.72) saturate(0.94)' }}
       />
-      <span aria-hidden className='absolute inset-0 bg-[rgba(36,26,17,0.34)]' />
+      <span aria-hidden className='absolute inset-0 bg-[rgba(36,26,17,0.26)]' />
       {/* Weite Kreisbögen wie im Referenz-Abschluss */}
       <span
         aria-hidden
