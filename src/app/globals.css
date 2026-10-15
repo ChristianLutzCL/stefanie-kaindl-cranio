@@ -608,8 +608,8 @@ div[id] {
     to right,
     rgba(40, 27, 16, 0.52) 0%,
     rgba(40, 27, 16, 0.5) 38%,
-    rgba(40, 27, 16, 0.46) 54%,
-    rgba(40, 27, 16, 0.2) 70%,
+    rgba(40, 27, 16, 0.46) 60%,
+    rgba(40, 27, 16, 0.2) 74%,
     rgba(42, 28, 17, 0.12) 100%
   );
 }
@@ -632,12 +632,6 @@ div[id] {
   }
 }
 
-/* Blume des Lebens: nach außen hin zu transparent ausblenden, damit die
-   Zeichnung das Foto nicht überlagert (im Viewport sichtbarer Auslauf). */
-.flower-fade {
-  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.5) 30%, transparent 48%);
-  mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.5) 30%, transparent 48%);
-}
 
 .scroller > * {
   scroll-snap-align: start;

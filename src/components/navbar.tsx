@@ -8,19 +8,17 @@ import { RETREAT_ENABLED } from '@/site-config';
 /**
  * Kopfzeile „Editorial Olive" — eine Zeile:
  *
- *      Über mich   Cranio          STEFANIE KAINDL          Yoga   Kontakt     Menü
+ *      Cranio   Yoga          STEFANIE KAINDL          Über mich   Kontakt
  *
- * Die Wortmarke sitzt in der Mitte, die Navigation fächert sich links und
- * rechts davon auf. Ein Drei-Spalten-Raster (`1fr auto 1fr`) hält die
- * Wortmarke exakt mittig, ohne absolute Positionierung — auch auf Mobil, wo
- * nur die Wortmarke und der Menü-Schalter sichtbar sind.
+ * Links die beiden Angebote, rechts die Praxis (wer, wie erreichbar). Die
+ * Wortmarke sitzt unabhängig davon exakt mittig.
  *
  * Auf der Startseite transparent über dem Hero, sonst auf Papier.
  */
 const NAV_MENU = [
-  { title: 'Über mich', href: '/ueber-mich' },
   { title: 'Cranio', href: '/angebote-preise' },
   { title: 'Yoga', href: '/yoga' },
+  { title: 'Über mich', href: '/ueber-mich' },
   { title: 'Kontakt', href: '/kontakt' },
   { title: 'Retreat', href: '/retreat' },
 ].filter((item) => RETREAT_ENABLED || item.href !== '/retreat');

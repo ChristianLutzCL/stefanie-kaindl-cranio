@@ -14,9 +14,9 @@ const COLUMNS = [
   {
     title: 'Praxis',
     links: [
-      { text: 'Über mich', href: '/ueber-mich' },
       { text: 'Cranio', href: '/angebote-preise' },
       { text: 'Yoga', href: '/yoga' },
+      { text: 'Über mich', href: '/ueber-mich' },
       { text: 'Kontakt', href: '/kontakt' },
     ],
   },
