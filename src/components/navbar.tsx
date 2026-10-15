@@ -90,11 +90,11 @@ export function Navbar() {
         }`}>
         {/* Vier gleich breite Zellen über die volle Breite, die Punkte nach außen
             gerückt; die Wortmarke sitzt unabhängig davon exakt in der Mitte.
-            Die Menüzeile steht auf der Höhe der Hauptzeile der Wortmarke, nicht
-            auf der Mitte des zweizeiligen Blocks. */}
+            Die Menüzeile ist auf der Höhe der Kopfzeile zentriert — kein
+            zusätzlicher Versatz, sonst sitzt sie im flachen Zustand zu hoch. */}
         <nav
           aria-label='Hauptnavigation'
-          className='hidden w-full -translate-y-[0.4rem] grid-cols-4 lg:grid'>
+          className='hidden w-full grid-cols-4 lg:grid'>
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
