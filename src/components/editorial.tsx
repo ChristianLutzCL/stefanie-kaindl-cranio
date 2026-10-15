@@ -86,6 +86,11 @@ for (let i = 0; i < 6; i++) {
   FLOWER_CENTERS.push([2 * FLOWER_R * Math.cos(a), 2 * FLOWER_R * Math.sin(a)]);
 }
 
+/* Auf drei Nachkommastellen runden: Math.cos/sin liefert je nach V8-Version
+   (Node beim Rendern, Browser beim Hydrieren) eine andere letzte Ziffer und
+   damit eine Hydration-Warnung auf jeder Seite. */
+const round3 = (value: number) => Number(value.toFixed(3));
+
 export function FlowerOfLife({
   className = '',
   stroke = 'rgba(243, 240, 233, 0.05)',
@@ -102,7 +107,13 @@ export function FlowerOfLife({
       stroke={stroke}
       strokeWidth={1}>
       {FLOWER_CENTERS.map(([cx, cy], i) => (
-        <circle key={i} cx={cx} cy={cy} r={FLOWER_R} vectorEffect='non-scaling-stroke' />
+        <circle
+          key={i}
+          cx={round3(cx)}
+          cy={round3(cy)}
+          r={FLOWER_R}
+          vectorEffect='non-scaling-stroke'
+        />
       ))}
       <circle r={3 * FLOWER_R} vectorEffect='non-scaling-stroke' />
     </svg>
@@ -184,7 +195,7 @@ export function PriceRow({
       <div>
         <h3 className='serif text-[clamp(1.35rem,1.8vw,1.65rem)] leading-tight text-ink'>
           {title}
-          <span className='text-ink-400'> / {meta}</span>
+          <span className='text-ink-500'> / {meta}</span>
         </h3>
         <p className='mt-2 max-w-xl text-[0.875rem] leading-relaxed text-ink-600'>{body}</p>
       </div>

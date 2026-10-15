@@ -28,9 +28,11 @@ const config: Config = withMT({
           900: "#1d1c17",
           800: "#3a3830",
           700: "#57554d",
-          600: "#75736a",
-          500: "#8f8d84",
-          400: "#a9a69a",
+          600: "#5f5d56",
+          500: "#67655d",
+          /* 400 hält nur 3,15:1 — ausschließlich für große Schrift (Preise,
+             Zähler in Displaygröße) verwenden, nicht für kleine Texte. */
+          400: "#8a877b",
           100: "#efece4",
         },
         olive: {

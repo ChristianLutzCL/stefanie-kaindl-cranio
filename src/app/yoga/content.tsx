@@ -283,7 +283,7 @@ export function Content() {
             <h2 className='display display-serif d2 mt-6 text-[var(--cream)]'>
               Komm einfach vorbei.
             </h2>
-            <p className='lead-lg mt-7 text-[var(--cream-80)]'>
+            <p className='lead-lg lead-lg-cream mt-7'>
               Schreib mir kurz per WhatsApp, an welchem Donnerstag und zu welcher Uhrzeit du kommen
               möchtest — ich melde mich persönlich mit allen Details.
             </p>

@@ -16,8 +16,11 @@
   --paper-soft: #f8f6f1;
   --ink: #1d1c17;
   --ink-80: rgba(29, 28, 23, 0.8);
-  --ink-60: rgba(29, 28, 23, 0.6);
-  --ink-45: rgba(29, 28, 23, 0.45);
+  /* Die Namen sind historische Stufen; die Werte sind so gewählt, dass sie
+     WCAG AA (4.5:1) auch auf der dunkelsten Papiertönung (#eae6db) halten.
+     Vorher: 0.6 → 4.18:1, 0.45 → 2.92:1 (beides zu schwach für Fließtext). */
+  --ink-60: rgba(29, 28, 23, 0.68);
+  --ink-45: rgba(29, 28, 23, 0.65);
   --line: rgba(29, 28, 23, 0.13);
   --olive: #616949;
   --olive-deep: #4d5438;
@@ -196,6 +199,12 @@ div[id] {
   font-size: clamp(1.05rem, 1.5vw, 1.4rem);
   line-height: 1.38;
   color: var(--ink);
+}
+/* Fließtext-Variante auf Olive/dunkler Fläche: `.lead-lg` setzt `color`, und
+   unlayered CSS schlägt Tailwinds `text-[…]` — die Utility am Element wirkt
+   dort nicht (dunkle Schrift auf Olive, gemessen 2,95:1). */
+.lead-lg-cream {
+  color: var(--cream-80);
 }
 .body-copy {
   font-size: 0.9375rem;

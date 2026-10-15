@@ -521,7 +521,7 @@ function Voices() {
           <div className='lg:col-span-2'>
             <span className='text-[1.25rem] font-light tabular-nums text-ink'>
               {String(active + 1).padStart(2, '0')}
-              <span className='text-ink-400'>/{String(QUOTES.length).padStart(2, '0')}</span>
+              <span className='text-ink-500'>/{String(QUOTES.length).padStart(2, '0')}</span>
             </span>
           </div>
 

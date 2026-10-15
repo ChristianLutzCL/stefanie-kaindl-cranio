@@ -21,7 +21,7 @@ export function LegalToc({ items }: { items: { id: string; title: string }[] }) 
             <a
               href={`#${item.id}`}
               className='group flex gap-3 text-ink-600 transition-colors hover:text-ink'>
-              <span className='tabular-nums text-ink-400'>{String(i + 1).padStart(2, '0')}</span>
+              <span className='tabular-nums text-ink-500'>{String(i + 1).padStart(2, '0')}</span>
               <span className='border-b border-transparent pb-0.5 transition-colors group-hover:border-current'>
                 {item.title}
               </span>
@@ -120,7 +120,7 @@ export function LegalLink({
 /** Herkunftshinweis am Fuß der Seite (z. B. e-recht24). */
 export function LegalSource({ children }: { children: React.ReactNode }) {
   return (
-    <p className='mt-12 border-t border-[var(--line)] pt-6 text-[0.75rem] leading-relaxed text-ink-45'>
+    <p className='mt-12 border-t border-[var(--line)] pt-6 text-[0.75rem] leading-relaxed text-ink-500'>
       {children}
     </p>
   );
