@@ -16,9 +16,13 @@ import { BOOKING, Photo, SectionHead, useReveal } from '@/components/editorial';
 const JOURNEY = [
   'Meine fundierte Ausbildung bei Katharina Bähner in Stuttgart, die ich im März 2024 abgeschlossen habe, war für mich ein intensiver Transformationsprozess – fachlich wie auch persönlich. Ergänzend dazu habe ich eine Weiterbildung in Kinder-Cranio absolviert, um auch Babys und Kinder mit besonderer Achtsamkeit und Einfühlungsvermögen begleiten zu können.',
   'Mit dem erfolgreichen Abschluss meiner 300-Stunden-Vinyasa-Yogalehrerausbildung bei Lovelysita in Prien am 10.01.2026 hat sich mein Weg mit Körper, Atem und Energie noch einmal vertieft. Für mich verbinden sich Yoga und Craniosacralarbeit auf besondere Weise – sie schaffen Raum für achtsame Präsenz, Bewusstsein und ganzheitliche Heilung.',
-  'Als zweifache Mama weiß ich aus eigener Erfahrung, wie wertvoll es ist, Körper und Seele mit Respekt und Sanftheit zu begegnen. Die Craniosacrale Arbeit ist für mich weit mehr als eine Technik – sie ist eine Begegnung auf Augenhöhe, eine Einladung zum Loslassen, zur inneren Ruhe und Selbstheilung.',
   'Ich möchte einen Ort schaffen, an dem du dich sicher und geborgen fühlst – einen Ort, an dem du zur Ruhe kommen und wieder in Verbindung mit deinem eigenen Rhythmus treten kannst. Mit großer Leidenschaft bilde ich mich kontinuierlich weiter, um mein Wissen zu vertiefen und dir die bestmögliche Erfahrung zu ermöglichen.',
 ];
+
+/* Zitat aus ihren eigenen Worten, das die Textspalte aufbricht. Bewusst ein
+   anderer Satz als das Zitat in „Meine Haltung" — der steht dort schon. */
+const PULL_QUOTE =
+  'Als zweifache Mama weiß ich aus eigener Erfahrung, wie wertvoll es ist, Körper und Seele mit Respekt und Sanftheit zu begegnen.';
 
 const QUALIFICATIONS = [
   {
@@ -108,17 +112,40 @@ export function Content() {
         </div>
       </header>
 
-      {/* Mein Weg */}
+      {/* Mein Weg — Bild links, Erzählung rechts, durch ein Zitat gebrochen */}
       <section className='section pt-0'>
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
-            <div className='lg:col-span-3'>
+            <div className='lg:col-span-5'>
               <span className='label'>Mein Weg</span>
+
+              <div className='mt-7' data-reveal>
+                <Photo
+                  src='/image/behandlung_2.webp'
+                  alt='Hände halten die Füße während einer craniosacralen Behandlung'
+                  ratio='aspect-[4/5]'
+                  position='50% 45%'
+                  sizes='(max-width: 1024px) 100vw, 40vw'
+                />
+              </div>
             </div>
 
-            <div className='lg:col-span-8 lg:col-start-5'>
-              <div className='max-w-2xl space-y-5 text-[1.0625rem] leading-relaxed text-ink-700'>
-                {JOURNEY.map((paragraph) => (
+            {/* Die Jahreszahlen stehen in der Ausbildung-Liste darunter — hier
+                beginnt die Erzählung deshalb auf gleicher Höhe wie das Bild. */}
+            <div className='lg:col-span-6 lg:col-start-7 lg:pt-11'>
+              <div className='space-y-5 text-[1.0625rem] leading-relaxed text-ink-700'>
+                {JOURNEY.slice(0, 2).map((paragraph) => (
+                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                ))}
+              </div>
+
+              {/* Zitat aus ihren eigenen Worten — bricht die Textspalte auf */}
+              <blockquote className='my-10 border-y border-[var(--line)] py-8'>
+                <p className='quote text-[clamp(1.2rem,1.7vw,1.55rem)]'>{PULL_QUOTE}</p>
+              </blockquote>
+
+              <div className='space-y-5 text-[1.0625rem] leading-relaxed text-ink-700'>
+                {JOURNEY.slice(2).map((paragraph) => (
                   <p key={paragraph.slice(0, 24)}>{paragraph}</p>
                 ))}
                 <p>
@@ -127,7 +154,7 @@ export function Content() {
                 </p>
               </div>
 
-              <p className='mt-10 max-w-2xl border-t border-[var(--line)] pt-6 text-[0.9375rem] text-ink-600'>
+              <p className='mt-10 text-[0.9375rem] text-ink-600'>
                 Von Herzen,
                 <span className='serif mt-1 block text-[1.5rem] leading-none text-ink'>Steffi</span>
               </p>
