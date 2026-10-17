@@ -281,7 +281,7 @@ const APPROACH = [
   },
   {
     title: 'Ganzheitlich',
-    body: 'Die Arbeit wirkt körperlich und emotional: bei Schmerzen, Migräne und Verspannungen ebenso wie bei Stress, Schlafproblemen und Belastendem.',
+    body: 'Die Arbeit wirkt körperlich und emotional: bei Schmerzen, Migräne und Verspannungen ebenso wie bei Stress, Schlafproblemen und emotionaler Belastung.',
   },
   {
     title: 'Für Babys & Kinder',
@@ -289,7 +289,7 @@ const APPROACH = [
   },
   {
     title: 'Yoga und Cranio',
-    body: 'Zwei Wege mit derselben Haltung: achtsame Präsenz. In meinen Yogastunden fließen craniosacrale Impulse in die Übung ein.',
+    body: 'Zwei Wege mit derselben Haltung: achtsame Präsenz. In meinen Yogastunden fließen craniosacrale Impulse in die Yogastunde ein.',
   },
 ];
 
@@ -414,7 +414,7 @@ function About() {
             <h2 className='display display-serif d2 mt-6'>Hallo, ich bin Steffi.</h2>
             <p className='lead-lg mt-7 max-w-xl'>
               Craniosacral-Praktikerin aus Leidenschaft, Yogalehrerin und zweifache Mama. Für mich
-              verbinden sich Yoga und Craniosacralarbeit auf besondere Weise — beide schaffen Raum
+              verbinden sich Yoga und Craniosacrale Körperarbeit auf besondere Weise — beide schaffen Raum
               für achtsame Präsenz und für deinen eigenen Rhythmus.
             </p>
 
@@ -458,7 +458,7 @@ const QUOTES = [
     text: 'Die Cranio Sacrale Körperarbeit hat mir und meinen Kindern geholfen, wieder ins Gleichgewicht zu kommen. Bei Stefanie findet man einen sicheren Raum.',
     name: 'Kathi G.',
     initials: 'KG',
-    role: 'Mutter mit Kindern',
+    role: 'Mutter & Kind',
   },
   {
     text: 'Einfühlsam, sensibel, mitfühlend, intensiv, wohltuend, geborgen — hier fühle ich mich beschützt und von Herzen willkommen.',
@@ -572,7 +572,7 @@ const BOOK_PATHS = [
     label: 'Cranio',
     title: 'Behandlung buchen',
     body: 'Wähle deinen Termin direkt online — für dich oder für dein Kind. Lieber erst kennenlernen? Dann ist die Erstberatung (30 Min · 40 €) ein guter Anfang.',
-    facts: [['Wann', 'Mo – Fr nach Vereinbarung']],
+    facts: [['Termine', 'Mo – Fr nach Vereinbarung']],
     cta: 'Termin online buchen',
     href: BOOKING.cranioOverview,
     more: { text: 'Alles zu Cranio', href: '/cranio/' },
@@ -581,7 +581,7 @@ const BOOK_PATHS = [
     label: 'Yoga',
     title: 'Platz reservieren',
     body: 'Schreib mir kurz per WhatsApp, an welchem Donnerstag und zu welcher Uhrzeit du kommen möchtest — ich melde mich persönlich mit allen Details.',
-    facts: [['Wann', 'Donnerstags 17:30 & 19:00 Uhr']],
+    facts: [['Termine', 'Donnerstags 17:30 & 19:00 Uhr']],
     cta: 'Per WhatsApp reservieren',
     href: BOOKING.yoga,
     more: { text: 'Alles zu Yoga', href: '/yoga/' },

@@ -59,7 +59,7 @@ export function CookieBanner() {
             type='button'
             onClick={handleRejectAll}
             className='cta-link text-[0.8125rem] cursor-pointer'>
-            Nur notwendige
+            Nur notwendige akzeptieren
           </button>
           <button
             type='button'

@@ -15,7 +15,7 @@ import { BOOKING, Photo, SectionHead, useReveal } from '@/components/editorial';
 
 const JOURNEY = [
   'Meine fundierte Ausbildung bei Katharina Bähner in Stuttgart, die ich im März 2024 abgeschlossen habe, war für mich ein intensiver Transformationsprozess – fachlich wie auch persönlich. Ergänzend dazu habe ich eine Weiterbildung in Kinder-Cranio absolviert, um auch Babys und Kinder mit besonderer Achtsamkeit und Einfühlungsvermögen begleiten zu können.',
-  'Mit dem erfolgreichen Abschluss meiner 300-Stunden-Vinyasa-Yogalehrerausbildung bei Lovelysita in Prien am 10.01.2026 hat sich mein Weg mit Körper, Atem und Energie noch einmal vertieft. Für mich verbinden sich Yoga und Craniosacralarbeit auf besondere Weise – sie schaffen Raum für achtsame Präsenz, Bewusstsein und ganzheitliche Heilung.',
+  'Mit dem erfolgreichen Abschluss meiner 300-Stunden-Vinyasa-Yogalehrerausbildung bei Lovelysita in Prien am 10.01.2026 hat sich mein Weg mit Körper, Atem und Energie noch einmal vertieft. Für mich verbinden sich Yoga und Craniosacrale Körperarbeit auf besondere Weise – sie schaffen Raum für achtsame Präsenz, Bewusstsein und ganzheitliches Wohlbefinden.',
   'Ich möchte einen Ort schaffen, an dem du dich sicher und geborgen fühlst – einen Ort, an dem du zur Ruhe kommen und wieder in Verbindung mit deinem eigenen Rhythmus treten kannst. Mit großer Leidenschaft bilde ich mich kontinuierlich weiter, um mein Wissen zu vertiefen und dir die bestmögliche Erfahrung zu ermöglichen.',
 ];
 
@@ -43,7 +43,7 @@ const QUALIFICATIONS = [
   {
     title: 'Kontinuierliche Weiterbildung',
     detail: 'Laufend',
-    body: 'Weiterbildung zur Vertiefung des Wissens und für eine bessere Begleitung.',
+    body: 'Ich bilde mich regelmäßig weiter, um dich fundiert begleiten zu können.',
   },
 ];
 
@@ -58,7 +58,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Präsenz & Bewusstsein',
-    body: 'Raum für Heilung auf allen Ebenen — körperlich, emotional und energetisch.',
+    body: 'Raum für Regeneration auf allen Ebenen — körperlich, emotional und energetisch.',
   },
 ];
 
@@ -200,9 +200,9 @@ export function Content() {
           <div className='mx-auto max-w-[48rem] text-center'>
             <span className='label label-inverse'>Meine Haltung</span>
             <p className='quote quote-cream mt-8'>
-              &bdquo;Die Craniosacrale Arbeit ist für mich weit mehr als eine Technik – sie ist eine
+              &bdquo;Die Craniosacrale Körperarbeit ist für mich weit mehr als eine Technik – sie ist eine
               Begegnung auf Augenhöhe, eine Einladung zum Loslassen, zur inneren Ruhe und
-              Selbstheilung.&ldquo;
+              Regeneration.&ldquo;
             </p>
             <p className='mt-6 text-[0.8125rem] text-[var(--cream-70)]'>Stefanie Kaindl</p>
           </div>

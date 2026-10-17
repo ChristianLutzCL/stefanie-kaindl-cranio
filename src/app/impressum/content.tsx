@@ -29,7 +29,7 @@ function Content() {
       <PageIntro
         label='Impressum'
         title='Impressum'
-        lead='Wer diese Website betreibt, wer die Fotos gemacht hat und wie du Kontakt aufnimmst.'
+        lead='Wer diese Website betreibt, wer die Fotos gemacht hat und wie Sie Kontakt aufnehmen.'
       />
 
       <LegalBody toc={TOC}>

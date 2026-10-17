@@ -32,7 +32,7 @@ function Content() {
       <PageIntro
         label='Datenschutz'
         title='Datenschutzerklärung'
-        lead='Was mit deinen Daten passiert, wenn du diese Website besuchst — und welche Rechte du hast.'
+        lead='Was mit Ihren Daten passiert, wenn Sie diese Website besuchen — und welche Rechte Sie haben.'
       />
 
       <LegalBody toc={TOC}>

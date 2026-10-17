@@ -43,7 +43,7 @@ const ADULTS = [
 const KIDS = [
   'Schlafprobleme und Unruhe',
   'Konzentrationsschwierigkeiten',
-  'Nach der Geburt und bei Geburtstrauma-Folgen',
+  'Nach der Geburt oder nach einem Geburtstrauma',
   'Entwicklungsverzögerungen',
   'Emotionale Belastungen',
 ];
@@ -88,10 +88,10 @@ export function Content() {
         </div>
       </header>
 
-      {/* Wobei sie hilft */}
+      {/* Womit ich dich unterstütze */}
       <section className='section pt-0'>
         <div className='shell'>
-          <SectionHead label='Wobei sie hilft' title='Für Erwachsene und für Kinder.' />
+          <SectionHead label='Womit ich dich unterstütze' title='Für Erwachsene und für Kinder.' />
 
           <div className='mt-14 grid gap-12 md:grid-cols-2 md:gap-16'>
             {[
@@ -177,7 +177,7 @@ export function Content() {
             <PriceRow
               title='5er-Paket'
               meta='5 Behandlungen'
-              body='Fünf Behandlungen im Voraus — 50 € gespart, flexibel planbar. Auf Wunsch mit Rechnung für Steuer oder Krankenkasse.'
+              body='Fünf Behandlungen im Voraus — 50 € gespart, flexibel planbar. Auf Wunsch mit Rechnung für die Steuer oder die Krankenkasse.'
               price='400 €'
               unit='Paket'
               cta='Paket anfragen'
@@ -206,7 +206,7 @@ export function Content() {
               {[
                 ['Terminvereinbarung', 'Telefonisch oder online — Mo – Fr nach Vereinbarung.'],
                 ['Stornierung', 'Kostenfrei bis 24 h vorher; danach wird die volle Gebühr fällig.'],
-                ['Zahlung', 'Bar oder per PayPal. Rechnung für Steuer und Krankenkasse auf Wunsch.'],
+                ['Zahlung', 'Bar oder per PayPal. Rechnung für die Steuer oder die Krankenkasse auf Wunsch.'],
                 ['Kostenerstattung', 'Manche Zusatzversicherungen übernehmen die Kosten.'],
                 ['Qualifikation', 'Ausbildung bei Katharina Bähner (2024) und Weiterbildung Kinder-Cranio.'],
               ].map(([title, value]) => (

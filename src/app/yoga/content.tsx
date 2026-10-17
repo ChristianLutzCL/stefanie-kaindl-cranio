@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import React from 'react';
 import { ArrowUpRight } from '@/components/icons';
 import { BOOKING, Photo, SectionHead, useReveal } from '@/components/editorial';
 
@@ -65,12 +66,35 @@ const YOGA_DAY = {
   date: 'Samstag, 07.11.2026',
   time: '10:00 – 17:00 Uhr',
   place: 'Yogaraum Paunzhausen · genauer Ort bei Anmeldung',
-  price: '111 € bis 30.09.2026, danach 129 €',
-  body: 'Ein Tag, um anzukommen, loszulassen und neue Kraft zu schöpfen. Autumn Vinyasa Flow, Yin Yoga, Herzchakra-Meditation und Kristallklangschalen — mit vegetarischem Mittagessen, Tee, Wasser und kleinen Snacks sowie deinem persönlichen Intention-Armband. Maximal 10 Teilnehmende.',
+  /* Frühbucherpreis bis zum Stichtag, danach der reguläre Preis. */
+  priceEarly: '111 € bei Anmeldung bis 30.09.2026, danach 129 €',
+  priceRegular: '129 €',
+  body: 'Ein Tag, um anzukommen, loszulassen und neue Kraft zu schöpfen. Herbstlicher Vinyasa Flow, Yin Yoga, Herzchakra-Meditation und Kristallklangschalen — mit vegetarischem Mittagessen, Tee, Wasser und kleinen Snacks sowie einem Armband mit deiner Intention. Maximal 10 Plätze.',
 };
 
 export function Content() {
   useReveal();
+
+  /* „Heute" erst nach dem Mounten ermitteln: Das Server-Markup kennt kein
+     Datum, ein sofortiger Filter würde eine Hydration-Abweichung erzeugen.
+     Bis dahin zeigt die Seite die vollständige Liste. */
+  const [heute, setHeute] = React.useState<Date | null>(null);
+  React.useEffect(() => {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    setHeute(now);
+  }, []);
+
+  /* Vergangene Donnerstage fallen aus der Liste. */
+  const termine = YOGA_DATES.filter((date) => {
+    if (!heute) return true;
+    const [day, month, year] = date.split('.').map(Number);
+    return new Date(year, month - 1, day) >= heute;
+  });
+
+  /* Frühbucherpreis nur bis zum Stichtag. */
+  const fruehbucher = !heute || heute <= new Date(2026, 8, 30);
+  const yogaDayPreis = fruehbucher ? YOGA_DAY.priceEarly : YOGA_DAY.priceRegular;
 
   return (
     <>
@@ -118,9 +142,8 @@ export function Content() {
               <span className='label'>Deine Stunde</span>
               <h2 className='display display-serif d2 mt-6'>Yoga für Körper und Geist.</h2>
               <p className='mt-6 text-[0.9375rem] leading-relaxed text-ink-700'>
-                Die Einheiten sind sanft bis dynamisch gestaltet und werden achtsam an die
-                Bedürfnisse der Teilnehmenden angepasst. Du entscheidest, wie viel du heute brauchst
-                — nichts muss, alles darf.
+                Die Stunden sind sanft bis dynamisch und richten sich nach der Gruppe. Du
+                entscheidest, wie viel du heute brauchst — nichts muss, alles darf.
               </p>
             </div>
 
@@ -148,9 +171,8 @@ export function Content() {
         <div className='shell'>
           <SectionHead label='Kurse' title='Zwei Kurse am Donnerstag.'>
             <p className='mt-6 text-[0.9375rem] leading-relaxed text-ink-600'>
-              Beide Kurse finden donnerstags in Paunzhausen statt, in kleinen Gruppen. Entscheide
-              spontan, ob du entspannend ankommen oder mit einem kraftvollen Flow ausklingen
-              möchtest.
+              Beide Kurse finden donnerstags in Paunzhausen statt, in kleinen Gruppen. Du kannst
+              spontan kommen — zum ruhigen Ankommen oder für einen kraftvollen Flow zum Ausklang.
             </p>
           </SectionHead>
 
@@ -169,7 +191,7 @@ export function Content() {
           <div className='mx-auto mt-14 grid max-w-4xl gap-x-10 gap-y-6 border-t border-[var(--line)] pt-8 sm:grid-cols-3'>
             {[
               ['Preis', '14 € pro Stunde'],
-              ['Ort', 'Paunzhausen · kleiner Kursraum'],
+              ['Ort', 'Paunzhausen · Yogaraum'],
               ['Zahlung', 'Vor Ort oder mit EGYM Wellpass'],
             ].map(([title, value]) => (
               <div key={title}>
@@ -179,8 +201,8 @@ export function Content() {
             ))}
           </div>
           <p className='mx-auto mt-6 max-w-4xl text-[0.8125rem] text-ink-500'>
-            Enthalten sind Cranio-Impulse, persönliche Begleitung und eine ruhige Atmosphäre in
-            kleinen Gruppen. Matten und Hilfsmittel sind vor Ort.
+            Enthalten sind craniosacrale Impulse, persönliche Begleitung und eine ruhige
+            Atmosphäre in kleinen Gruppen. Matten und Hilfsmittel sind vor Ort.
           </p>
         </div>
       </section>
@@ -206,8 +228,13 @@ export function Content() {
             </div>
 
             <div className='lg:col-span-6 lg:col-start-7'>
+              {termine.length === 0 && (
+                <p className='text-[0.9375rem] leading-relaxed text-ink-600'>
+                  Die nächsten Termine sind noch nicht eingetragen.
+                </p>
+              )}
               <ul className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
-                {YOGA_DATES.map((date) => {
+                {termine.map((date) => {
                   const [day, month, year] = date.split('.');
                   return (
                     <li
@@ -254,7 +281,7 @@ export function Content() {
                   ['Datum', YOGA_DAY.date],
                   ['Uhrzeit', YOGA_DAY.time],
                   ['Ort', YOGA_DAY.place],
-                  ['Preis', YOGA_DAY.price],
+                  ['Preis', yogaDayPreis],
                 ].map(([title, value]) => (
                   <div key={title}>
                     <dt className='meta-line'>{title}</dt>
@@ -296,7 +323,7 @@ export function Content() {
               </a>
             </div>
             <p className='mt-12 border-t border-[var(--cream-line)] pt-6 text-[0.8125rem] text-[var(--cream-70)]'>
-              Du findest Yoga auch spannend, möchtest aber persönlich arbeiten?{' '}
+              Yoga gefällt dir, aber du möchtest lieber im Einzeltermin arbeiten?{' '}
               <Link href='/cranio/' className='text-[var(--cream)] underline underline-offset-4'>
                 Zur Craniosacralen Körperarbeit
               </Link>

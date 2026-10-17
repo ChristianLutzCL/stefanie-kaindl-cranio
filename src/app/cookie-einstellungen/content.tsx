@@ -28,7 +28,7 @@ const CATEGORIES = [
   {
     key: 'functional' as const,
     title: 'Funktionale Cookies',
-    body: 'Diese Cookies ermöglichen erweiterte Funktionen und Personalisierung. Sie können von uns oder von Drittanbietern gesetzt werden, deren Dienste wir auf unseren Seiten verwenden.',
+    body: 'Diese Cookies ermöglichen erweiterte Funktionen und Personalisierung. Sie werden von uns oder von Drittanbietern gesetzt, deren Dienste wir einsetzen.',
     locked: false,
   },
   {
@@ -40,7 +40,7 @@ const CATEGORIES = [
   {
     key: 'marketing' as const,
     title: 'Marketing-Cookies',
-    body: 'Diese Cookies werden verwendet, um Werbung für Sie relevanter zu gestalten. Sie verhindern, dass dieselbe Anzeige kontinuierlich erscheint, und helfen uns, die Effektivität von Werbekampagnen zu messen.',
+    body: 'Diese Cookies werden verwendet, um Werbung für dich relevanter zu gestalten. Sie verhindern, dass dieselbe Anzeige kontinuierlich erscheint, und helfen uns, die Effektivität von Werbekampagnen zu messen.',
     locked: false,
   },
 ];
@@ -141,14 +141,14 @@ function Content() {
         <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='lg:col-span-4'>
             <p className='text-[0.9375rem] leading-[1.75] text-ink-600'>
-              Wir verwenden Cookies, um Ihnen ein optimales Webseiten-Erlebnis zu bieten. Dazu zählen
-              Cookies, die für den Betrieb der Seite notwendig sind, sowie solche, die zu
-              Statistikzwecken oder zur Anzeige personalisierter Inhalte genutzt werden. Sie können
-              selbst entscheiden, welche Kategorien Sie zulassen möchten.
+              Diese Website verwendet Cookies, um dir ein angenehmes Erlebnis zu bieten. Dazu
+              zählen Cookies, die für den Betrieb der Seite notwendig sind, sowie solche, die zu
+              Statistikzwecken oder zur Anzeige personalisierter Inhalte genutzt werden. Du
+              entscheidest, welche Kategorien du zulässt.
             </p>
             <p className='mt-4 text-[0.9375rem] leading-[1.75] text-ink-600'>
-              Bitte beachten Sie, dass auf Basis Ihrer Einstellungen möglicherweise nicht alle
-              Funktionalitäten der Seite zur Verfügung stehen.
+              Je nach deiner Auswahl stehen dir möglicherweise nicht alle Funktionen der Seite zur
+              Verfügung.
             </p>
             <p className='mt-6 border-t border-[var(--line)] pt-6 text-[0.75rem] leading-relaxed text-ink-45'>
               Weitere Informationen findest du in der{' '}
@@ -194,17 +194,17 @@ function Content() {
                 Auswahl speichern
               </button>
               <button type='button' onClick={handleRejectAll} className='btn btn-outline-ink'>
-                Nur notwendige
+                Nur notwendige akzeptieren
               </button>
             </div>
 
             <p
               role='status'
               aria-live='polite'
-              className={`mt-6 text-[0.8125rem] text-olive transition-opacity ${
+              className={`mt-6 min-h-[1.25rem] text-[0.8125rem] text-olive transition-opacity ${
                 status ? 'opacity-100' : 'opacity-0'
               }`}>
-              {status || '—'}
+              {status}
             </p>
           </div>
         </div>
