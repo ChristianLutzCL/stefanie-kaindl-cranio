@@ -1,0 +1,122 @@
+{
+ "v": 3,
+ "layout": "files",
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-10-17T12:00:00Z"
+ },
+ "title": "Editorial Olive",
+ "namespace": "Stefanie Kaindl — Cranio Sacral & Yoga",
+ "libraries": [],
+ "sections": {},
+ "groups": [
+  "Logos",
+  "Imagery"
+ ],
+ "assetGroups": {
+  "Logos": {
+   "name": "Logos",
+   "tile": "m",
+   "order": [
+    "sk_logo_dark.png",
+    "sk_logo_light.png",
+    "sk_logo_2.png",
+    "logo.png",
+    "favicon.png",
+    "apple-touch-icon.png"
+   ],
+   "files": {
+    "sk_logo_dark.png": {
+     "name": "sk_logo_dark.png",
+     "blob": "f1232496eb08d0d65ae150682308ddbd",
+     "size": 62661,
+     "type": "image/png"
+    },
+    "sk_logo_light.png": {
+     "name": "sk_logo_light.png",
+     "blob": "d6eb024e577ea2a10032107fe6ae48cc",
+     "size": 55721,
+     "type": "image/png"
+    },
+    "sk_logo_2.png": {
+     "name": "sk_logo_2.png",
+     "blob": "edfa560b78443dce68ddd3da531b364b",
+     "size": 51388,
+     "type": "image/png"
+    },
+    "logo.png": {
+     "name": "logo.png",
+     "blob": "f50609f0f32090ec4c0eda7ea963e4cc",
+     "size": 123094,
+     "type": "image/png"
+    },
+    "favicon.png": {
+     "name": "favicon.png",
+     "blob": "cd8617ecdc3c12defcd7102ec077691b",
+     "size": 51222,
+     "type": "image/png"
+    },
+    "apple-touch-icon.png": {
+     "name": "apple-touch-icon.png",
+     "blob": "43d19ee090d750968acb616c6984afbd",
+     "size": 17761,
+     "type": "image/png"
+    }
+   }
+  },
+  "Imagery": {
+   "name": "Imagery",
+   "tile": "l",
+   "order": [
+    "hero-stefanie.webp",
+    "behandlung.webp",
+    "behandlung_2.webp",
+    "yoga.webp",
+    "kopf.webp"
+   ],
+   "files": {
+    "hero-stefanie.webp": {
+     "name": "hero-stefanie.webp",
+     "blob": "2d81c194e95cf41efd577e9d803ce52d",
+     "size": 96578,
+     "type": "image/webp"
+    },
+    "behandlung.webp": {
+     "name": "behandlung.webp",
+     "blob": "b645f5151f65b9f474d2126ea446ca7a",
+     "size": 56666,
+     "type": "image/webp"
+    },
+    "behandlung_2.webp": {
+     "name": "behandlung_2.webp",
+     "blob": "7ea7665aa463f41f1b2f2bc5069daf92",
+     "size": 39466,
+     "type": "image/webp"
+    },
+    "yoga.webp": {
+     "name": "yoga.webp",
+     "blob": "da8988a4439679ccf44e10cc27c5be5e",
+     "size": 43922,
+     "type": "image/webp"
+    },
+    "kopf.webp": {
+     "name": "kopf.webp",
+     "blob": "200953dfe9d20da1a81accea87820e0d",
+     "size": 26426,
+     "type": "image/webp"
+    }
+   }
+  }
+ },
+ "blobs": {},
+ "docs": {
+  "readme": "project/README.md",
+  "sections": []
+ },
+ "lastChange": {
+  "by": "Christian",
+  "at": "2026-10-17T12:00:00Z",
+  "via": "lokaler Checkout /opt/sites/stefanie-kaindl-cranio @ redesign/editorial-olive aacdf3e",
+  "note": "Erster Sync: 32 Farb-Tokens × 2 Flächen, 20 Typostile, Spacing, Radien, Schatten, Logos, 18 statische Komponenten-Renditionen, overview.html als Einzelseiten-Übersicht"
+ }
+}

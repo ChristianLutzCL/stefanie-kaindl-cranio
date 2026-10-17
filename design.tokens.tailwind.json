@@ -1,0 +1,200 @@
+{
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": "#616949",
+        "primary-deep": "#4d5438",
+        "primary-soft": "#8d9375",
+        "primary-tint": "#e5e7db",
+        "neutral": "#f3f0e9",
+        "paper-soft": "#f8f6f1",
+        "paper-deep": "#eae6db",
+        "paper-dark": "#ded9cb",
+        "ink": "#1d1c17",
+        "ink-stark": "#3a3830",
+        "ink-muted": "#57554d",
+        "ink-body": "#67655d",
+        "ink-faint": "#8a877b",
+        "on-dark": "#f3f0e9",
+        "on-dark-muted": "#f3f0e9b8",
+        "on-dark-faint": "#f3f0e973",
+        "on-dark-veil": "#f3f0e91f",
+        "line": "#1d1c1721",
+        "line-inverse": "#f3f0e933",
+        "white": "#ffffff"
+      },
+      "fontFamily": {
+        "display-1": [
+          "Hanken Grotesk"
+        ],
+        "display-1-serif": [
+          "Cormorant Garamond"
+        ],
+        "display-2": [
+          "Cormorant Garamond"
+        ],
+        "display-3": [
+          "Cormorant Garamond"
+        ],
+        "quote": [
+          "Hanken Grotesk"
+        ],
+        "lead-lg": [
+          "Hanken Grotesk"
+        ],
+        "lead": [
+          "Hanken Grotesk"
+        ],
+        "body": [
+          "Hanken Grotesk"
+        ],
+        "meta": [
+          "Hanken Grotesk"
+        ],
+        "label": [
+          "Hanken Grotesk"
+        ],
+        "label-caps": [
+          "Hanken Grotesk"
+        ],
+        "serif-title": [
+          "Cormorant Garamond"
+        ],
+        "brand-mark": [
+          "Cormorant Garamond"
+        ],
+        "brand-sub": [
+          "Cormorant Garamond"
+        ],
+        "button": [
+          "Hanken Grotesk"
+        ]
+      },
+      "fontSize": {
+        "display-1": [
+          "60px",
+          {
+            "letterSpacing": "-0.015em",
+            "fontWeight": "300"
+          }
+        ],
+        "display-1-serif": [
+          "64px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "display-2": [
+          "46px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "display-3": [
+          "29px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "quote": [
+          "43px",
+          {
+            "letterSpacing": "-0.01em",
+            "fontWeight": "300"
+          }
+        ],
+        "lead-lg": [
+          "22px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "lead": [
+          "18px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "body": [
+          "15px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "meta": [
+          "11px",
+          {
+            "letterSpacing": "0.02em",
+            "fontWeight": "400"
+          }
+        ],
+        "label": [
+          "10px",
+          {
+            "letterSpacing": "0.055em",
+            "fontWeight": "400"
+          }
+        ],
+        "label-caps": [
+          "10px",
+          {
+            "letterSpacing": "0.18em",
+            "fontWeight": "400"
+          }
+        ],
+        "serif-title": [
+          "26px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "500"
+          }
+        ],
+        "brand-mark": [
+          "21px",
+          {
+            "letterSpacing": "0.18em",
+            "fontWeight": "500"
+          }
+        ],
+        "brand-sub": [
+          "9px",
+          {
+            "letterSpacing": "0.36em",
+            "fontWeight": "500"
+          }
+        ],
+        "button": [
+          "13px",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ]
+      },
+      "borderRadius": {
+        "none": "0px",
+        "xs": "6px",
+        "sm": "8px",
+        "full": "9999px"
+      },
+      "spacing": {
+        "3xs": "4px",
+        "2xs": "8px",
+        "xs": "12px",
+        "sm": "16px",
+        "md": "24px",
+        "lg": "32px",
+        "xl": "48px",
+        "2xl": "64px",
+        "3xl": "96px",
+        "section-y": "136px"
+      }
+    }
+  }
+}

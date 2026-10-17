@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editorial Olive — Board</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { background: var(--paper); color: var(--ink); font-family: var(--font-sans); margin: 0; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 56px 24px 96px; }
+  h1 { font-family: var(--font-serif); font-weight: 400; font-size: 44px; line-height: 1.12; margin: 0 0 8px; }
+  .lede { color: var(--ink-600); font-size: 15px; line-height: 1.7; max-width: 60ch; margin: 0; }
+  .lede code { font-size: 13px; }
+  .grp { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--ink-45);
+          font-weight: 400; margin: 56px 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .grid { display: grid; gap: 24px; }
+  .card { margin: 0; border: 1px solid var(--line); background: var(--paper-soft); }
+  .card figcaption { display: flex; align-items: baseline; gap: 16px; padding: 12px 16px;
+                      border-bottom: 1px solid var(--line); font-size: 12px; color: var(--ink-500); }
+  .card figcaption b { font-size: 13px; color: var(--ink); font-weight: 500; }
+  .card figcaption a { margin-left: auto; color: var(--ink-500); text-decoration: none; }
+  .card figcaption a:hover { color: var(--ink); }
+  iframe { display: block; width: 100%; border: 0; background: var(--paper); }
+  .meta { margin-top: 40px; font-size: 13px; color: var(--ink-500); }
+  .meta a { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Editorial Olive</h1>
+  <p class="lede">Das Gestaltungssystem der Website von Stefanie Kaindl (Craniosacrale Körperarbeit &amp; Yoga).
+  Alle Zellen sind statische Renditionen: von Hand aus <code>src/app/globals.css</code> und
+  <code>src/components/**</code> geschrieben und über <code>tokens.css</code> + <code>bundle.css</code> gestaltet —
+  nicht die React-Komponenten. Chromium zeichnet iframe-Inhalte außerhalb des Sichtfelds nicht:
+  beim Screenshot das Fenster so hoch setzen oder die Seite durchscrollen, dass jede Zelle sichtbar war.</p>
+  <h2 class="grp">Cover</h2><div class="grid"><figure class="card">
+  <figcaption><b>Cover</b><a href="Cover/preview.html">preview.html</a><a href="Cover/README.md">README</a></figcaption>
+  <iframe src="Cover/preview.html" height="288" title="Cover"></iframe>
+</figure></div><h2 class="grp">Brand</h2><div class="grid"><figure class="card">
+  <figcaption><b>Mark</b><a href="Mark/preview.html">preview.html</a><a href="Mark/README.md">README</a></figcaption>
+  <iframe src="Mark/preview.html" height="505" title="Mark"></iframe>
+</figure></div><h2 class="grp">Navigation</h2><div class="grid"><figure class="card">
+  <figcaption><b>Navbar</b><a href="Navbar/preview.html">preview.html</a><a href="Navbar/README.md">README</a></figcaption>
+  <iframe src="Navbar/preview.html" height="257" title="Navbar"></iframe>
+</figure></div><h2 class="grp">Layout</h2><div class="grid"><figure class="card">
+  <figcaption><b>Hero</b><a href="Hero/preview.html">preview.html</a><a href="Hero/README.md">README</a></figcaption>
+  <iframe src="Hero/preview.html" height="580" title="Hero"></iframe>
+</figure></div><h2 class="grp">Text</h2><div class="grid"><figure class="card">
+  <figcaption><b>Label</b><a href="Label/preview.html">preview.html</a><a href="Label/README.md">README</a></figcaption>
+  <iframe src="Label/preview.html" height="350" title="Label"></iframe>
+</figure></div><h2 class="grp">Layout</h2><div class="grid"><figure class="card">
+  <figcaption><b>SectionHead</b><a href="SectionHead/preview.html">preview.html</a><a href="SectionHead/README.md">README</a></figcaption>
+  <iframe src="SectionHead/preview.html" height="608" title="SectionHead"></iframe>
+</figure><figure class="card">
+  <figcaption><b>PageIntro</b><a href="PageIntro/preview.html">preview.html</a><a href="PageIntro/README.md">README</a></figcaption>
+  <iframe src="PageIntro/preview.html" height="415" title="PageIntro"></iframe>
+</figure></div><h2 class="grp">Actions</h2><div class="grid"><figure class="card">
+  <figcaption><b>Button</b><a href="Button/preview.html">preview.html</a><a href="Button/README.md">README</a></figcaption>
+  <iframe src="Button/preview.html" height="440" title="Button"></iframe>
+</figure><figure class="card">
+  <figcaption><b>CtaLink</b><a href="CtaLink/preview.html">preview.html</a><a href="CtaLink/README.md">README</a></figcaption>
+  <iframe src="CtaLink/preview.html" height="374" title="CtaLink"></iframe>
+</figure></div><h2 class="grp">Content</h2><div class="grid"><figure class="card">
+  <figcaption><b>PriceRow</b><a href="PriceRow/preview.html">preview.html</a><a href="PriceRow/README.md">README</a></figcaption>
+  <iframe src="PriceRow/preview.html" height="471" title="PriceRow"></iframe>
+</figure><figure class="card">
+  <figcaption><b>Facts</b><a href="Facts/preview.html">preview.html</a><a href="Facts/README.md">README</a></figcaption>
+  <iframe src="Facts/preview.html" height="293" title="Facts"></iframe>
+</figure><figure class="card">
+  <figcaption><b>Quote</b><a href="Quote/preview.html">preview.html</a><a href="Quote/README.md">README</a></figcaption>
+  <iframe src="Quote/preview.html" height="441" title="Quote"></iframe>
+</figure><figure class="card">
+  <figcaption><b>Accordion</b><a href="Accordion/preview.html">preview.html</a><a href="Accordion/README.md">README</a></figcaption>
+  <iframe src="Accordion/preview.html" height="658" title="Accordion"></iframe>
+</figure><figure class="card">
+  <figcaption><b>CourseTable</b><a href="CourseTable/preview.html">preview.html</a><a href="CourseTable/README.md">README</a></figcaption>
+  <iframe src="CourseTable/preview.html" height="567" title="CourseTable"></iframe>
+</figure></div><h2 class="grp">Form</h2><div class="grid"><figure class="card">
+  <figcaption><b>Field</b><a href="Field/preview.html">preview.html</a><a href="Field/README.md">README</a></figcaption>
+  <iframe src="Field/preview.html" height="605" title="Field"></iframe>
+</figure></div><h2 class="grp">Media</h2><div class="grid"><figure class="card">
+  <figcaption><b>Photo</b><a href="Photo/preview.html">preview.html</a><a href="Photo/README.md">README</a></figcaption>
+  <iframe src="Photo/preview.html" height="469" title="Photo"></iframe>
+</figure></div><h2 class="grp">Navigation</h2><div class="grid"><figure class="card">
+  <figcaption><b>Footer</b><a href="Footer/preview.html">preview.html</a><a href="Footer/README.md">README</a></figcaption>
+  <iframe src="Footer/preview.html" height="1047" title="Footer"></iframe>
+</figure></div><h2 class="grp">Overlay</h2><div class="grid"><figure class="card">
+  <figcaption><b>CookieBanner</b><a href="CookieBanner/preview.html">preview.html</a><a href="CookieBanner/README.md">README</a></figcaption>
+  <iframe src="CookieBanner/preview.html" height="260" title="CookieBanner"></iframe>
+</figure></div>
+  <p class="meta">Tokens: <a href="../tokens.json">tokens.json</a> · <a href="../tokens.css">tokens.css</a> ·
+  Quelle: <a href="../../DESIGN.md">DESIGN.md</a> · Komponenten-Props: <a href="index.d.ts">index.d.ts</a></p>
+</div>
+</body>
+</html>

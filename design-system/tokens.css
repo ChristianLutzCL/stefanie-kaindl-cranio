@@ -1,0 +1,134 @@
+/* Editorial Olive — Design-Tokens der Website von Stefanie Kaindl.
+   Drop-in: die Datei enthält die Werte aus src/app/globals.css unverändert, dazu
+   die Rollen, die im Repo nur als Tailwind-Klassen (tailwind.config.ts) oder als
+   Klasse (.d2, .label, .btn-ink) existieren. Wer damit baut, trifft das System.
+
+   Kein Dark-Mode: die Seite hat keinen. Die „zweite Fläche" ist Olive bzw. das
+   dunkle Foto — dafür die --cream-* Gruppe. */
+
+:root {
+  /* --- Fläche: Papier ------------------------------------------------ */
+  --paper: #f3f0e9;          /* body */
+  --paper-soft: #f8f6f1;     /* aufgehellte Fläche (Karten, Kartenblock) */
+  --paper-deep: #eae6db;     /* gedämpft (Zitatband, Formularsektion, .ph-Grund) */
+  --paper-dark: #ded9cb;     /* dunkelste Papierstufe (Bildplatzhalter) */
+
+  /* --- Schrift: Tinte ------------------------------------------------ */
+  --ink: #1d1c17;            /* Überschriften, Primärtext — 15,0:1 auf Papier */
+  --ink-80: rgba(29, 28, 23, 0.8);   /* 8,3:1 auf Papier */
+  --ink-60: rgba(29, 28, 23, 0.68);  /* 5,5:1 Papier / 5,3:1 paper-deep */
+  --ink-45: rgba(29, 28, 23, 0.65);  /* 5,0:1 Papier / 4,8:1 paper-deep */
+  --ink-900: #1d1c17;
+  --ink-800: #3a3830;
+  --ink-700: #57554d;        /* 6,6:1 auf Papier */
+  --ink-600: #5f5d56;        /* 5,8:1 auf Papier */
+  --ink-500: #67655d;        /* 5,1:1 auf Papier / 4,7:1 paper-deep */
+  --ink-400: #8a877b;        /* 3,2:1 — NUR große Schrift (Preise, Zähler) */
+  --ink-100: #efece4;
+
+  /* --- Olive: die eine Akzentfarbe ---------------------------------- */
+  --olive: #616949;          /* 5,1:1 auf Papier */
+  --olive-deep: #4d5438;     /* Hover-Ziel, 7,0:1 auf Papier */
+  --olive-soft: #8d9375;     /* 2,8:1 — nur Dekor (Kreisbögen, Punkte) */
+  --olive-tint: #e5e7db;     /* leise Olive-Fläche (sichtbarer Punkt, Chips) */
+
+  /* --- Invers: Text auf Olive und auf dunklem Foto ------------------- */
+  --cream: #f3f0e9;          /* 5,1:1 auf Olive */
+  --cream-80: rgba(243, 240, 233, 0.92);  /* 4,6:1 auf Olive — kleinste Stufe */
+  --cream-70: rgba(243, 240, 233, 0.72);  /* 3,5:1 auf Olive — nur große Schrift */
+  --cream-60: rgba(243, 240, 233, 0.6);   /* 2,9:1 auf Olive — nur Dekor */
+  --cream-45: rgba(243, 240, 233, 0.45);  /* 2,3:1 auf Olive — nur Dekor */
+  --cream-15: rgba(243, 240, 233, 0.15);
+  --cream-70-photo: rgba(243, 240, 233, 0.72); /* auf Foto: 8,3:1 — hier reicht sie */
+
+  /* --- Linien ------------------------------------------------------- */
+  --line: rgba(29, 28, 23, 0.13);
+  --cream-line: rgba(243, 240, 233, 0.2);
+
+  /* --- Foto: ein Ton für alle Aufnahmen ----------------------------- */
+  --photo-ground: #241a11;   /* Grund unter dem Hero und dem Buchungsband */
+  --photo-veil: #6b7250;     /* Olive-Multiplikation über jedem Bild (.ph) */
+  --photo-veil-opacity: 0.14;
+  --photo-veil-deep: 0.42;
+  --photo-filter: sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99);
+  --photo-filter-hero: brightness(0.76) saturate(0.96) contrast(1.08);
+
+  /* --- Schatten: nur zwei ------------------------------------------- */
+  --warm-shadow: 0 1px 2px rgba(29, 28, 23, 0.04), 0 12px 32px -24px rgba(29, 28, 23, 0.35);
+  --card-shadow: 0 40px 80px -40px rgba(20, 16, 10, 0.6);
+  --on-photo-shadow: 0 1px 14px rgba(18, 14, 10, 0.5), 0 1px 3px rgba(18, 14, 10, 0.35);
+
+  /* --- Raster ------------------------------------------------------- */
+  --shell-max: 1560px;
+  --shell-pad: 1.5rem;
+  --measure: 46rem;          /* Standard-Textbreite (Startseiten-Einstieg) */
+  --measure-lead: 42rem;
+  --section-y: clamp(4rem, 8vw, 8.5rem);
+  --section-y-tight: clamp(3rem, 5.5vw, 6rem);
+  --anchor-offset: 6.5rem;
+
+  /* --- Schriftfamilien (die App überschreibt beide über next/font) --- */
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+
+  /* --- Typografie-Skala -------------------------------------------- */
+  --type-hero: clamp(1.95rem, 3.9vw, 3.75rem);   /* .d1-hero, lh 1.1 */
+  --type-d1: clamp(2.35rem, 6vw, 5.5rem);        /* .d1 */
+  --type-d2: clamp(1.7rem, 3vw, 2.9rem);         /* .d2 */
+  --type-d2-serif: clamp(2.15rem, 4.5vw, 4rem);  /* .display-serif.d2 */
+  --type-d3: clamp(1.3rem, 1.9vw, 1.8rem);       /* .d3 */
+  --type-quote: clamp(1.45rem, 2.9vw, 2.7rem);   /* .quote, lh 1.26 */
+  --type-lead-lg: clamp(1.05rem, 1.5vw, 1.4rem); /* .lead-lg, lh 1.38 */
+  --type-lead: clamp(0.95rem, 1vw, 1.125rem);    /* .lead, lh 1.65 */
+  --type-body: 0.9375rem;                        /* .body-copy, lh 1.75 */
+  --type-small: 0.875rem;                        /* häufigster Fließtext der Sektionen */
+  --type-meta: 0.6875rem;                        /* .meta-line */
+  --type-label: 0.625rem;                        /* .label */
+  --type-price: clamp(1.5rem, 2vw, 1.85rem);
+  --type-mark: 1.05rem;                          /* Wortmarke Kopfzeile, mobil */
+  --type-mark-lg: 1.3rem;                        /* Wortmarke Kopfzeile, ab md */
+
+  --tracking-display: -0.015em;   /* .display */
+  --tracking-label: 0.055em;      /* .label */
+  --tracking-caps: 0.18em;        /* .label-caps, Wortmarke */
+  --tracking-sub: 0.36em;         /* „Cranio Sacral" unter der Wortmarke */
+  --tracking-marquee: 0.4em;
+
+  /* --- Radien: die Skala ist dünn ----------------------------------- */
+  --radius-none: 0px;        /* Standard: Flächen, Felder, Bilder, Preiszeilen */
+  --radius-xs: 6px;          /* rounded-md — kleine Chips */
+  --radius-sm: 8px;          /* rounded-lg — die wenigen Karten */
+  --radius-full: 9999px;     /* jeder Button, jede Pille, jeder Punkt */
+
+  /* --- Bewegung ----------------------------------------------------- */
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-hover: 200ms;
+  --dur-state: 300ms;
+  --dur-reveal: 900ms;
+  --dur-hero: 1.1s;
+
+  /* --- Semantische Aliase (Rollen statt Farbnamen) ------------------ */
+  --canvas: var(--paper);
+  --surface: var(--paper-soft);
+  --surface-2: var(--paper-deep);
+  --text: var(--ink);
+  --text-2: var(--ink-60);
+  --text-3: var(--ink-45);
+  --text-strong: var(--ink-80);
+  --accent: var(--olive);
+  --accent-strong: var(--olive-deep);
+  --accent-soft: var(--olive-soft);
+  --border: var(--line);
+  --border-inverse: var(--cream-line);
+  --focus-ring: var(--olive);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--olive); color: var(--cream); }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }

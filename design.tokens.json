@@ -1,0 +1,544 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Ruhige redaktionelle Praxis-Website: Papier statt Weiß, Tinte statt Schwarz, eine einzige Akzentfarbe (Olive). Haarlinien statt Rahmen, zwei Schriften mit klarer Rollenteilung, viel Weißraum, Bewegung nur als leises Einblenden.",
+  "color": {
+    "$type": "color",
+    "primary": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.38,
+          0.412,
+          0.286
+        ],
+        "hex": "#616949"
+      }
+    },
+    "primary-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.302,
+          0.329,
+          0.22
+        ],
+        "hex": "#4d5438"
+      }
+    },
+    "primary-soft": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.553,
+          0.576,
+          0.459
+        ],
+        "hex": "#8d9375"
+      }
+    },
+    "primary-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.898,
+          0.906,
+          0.859
+        ],
+        "hex": "#e5e7db"
+      }
+    },
+    "neutral": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.953,
+          0.941,
+          0.914
+        ],
+        "hex": "#f3f0e9"
+      }
+    },
+    "paper-soft": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.973,
+          0.965,
+          0.945
+        ],
+        "hex": "#f8f6f1"
+      }
+    },
+    "paper-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.918,
+          0.902,
+          0.859
+        ],
+        "hex": "#eae6db"
+      }
+    },
+    "paper-dark": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.871,
+          0.851,
+          0.796
+        ],
+        "hex": "#ded9cb"
+      }
+    },
+    "ink": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.114,
+          0.11,
+          0.09
+        ],
+        "hex": "#1d1c17"
+      }
+    },
+    "ink-stark": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.227,
+          0.22,
+          0.188
+        ],
+        "hex": "#3a3830"
+      }
+    },
+    "ink-muted": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.341,
+          0.333,
+          0.302
+        ],
+        "hex": "#57554d"
+      }
+    },
+    "ink-body": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.404,
+          0.396,
+          0.365
+        ],
+        "hex": "#67655d"
+      }
+    },
+    "ink-faint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.541,
+          0.529,
+          0.482
+        ],
+        "hex": "#8a877b"
+      }
+    },
+    "on-dark": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.953,
+          0.941,
+          0.914
+        ],
+        "hex": "#f3f0e9"
+      }
+    },
+    "on-dark-muted": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.953,
+          0.941,
+          0.914
+        ],
+        "hex": "#f3f0e9b8"
+      }
+    },
+    "on-dark-faint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.953,
+          0.941,
+          0.914
+        ],
+        "hex": "#f3f0e973"
+      }
+    },
+    "on-dark-veil": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.953,
+          0.941,
+          0.914
+        ],
+        "hex": "#f3f0e91f"
+      }
+    },
+    "line": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.114,
+          0.11,
+          0.09
+        ],
+        "hex": "#1d1c1721"
+      }
+    },
+    "line-inverse": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.953,
+          0.941,
+          0.914
+        ],
+        "hex": "#f3f0e933"
+      }
+    },
+    "white": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#ffffff"
+      }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "3xs": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "2xs": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "xs": {
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "md": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      }
+    },
+    "xl": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      }
+    },
+    "2xl": {
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      }
+    },
+    "3xl": {
+      "$value": {
+        "value": 96,
+        "unit": "px"
+      }
+    },
+    "section-y": {
+      "$value": {
+        "value": 136,
+        "unit": "px"
+      }
+    }
+  },
+  "rounded": {
+    "$type": "dimension",
+    "none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      }
+    },
+    "xs": {
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "full": {
+      "$value": {
+        "value": 9999,
+        "unit": "px"
+      }
+    }
+  },
+  "typography": {
+    "display-1": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 60,
+          "unit": "px"
+        },
+        "fontWeight": 300,
+        "letterSpacing": {
+          "value": -0.015,
+          "unit": "em"
+        }
+      }
+    },
+    "display-1-serif": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cormorant Garamond",
+        "fontSize": {
+          "value": 64,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "display-2": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cormorant Garamond",
+        "fontSize": {
+          "value": 46,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "display-3": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cormorant Garamond",
+        "fontSize": {
+          "value": 29,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "quote": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 43,
+          "unit": "px"
+        },
+        "fontWeight": 300,
+        "letterSpacing": {
+          "value": -0.01,
+          "unit": "em"
+        }
+      }
+    },
+    "lead-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 22,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "lead": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 18,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "body": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 15,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "meta": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 11,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0.02,
+          "unit": "em"
+        }
+      }
+    },
+    "label": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 10,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0.055,
+          "unit": "em"
+        }
+      }
+    },
+    "label-caps": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 10,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0.18,
+          "unit": "em"
+        }
+      }
+    },
+    "serif-title": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cormorant Garamond",
+        "fontSize": {
+          "value": 26,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "brand-mark": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cormorant Garamond",
+        "fontSize": {
+          "value": 21,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "letterSpacing": {
+          "value": 0.18,
+          "unit": "em"
+        }
+      }
+    },
+    "brand-sub": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cormorant Garamond",
+        "fontSize": {
+          "value": 9,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "letterSpacing": {
+          "value": 0.36,
+          "unit": "em"
+        }
+      }
+    },
+    "button": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Hanken Grotesk",
+        "fontSize": {
+          "value": 13,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    }
+  }
+}

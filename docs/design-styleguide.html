@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Editorial Olive — Styleguide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f3f0e9; --paper-soft:#f8f6f1; --paper-deep:#eae6db; --paper-dark:#ded9cb;
+    --ink:#1d1c17; --ink-stark:#3a3830; --ink-muted:#57554d; --ink-body:#67655d; --ink-faint:#8a877b;
+    --olive:#616949; --olive-deep:#4d5438; --olive-soft:#8d9375; --olive-tint:#e5e7db;
+    --cream:#f3f0e9; --cream-80:rgba(243,240,233,.8); --cream-70:rgba(243,240,233,.72);
+    --cream-45:rgba(243,240,233,.45); --cream-line:rgba(243,240,233,.2);
+    --line:rgba(29,28,23,.13);
+    --sans:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+    --serif:"Cormorant Garamond",Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:1100px;margin:0 auto;padding:56px 32px 96px}
+  h1,h2,h3{margin:0}
+  .mark{font-family:var(--serif);text-transform:uppercase;letter-spacing:.18em;font-weight:500;font-size:24px}
+  .mark small{display:block;font-size:10px;letter-spacing:.36em;color:var(--olive);margin-top:6px}
+  .kicker{font-family:var(--serif);font-size:44px;font-weight:400;line-height:1.12;letter-spacing:0}
+  .sec{margin-top:72px}
+  .sec > h2{font-family:var(--serif);font-size:30px;font-weight:400;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .note{color:var(--ink-body);font-size:14px;margin:14px 0 0;max-width:70ch}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));margin-top:26px}
+  .sw{border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--paper-soft)}
+  .sw .chip{height:82px}
+  .sw .meta{padding:10px 12px;font-size:12px}
+  .sw .meta b{display:block;font-weight:500;font-size:13px}
+  .sw .meta span{color:var(--ink-body);font-variant-numeric:tabular-nums}
+  .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:26px}
+  table{width:100%;border-collapse:collapse;margin-top:22px;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-top:1px solid var(--line);vertical-align:baseline}
+  th{font-weight:500;font-size:11px;letter-spacing:.055em;text-transform:uppercase;color:var(--ink-muted)}
+  td:first-child{white-space:nowrap}
+  .spec{font-family:var(--serif);color:var(--olive)}
+  /* type specimen */
+  .spec-row{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:baseline;padding:16px 0;border-top:1px solid var(--line)}
+  .spec-row .lbl{font-size:10px;letter-spacing:.055em;color:var(--ink-muted);display:inline-flex;align-items:center;gap:8px}
+  .spec-row .lbl::before{content:"";width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.75}
+  .t-d1{font-family:var(--serif);font-size:56px;line-height:1.1;font-weight:400;letter-spacing:0;text-wrap:balance}
+  .t-quote{font-size:36px;font-weight:300;line-height:1.26;letter-spacing:-.01em}
+  .t-lead-lg{font-size:20px;line-height:1.38}
+  .t-lead{font-size:17px;line-height:1.65;color:var(--cream-80)}
+  .t-body{font-size:15px;line-height:1.75;color:var(--ink-body)}
+  .t-meta{font-size:11px;letter-spacing:.02em;color:var(--ink-muted)}
+  .t-label{font-size:10px;letter-spacing:.055em;color:var(--ink-muted);display:inline-flex;align-items:center;gap:8px}
+  .t-label::before{content:"";width:3.5px;height:3.5px;border-radius:50%;background:currentColor;opacity:.75}
+  .t-caps{text-transform:uppercase;letter-spacing:.18em}
+  em.acc{font-style:italic;font-weight:inherit;font-size:1em}
+  /* components */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:9999px;padding:15px 28px;font-size:13px;line-height:1;border:1px solid transparent;cursor:pointer;font-family:var(--sans);text-decoration:none}
+  .btn-ink{background:var(--ink);color:var(--paper)}
+  .btn-olive{background:var(--olive);color:var(--cream)}
+  .btn-outline{border-color:var(--line);color:var(--ink);background:transparent}
+  .btn-cream{background:var(--cream);color:var(--ink)}
+  .btn-outline-cream{border-color:var(--cream-45);color:var(--cream);background:transparent}
+  .pill{display:inline-flex;align-items:center;gap:8px;border-radius:9999px;border:1px solid rgba(243,240,233,.28);background:rgba(243,240,233,.12);padding:7px 14px;font-size:10px;letter-spacing:.055em;color:var(--cream-70);backdrop-filter:blur(6px)}
+  .pill::before{content:"";width:3.5px;height:3.5px;border-radius:50%;background:currentColor;opacity:.85}
+  .field{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:8px 0;font-size:15px;color:var(--ink);font-family:var(--sans)}
+  .field::placeholder{color:var(--ink-muted)}
+  .card-olive{background:var(--olive);color:var(--cream);border-radius:8px;padding:32px}
+  .price{font-family:var(--serif);font-size:34px;font-weight:500;line-height:1;font-variant-numeric:lining-nums}
+  .price span{font-size:.55em;color:var(--cream-70)}
+  .hair{border:0;border-top:1px solid var(--line);margin:22px 0}
+  .cta{display:inline-flex;align-items:center;gap:7px;font-size:14px;color:var(--ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+  .band{background:var(--olive);color:var(--cream);border-radius:6px;padding:28px 32px;margin-top:26px}
+  .dots{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .dot{display:flex;flex-direction:column;gap:8px;align-items:center;font-size:11px;color:var(--ink-muted)}
+  .dot i{display:block;background:var(--olive-soft);opacity:.9}
+  .ph{position:relative;overflow:hidden;background:var(--paper-deep);border-radius:6px;height:150px}
+  .ph img{width:100%;height:100%;object-fit:cover;filter:sepia(.16) saturate(.86) contrast(1.03) brightness(.99)}
+  .ph::after{content:"";position:absolute;inset:0;background:#6b7250;mix-blend-mode:multiply;opacity:.14}
+  .bad{color:#9a3b2b}
+  .ok{color:var(--olive-deep)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:var(--paper-deep);padding:2px 5px;border-radius:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="mark">Stefanie Kaindl<small>Cranio Sacrale</small></div>
+  <h1 class="kicker" style="margin-top:28px">Editorial Olive — Styleguide</h1>
+  <p class="note">Papier statt Weiß, Tinte statt Schwarz, eine einzige Akzentfarbe. Haarlinien statt Rahmen, zwei Schriften mit klarer Rollenteilung. Dies ist die visuelle Fassung von <code>DESIGN.md</code>.</p>
+
+  <section class="sec">
+    <h2>Farben</h2>
+    <p class="note">Kontrastwerte gegen die tatsächliche Fläche (WCAG AA = 4,5:1 für Text, 3:1 für große Grade).</p>
+    <div class="grid">
+      <div class="sw"><div class="chip" style="background:#616949"></div><div class="meta"><b>primary</b><span>#616949 · Olive</span></div></div>
+      <div class="sw"><div class="chip" style="background:#4d5438"></div><div class="meta"><b>primary-deep</b><span>#4d5438 · Hover</span></div></div>
+      <div class="sw"><div class="chip" style="background:#8d9375"></div><div class="meta"><b>primary-soft</b><span>#8d9375 · Dekor</span></div></div>
+      <div class="sw"><div class="chip" style="background:#e5e7db"></div><div class="meta"><b>primary-tint</b><span>#e5e7db · Fläche</span></div></div>
+      <div class="sw"><div class="chip" style="background:#f3f0e9"></div><div class="meta"><b>neutral</b><span>#f3f0e9 · Papier</span></div></div>
+      <div class="sw"><div class="chip" style="background:#f8f6f1"></div><div class="meta"><b>paper-soft</b><span>#f8f6f1</span></div></div>
+      <div class="sw"><div class="chip" style="background:#eae6db"></div><div class="meta"><b>paper-deep</b><span>#eae6db</span></div></div>
+      <div class="sw"><div class="chip" style="background:#ded9cb"></div><div class="meta"><b>paper-dark</b><span>#ded9cb · Bildplatz</span></div></div>
+      <div class="sw"><div class="chip" style="background:#1d1c17"></div><div class="meta"><b>ink</b><span>#1d1c17 · 15,0:1</span></div></div>
+      <div class="sw"><div class="chip" style="background:#3a3830"></div><div class="meta"><b>ink-stark</b><span>#3a3830 · 10,3:1</span></div></div>
+      <div class="sw"><div class="chip" style="background:#57554d"></div><div class="meta"><b>ink-muted</b><span>#57554d · 6,6:1</span></div></div>
+      <div class="sw"><div class="chip" style="background:#67655d"></div><div class="meta"><b>ink-body</b><span>#67655d · 5,3:1</span></div></div>
+      <div class="sw"><div class="chip" style="background:#8a877b"></div><div class="meta"><b class="bad">ink-faint</b><span>#8a877b · 3,2:1 nur groß</span></div></div>
+      <div class="sw"><div class="chip" style="background:rgba(29,28,23,.13);position:relative"></div><div class="meta"><b>line</b><span>rgba(29,28,23,.13)</span></div></div>
+      <div class="sw"><div class="chip" style="background:#616949;display:flex;align-items:center;justify-content:center"><div style="width:100%;height:1px;background:rgba(243,240,233,.2)"></div></div><div class="meta"><b>line-inverse</b><span>rgba(243,240,233,.2)</span></div></div>
+      <div class="sw"><div class="chip" style="background:#616949"></div><div class="meta"><b>on-dark-muted</b><span class="bad">cream-70 · 3,5:1</span></div></div>
+    </div>
+    <table>
+      <tr><th>Paarung</th><th>Verhältnis</th><th>Urteil</th></tr>
+      <tr><td>Tinte auf Papier</td><td>15,0:1</td><td class="ok">AA / AAA</td></tr>
+      <tr><td>Papier auf Tinte (Primärbutton)</td><td>15,0:1</td><td class="ok">AA / AAA</td></tr>
+      <tr><td>Papier auf Olive (Accent)</td><td>5,1:1</td><td class="ok">AA</td></tr>
+      <tr><td>ink-body auf Papier-deep</td><td>5,3:1</td><td class="ok">AA</td></tr>
+      <tr><td>cream-70 (Kleinschrift) auf Olive</td><td>3,5:1</td><td class="bad">unter AA — volles cream nehmen</td></tr>
+      <tr><td>cream-45 auf Olive</td><td>2,3:1</td><td class="bad">nur Zierde, nie Text</td></tr>
+      <tr><td>ink-faint auf Papier</td><td>3,2:1</td><td class="bad">nur ≥ 24 px</td></tr>
+    </table>
+  </section>
+
+  <section class="sec">
+    <h2>Typografie</h2>
+    <p class="note">Hanken Grotesk = alles Lesbare (300/400/500). Cormorant Garamond = Wortmarke, Sektions- und Karten-Überschriften, Zitate, Preise (400/500). Nie eine dritte Familie, nie zwei Familien in einer Zeile.</p>
+    <div class="spec-row"><span class="lbl">display-1-serif</span><div class="t-d1">Raum, um <em class="acc">anzukommen.</em></div></div>
+    <div class="spec-row"><span class="lbl">quote</span><div class="t-quote">„Nach jahrelangen Kopfschmerzen habe ich endlich Linderung gefunden.“</div></div>
+    <div class="spec-row"><span class="lbl">lead-lg</span><div class="t-lead-lg">Ein Druck von nur etwa fünf Gramm — so leicht wie das Gewicht einer Münze.</div></div>
+    <div class="spec-row"><span class="lbl">body</span><div class="t-body">Der craniosacrale Rhythmus wird ertastet, nicht gedrückt. Die Arbeit wirkt körperlich und emotional: bei Schmerzen, Migräne und Verspannungen ebenso wie bei Stress und Schlafproblemen.</div></div>
+    <div class="spec-row"><span class="lbl">meta / label</span><div><div class="t-meta">Cranio · 60 Minuten</div><div class="t-label" style="margin-top:8px">Meine Arbeitsweise</div><div class="t-label t-caps" style="margin-top:8px">Termin</div></div></div>
+    <div class="spec-row"><span class="lbl">serif-title / Preis</span><div><div style="font-family:var(--serif);font-size:30px;font-weight:500;font-variant-numeric:lining-nums">Craniosacrale Körperarbeit <span style="color:var(--ink-muted)">/ 60 Minuten</span></div><div class="price" style="color:var(--ink);margin-top:10px">90 € <span style="color:var(--ink-muted)">/ Sitzung</span></div></div></div>
+  </section>
+
+  <section class="sec">
+    <h2>Komponenten</h2>
+    <div class="row">
+      <a class="btn btn-ink" href="#">Termin buchen</a>
+      <a class="btn btn-olive" href="#">Platz reservieren</a>
+      <a class="btn btn-outline" href="#">Mehr erfahren</a>
+    </div>
+    <div class="band">
+      <div class="row" style="margin-top:0">
+        <a class="btn btn-cream" href="#">Zum Formular</a>
+        <a class="btn btn-outline-cream" href="#">Anrufen</a>
+        <span class="pill">Movement · 6 min</span>
+      </div>
+      <hr style="border:0;border-top:1px solid var(--cream-line);margin:26px 0" />
+      <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div><div class="t-label" style="color:var(--cream-70)">Label auf Olive</div><p class="t-lead" style="margin:8px 0 0;font-size:16px">Gedämpfter Text — hier ist <b style="color:var(--cream)">volles cream</b> für Kleinschrift Pflicht.</p></div>
+        <div><div class="t-caps" style="font-size:11px;letter-spacing:.4em;color:var(--cream-45)">Laufschrift</div><p style="color:var(--cream-45);font-size:12px;margin:8px 0 0">cream-45 — Zierzeile, 2,3:1</p></div>
+      </div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <div class="card-olive">
+        <div class="t-label" style="color:var(--cream)">Cranio · 60 Minuten</div>
+        <div style="font-family:var(--serif);font-size:26px;font-weight:500;margin-top:14px">Erwachsene</div>
+        <hr style="border:0;border-top:1px solid var(--cream-line);margin:18px 0" />
+        <div class="price">90 € <span>/ Sitzung</span></div>
+      </div>
+      <div class="ph"><img alt="Beispielfoto mit warmer Gradiation" src="https://picsum.photos/seed/olive/800/600" /></div>
+      <div>
+        <input class="field" placeholder="Deine E-Mail" />
+        <input class="field" placeholder="Nachricht" style="margin-top:18px" />
+        <p style="margin-top:22px"><a class="cta" href="#">Mehr über mich ↗</a></p>
+        <p style="margin-top:18px"><a class="cta" href="#" style="color:var(--olive)">Termin buchen ↗</a></p>
+      </div>
+    </div>
+    <p class="note">Bildfläche <code>.ph</code>: Radius 6 px, Gradiation <code>sepia(.16) saturate(.86) contrast(1.03)</code> plus Olive-Multiplikation 14 % — so sitzen alle Fotos im selben warmen Ton. Text steht unter dem Bild, nie als Overlay.</p>
+  </section>
+
+  <section class="sec">
+    <h2>Form &amp; Abstand</h2>
+    <div class="dots">
+      <div class="dot"><i style="width:26px;height:26px;border-radius:0"></i>none 0</div>
+      <div class="dot"><i style="width:26px;height:26px;border-radius:6px"></i>xs 6px</div>
+      <div class="dot"><i style="width:26px;height:26px;border-radius:8px"></i>sm 8px</div>
+      <div class="dot"><i style="width:26px;height:26px;border-radius:9999px"></i>full</div>
+    </div>
+    <table>
+      <tr><th>Token</th><th>Wert</th><th>Verwendung</th></tr>
+      <tr><td>shell</td><td>max 1560 px, pad 24/40/56 px</td><td>ein Container für Kopfzeile und Sektionen</td></tr>
+      <tr><td>section-y</td><td>clamp(4rem, 8vw, 8.5rem)</td><td>vertikaler Rhythmus, 64–136 px</td></tr>
+      <tr><td>Spacing</td><td>4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 px</td><td>Abstände innerhalb einer Sektion</td></tr>
+      <tr><td>warm-shadow</td><td>0 1px 2px rgba(29,28,23,.04), 0 12px 32px -24px rgba(29,28,23,.35)</td><td>nur schwebende Elemente</td></tr>
+      <tr><td>Übergänge</td><td>200–350 ms</td><td>cubic-bezier(.2,.7,.2,1)</td></tr>
+      <tr><td>Reveal</td><td>900 ms, 16 px Versatz</td><td>für <code>[data-reveal]</code>; reduced-motion schaltet ab</td></tr>
+    </table>
+  </section>
+
+</div>
+</body>
+</html>

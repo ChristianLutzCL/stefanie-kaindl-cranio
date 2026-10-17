@@ -1,0 +1,1559 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editorial Olive — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens und Komponenten-CSS des Bundles, inline ===== */
+/* Editorial Olive — Design-Tokens der Website von Stefanie Kaindl.
+   Drop-in: die Datei enthält die Werte aus src/app/globals.css unverändert, dazu
+   die Rollen, die im Repo nur als Tailwind-Klassen (tailwind.config.ts) oder als
+   Klasse (.d2, .label, .btn-ink) existieren. Wer damit baut, trifft das System.
+
+   Kein Dark-Mode: die Seite hat keinen. Die „zweite Fläche" ist Olive bzw. das
+   dunkle Foto — dafür die --cream-* Gruppe. */
+
+:root {
+  /* --- Fläche: Papier ------------------------------------------------ */
+  --paper: #f3f0e9;          /* body */
+  --paper-soft: #f8f6f1;     /* aufgehellte Fläche (Karten, Kartenblock) */
+  --paper-deep: #eae6db;     /* gedämpft (Zitatband, Formularsektion, .ph-Grund) */
+  --paper-dark: #ded9cb;     /* dunkelste Papierstufe (Bildplatzhalter) */
+
+  /* --- Schrift: Tinte ------------------------------------------------ */
+  --ink: #1d1c17;            /* Überschriften, Primärtext — 15,0:1 auf Papier */
+  --ink-80: rgba(29, 28, 23, 0.8);   /* 8,3:1 auf Papier */
+  --ink-60: rgba(29, 28, 23, 0.68);  /* 5,5:1 Papier / 5,3:1 paper-deep */
+  --ink-45: rgba(29, 28, 23, 0.65);  /* 5,0:1 Papier / 4,8:1 paper-deep */
+  --ink-900: #1d1c17;
+  --ink-800: #3a3830;
+  --ink-700: #57554d;        /* 6,6:1 auf Papier */
+  --ink-600: #5f5d56;        /* 5,8:1 auf Papier */
+  --ink-500: #67655d;        /* 5,1:1 auf Papier / 4,7:1 paper-deep */
+  --ink-400: #8a877b;        /* 3,2:1 — NUR große Schrift (Preise, Zähler) */
+  --ink-100: #efece4;
+
+  /* --- Olive: die eine Akzentfarbe ---------------------------------- */
+  --olive: #616949;          /* 5,1:1 auf Papier */
+  --olive-deep: #4d5438;     /* Hover-Ziel, 7,0:1 auf Papier */
+  --olive-soft: #8d9375;     /* 2,8:1 — nur Dekor (Kreisbögen, Punkte) */
+  --olive-tint: #e5e7db;     /* leise Olive-Fläche (sichtbarer Punkt, Chips) */
+
+  /* --- Invers: Text auf Olive und auf dunklem Foto ------------------- */
+  --cream: #f3f0e9;          /* 5,1:1 auf Olive */
+  --cream-80: rgba(243, 240, 233, 0.92);  /* 4,6:1 auf Olive — kleinste Stufe */
+  --cream-70: rgba(243, 240, 233, 0.72);  /* 3,5:1 auf Olive — nur große Schrift */
+  --cream-60: rgba(243, 240, 233, 0.6);   /* 2,9:1 auf Olive — nur Dekor */
+  --cream-45: rgba(243, 240, 233, 0.45);  /* 2,3:1 auf Olive — nur Dekor */
+  --cream-15: rgba(243, 240, 233, 0.15);
+  --cream-70-photo: rgba(243, 240, 233, 0.72); /* auf Foto: 8,3:1 — hier reicht sie */
+
+  /* --- Linien ------------------------------------------------------- */
+  --line: rgba(29, 28, 23, 0.13);
+  --cream-line: rgba(243, 240, 233, 0.2);
+
+  /* --- Foto: ein Ton für alle Aufnahmen ----------------------------- */
+  --photo-ground: #241a11;   /* Grund unter dem Hero und dem Buchungsband */
+  --photo-veil: #6b7250;     /* Olive-Multiplikation über jedem Bild (.ph) */
+  --photo-veil-opacity: 0.14;
+  --photo-veil-deep: 0.42;
+  --photo-filter: sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99);
+  --photo-filter-hero: brightness(0.76) saturate(0.96) contrast(1.08);
+
+  /* --- Schatten: nur zwei ------------------------------------------- */
+  --warm-shadow: 0 1px 2px rgba(29, 28, 23, 0.04), 0 12px 32px -24px rgba(29, 28, 23, 0.35);
+  --card-shadow: 0 40px 80px -40px rgba(20, 16, 10, 0.6);
+  --on-photo-shadow: 0 1px 14px rgba(18, 14, 10, 0.5), 0 1px 3px rgba(18, 14, 10, 0.35);
+
+  /* --- Raster ------------------------------------------------------- */
+  --shell-max: 1560px;
+  --shell-pad: 1.5rem;
+  --measure: 46rem;          /* Standard-Textbreite (Startseiten-Einstieg) */
+  --measure-lead: 42rem;
+  --section-y: clamp(4rem, 8vw, 8.5rem);
+  --section-y-tight: clamp(3rem, 5.5vw, 6rem);
+  --anchor-offset: 6.5rem;
+
+  /* --- Schriftfamilien (die App überschreibt beide über next/font) --- */
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+
+  /* --- Typografie-Skala -------------------------------------------- */
+  --type-hero: clamp(1.95rem, 3.9vw, 3.75rem);   /* .d1-hero, lh 1.1 */
+  --type-d1: clamp(2.35rem, 6vw, 5.5rem);        /* .d1 */
+  --type-d2: clamp(1.7rem, 3vw, 2.9rem);         /* .d2 */
+  --type-d2-serif: clamp(2.15rem, 4.5vw, 4rem);  /* .display-serif.d2 */
+  --type-d3: clamp(1.3rem, 1.9vw, 1.8rem);       /* .d3 */
+  --type-quote: clamp(1.45rem, 2.9vw, 2.7rem);   /* .quote, lh 1.26 */
+  --type-lead-lg: clamp(1.05rem, 1.5vw, 1.4rem); /* .lead-lg, lh 1.38 */
+  --type-lead: clamp(0.95rem, 1vw, 1.125rem);    /* .lead, lh 1.65 */
+  --type-body: 0.9375rem;                        /* .body-copy, lh 1.75 */
+  --type-small: 0.875rem;                        /* häufigster Fließtext der Sektionen */
+  --type-meta: 0.6875rem;                        /* .meta-line */
+  --type-label: 0.625rem;                        /* .label */
+  --type-price: clamp(1.5rem, 2vw, 1.85rem);
+  --type-mark: 1.05rem;                          /* Wortmarke Kopfzeile, mobil */
+  --type-mark-lg: 1.3rem;                        /* Wortmarke Kopfzeile, ab md */
+
+  --tracking-display: -0.015em;   /* .display */
+  --tracking-label: 0.055em;      /* .label */
+  --tracking-caps: 0.18em;        /* .label-caps, Wortmarke */
+  --tracking-sub: 0.36em;         /* „Cranio Sacral" unter der Wortmarke */
+  --tracking-marquee: 0.4em;
+
+  /* --- Radien: die Skala ist dünn ----------------------------------- */
+  --radius-none: 0px;        /* Standard: Flächen, Felder, Bilder, Preiszeilen */
+  --radius-xs: 6px;          /* rounded-md — kleine Chips */
+  --radius-sm: 8px;          /* rounded-lg — die wenigen Karten */
+  --radius-full: 9999px;     /* jeder Button, jede Pille, jeder Punkt */
+
+  /* --- Bewegung ----------------------------------------------------- */
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-hover: 200ms;
+  --dur-state: 300ms;
+  --dur-reveal: 900ms;
+  --dur-hero: 1.1s;
+
+  /* --- Semantische Aliase (Rollen statt Farbnamen) ------------------ */
+  --canvas: var(--paper);
+  --surface: var(--paper-soft);
+  --surface-2: var(--paper-deep);
+  --text: var(--ink);
+  --text-2: var(--ink-60);
+  --text-3: var(--ink-45);
+  --text-strong: var(--ink-80);
+  --accent: var(--olive);
+  --accent-strong: var(--olive-deep);
+  --accent-soft: var(--olive-soft);
+  --border: var(--line);
+  --border-inverse: var(--cream-line);
+  --focus-ring: var(--olive);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--olive); color: var(--cream); }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+
+/* Editorial Olive — statische Renditionen der Komponenten der Website
+   stefanie-kaindl-cranio.de.
+   Von Hand aus src/app/globals.css, src/components/** und den Seiten geschrieben:
+   jede Tailwind-Klasse ist hier eine CSS-Regel über den Tokens (tokens.css).
+   Hanken Grotesk + Cormorant Garamond sind im Projekt Google-Fonts (next/font/google). */
+
+/* Wie Tailwinds Preflight: ohne border-box addiert .eo-shell seine Innenabstände
+   zur Breite und die Seite läuft horizontal über. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--olive); color: var(--cream); }
+:focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; }
+
+/* --- Hilfsrahmen der Vorschau (kein Teil des Systems) --------------------- */
+.eo-frame { padding: 28px; }
+.eo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.eo-stack { display: grid; gap: 16px; }
+.eo-stack-sm { display: grid; gap: 8px; }
+.eo-band-olive { background: var(--olive); color: var(--cream); }
+.eo-band-deep { background: var(--paper-deep); }
+.eo-band-dark { background: var(--photo-ground); color: var(--cream); }
+.eo-note { font-size: 12px; color: var(--ink-500); }
+
+/* --- Raster: EIN Container für Kopfzeile und Sektionen ------------------- */
+.eo-shell { width: 100%; margin-inline: auto; max-width: var(--shell-max); padding-inline: 1.5rem; }
+@media (min-width: 768px) { .eo-shell { padding-inline: 2.5rem; } }
+@media (min-width: 1280px) { .eo-shell { padding-inline: 3.5rem; } }
+.eo-section { padding-block: var(--section-y); }
+.eo-section-tight { padding-block: var(--section-y-tight); }
+
+/* --- Typografie ---------------------------------------------------------- */
+.eo-display {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+.eo-display-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+.eo-display em, .eo-accent { font-style: italic; font-weight: inherit; font-size: 1em; line-height: inherit; }
+.eo-d1-hero { font-size: var(--type-hero); line-height: 1.1; }
+.eo-d1-hero > span { display: block; text-wrap: balance; }
+.eo-d1 { font-size: var(--type-d1); }
+.eo-d2 { font-size: var(--type-d2); }
+.eo-display-serif.eo-d2 { font-size: var(--type-d2-serif); }
+.eo-d3 { font-size: var(--type-d3); }
+.eo-serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-variant-numeric: lining-nums;   /* Cormorant setzt sonst Mediävalziffern */
+}
+.eo-quote {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: var(--type-quote);
+  line-height: 1.26;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+.eo-quote-cream { color: var(--cream); }
+.eo-quote em { font-style: italic; font-weight: inherit; font-size: 1em; }
+.eo-lead-lg { font-size: var(--type-lead-lg); line-height: 1.38; color: var(--ink); margin: 0; }
+.eo-lead-lg-cream { color: var(--cream-80); }
+.eo-lead { font-size: var(--type-lead); line-height: 1.65; color: var(--ink-60); margin: 0; }
+.eo-body-copy { font-size: var(--type-body); line-height: 1.75; color: var(--ink-60); margin: 0; }
+.eo-body { font-size: var(--type-small); line-height: 1.6; color: var(--ink-600); margin: 0; }
+.eo-meta-line { font-size: var(--type-meta); line-height: 1.4; letter-spacing: 0.02em; color: var(--ink-45); }
+.eo-small { font-size: 0.75rem; line-height: 1.6; color: var(--ink-500); }
+
+/* --- Label / Eyebrow ----------------------------------------------------- */
+.eo-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--type-label);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink-60);
+}
+.eo-label::before {
+  content: "";
+  width: 0.22rem; height: 0.22rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.75;
+  flex: none;
+}
+.eo-label-caps { text-transform: uppercase; letter-spacing: var(--tracking-caps); }
+.eo-label-inverse { color: var(--cream-70); }
+.eo-on-olive { color: var(--cream); }
+.eo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(243, 240, 233, 0.28);
+  background-color: rgba(243, 240, 233, 0.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0.45rem 0.9rem;
+  font-size: var(--type-label);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-label);
+  color: var(--cream-70);
+}
+.eo-pill::before {
+  content: "";
+  width: 0.22rem; height: 0.22rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.85;
+  flex: none;
+}
+.eo-on-photo {
+  text-shadow: 0 1px 14px rgba(18, 14, 10, 0.5), 0 1px 3px rgba(18, 14, 10, 0.35);
+}
+@media (max-width: 767px) {
+  .eo-on-photo { text-shadow: 0 2px 26px rgba(18, 14, 10, 0.85), 0 1px 9px rgba(18, 14, 10, 0.72), 0 0 3px rgba(18, 14, 10, 0.5); }
+}
+
+/* --- Haarlinien ---------------------------------------------------------- */
+.eo-hairline { border-top: 1px solid var(--line); }
+.eo-hairline-inverse { border-top: 1px solid var(--cream-line); }
+.eo-hairline-full { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* --- Pfeil-Icons --------------------------------------------------------- */
+.eo-icon-arrow { width: 0.68em; height: 0.68em; flex: none; display: inline-block; overflow: visible; }
+
+/* --- CTA-Link ------------------------------------------------------------ */
+.eo-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  position: relative;
+  font-size: 1rem;
+  color: var(--cream);
+  padding-bottom: 0.12rem;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.eo-cta-link::after { content: ""; position: absolute; inset: -0.5rem -0.35rem; }  /* Trefferfläche ~37 px */
+.eo-cta-link .eo-icon-arrow { transition: transform 0.25s ease; }
+.eo-cta-link:hover .eo-icon-arrow { transform: translate(2px, -2px); }
+.eo-cta-link:hover { box-shadow: 0 1px 0 0 currentColor; }  /* Linie dicker, ohne Layoutsprung */
+.eo-cta-link-ink { color: var(--ink); }
+.eo-cta-link-cream { color: var(--cream); }
+
+/* --- Buttons ------------------------------------------------------------- */
+.eo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: var(--radius-full);
+  padding: 1rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.eo-btn-ink { background: var(--ink); color: var(--paper); }
+.eo-btn-ink:hover { background: var(--olive-deep); }
+.eo-btn-olive { background: var(--olive); color: var(--cream); }
+.eo-btn-olive:hover { background: var(--olive-deep); }
+.eo-btn-cream { background: var(--cream); color: var(--ink); }
+.eo-btn-cream:hover { background: #fff; }
+.eo-btn-outline-ink { border-color: var(--line); color: var(--ink); }
+.eo-btn-outline-ink:hover { border-color: var(--ink); }
+.eo-btn-outline-cream { border-color: var(--cream-45); color: var(--cream); }
+.eo-btn-outline-cream:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+.eo-btn-block { width: 100%; }
+.eo-arrow-link {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.8125rem; color: var(--ink-80);
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+.eo-arrow-link:hover { gap: 0.95rem; color: var(--ink); }
+.eo-arrow-link-inverse { color: var(--cream-70); }
+.eo-arrow-link-inverse:hover { color: var(--cream); }
+
+/* --- Kopfzeile ----------------------------------------------------------- */
+.eo-nav { display: flex; align-items: center; position: relative; height: 92px; }
+.eo-nav.is-solid { height: 70px; }
+.eo-nav-solid { background-color: rgba(243, 240, 233, 0.92); backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px) saturate(1.1); }
+.eo-nav-clear {
+  background-image: linear-gradient(to bottom, rgba(30, 22, 14, 0.4) 0%, rgba(30, 22, 14, 0.22) 55%, rgba(30, 22, 14, 0) 100%);
+}
+.eo-nav-links { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; }
+.eo-nav-link {
+  position: relative;
+  padding-block: 0.35rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--ink-700);
+  transition: color 0.2s ease;
+}
+.eo-nav-link:hover { color: var(--ink); }
+.eo-nav-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.eo-nav-link:hover::after, .eo-nav-link.is-active::after { transform: scaleX(1); }
+.eo-nav-link.is-active { color: var(--ink); }
+.eo-nav-inverse { color: var(--cream-80); }
+.eo-nav-inverse:hover, .eo-nav-inverse.is-active { color: var(--cream); }
+.eo-mark-wrap { text-align: center; }
+.eo-mark {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  line-height: 1;
+  display: block;
+}
+.eo-mark-sub {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-sub);
+  line-height: 1;
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--olive);
+}
+.eo-mark-sub-inverse { color: var(--cream-80); }
+
+/* --- Hero ---------------------------------------------------------------- */
+.eo-hero { position: relative; overflow: hidden; background: var(--photo-ground); color: var(--cream); min-height: 100svh; display: flex; flex-direction: column; }
+.eo-hero-photo {
+  position: absolute; inset: 0;
+  background-image: url("../assets/Imagery/hero-stefanie.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 38% 50%;
+  filter: brightness(0.76) saturate(0.96) contrast(1.08);
+}
+@media (max-width: 767px) { .eo-hero-photo { background-position: 74% 50%; } }
+.eo-hero-scrim {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(to right,
+    rgba(40, 27, 16, 0.52) 0%, rgba(40, 27, 16, 0.5) 38%, rgba(40, 27, 16, 0.46) 60%,
+    rgba(40, 27, 16, 0.2) 74%, rgba(42, 28, 17, 0.12) 100%);
+}
+.eo-hero-inner { position: relative; z-index: 10; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding: 8rem 0 6rem; }
+.eo-hero-eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(243, 240, 233, 0.9);
+  white-space: nowrap;
+}
+.eo-hero-eyebrow span { margin-inline: 0.5rem; color: rgba(243, 240, 233, 0.55); }
+@keyframes eo-hero-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.eo-hero-in { animation: eo-hero-in 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.eo-hero-in-2 { animation-delay: 0.25s; }
+.eo-hero-in-3 { animation-delay: 0.45s; }
+
+/* --- Fotoflächen --------------------------------------------------------- */
+.eo-ph { position: relative; overflow: hidden; background: var(--paper-deep); }
+.eo-ph img { filter: var(--photo-filter); display: block; width: 100%; height: 100%; object-fit: cover; }
+.eo-ph::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--photo-veil); mix-blend-mode: multiply;
+  opacity: var(--photo-veil-opacity); pointer-events: none;
+}
+.eo-ph-deep::after { opacity: var(--photo-veil-deep); }
+.eo-ph-fill { position: absolute; inset: 0; }
+
+/* --- Preiszeile / Fakten ------------------------------------------------- */
+.eo-price-row { display: grid; gap: 12px 40px; border-top: 1px solid var(--line); padding-block: 28px; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; }
+.eo-price-row h3 { margin: 0; font-family: var(--font-serif); font-weight: 500; font-variant-numeric: lining-nums; font-size: clamp(1.35rem, 1.8vw, 1.65rem); line-height: 1.15; color: var(--ink); }
+.eo-price-row h3 span { color: var(--ink-500); }
+.eo-price-row .eo-price-body { margin: 8px 0 0; max-width: 36rem; font-size: 0.875rem; line-height: 1.625; color: var(--ink-600); }
+.eo-price-row .eo-price-cell { display: flex; align-items: baseline; justify-content: space-between; gap: 32px; }
+@media (min-width: 768px) { .eo-price-row .eo-price-cell { flex-direction: column; align-items: flex-end; gap: 8px; } }
+.eo-price-amount { margin: 0; font-family: var(--font-serif); font-weight: 500; font-variant-numeric: lining-nums; font-size: clamp(1.5rem, 2vw, 1.85rem); line-height: 1; color: var(--ink); }
+.eo-price-amount span { font-size: 0.55em; color: var(--ink-500); }
+
+.eo-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 32px; margin: 36px 0 0; padding-top: 24px; border-top: 1px solid var(--line); }
+.eo-facts dt { font-size: var(--type-meta); letter-spacing: 0.02em; color: var(--ink-45); }
+.eo-facts dd { margin: 6px 0 0; font-size: 0.875rem; line-height: 1.4; color: var(--ink); }
+.eo-facts-inverse { border-top-color: var(--cream-line); }
+.eo-facts-inverse dt { font-size: 0.6875rem; color: var(--cream-70); }
+.eo-facts-inverse dd { color: var(--cream); }
+
+/* --- Zitat --------------------------------------------------------------- */
+.eo-initials {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.9rem; height: 1.9rem; flex: none;
+  background-color: var(--olive); color: var(--cream);
+  font-family: var(--font-serif); font-size: 0.8125rem; line-height: 1; letter-spacing: 0.02em;
+}
+.eo-quote-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 40px; margin-top: 20px; }
+.eo-quote-name { display: block; font-size: 0.9375rem; color: var(--ink); }
+.eo-quote-role { display: block; margin-top: 2px; font-size: 0.75rem; color: var(--ink-500); }
+
+/* --- Akkordeon ----------------------------------------------------------- */
+.eo-accordion { list-style: none; margin: 0; padding: 0; max-width: 28rem; }
+.eo-accordion li { border-top: 1px solid var(--cream-line); }
+.eo-accordion li:last-child { border-bottom: 1px solid var(--cream-line); }
+.eo-accordion button {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 20px 0; text-align: left; background: none; border: 0; cursor: pointer;
+  font-family: var(--font-sans); font-size: 0.9375rem; color: var(--cream-70);
+  transition: color 0.3s ease;
+}
+.eo-accordion button:hover { color: var(--cream); }
+.eo-accordion li.is-open button { color: var(--cream); }
+.eo-accordion .eo-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cream); opacity: 0; transition: opacity 0.3s ease; flex: none; }
+.eo-accordion li.is-open .eo-dot { opacity: 1; }
+.eo-accordion .eo-idx { margin-left: auto; font-size: 0.6875rem; font-variant-numeric: tabular-nums; color: var(--cream-45); }
+.eo-accordion .eo-panel { display: none; padding: 0 0 24px 16px; font-size: 0.875rem; line-height: 1.625; color: var(--cream-80); }
+.eo-accordion li.is-open .eo-panel { display: block; }
+
+/* --- Kursliste ----------------------------------------------------------- */
+.eo-course-grid { display: grid; gap: 24px; margin-top: 56px; }
+@media (min-width: 640px) { .eo-course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.eo-course { border-top: 1px solid var(--line); padding-top: 24px; }
+.eo-course-time { margin: 16px 0 0; font-family: var(--font-serif); font-weight: 500; font-variant-numeric: lining-nums; font-size: clamp(1.5rem, 2.2vw, 2rem); line-height: 1; color: var(--ink); }
+.eo-course-detail { margin: 12px 0 0; font-size: 0.9375rem; line-height: 1.625; color: var(--ink-600); }
+.eo-termine { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.eo-termine li { border: 1px solid var(--line); padding: 20px 16px; text-align: center; }
+.eo-termine .eo-day { display: block; font-family: var(--font-serif); font-weight: 500; font-variant-numeric: lining-nums; font-size: 1.75rem; line-height: 1; color: var(--ink); }
+.eo-termine .eo-month { display: block; margin-top: 8px; font-size: 0.8125rem; color: var(--ink-600); }
+.eo-termine .eo-year { display: block; margin-top: 4px; font-size: var(--type-meta); color: var(--ink-45); }
+
+/* --- Formular ------------------------------------------------------------ */
+.eo-field-group { display: grid; gap: 32px; }
+.eo-field-2 { display: grid; gap: 32px; }
+@media (min-width: 640px) { .eo-field-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.eo-field-label { display: block; }
+.eo-field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--ink);
+  transition: border-color 0.2s ease;
+}
+.eo-field::placeholder { color: var(--ink-45); }
+.eo-field:focus { outline: none; border-bottom-color: var(--olive); }
+textarea.eo-field { resize: vertical; min-height: 7rem; line-height: 1.6; }
+.eo-field-hint { font-size: 0.75rem; line-height: 1.625; color: var(--ink-500); }
+
+/* --- Footer -------------------------------------------------------------- */
+.eo-footer { background: var(--olive); color: var(--cream); overflow: hidden; }
+.eo-marquee { display: flex; overflow: hidden; white-space: nowrap; }
+.eo-marquee-track { display: flex; flex: none; animation: eo-marquee 42s linear infinite; }
+@keyframes eo-marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+.eo-marquee span { padding-inline: 1.5rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: var(--tracking-marquee); color: var(--cream-45); }
+.eo-footer-cols { display: grid; gap: 40px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.eo-footer-col-title { margin: 0; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: var(--tracking-caps); color: var(--cream-45); }
+.eo-footer-links { list-style: none; margin: 20px 0 0; padding: 0; }
+.eo-footer-links a { display: block; padding-block: 0.375rem; font-size: 0.875rem; color: var(--cream-70); text-decoration: none; transition: color 0.2s ease; }
+.eo-footer-links a:hover { color: var(--cream); }
+.eo-footer-mark-wrap { container-type: inline-size; --mark-size: calc(100cqw / 10.898); }
+.eo-footer-mark { font-size: var(--mark-size); letter-spacing: var(--tracking-caps); margin-right: -0.18em; }
+.eo-footer-mark-sub { font-size: calc(var(--mark-size) * 0.48); letter-spacing: var(--tracking-sub); margin-right: -0.36em; text-align: center; }
+.eo-flower-fade {
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 76%);
+  mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 76%);
+}
+.eo-legal-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; font-size: 0.6875rem; color: var(--cream-45); }
+.eo-legal-row a { padding-block: 0.375rem; color: inherit; text-decoration: none; transition: color 0.2s ease; }
+.eo-legal-row a:hover { color: var(--cream); }
+
+/* --- Cookie-Hinweis ------------------------------------------------------ */
+.eo-cookie {
+  border-top: 1px solid var(--cream-line);
+  background: rgba(29, 28, 23, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--cream-70);
+}
+@keyframes eo-banner-in { from { opacity: 0; transform: translateY(1.25rem); } to { opacity: 1; transform: none; } }
+.eo-banner-in { animation: eo-banner-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/* --- Reveal -------------------------------------------------------------- */
+[data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+[data-reveal][data-visible="true"] { opacity: 1; transform: none; }
+
+/* --- Slider -------------------------------------------------------------- */
+.eo-scroller { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.eo-scroller::-webkit-scrollbar { display: none; }
+.eo-scroller > * { scroll-snap-align: start; flex: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .eo-hero-in, .eo-marquee-track, .eo-banner-in { animation: none; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* --- Cover (Rendition, kein Bestandteil der Seite) ----------------------- */
+.eo-cover { position: relative; width: 960px; height: 288px; overflow: hidden; background: var(--paper); }
+.eo-cover svg { position: absolute; left: 0; top: 0; }
+.eo-cover .eo-cover-name { position: absolute; left: 48px; bottom: 60px; margin: 0; }
+.eo-cover .eo-cover-tag { position: absolute; left: 48px; bottom: 30px; margin: 0; font-size: 14px; color: var(--ink-600); }
+.eo-cover .eo-cover-label { position: absolute; left: 48px; bottom: 132px; }
+
+
+/* --- Gerüst dieser Seite (Dokumentation, kein Bestandteil der Website) --- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);margin:0;-webkit-font-smoothing:antialiased}
+.page{max-width:1240px;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3.5rem)}
+.topbar{position:sticky;top:0;z-index:60;background:rgba(243,240,233,.94);backdrop-filter:blur(10px) saturate(1.1);border-bottom:1px solid var(--line)}
+.topbar .page{display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);min-height:58px;flex-wrap:wrap;padding-block:.5rem}
+.topbar .mark{font-family:var(--font-serif);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:.9375rem;white-space:nowrap}
+.topbar nav{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;margin-left:auto}
+.topnav a{font-size:.75rem;color:var(--ink-600);text-decoration:none;padding-block:.35rem;border-bottom:1px solid transparent;white-space:nowrap}
+.topnav a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.cover-stage{display:flex;justify-content:center;overflow-x:auto;border-bottom:1px solid var(--line)}
+section{scroll-margin-top:70px}
+.sec{padding-block:clamp(2.5rem,5vw,4.5rem);border-top:1px solid var(--line)}
+.sec:first-of-type{border-top:0}
+.sechead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem 2rem;align-items:baseline}
+h1{font-family:var(--font-serif);font-weight:400;font-size:clamp(2.4rem,5.2vw,4rem);line-height:1.06;margin:1.5rem 0 0}
+h2{font-family:var(--font-serif);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.12;margin:1.25rem 0 0}
+h3.grp{font-family:var(--font-sans);font-size:.6875rem;text-transform:uppercase;letter-spacing:.18em;font-weight:400;color:var(--ink-45);margin:clamp(2.5rem,5vw,4rem) 0 0;padding-bottom:.75rem;border-bottom:1px solid var(--line)}
+h4{font-family:var(--font-serif);font-weight:500;font-size:1.35rem;margin:0;color:var(--ink)}
+.dim{color:var(--ink-45);font-size:.75rem;font-weight:400;font-family:var(--font-sans);letter-spacing:0}
+.lead{font-size:clamp(1.05rem,1.5vw,1.35rem);line-height:1.42;color:var(--ink);max-width:52rem;margin:1.75rem 0 0}
+.lede{font-size:.9375rem;line-height:1.75;color:var(--ink-600);max-width:58rem;margin:1rem 0 0}
+p{margin:0}
+.meta{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.35rem 2rem;font-size:.75rem;color:var(--ink-500)}
+code{font-family:var(--font-sans);font-size:.9em;background:rgba(29,28,23,.06);padding:.08em .35em;border-radius:3px}
+.lede code,.src code,.tmeta code{background:rgba(29,28,23,.06)}
+ol.rules{margin:1.75rem 0 0;padding:0;list-style:none;max-width:60rem;counter-reset:r}
+ol.rules li{counter-increment:r;display:grid;grid-template-columns:2.5rem minmax(0,1fr);gap:1rem;padding-block:1rem;border-top:1px solid var(--line)}
+ol.rules li:last-child{border-bottom:1px solid var(--line)}
+ol.rules li::before{content:counter(r,decimal-leading-zero);font-size:.6875rem;color:var(--ink-45);padding-top:.35rem}
+ol.rules b{font-weight:500}
+table{width:100%;border-collapse:collapse;margin-top:1.75rem;font-size:.8125rem}
+th,td{text-align:left;vertical-align:top;padding:.7rem .75rem;border-top:1px solid var(--line)}
+tr.fam th{padding-top:1.75rem;font-size:.6875rem;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-45);font-weight:400;border-top:1px solid var(--line)}
+td.sw{width:72px}td.nm{width:22%}td.hx{width:26%;font-variant-numeric:tabular-nums;color:var(--ink-600)}
+td.ct{color:var(--ink-600);font-variant-numeric:tabular-nums}
+.chip{display:block;width:56px;height:40px;border:1px solid var(--line);background:var(--paper)}
+.chip-none{border-style:dashed}
+.chip-ground{display:flex;padding:0}
+.chip-ground>span{display:block;flex:1}
+.nm code{display:block;color:var(--ink)}
+.inv{display:block;font-size:.6875rem;color:var(--ink-45);margin-top:.25rem}
+.tmeta{width:44%}.tmeta code{display:inline-block;color:var(--ink)}
+.cls{display:block;font-size:.6875rem;color:var(--ink-45);margin-top:.3rem}
+.use{display:block;font-size:.75rem;color:var(--ink-600);margin-top:.5rem;line-height:1.6;max-width:38rem}
+.tsample{padding-block:1.5rem}
+.tsample span{display:block;color:var(--ink);text-wrap:balance}
+.mono{font-variant-numeric:tabular-nums;color:var(--ink-600)}
+.bar{display:block;height:8px;background:var(--olive-soft)}
+.radbox,.shbox{display:inline-flex;flex-direction:column;gap:.4rem;margin:1.5rem 1.5rem 0 0;width:190px;vertical-align:top}
+.sq{display:block;width:96px;height:64px;background:var(--paper-deep);border:1px solid var(--line)}
+.shbox .card{display:block;width:140px;height:72px;background:var(--paper-soft);border:1px solid var(--line)}
+ul.ez{list-style:none;margin:1.5rem 0 0;padding:0;max-width:58rem}
+ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-template-columns:12rem 16rem minmax(0,1fr);gap:.5rem 1.5rem;font-size:.8125rem}
+.spec{padding-top:clamp(2rem,4vw,3.5rem)}
+.spechead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 2rem;align-items:baseline;padding-bottom:.75rem;border-bottom:1px solid var(--line)}
+.src{font-size:.6875rem;color:var(--ink-45)}
+.stage{margin-top:1.5rem;border-block:1px solid var(--line);overflow:hidden}
+.stage>*{max-width:100%}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem;margin-top:1.75rem}
+.cols h4{font-size:1rem;font-family:var(--font-sans);font-weight:500;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.cols ul{list-style:none;margin:.75rem 0 0;padding:0;font-size:.875rem;line-height:1.7;color:var(--ink-600)}
+.cols li{padding-block:.45rem;border-bottom:1px solid var(--line)}
+.cols li b{color:var(--ink);font-weight:500}
+.assets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-top:1.75rem}
+.asset{border:1px solid var(--line);background:var(--paper-soft);padding:1rem}
+.asset img{display:block;width:100%;height:auto;max-height:150px;object-fit:contain}
+.asset code{display:block;margin-top:.75rem}
+.asset span{display:block;font-size:.75rem;color:var(--ink-600);margin-top:.35rem;line-height:1.6}
+.warn{margin-top:1.75rem;border:1px solid rgba(29,28,23,.13);background:var(--paper-deep);padding:1.25rem 1.5rem;max-width:62rem}
+.warn h4{font-size:1rem;font-family:var(--font-sans)}
+.warn p{font-size:.875rem;line-height:1.7;color:var(--ink-600);margin-top:.6rem}
+.foot{margin-top:3rem;padding-block:2.5rem 4rem;border-top:1px solid var(--line);font-size:.8125rem;color:var(--ink-500);display:grid;gap:1rem;max-width:62rem}
+.foot a{color:var(--ink)}
+@media (max-width:820px){
+  .tmeta{width:auto}.cols{grid-template-columns:minmax(0,1fr)}
+  .sechead,.spechead{grid-template-columns:minmax(0,1fr)}
+  ul.ez li{grid-template-columns:minmax(0,1fr);gap:.2rem}
+  table{font-size:.75rem}td.nm,td.hx{width:auto}
+}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="page">
+  <span class="mark">Editorial Olive</span>
+  <nav class="topnav"><a href="#prinzipien">Prinzipien</a><a href="#farbe">Farbe</a><a href="#typografie">Typografie</a><a href="#raster">Raster &amp; Form</a><a href="#bewegung">Bewegung</a><a href="#komponenten">Komponenten</a><a href="#stimme">Stimme</a><a href="#assets">Assets</a><a href="#offen">Offene Punkte</a></nav>
+</div></header>
+
+<div class="cover-stage"><div class="eo-cover">
+<!--
+  Blöcke: Tinte 300×124, Olive 240×124 (läuft rechts aus dem Bild), olive-soft 84×88,
+  paper-dark 72×56 — alle vollrund (radius-full), von der Oberkante angeschnitten.
+  Anordnung: Skelettband oben, darunter Wortmarke links und Fußzeile.
+  Muster: Punktreihe (4 px, 32 px Abstand) aus der Tinte-Fläche ausgespart — dieselbe
+  Punktform wie der Punkt vor jedem Label (.label::before) und im Akkordeon.
+  Maß: Raster 32 px, Abstände 16 px, Radien vollrund, Haarlinie 1 px.
+-->
+<svg width="960" height="288" viewBox="0 0 960 288" aria-hidden="true">
+  <rect x="0" y="0" width="960" height="288" fill="#f3f0e9"/>
+  <rect x="232" y="-24" width="72" height="80" rx="9999" fill="#ded9cb"/>
+  <rect x="320" y="-24" width="84" height="112" rx="9999" fill="#8d9375"/>
+  <rect x="420" y="-24" width="300" height="136" rx="9999" fill="#1d1c17"/>
+  <rect x="736" y="-24" width="248" height="136" rx="9999" fill="#616949"/>
+  <g fill="#f3f0e9">
+    <circle cx="452" cy="24" r="4"/><circle cx="484" cy="24" r="4"/><circle cx="516" cy="24" r="4"/>
+    <circle cx="548" cy="24" r="4"/><circle cx="580" cy="24" r="4"/><circle cx="612" cy="24" r="4"/>
+    <circle cx="644" cy="24" r="4"/><circle cx="676" cy="24" r="4"/>
+    <circle cx="452" cy="56" r="4"/><circle cx="484" cy="56" r="4"/><circle cx="516" cy="56" r="4"/>
+    <circle cx="548" cy="56" r="4"/><circle cx="580" cy="56" r="4"/><circle cx="612" cy="56" r="4"/>
+    <circle cx="644" cy="56" r="4"/><circle cx="676" cy="56" r="4"/>
+  </g>
+  <circle cx="905" cy="215" r="120" fill="none" stroke="rgba(29,28,23,0.13)" stroke-width="1"/>
+  <circle cx="905" cy="215" r="170" fill="none" stroke="rgba(29,28,23,0.13)" stroke-width="1"/>
+  <line x1="48" y1="130" x2="912" y2="130" stroke="rgba(29,28,23,0.13)" stroke-width="1"/>
+</svg>
+<p class="eo-cover-label eo-label eo-label-caps">Craniosacrale Körperarbeit &amp; Yoga</p>
+<p class="eo-cover-name eo-serif eo-mark" style="font-size:64px">Stefanie Kaindl</p>
+<p class="eo-cover-tag">Sanfte Berührung und Bewegung — Pfaffenhofen a. d. Ilm &amp; Paunzhausen.</p>
+</div></div>
+<div class="page" style="padding-top:clamp(2rem,4vw,3.5rem)">
+  <span class="eo-label eo-label-caps">Design System · Stefanie Kaindl</span>
+  <h1>Editorial Olive</h1>
+  <p class="lead">Papier statt Weiß, Tinte statt Schwarz, eine einzige Olive. Zwei gleichwertige Angebote, eine Person, ein leiser Ton — große Serif-Überschriften in niedrigem Gewicht, Haarlinien statt Rahmen, und Olive als einzige Akzentfarbe.</p>
+  <p class="lede">Diese Seite ist die Übersicht: Tokens, Typografie, Formen und alle achtzehn Komponenten der Website — jede mit ihrem Vertrag. Sie ist aus dem Bestand abgeleitet, nicht entworfen: jeder Wert hat eine Quelle im Repo.</p>
+  <div class="meta">
+    <span>Quelle: <code>/opt/sites/stefanie-kaindl-cranio</code></span>
+    <span>Stand: <code>redesign/editorial-olive @ aacdf3e</code></span>
+    <span>Sync: 17.10.2026</span>
+    <span>32 Farb-Tokens · 20 Typostile · 18 Renditionen</span>
+  </div>
+</div>
+<section class="sec" id="prinzipien"><div class="page">
+  <span class="eo-label eo-label-caps">Prinzipien</span>
+  <h2>Drei Entscheidungen tragen alles.</h2>
+  
+<ol class="rules">
+  <li><span><b>Papier statt Weiß, Tinte statt Schwarz.</b> Grundfläche ist ein warmes Papier <code>#f3f0e9</code>, Schrift ein warmes Tintenschwarz <code>#1d1c17</code> (15,0:1). Reines Weiß und reines Schwarz kommen nicht vor.</span></li>
+  <li><span><b>Eine einzige Akzentfarbe: Olive <code>#616949</code>.</b> Olive ist Fläche (Bänder, Footer), Textlink auf Papier (5,1:1), Button-Variante und Fokusring. Es gibt keine zweite Markenfarbe — Türkis, Blau, Korall gab es einmal (Legacy-Tokens <code>sage</code>, <code>therapeutic</code>, <code>taupe</code>) und darf nicht zurückkommen.</span></li>
+  <li><span><b>Keine Kästen.</b> Flächen statt Karten, Haarlinien statt Rahmen, Weißraum statt Schatten. Ein Block ist entweder eine ruhige Fläche oder eine dünne Linie — niemals ein umrandeter Kasten mit Schatten.</span></li>
+  <li><span><b>Gedämpfte Töne über Alpha, nicht über neue Hex-Werte.</b> <code>ink-60</code> ist <code>rgba(29,28,23,.68)</code>, nicht ein neues Grau. Jede Textfarbe wird gegen die <b>tatsächliche</b> Fläche gemessen — gegen <code>paper-deep</code>, nicht nur gegen Papier.</span></li>
+  <li><span><b>Bewegung ist immer ein Einblenden, nie ein Effekt.</b> Ein Easing, vier Dauern, Hover-Bewegungen von 2 px. <code>prefers-reduced-motion</code> schaltet alles ab — verpflichtend.</span></li>
+</ol>
+</div></section>
+<section class="sec" id="farbe"><div class="page">
+  <span class="eo-label eo-label-caps">Farbe</span>
+  <h2>Eine Palette, zwei Flächen.</h2>
+  
+<p class="lede">Links die Fläche, in der Mitte der Wert (Papier-Kontext), rechts der gemessene Kontrast. Die zweite Zeile jeder Zelle nennt den Wert für die inverse Fläche — Olive oder dunkles Foto. Es gibt <b>keinen Dark-Mode</b>: die „zweite Fläche" ist eine Bild- und Bandfläche, keine Umschaltung.</p>
+<table>
+  <thead><tr><th>Fläche</th><th>Token</th><th>Wert</th><th>Kontrast (gemessen)</th></tr></thead>
+  <tbody>
+<tr class="fam"><th colspan="4">Fläche</th></tr>
+<tr><td class="sw"><span class="chip" style="background:#f3f0e9"></span></td><td class="nm"><code>--paper</code><span class="inv">invers: #241a11</span></td><td class="hx">#f3f0e9</td><td class="ct">—</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#f8f6f1"></span></td><td class="nm"><code>--paper-soft</code><span class="inv">invers: #f3f0e9</span></td><td class="hx">#f8f6f1</td><td class="ct">—</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#eae6db"></span></td><td class="nm"><code>--paper-deep</code><span class="inv">invers: #eae6db</span></td><td class="hx">#eae6db</td><td class="ct">—</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#ded9cb"></span></td><td class="nm"><code>--paper-dark</code><span class="inv">invers: #ded9cb</span></td><td class="hx">#ded9cb</td><td class="ct">—</td></tr>
+<tr class="fam"><th colspan="4">Tinte</th></tr>
+<tr><td class="sw"><span class="chip" style="background:#1d1c17"></span></td><td class="nm"><code>--ink</code><span class="inv">invers: #f3f0e9</span></td><td class="hx">#1d1c17</td><td class="ct">15,0:1 Papier · 13,7:1 paper-deep</td></tr>
+<tr><td class="sw"><span class="chip" style="background:rgba(29, 28, 23, 0.8)"></span></td><td class="nm"><code>--ink-80</code><span class="inv">invers: rgba(243, 240, 233, 0.8)</span></td><td class="hx">rgba(29, 28, 23, 0.8)</td><td class="ct">8,3:1 Papier</td></tr>
+<tr><td class="sw"><span class="chip" style="background:rgba(29, 28, 23, 0.68)"></span></td><td class="nm"><code>--ink-60</code><span class="inv">invers: rgba(243, 240, 233, 0.72)</span></td><td class="hx">rgba(29, 28, 23, 0.68)</td><td class="ct">5,5:1 Papier · 5,3:1 paper-deep</td></tr>
+<tr><td class="sw"><span class="chip" style="background:rgba(29, 28, 23, 0.65)"></span></td><td class="nm"><code>--ink-45</code><span class="inv">invers: rgba(243, 240, 233, 0.45)</span></td><td class="hx">rgba(29, 28, 23, 0.65)</td><td class="ct">5,0:1 Papier · 4,8:1 paper-deep</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#57554d"></span></td><td class="nm"><code>--ink-700</code><span class="inv">invers: #f3f0e9</span></td><td class="hx">#57554d</td><td class="ct">6,6:1 Papier</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#5f5d56"></span></td><td class="nm"><code>--ink-600</code><span class="inv">invers: #f3f0e9</span></td><td class="hx">#5f5d56</td><td class="ct">5,8:1 Papier</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#67655d"></span></td><td class="nm"><code>--ink-500</code><span class="inv">invers: #f3f0e9</span></td><td class="hx">#67655d</td><td class="ct">5,1:1 Papier · 4,7:1 paper-deep</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#8a877b"></span></td><td class="nm"><code>--ink-400</code><span class="inv">invers: #f3f0e9</span></td><td class="hx">#8a877b</td><td class="ct">3,2:1 Papier — nur große Schrift</td></tr>
+<tr class="fam"><th colspan="4">Olive</th></tr>
+<tr><td class="sw"><span class="chip" style="background:#616949"></span></td><td class="nm"><code>--olive</code><span class="inv">invers: #616949</span></td><td class="hx">#616949</td><td class="ct">5,1:1 Papier</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#4d5438"></span></td><td class="nm"><code>--olive-deep</code><span class="inv">invers: #4d5438</span></td><td class="hx">#4d5438</td><td class="ct">7,0:1 Papier</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#8d9375"></span></td><td class="nm"><code>--olive-soft</code><span class="inv">invers: #8d9375</span></td><td class="hx">#8d9375</td><td class="ct">2,8:1 Papier — nur Dekor</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#e5e7db"></span></td><td class="nm"><code>--olive-tint</code><span class="inv">invers: #3f4530</span></td><td class="hx">#e5e7db</td><td class="ct">—</td></tr>
+<tr class="fam"><th colspan="4">Invers — auf Olive und dunklem Foto</th></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:#f3f0e9"></span></span></td><td class="nm"><code>--cream</code><span class="inv">invers: #f3f0e9</span></td><td class="hx">#f3f0e9</td><td class="ct">5,1:1 Olive · 15,0:1 Fotogrund</td></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:rgba(243, 240, 233, 0.92)"></span></span></td><td class="nm"><code>--cream-80</code><span class="inv">invers: rgba(243, 240, 233, 0.92)</span></td><td class="hx">rgba(243, 240, 233, 0.92)</td><td class="ct">4,6:1 Olive — kleinste AA-Stufe</td></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:rgba(243, 240, 233, 0.72)"></span></span></td><td class="nm"><code>--cream-70</code><span class="inv">invers: rgba(243, 240, 233, 0.72)</span></td><td class="hx">rgba(243, 240, 233, 0.72)</td><td class="ct">3,5:1 Olive · 8,3:1 Fotogrund</td></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:rgba(243, 240, 233, 0.6)"></span></span></td><td class="nm"><code>--cream-60</code><span class="inv">invers: rgba(243, 240, 233, 0.6)</span></td><td class="hx">rgba(243, 240, 233, 0.6)</td><td class="ct">2,9:1 Olive — Dekor</td></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:rgba(243, 240, 233, 0.45)"></span></span></td><td class="nm"><code>--cream-45</code><span class="inv">invers: rgba(243, 240, 233, 0.45)</span></td><td class="hx">rgba(243, 240, 233, 0.45)</td><td class="ct">2,3:1 Olive — Dekor</td></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:rgba(243, 240, 233, 0.15)"></span></span></td><td class="nm"><code>--cream-15</code><span class="inv">invers: rgba(243, 240, 233, 0.15)</span></td><td class="hx">rgba(243, 240, 233, 0.15)</td><td class="ct">—</td></tr>
+<tr class="fam"><th colspan="4">Linien und Foto</th></tr>
+<tr><td class="sw"><span class="chip" style="background:rgba(29, 28, 23, 0.13)"></span></td><td class="nm"><code>--line</code><span class="inv">invers: rgba(243, 240, 233, 0.2)</span></td><td class="hx">rgba(29, 28, 23, 0.13)</td><td class="ct">—</td></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:rgba(243, 240, 233, 0.2)"></span></span></td><td class="nm"><code>--cream-line</code><span class="inv">invers: rgba(29, 28, 23, 0.13)</span></td><td class="hx">rgba(243, 240, 233, 0.2)</td><td class="ct">—</td></tr>
+<tr><td class="sw"><span class="chip" style="background:#241a11"></span></td><td class="nm"><code>--photo-ground</code><span class="inv">invers: #241a11</span></td><td class="hx">#241a11</td><td class="ct">—</td></tr>
+<tr><td class="sw"><span class="chip chip-ground" style="background:#241a11"><span style="background:#6b7250"></span></span></td><td class="nm"><code>--photo-veil</code><span class="inv">invers: #6b7250</span></td><td class="hx">#6b7250</td><td class="ct">—</td></tr>
+  </tbody>
+</table>
+<div class="warn">
+  <h4>Warnung: Cream auf Olive hält kein AA</h4>
+  <p><code>cream-70</code> 3,5:1 · <code>cream-60</code> 2,9:1 · <code>cream-45</code> 2,3:1 auf <code>#616949</code>. Im Footer tragen genau diese Werte Kleinschrift (Linktexte 14 px, Zeiten 13 px, Spaltenköpfe 11 px). Kleinste tragfähige Stufe auf Olive ist <code>cream-80</code> (4,6:1), volles <code>cream</code> 5,1:1. Auf dem dunklen Fotogrund ist <code>cream-70</code> dagegen mit 8,3:1 unbedenklich.</p>
+</div>
+</div></section>
+<section class="sec" id="typografie"><div class="page">
+  <span class="eo-label eo-label-caps">Typografie</span>
+  <h2>Zwei Familien, zwei Rollen — keine dritte.</h2>
+  
+<p class="lede">Hanken Grotesk für alles Lesbare, Cormorant Garamond für Wortmarke, große Überschriften, Preise und kursive Akzente. Cormorant hat eine kleine x-Höhe: große Grade brauchen sie, kleine nicht — deshalb steht sie auf 400/500 und immer eine Stufe größer als die Sans. In Zahlen immer <code>lining-nums</code>.</p>
+<table>
+  <thead><tr><th>Stil</th><th>Muster</th></tr></thead>
+  <tbody>
+<tr class="fam"><th colspan="2">Display (Serif) — serif</th></tr>
+<tr>
+  <td class="tmeta"><code>hero</code><span class="cls">.d1-hero</span>
+    <span class="dim">60px · lh 1.1 · w 400 · clamp(1.95rem, 3.9vw, 3.75rem)</span>
+    <span class="use">Hero-Headline, zwei &lt;span&gt;-Blöcke, je Zeile text-wrap: balance. Nie kürzen, nie fett.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:clamp(1.95rem, 3.9vw, 3.75rem);font-weight:400;line-height:1.1;">Raum, um anzukommen.</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>display-1</code><span class="cls">.d1</span>
+    <span class="dim">88px · lh 1.12 · w 400 · clamp(2.35rem, 6vw, 5.5rem)</span>
+    <span class="use">Nur zusammen mit .d1-hero auf den Köpfen der Unterseiten (PageIntro).</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:clamp(2.35rem, 6vw, 5.5rem);font-weight:400;line-height:1.12;">Craniosacrale Körperarbeit</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>display-2</code><span class="cls">.d2</span>
+    <span class="dim">46px · lh 1.12 · w 400 · clamp(1.7rem, 3vw, 2.9rem)</span>
+    <span class="use">Sektions- und Kartenüberschrift. Der Standard nach dem Hero.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:clamp(1.7rem, 3vw, 2.9rem);font-weight:400;line-height:1.12;">Yoga am Donnerstag</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>display-2-serif</code><span class="cls">.display-serif.d2</span>
+    <span class="dim">64px · lh 1.12 · w 400 · clamp(2.15rem, 4.5vw, 4rem)</span>
+    <span class="use">Die große Serif-Zeile auf einer Fläche (Footer-Aussage, CTA-Band).</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:clamp(2.15rem, 4.5vw, 4rem);font-weight:400;line-height:1.12;">Zur Ruhe kommen.</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>display-3</code><span class="cls">.d3</span>
+    <span class="dim">29px · lh 1.15 · w 400 · clamp(1.3rem, 1.9vw, 1.8rem)</span>
+    <span class="use">Kleinste Serif-Überschrift (Yoga-Day-Block, Nebenblöcke).</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:clamp(1.3rem, 1.9vw, 1.8rem);font-weight:400;line-height:1.15;">Ein Tag nur für dich</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>price</code>
+    <span class="dim">30px · lh 1 · w 500 · clamp(1.5rem, 2vw, 1.85rem)</span>
+    <span class="use">Preiszeile in PriceRow und in der Kursliste. Immer lining-nums; die Einheit steht in 0.55em und ink-500.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:clamp(1.5rem, 2vw, 1.85rem);font-weight:500;line-height:1;font-variant-numeric:lining-nums;">73 €</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>serif-title</code>
+    <span class="dim">26px · lh 1.15 · w 500 · clamp(1.35rem, 1.8vw, 1.65rem)</span>
+    <span class="use">Titel einer Preiszeile; Tage und Zeiten im Footer.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:clamp(1.35rem, 1.8vw, 1.65rem);font-weight:500;line-height:1.15;font-variant-numeric:lining-nums;">Craniosacrale Behandlung</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>brand-mark</code><span class="cls">.serif (+ .footer-mark im Fuß)</span>
+    <span class="dim">21px · lh 1 · w 500 · ls 0.18em</span>
+    <span class="use">Wortmarke: Kopfzeile 1.05rem mobil / 1.3rem ab md, im Footer über die volle Inhaltsbreite (Größe = Inhaltsbreite / 10,898). Immer uppercase.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:21px;font-weight:500;line-height:1;letter-spacing:0.18em;">Stefanie Kaindl</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>brand-sub</code>
+    <span class="dim">9px · lh 1 · w 500 · ls 0.36em</span>
+    <span class="use">Zweite Zeile der Wortmarke: 0.5625rem mobil / 0.625rem ab md, im Footer 0.48 × Markengröße.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-serif);font-size:9px;font-weight:500;line-height:1;letter-spacing:0.36em;">CRANIO SACRAL</span></td>
+</tr>
+<tr class="fam"><th colspan="2">Text (Sans) — sans</th></tr>
+<tr>
+  <td class="tmeta"><code>quote</code><span class="cls">.quote</span>
+    <span class="dim">43px · lh 1.26 · w 300 · clamp(1.45rem, 2.9vw, 2.7rem) · ls -0.01em</span>
+    <span class="use">Zitat in der Sans, nicht in der Serif. Deutsche Anführung unten/oben. Auf Olive: .quote-cream.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:clamp(1.45rem, 2.9vw, 2.7rem);font-weight:300;line-height:1.26;letter-spacing:-0.01em;">„Die Behandlung ist eine Wohltat für Körper, Geist und Seele.“</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>lead-lg</code><span class="cls">.lead-lg</span>
+    <span class="dim">22px · lh 1.38 · w 400 · clamp(1.05rem, 1.5vw, 1.4rem)</span>
+    <span class="use">Einstiegstext direkt unter einer Display-Headline, max ~46rem. Auf Olive oder Foto: .lead-lg-cream.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:clamp(1.05rem, 1.5vw, 1.4rem);font-weight:400;line-height:1.38;">Bei mir findest du zwei Wege, wieder bei dir anzukommen.</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>lead</code><span class="cls">.lead</span>
+    <span class="dim">18px · lh 1.65 · w 400 · clamp(0.95rem, 1vw, 1.125rem)</span>
+    <span class="use">Vorlauf unter einem Seitenkopf.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:clamp(0.95rem, 1vw, 1.125rem);font-weight:400;line-height:1.65;">Kurs 1 startet um 17:30 Uhr, Kurs 2 um 19:00 Uhr.</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>body</code><span class="cls">.body-copy</span>
+    <span class="dim">15px · lh 1.75 · w 400</span>
+    <span class="use">Standard-Fließtext der Sektionen. Im Bestand meist als text-[0.9375rem] mit ink-600.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:15px;font-weight:400;line-height:1.75;">Eine sanfte, achtsame Berührung — mit einem Druck von nur etwa fünf Gramm.</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>body-small</code>
+    <span class="dim">14px · lh 1.6 · w 400</span>
+    <span class="use">Fußnoten, Rechtstext in Karten, Bildunterschriften.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:14px;font-weight:400;line-height:1.6;">Matten und Hilfsmittel sind vor Ort.</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>ui</code>
+    <span class="dim">13px · lh 1 · w 400</span>
+    <span class="use">Button- und CTA-Beschriftung. Nie fett, nie uppercase.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:13px;font-weight:400;line-height:1;">Termin online buchen</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>nav</code>
+    <span class="dim">13px · lh 1 · w 400 · ls 0.01em</span>
+    <span class="use">Menüpunkt der Kopfzeile. Kein uppercase, keine Sperrung.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:13px;font-weight:400;line-height:1;letter-spacing:0.01em;">Cranio · Yoga · Über mich · Kontakt</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>meta</code><span class="cls">.meta-line</span>
+    <span class="dim">11px · lh 1.4 · w 400 · ls 0.02em</span>
+    <span class="use">Metazeile über einem Wert (Facts, Formularbeschriftung, Kursdaten).</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:11px;font-weight:400;line-height:1.4;letter-spacing:0.02em;">Erwachsene · ca. 60 Min</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>label</code><span class="cls">.label</span>
+    <span class="dim">10px · lh 1.2 · w 400 · ls 0.055em</span>
+    <span class="use">Eyebrow mit vorangestelltem Punkt (2,2 px, currentColor, 75 %). Als Sektionslabel zusätzlich .label-caps (0.18em, Versalien).</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:10px;font-weight:400;line-height:1.2;letter-spacing:0.055em;">01 · Cranio</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>label-caps</code><span class="cls">.label.label-caps</span>
+    <span class="dim">10px · lh — · w 400 · ls 0.18em</span>
+    <span class="use">Versalien-Variante: Sektionslabel, Footer-Spaltenkopf, Gruppe im mobilen Menü.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;">SEITEN</span></td>
+</tr>
+<tr>
+  <td class="tmeta"><code>marquee</code>
+    <span class="dim">11px · lh — · w 400 · ls 0.4em</span>
+    <span class="use">Laufschrift am Fußrand. Dekor (aria-hidden), 42 s linear, bei prefers-reduced-motion aus.</span></td>
+  <td class="tsample"><span style="font-family:var(--font-sans);font-size:11px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;">RAUM FÜR DICH</span></td>
+</tr>
+  </tbody>
+</table>
+</div></section>
+<section class="sec" id="raster"><div class="page">
+  <span class="eo-label eo-label-caps">Raster &amp; Form</span>
+  <h2>Ein Container, ein Rhythmus, wenig Radius.</h2>
+  
+<div class="cols">
+  <div>
+    <h4>Container und Rhythmus</h4>
+    <ul>
+      <li><b>.shell</b> — <code>max-width:1560px</code>, zentriert, <code>padding-inline</code> 24 / 40 / 56 px. Kopfzeile und Sektionen teilen exakt dieses Raster.</li>
+      <li><b>.section</b> — <code>clamp(4rem, 8vw, 8.5rem)</code> vertikal. <b>.section-tight</b> <code>clamp(3rem, 5.5vw, 6rem)</code>.</li>
+      <li><b>Raster</b> — 12 Spalten für redaktionelle Sektionen, 2/3 Spalten für Kartenreihen. Kein asymmetrisches Sonderraster.</li>
+      <li><b>Sprungmarken</b> — <code>scroll-margin-top: 6.5rem</code>, sonst landet ein Anker unter der festen Kopfzeile.</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Radius und Tiefe</h4>
+    <ul>
+      <li><b>Radius ist selten</b> — Flächen, Preiszeilen, Felder, Bildrahmen sind 0 px. Die wenigen echten Karten nehmen 6–8 px.</li>
+      <li><b>Alles Runde ist vollrund</b> — jeder Button, jede Pille, jeder Punkt, die Kreisbögen: <code>9999px</code>.</li>
+      <li><b>Zwei Schatten insgesamt</b> — <code>warm-shadow</code> für schwebende Elemente, der Schatten des Papierblocks auf dem dunklen Buchungsfoto. Dazu <code>on-photo</code>: ein weicher Hof hinter Schrift auf Bildern.</li>
+    </ul>
+  </div>
+</div>
+<div><div class="radbox"><span class="sq" style="border-radius:0px"></span><code>radius-none</code><span class="dim">0px</span></div><div class="radbox"><span class="sq" style="border-radius:6px"></span><code>radius-xs</code><span class="dim">6px</span></div><div class="radbox"><span class="sq" style="border-radius:8px"></span><code>radius-sm</code><span class="dim">8px</span></div><div class="radbox"><span class="sq" style="border-radius:9999px"></span><code>radius-full</code><span class="dim">9999px</span></div></div>
+<div><div class="shbox"><span class="card" style="box-shadow:0 1px 2px rgba(29, 28, 23, 0.04), 0 12px 32px -24px rgba(29, 28, 23, 0.35)"></span><code>warm-shadow</code><span class="dim">Der einzige reguläre Schatten — Overlay, Popover, mobile Menüfläche.</span></div><div class="shbox"><span class="card" style="box-shadow:0 40px 80px -40px rgba(20, 16, 10, 0.6)"></span><code>card-shadow</code><span class="dim">Der Papierblock auf dem dunklen Buchungsfoto — Sonderfall, einmal pro Seite.</span></div><div class="shbox"><span class="card" style="box-shadow:0 1px 14px rgba(18, 14, 10, 0.5), 0 1px 3px rgba(18, 14, 10, 0.35)"></span><code>on-photo-shadow</code><span class="dim">Schrift auf Foto (.on-photo). Mobil der stärkere Hof — dort trägt der Schatten die Lesbarkeit, nicht der Schleier.</span></div></div>
+<table>
+  <thead><tr><th>Token</th><th>Wert</th><th>Einsatz</th><th></th></tr></thead>
+  <tbody>
+<tr><td><code>space-1</code></td><td class="mono">4px</td><td class="dim">Punkt vor Label, feinste Abstände.</td><td><span class="bar" style="width:2px"></span></td></tr>
+<tr><td><code>space-2</code></td><td class="mono">8px</td><td class="dim">Label zu Wert (Facts, Formularbeschriftung), Zeilen in Linklisten.</td><td><span class="bar" style="width:4.0px"></span></td></tr>
+<tr><td><code>space-3</code></td><td class="mono">12px</td><td class="dim">Bildabstand im Bildband, Initialen zu Name.</td><td><span class="bar" style="width:6.0px"></span></td></tr>
+<tr><td><code>space-4</code></td><td class="mono">16px</td><td class="dim">Standardabstand zwischen Textblöcken, Rasterabstand in Kartenreihen.</td><td><span class="bar" style="width:8.0px"></span></td></tr>
+<tr><td><code>space-5</code></td><td class="mono">20px</td><td class="dim">Abstand unter einer Sektions-Headline (mt-5), Kontaktblöcke.</td><td><span class="bar" style="width:10.0px"></span></td></tr>
+<tr><td><code>space-6</code></td><td class="mono">24px</td><td class="dim">Label zu Headline (mt-6), Kartenabstand.</td><td><span class="bar" style="width:12.0px"></span></td></tr>
+<tr><td><code>space-7</code></td><td class="mono">28px</td><td class="dim">Einstiegstext unter der Headline (mt-7), Aktionsreihe (mt-7).</td><td><span class="bar" style="width:14.0px"></span></td></tr>
+<tr><td><code>space-8</code></td><td class="mono">32px</td><td class="dim">Handlungszeile (mt-8), Faktenblock (mt-9).</td><td><span class="bar" style="width:16.0px"></span></td></tr>
+<tr><td><code>space-10</code></td><td class="mono">40px</td><td class="dim">Abstand zwischen Aktionsgruppe und Folgesektion.</td><td><span class="bar" style="width:20.0px"></span></td></tr>
+<tr><td><code>space-14</code></td><td class="mono">56px</td><td class="dim">Kurskarten (mt-14), Haarlinie unter einem Zitat (mt-14).</td><td><span class="bar" style="width:28.0px"></span></td></tr>
+<tr><td><code>space-16</code></td><td class="mono">64px</td><td class="dim">Footer-Wortmarke, große Blockabstände.</td><td><span class="bar" style="width:32.0px"></span></td></tr>
+<tr><td><code>section-y</code></td><td class="mono">clamp(4rem, 8vw, 8.5rem)</td><td class="dim">.section — vertikaler Rhythmus jeder Sektion (64–136 px).</td><td></td></tr>
+<tr><td><code>section-y-tight</code></td><td class="mono">clamp(3rem, 5.5vw, 6rem)</td><td class="dim">.section-tight — Sektionen ohne eigenen Kopf (48–96 px).</td><td></td></tr>
+<tr><td><code>shell</code></td><td class="mono">1560px / 24–56px</td><td class="dim">.shell — EIN Container für Kopfzeile und Sektionen. padding-inline 24 px, ab 768 px 40 px, ab 1280 px 56 px.</td><td></td></tr>
+<tr><td><code>measure</code></td><td class="mono">46rem</td><td class="dim">Standard-Textbreite eines zentrierten Blocks (736 px).</td><td></td></tr>
+<tr><td><code>anchor-offset</code></td><td class="mono">6.5rem</td><td class="dim">scroll-margin-top für section[id] / div[id] unter der festen Kopfzeile.</td><td></td></tr>
+  </tbody>
+</table>
+</div></section>
+<section class="sec" id="bewegung"><div class="page">
+  <span class="eo-label eo-label-caps">Bewegung</span>
+  <h2>Ein Easing, vier Dauern.</h2>
+  
+<ul class="ez">
+<li><code>ease-soft</code> <span class="mono">cubic-bezier(0.2, 0.7, 0.2, 1)</span><span class="dim">Jede Bewegung: Reveal, Hero-Auftritt, Menülinie, Hover-Lift.</span></li><li><code>dur-hover</code> <span class="mono">200ms</span><span class="dim">Farbe und Linienstärke bei Hover.</span></li><li><code>dur-state</code> <span class="mono">300ms</span><span class="dim">Zustandswechsel: Kopfzeilenfarbe, Menülinie, Akkordeon-Zeile.</span></li><li><code>dur-reveal</code> <span class="mono">900ms</span><span class="dim">[data-reveal] Einblenden beim Scrollen, 16 px Versatz.</span></li>
+</ul>
+<p class="lede">Hover-Bewegungen sind winzig: der Pfeil wandert 2 px, die Menülinie wächst von der Mitte (<code>scaleX 0→1</code>, 350 ms), das Reveal verschiebt 16 px. Fokus ist immer <code>outline: 2px solid var(--olive)</code> mit 3 px Offset.</p>
+</div></section>
+<section class="sec" id="komponenten"><div class="page">
+  <span class="eo-label eo-label-caps">Komponenten</span>
+  <h2>Achtzehn Renditionen, jede mit ihrem Vertrag.</h2>
+  <p class="lede">Statisches Markup, von Hand aus <code>globals.css</code>, <code>src/components/**</code> und den Seiten übersetzt — nicht die laufenden React-Komponenten. Sie zeigen den Vertrag: Abstände, Farbgebrauch, Textregeln. Quelle für Code ist das Repo.</p>
+</div></section>
+<div class="comps">
+<h3 class="grp">Brand</h3>
+<section class="spec" id="c-Mark">
+  <div class="page">
+    <div class="spechead"><h4>Wortmarke<span class="dim"> · Mark</span></h4>
+      <p class="src"><code>src/components/navbar.tsx · src/components/footer.tsx (Wortmarke im Fluss)</code></p></div>
+    <p class="lede">Die Wortmarke ist <b>kein Bild</b>, sondern Satz: Cormorant Garamond 500, Versalien, gesperrt. In der Kopfzeile 1.05 rem (mobil) / 1.3 rem (ab md), darunter die zweite Zeile „CRANIO SACRAL" in 0.5625 / 0.625 rem mit 0.36em Sperrung in Olive (auf Papier) bzw. Cream (auf Foto oder Olive).</p>
+  </div>
+  <div class="stage"><div class="eo-frame eo-stack" style="gap:36px">
+  <div class="eo-mark-wrap">
+    <span class="eo-mark" style="font-size:1.3rem;color:var(--ink)">Stefanie Kaindl</span>
+    <span class="eo-mark-sub" style="font-size:0.625rem">Cranio Sacral</span>
+  </div>
+
+  <div class="eo-band-dark" style="padding:24px">
+    <div class="eo-mark-wrap">
+      <span class="eo-mark" style="font-size:1.3rem;color:var(--cream)">Stefanie Kaindl</span>
+      <span class="eo-mark-sub eo-mark-sub-inverse" style="font-size:0.625rem">Cranio Sacral</span>
+    </div>
+  </div>
+
+  <div class="eo-footer-mark-wrap eo-band-olive" style="padding:28px 24px 20px">
+    <span class="eo-mark eo-footer-mark" style="color:var(--cream)">Stefanie Kaindl</span>
+    <span class="eo-mark eo-footer-mark-sub" style="color:var(--cream-70);margin-top:0.6em">Cranio Sacral</span>
+  </div>
+</div></div>
+</section>
+<h3 class="grp">Navigation</h3>
+<section class="spec" id="c-Navbar">
+  <div class="page">
+    <div class="spechead"><h4>Kopfzeile<span class="dim"> · Navbar</span></h4>
+      <p class="src"><code>src/components/navbar.tsx</code></p></div>
+    <p class="lede">Eine Zeile, vier Menüpunkte, die Wortmarke exakt in der Mitte — sie hängt an <code>position: absolute; left: 50%</code> und bleibt unabhängig von der Breite der Menüpunkte zentriert. Die vier Punkte liegen in vier gleich breiten Zellen; die äußeren sitzen am Rand, die inneren an der Außenkante ihrer Zelle (deshalb bleibt zur Marke Luft).</p>
+  </div>
+  <div class="stage"><div style="position:relative">
+  <div style="position:relative;height:170px;overflow:hidden;background:var(--photo-ground)">
+    <img src="assets/Imagery/hero-stefanie.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:38% 50%;filter:brightness(0.76) saturate(0.96) contrast(1.08)">
+    <div class="eo-nav-clear" style="position:absolute;inset:0">
+      <div class="eo-shell">
+        <div class="eo-nav">
+          <nav class="eo-nav-links" aria-label="Hauptnavigation">
+            <a href="#" class="eo-nav-link eo-nav-inverse" style="justify-self:start">Cranio</a>
+            <a href="#" class="eo-nav-link eo-nav-inverse" style="justify-self:start">Yoga</a>
+            <a href="#" class="eo-nav-link eo-nav-inverse" style="justify-self:end">Über mich</a>
+            <a href="#" class="eo-nav-link eo-nav-inverse" style="justify-self:end">Kontakt</a>
+          </nav>
+          <span class="eo-mark-wrap" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+            <span class="eo-mark" style="font-size:1.3rem;color:var(--cream)">Stefanie Kaindl</span>
+            <span class="eo-mark-sub eo-mark-sub-inverse" style="font-size:0.625rem">Cranio Sacral</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="eo-nav-solid">
+  <div class="eo-shell">
+    <div class="eo-nav is-solid">
+      <nav class="eo-nav-links" aria-label="Hauptnavigation">
+        <a href="#" class="eo-nav-link is-active" style="justify-self:start">Cranio</a>
+        <a href="#" class="eo-nav-link" style="justify-self:start">Yoga</a>
+        <a href="#" class="eo-nav-link" style="justify-self:end">Über mich</a>
+        <a href="#" class="eo-nav-link" style="justify-self:end">Kontakt</a>
+      </nav>
+      <span class="eo-mark-wrap" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+        <span class="eo-mark" style="font-size:1.3rem;color:var(--ink)">Stefanie Kaindl</span>
+        <span class="eo-mark-sub" style="font-size:0.625rem">Cranio Sacral</span>
+      </span>
+    </div>
+  </div>
+  <div style="height:1px;background:var(--line)"></div>
+</div></div>
+</section>
+<section class="spec" id="c-Footer">
+  <div class="page">
+    <div class="spechead"><h4>Fußbereich<span class="dim"> · Footer</span></h4>
+      <p class="src"><code>src/components/footer.tsx</code></p></div>
+    <p class="lede">Olive-Fläche mit Laufschrift am oberen Rand, zwei Linkspalten, Aussage und Kontaktspalten, darunter die Wortmarke über die volle Inhaltsbreite und die Rechts-Zeile.</p>
+  </div>
+  <div class="stage"><footer class="eo-footer">
+  <div class="eo-hairline-inverse" style="overflow:hidden;padding-block:16px">
+    <div class="eo-marquee" aria-hidden="true">
+      <div class="eo-marquee-track"><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span></div>
+      <div class="eo-marquee-track"><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span><span>Raum für dich</span></div>
+    </div>
+  </div>
+
+  <div class="eo-shell" style="padding-bottom:40px;padding-top:56px">
+    <div style="display:grid;gap:56px;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)">
+      <div class="eo-footer-cols">
+        <nav aria-label="Seiten">
+          <p class="eo-footer-col-title">Seiten</p>
+          <ul class="eo-footer-links"><li><a href="#">Cranio</a></li><li><a href="#">Yoga</a></li><li><a href="#">Über mich</a></li><li><a href="#">Kontakt</a></li></ul>
+        </nav>
+        <nav aria-label="Angebote">
+          <p class="eo-footer-col-title">Angebote</p>
+          <ul class="eo-footer-links"><li><a href="#">Cranio für Erwachsene</a></li><li><a href="#">Cranio für Babys &amp; Kinder</a></li><li><a href="#">Erstberatung &amp; 5er-Paket</a></li><li><a href="#">Yoga am Donnerstag</a></li></ul>
+        </nav>
+        <div style="grid-column:span 2;margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px">
+          <a href="#" class="eo-btn eo-btn-cream">Termin vereinbaren
+            <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg>
+          </a>
+          <a href="#" style="font-size:0.875rem;color:var(--cream-70);text-decoration:underline;text-decoration-color:var(--cream-45);text-underline-offset:4px">info@stefanie-kaindl-cranio.de</a>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:40px;grid-template-columns:repeat(2,minmax(0,1fr))">
+        <div style="grid-column:span 2">
+          <p class="eo-display eo-display-serif" style="margin:0;font-size:clamp(1.75rem,3.2vw,3rem);color:var(--cream)">Zur Ruhe kommen.</p>
+          <p class="eo-body" style="margin-top:20px;max-width:28rem;color:var(--cream-70)">Craniosacrale Körperarbeit für Erwachsene, Babys und Kinder, dazu Yoga am Donnerstag — in Pfaffenhofen an der Ilm. Zeit ohne Eile und eine Berührung, die nichts erzwingt.</p>
+        </div>
+        <div>
+          <p class="eo-footer-col-title">Adresse</p>
+          <p class="eo-body" style="margin-top:12px;color:var(--cream-70)">Bahnstraße 2a<br>85276 Pfaffenhofen a. d. Ilm<br>Ortsteil Uttenhofen</p>
+          <a href="#" style="display:block;padding-block:0.375rem;font-size:0.875rem;color:var(--cream-70);text-decoration:none">0176 63094476</a>
+        </div>
+        <div>
+          <p class="eo-footer-col-title">Öffnungszeiten</p>
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:12px">
+            <div><p class="eo-serif" style="margin:0;font-size:0.9375rem;color:var(--cream-70)">Termine</p><p class="eo-small" style="margin-top:4px;color:var(--cream-45)">Mo – Fr nach Vereinbarung</p></div>
+            <div><p class="eo-serif" style="margin:0;font-size:0.9375rem;color:var(--cream-70)">Yoga</p><p class="eo-small" style="margin-top:4px;color:var(--cream-45)">Do 17:30 &amp; 19:00</p></div>
+          </div>
+          <a href="#" style="display:inline-block;padding-block:0.375rem;font-size:0.875rem;color:var(--cream-70);text-decoration:none">Instagram
+            <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="position:relative;margin-top:64px;padding-top:32px;user-select:none">
+      <div class="eo-hairline-inverse" style="position:absolute;left:0;right:0;top:0"></div>
+      <svg aria-hidden="true" viewBox="-150 -150 300 300" fill="none" stroke="rgba(243,240,233,0.05)" stroke-width="1" style="position:absolute;left:50%;bottom:-24rem;width:min(150vw,1800px);transform:translateX(-50%);pointer-events:none" class="eo-flower-fade"><circle cx="0" cy="0" r="50" vector-effect="non-scaling-stroke"/><circle cx="50.0" cy="0.0" r="50" vector-effect="non-scaling-stroke"/><circle cx="25.0" cy="43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="-25.0" cy="43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="-50.0" cy="0.0" r="50" vector-effect="non-scaling-stroke"/><circle cx="-25.0" cy="-43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="25.0" cy="-43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="75.0" cy="43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="0.0" cy="86.603" r="50" vector-effect="non-scaling-stroke"/><circle cx="-75.0" cy="43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="-75.0" cy="-43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="-0.0" cy="-86.603" r="50" vector-effect="non-scaling-stroke"/><circle cx="75.0" cy="-43.301" r="50" vector-effect="non-scaling-stroke"/><circle cx="100.0" cy="0.0" r="50" vector-effect="non-scaling-stroke"/><circle cx="50.0" cy="86.603" r="50" vector-effect="non-scaling-stroke"/><circle cx="-50.0" cy="86.603" r="50" vector-effect="non-scaling-stroke"/><circle cx="-100.0" cy="0.0" r="50" vector-effect="non-scaling-stroke"/><circle cx="-50.0" cy="-86.603" r="50" vector-effect="non-scaling-stroke"/><circle cx="50.0" cy="-86.603" r="50" vector-effect="non-scaling-stroke"/><circle r="150" vector-effect="non-scaling-stroke"/></svg>
+      <div class="eo-footer-mark-wrap" style="position:relative">
+        <p aria-hidden="true" class="eo-mark eo-footer-mark" style="color:var(--cream);white-space:nowrap">Stefanie Kaindl</p>
+        <p class="eo-mark eo-footer-mark-sub" style="color:var(--cream-70);margin-top:0.6em">Cranio Sacral</p>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px" class="eo-legal-row">
+      <p style="margin:0">© 2026 Stefanie Kaindl · Alle Rechte vorbehalten</p>
+      <div class="eo-legal-row"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">Cookie-Einstellungen</a><a href="#">Design: Christian Lutz</a></div>
+    </div>
+  </div>
+</footer></div>
+</section>
+<h3 class="grp">Layout</h3>
+<section class="spec" id="c-Hero">
+  <div class="page">
+    <div class="spechead"><h4>Hero<span class="dim"> · Hero</span></h4>
+      <p class="src"><code>src/app/hero.tsx</code></p></div>
+    <p class="lede">Vollflächiges Foto, mittig der Text: Eyebrow, zweizeilige Serif-Headline, zwei gleichwertige Wege. Höhe <code>min-height: 100svh</code>.</p>
+  </div>
+  <div class="stage"><div class="eo-hero" style="min-height:0;height:560px">
+  <div class="eo-hero-photo" aria-hidden="true"></div>
+  <span class="eo-hero-scrim" aria-hidden="true"></span>
+  <div class="eo-hero-inner eo-on-photo eo-shell">
+    <div style="width:100%">
+      <p class="eo-hero-eyebrow">Craniosacrale Körperarbeit<span aria-hidden="true">&amp;</span>Yoga</p>
+      <h1 class="eo-display eo-display-serif eo-d1-hero" style="margin:24px 0 0;color:var(--cream)">
+        <span>Raum, um anzukommen.</span>
+        <span>Zeit, um loszulassen.</span>
+      </h1>
+      <div class="eo-row" style="margin-top:40px;justify-content:center;gap:40px">
+        <a href="#" class="eo-cta-link">Mehr zu Cranio
+          <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.4 8h9.2"/><path d="M9.1 4.6 12.6 8l-3.5 3.4"/></svg>
+        </a>
+        <a href="#" class="eo-cta-link">Mehr zu Yoga
+          <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.4 8h9.2"/><path d="M9.1 4.6 12.6 8l-3.5 3.4"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div></div>
+</section>
+<section class="spec" id="c-SectionHead">
+  <div class="page">
+    <div class="spechead"><h4>Sektionskopf<span class="dim"> · SectionHead</span></h4>
+      <p class="src"><code>src/components/editorial.tsx</code></p></div>
+    <p class="lede">Zentrierter Sektionskopf: Label, Serif-Headline, optional ein Absatz darunter. Der Standardbaustein, wenn eine Sektion keine eigene Spaltenaufteilung braucht.</p>
+  </div>
+  <div class="stage"><div class="eo-section-tight">
+  <div class="eo-shell" style="max-width:900px">
+    <div style="margin-inline:auto;max-width:42rem;text-align:center">
+      <span class="eo-label eo-label-caps">Zwei Wege zur Ruhe</span>
+      <h2 class="eo-display eo-display-serif eo-d2" style="margin:24px 0 0">Zwei Kurse am Donnerstag.</h2>
+      <p class="eo-body" style="margin:24px auto 0;max-width:36rem">Beide Kurse finden donnerstags in Paunzhausen statt, in kleinen Gruppen. Du kannst spontan kommen — zum ruhigen Ankommen oder für einen kraftvollen Flow zum Ausklang.</p>
+    </div>
+  </div>
+</div>
+
+<div class="eo-band-olive eo-section-tight">
+  <div class="eo-shell" style="max-width:900px">
+    <div style="margin-inline:auto;max-width:42rem;text-align:center">
+      <span class="eo-label eo-label-inverse eo-label-caps">Deine Stunde</span>
+      <h2 class="eo-display eo-display-serif eo-d2" style="margin:24px 0 0;color:var(--cream)">Yoga für Körper und Geist.</h2>
+    </div>
+  </div>
+</div></div>
+</section>
+<section class="spec" id="c-PageIntro">
+  <div class="page">
+    <div class="spechead"><h4>Seitenkopf<span class="dim"> · PageIntro</span></h4>
+      <p class="src"><code>src/components/editorial.tsx</code></p></div>
+    <p class="lede">Seitenkopf jeder Unterseite (<code>/cranio</code>, <code>/yoga</code>, <code>/ueber-mich</code>, <code>/kontakt</code>): Label, große Serif-Zeile, Einstiegstext — zentriert, max 48 rem.</p>
+  </div>
+  <div class="stage"><div class="eo-shell" style="max-width:900px;padding-top:56px;padding-bottom:48px">
+  <div style="margin-inline:auto;max-width:48rem;text-align:center">
+    <span class="eo-label eo-label-caps">Cranio</span>
+    <h1 class="eo-display eo-display-serif eo-d1-hero eo-d1" style="margin:24px 0 0">Craniosacrale Körperarbeit</h1>
+    <p class="eo-lead-lg" style="margin:28px auto 0;max-width:42rem">Eine sanfte Berührung, die nichts erzwingt: Der Körper bekommt Raum, aus der Anspannung zu finden und in seinen eigenen Rhythmus zurückzukommen.</p>
+  </div>
+</div></div>
+</section>
+<h3 class="grp">Text</h3>
+<section class="spec" id="c-Label">
+  <div class="page">
+    <div class="spechead"><h4>Eyebrow<span class="dim"> · Label</span></h4>
+      <p class="src"><code>src/app/globals.css (.label, .label-caps, .pill)</code></p></div>
+    <p class="lede">Eyebrow des Systems: 10 px, mit einem 2,2-px-Punkt davor (<code>currentColor</code>, 75 % Deckkraft). Drei Zustände:</p>
+  </div>
+  <div class="stage"><div class="eo-frame eo-stack" style="gap:28px">
+  <div class="eo-row" style="gap:32px">
+    <span class="eo-label">01 · Cranio</span>
+    <span class="eo-label eo-label-caps">Zwei Wege zur Ruhe</span>
+    <span class="eo-label eo-label-caps">Stimmen</span>
+  </div>
+
+  <div class="eo-band-olive" style="padding:24px">
+    <div class="eo-row" style="gap:32px">
+      <span class="eo-label eo-label-inverse eo-label-caps">Platz reservieren</span>
+      <span class="eo-label eo-label-inverse">Meine Arbeitsweise</span>
+    </div>
+  </div>
+
+  <div style="position:relative;min-height:150px;background:var(--photo-ground);overflow:hidden">
+    <img src="assets/Imagery/behandlung.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.72) saturate(0.94)">
+    <span style="position:absolute;inset:0;background:rgba(36,26,17,0.26)"></span>
+    <div style="position:relative;padding:34px 24px">
+      <span class="eo-pill">Craniosacrale Körperarbeit</span>
+    </div>
+  </div>
+</div></div>
+</section>
+<h3 class="grp">Actions</h3>
+<section class="spec" id="c-Button">
+  <div class="page">
+    <div class="spechead"><h4>Button<span class="dim"> · Button</span></h4>
+      <p class="src"><code>src/app/globals.css (.btn, .btn-ink, .btn-olive, .btn-cream, .btn-outline-*)</code></p></div>
+    <p class="lede">Vollrunder Button, 13 px, <code>padding: 1rem 1.75rem</code> (≈46 px Höhe). Fünf Varianten — die Wahl hängt an der Fläche, nicht am Geschmack:</p>
+  </div>
+  <div class="stage"><div class="eo-frame eo-stack" style="gap:28px">
+  <div class="eo-row">
+    <a href="#" class="eo-btn eo-btn-ink">Termin online buchen</a>
+    <a href="#" class="eo-btn eo-btn-olive">Platz reservieren</a>
+    <a href="#" class="eo-btn eo-btn-outline-ink">Mehr zu Cranio</a>
+  </div>
+  <div class="eo-row">
+    <a href="#" class="eo-btn eo-btn-ink">Termin vereinbaren
+      <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg>
+    </a>
+    <a href="#" class="eo-btn eo-btn-ink" style="padding:0.875rem 1.5rem">Cranio buchen
+      <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg>
+    </a>
+    <a href="#" class="eo-btn eo-btn-outline-ink" style="padding:0.875rem 1.5rem">Yoga buchen
+      <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg>
+    </a>
+  </div>
+  <div class="eo-band-olive" style="padding:24px">
+    <div class="eo-row">
+      <a href="#" class="eo-btn eo-btn-cream">Termin vereinbaren
+        <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg>
+      </a>
+      <a href="#" class="eo-btn eo-btn-outline-cream">Mehr über mich</a>
+    </div>
+  </div>
+  <div class="eo-band-dark" style="padding:24px">
+    <a href="#" class="eo-btn eo-btn-cream eo-btn-block" style="max-width:320px">Akzeptieren</a>
+  </div>
+</div></div>
+</section>
+<section class="spec" id="c-CtaLink">
+  <div class="page">
+    <div class="spechead"><h4>Text-Link<span class="dim"> · CtaLink</span></h4>
+      <p class="src"><code>src/app/globals.css (.cta-link, .cta-link-ink)</code></p></div>
+    <p class="lede">Der Textlink des Systems — die häufigste Handlung auf der Seite (19 Stellen). Die Linie kommt aus <code>border-bottom</code>, <b>nicht</b> aus <code>text-decoration</code>: sonst entsteht zwischen Wort und Pfeil eine Lücke im Strich.</p>
+  </div>
+  <div class="stage"><div class="eo-frame eo-stack" style="gap:28px">
+  <div class="eo-row" style="gap:40px">
+    <a href="#" class="eo-cta-link eo-cta-link-ink">Mehr zu Cranio <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.4 8h9.2"/><path d="M9.1 4.6 12.6 8l-3.5 3.4"/></svg></a>
+    <a href="#" class="eo-cta-link eo-cta-link-ink">Termin online buchen <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg></a>
+  </div>
+  <div class="eo-band-olive" style="padding:24px">
+    <div class="eo-row" style="gap:40px">
+      <a href="#" class="eo-cta-link">Mehr zu Yoga <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.4 8h9.2"/><path d="M9.1 4.6 12.6 8l-3.5 3.4"/></svg></a>
+      <a href="#" class="eo-cta-link">Einstellungen</a>
+    </div>
+  </div>
+  <div style="position:relative;min-height:150px;background:var(--photo-ground);overflow:hidden">
+    <img src="assets/Imagery/behandlung_2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.72) saturate(0.94)">
+    <span style="position:absolute;inset:0;background:rgba(36,26,17,0.26)"></span>
+    <div style="position:relative;padding:44px 24px" class="eo-on-photo">
+      <div class="eo-row" style="gap:40px">
+        <a href="#" class="eo-cta-link">Mehr zu Cranio <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.4 8h9.2"/><path d="M9.1 4.6 12.6 8l-3.5 3.4"/></svg></a>
+        <a href="#" class="eo-cta-link">Mehr zu Yoga <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M3.4 8h9.2"/><path d="M9.1 4.6 12.6 8l-3.5 3.4"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div></div>
+</section>
+<h3 class="grp">Content</h3>
+<section class="spec" id="c-PriceRow">
+  <div class="page">
+    <div class="spechead"><h4>Preiszeile<span class="dim"> · PriceRow</span></h4>
+      <p class="src"><code>src/components/editorial.tsx</code></p></div>
+    <p class="lede">Eine Angebotszeile mit Preis. Der Baustein für jede Preisliste — <code>/cranio</code>, <code>/angebote-preise</code>, Kursliste.</p>
+  </div>
+  <div class="stage"><div class="eo-shell" style="max-width:1000px;padding-block:32px">
+  <div class="eo-price-row">
+    <div>
+      <h3>Craniosacrale Behandlung <span>/ ca. 60 Min</span></h3>
+      <p class="eo-price-body">Eine ruhige, vollständige Sitzung für Erwachsene — Zeit, um anzukommen und den Körper arbeiten zu lassen.</p>
+    </div>
+    <div class="eo-price-cell">
+      <p class="eo-price-amount">73 €</p>
+      <a href="#" class="eo-cta-link eo-cta-link-ink" style="font-size:0.875rem">Termin buchen</a>
+    </div>
+  </div>
+
+  <div class="eo-price-row">
+    <div>
+      <h3>Babys &amp; Kinder <span>/ 20 – 40 Min</span></h3>
+      <p class="eo-price-body">Spielerisch und altersgerecht, mit viel Zeit und Ruhe — von den ersten Wochen bis ins Schulalter.</p>
+    </div>
+    <div class="eo-price-cell">
+      <p class="eo-price-amount">53 €</p>
+      <a href="#" class="eo-cta-link eo-cta-link-ink" style="font-size:0.875rem">Termin buchen</a>
+    </div>
+  </div>
+
+  <div class="eo-price-row">
+    <div>
+      <h3>5er-Paket <span>/ ca. 60 Min</span></h3>
+      <p class="eo-price-body">Fünf Behandlungen zum Paketpreis — für einen Verlauf über mehrere Wochen.</p>
+    </div>
+    <div class="eo-price-cell">
+      <p class="eo-price-amount">400 €</p>
+      <a href="#" class="eo-cta-link eo-cta-link-ink" style="font-size:0.875rem">Termin buchen</a>
+    </div>
+  </div>
+</div></div>
+</section>
+<section class="spec" id="c-Facts">
+  <div class="page">
+    <div class="spechead"><h4>Eckdaten<span class="dim"> · Facts</span></h4>
+      <p class="src"><code>src/app/content.tsx (Facts)</code></p></div>
+    <p class="lede">Eckdaten unter einem Angebotstext: drei Paare (Begriff oben, Wert darunter), eine Haarlinie darüber, <code>grid-cols-3</code> ab <code>sm</code>.</p>
+  </div>
+  <div class="stage"><div class="eo-shell" style="max-width:1000px;padding-block:28px">
+  <dl class="eo-facts" style="margin-top:0">
+    <div><dt>Erwachsene</dt><dd>ca. 60 Min · 73 €</dd></div>
+    <div><dt>Babys &amp; Kinder</dt><dd>20 – 40 Min · 53 €</dd></div>
+    <div><dt>Ort</dt><dd>Pfaffenhofen-Uttenhofen</dd></div>
+  </dl>
+
+  <div class="eo-band-olive" style="margin-top:36px;padding:28px">
+    <dl class="eo-facts eo-facts-inverse" style="margin-top:0">
+      <div><dt>Donnerstags</dt><dd>17:30 &amp; 19:00 Uhr</dd></div>
+      <div><dt>Pro Stunde</dt><dd>14 € · EGYM Wellpass</dd></div>
+      <div><dt>Ort</dt><dd>Paunzhausen</dd></div>
+    </dl>
+  </div>
+</div></div>
+</section>
+<section class="spec" id="c-Quote">
+  <div class="page">
+    <div class="spechead"><h4>Zitat<span class="dim"> · Quote</span></h4>
+      <p class="src"><code>src/app/content.tsx (Voices) · globals.css (.quote, .initials)</code></p></div>
+    <p class="lede">Zitatband auf <code>paper-deep</code>: Zitat in der <b>Sans</b> (nicht in der Serif), darunter eine Haarlinie, dann Initialen-Kachel, Name und Anlass. Zähler „01 / 04" auf der linken Viertellinie.</p>
+  </div>
+  <div class="stage"><div class="eo-band-deep" style="padding:40px 0">
+  <div class="eo-shell" style="max-width:1000px">
+    <div style="display:grid;gap:32px;grid-template-columns:minmax(0,7fr)">
+      <div>
+        <span class="eo-label eo-label-caps">Stimmen</span>
+        <span class="eo-display" style="display:block;margin-top:16px;font-size:1.25rem;font-weight:300;font-variant-numeric:tabular-nums">01<span style="color:var(--ink-500)">/04</span></span>
+      </div>
+      <blockquote style="margin:0">
+        <p class="eo-quote">&bdquo;Die Behandlung bei Steffi ist eine Wohltat für Körper, Geist und Seele. Nach der Cranio fühle ich mich viel leichter und meine Gedanken kommen zur Ruhe.&ldquo;</p>
+        <div class="eo-hairline" style="margin-top:56px"></div>
+        <footer class="eo-quote-foot">
+          <span style="display:flex;align-items:center;gap:12px">
+            <span class="eo-initials" aria-hidden="true">KP</span>
+            <span>
+              <span class="eo-quote-name">Kathi P.</span>
+              <span class="eo-quote-role">Stress &amp; Verspannungen</span>
+            </span>
+          </span>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</div></div>
+</section>
+<section class="spec" id="c-Accordion">
+  <div class="page">
+    <div class="spechead"><h4>Akkordeon<span class="dim"> · Accordion</span></h4>
+      <p class="src"><code>src/app/content.tsx (Approach)</code></p></div>
+    <p class="lede">Merkmal-Liste auf Olive (im Repo als <code>Approach</code> in <code>src/app/content.tsx</code>). Immer nur <b>eine</b> Zeile offen — es ist eine Auswahl, kein FAQ.</p>
+  </div>
+  <div class="stage"><div class="eo-band-olive" style="padding:36px 24px">
+  <div class="eo-shell" style="max-width:1000px">
+    <span class="eo-label eo-label-inverse eo-label-caps">Meine Arbeitsweise</span>
+    <h2 class="eo-display eo-display-serif eo-d2" style="margin:20px 0 32px;max-width:28rem;color:var(--cream)">Was meine Arbeit trägt.</h2>
+    <ol class="eo-accordion">
+      <li class="is-open">
+        <button type="button" aria-expanded="true"><span class="eo-dot" aria-hidden="true"></span>Sanfte Berührung<span class="eo-idx" aria-hidden="true">01</span></button>
+        <p class="eo-panel">Ein Druck von nur etwa fünf Gramm — so leicht wie das Gewicht einer Münze. Der craniosacrale Rhythmus wird ertastet, nicht gedrückt.</p>
+      </li>
+      <li>
+        <button type="button" aria-expanded="false"><span class="eo-dot" aria-hidden="true"></span>Ganzheitlich<span class="eo-idx" aria-hidden="true">02</span></button>
+        <p class="eo-panel">Die Arbeit wirkt körperlich und emotional: bei Schmerzen, Migräne und Verspannungen ebenso wie bei Stress, Schlafproblemen und emotionaler Belastung.</p>
+      </li>
+      <li>
+        <button type="button" aria-expanded="false"><span class="eo-dot" aria-hidden="true"></span>Für Babys &amp; Kinder<span class="eo-idx" aria-hidden="true">03</span></button>
+        <p class="eo-panel">Spielerisch und altersgerecht, mit viel Zeit und Ruhe — von den ersten Wochen bis ins Schulalter.</p>
+      </li>
+    </ol>
+    <a href="#" class="eo-cta-link" style="margin-top:40px">Mehr zu Cranio
+      <svg class="eo-icon-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg>
+    </a>
+  </div>
+</div></div>
+</section>
+<section class="spec" id="c-CourseTable">
+  <div class="page">
+    <div class="spechead"><h4>Kursliste<span class="dim"> · CourseTable</span></h4>
+      <p class="src"><code>src/app/yoga/content.tsx (Kurse · Termine)</code></p></div>
+    <p class="lede">Kurs- und Terminliste einer Kursseite (<code>/yoga</code>): zwei Kurse in zwei Spalten, darunter die drei Eckdaten, dann die Termine als Kachelreihe.</p>
+  </div>
+  <div class="stage"><div class="eo-shell" style="max-width:1000px;padding-block:32px">
+  <div class="eo-course-grid" style="margin-top:0">
+    <div class="eo-course">
+      <span class="eo-label">Kurs 1 · Sanft</span>
+      <p class="eo-course-time">17:30</p>
+      <p class="eo-course-detail">Ruhiges Ankommen: sanfte Haltungen, Atemarbeit und eine lange Schlussentspannung.</p>
+    </div>
+    <div class="eo-course">
+      <span class="eo-label">Kurs 2 · Flow</span>
+      <p class="eo-course-time">19:00</p>
+      <p class="eo-course-detail">Kraftvoller Ausklang: Vinyasa-Flow, an die Gruppe angepasst — für Anfänger und Fortgeschrittene.</p>
+    </div>
+  </div>
+
+  <div class="eo-facts" style="margin-top:56px">
+    <div><dt>Preis</dt><dd>14 € pro Stunde</dd></div>
+    <div><dt>Ort</dt><dd>Paunzhausen · Yogaraum</dd></div>
+    <div><dt>Zahlung</dt><dd>Vor Ort oder mit EGYM Wellpass</dd></div>
+  </div>
+  <p class="eo-small" style="margin-top:24px;max-width:44rem">Enthalten sind craniosacrale Impulse, persönliche Begleitung und eine ruhige Atmosphäre in kleinen Gruppen. Matten und Hilfsmittel sind vor Ort.</p>
+
+  <ul class="eo-termine" style="margin-top:40px">
+    <li><span class="eo-day">07</span><span class="eo-month">November</span><span class="eo-year">2026</span></li>
+    <li><span class="eo-day">14</span><span class="eo-month">November</span><span class="eo-year">2026</span></li>
+    <li><span class="eo-day">21</span><span class="eo-month">November</span><span class="eo-year">2026</span></li>
+  </ul>
+</div></div>
+</section>
+<h3 class="grp">Form</h3>
+<section class="spec" id="c-Field">
+  <div class="page">
+    <div class="spechead"><h4>Formularfeld<span class="dim"> · Field</span></h4>
+      <p class="src"><code>src/app/kontakt/content.tsx (ContactForm) · globals.css (.field)</code></p></div>
+    <p class="lede">Formularfeld <b>ohne Box</b>: keine Fläche, kein Rahmen, nur eine 1-px-Linie unter dem Feld. Fokus färbt die Linie Olive (kein Ring, kein Halo).</p>
+  </div>
+  <div class="stage"><div class="eo-shell" style="max-width:640px;padding-block:36px">
+  <form class="eo-field-group" onsubmit="return false">
+    <div class="eo-field-2">
+      <label class="eo-field-label"><span class="eo-meta-line">Name</span><input class="eo-field" type="text" value=""></label>
+      <label class="eo-field-label"><span class="eo-meta-line">E-Mail *</span><input class="eo-field" type="email" value=""></label>
+    </div>
+    <label class="eo-field-label"><span class="eo-meta-line">Telefon (optional)</span><input class="eo-field" type="tel" placeholder="+49"></label>
+    <label class="eo-field-label"><span class="eo-meta-line">Nachricht *</span><textarea class="eo-field" rows="4"></textarea></label>
+    <p class="eo-field-hint">Mit dem Absenden stimmst du zu, dass deine Angaben zur Bearbeitung der Anfrage gespeichert werden. Mehr dazu in der <a href="#" style="color:var(--ink)">Datenschutzerklärung</a>.</p>
+    <div><button type="button" class="eo-btn eo-btn-ink">Nachricht senden</button></div>
+  </form>
+</div></div>
+</section>
+<h3 class="grp">Media</h3>
+<section class="spec" id="c-Photo">
+  <div class="page">
+    <div class="spechead"><h4>Bildfläche<span class="dim"> · Photo</span></h4>
+      <p class="src"><code>src/components/editorial.tsx (Photo) · globals.css (.ph)</code></p></div>
+    <p class="lede">Jedes Foto der Seite läuft über <code>.ph</code>. Der Filter ist Teil des Systems, nicht eine Spielwiese: <code>sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99)</code> plus eine Olive-Fläche (<code>#6b7250</code>) mit <code>mix-blend-mode: multiply</code> bei 14 % (<code>.ph-deep</code>: 42 %). Erst dadurch haben Aufnahmen aus verschiedenen Räumen und Jahren denselben Ton.</p>
+  </div>
+  <div class="stage"><div class="eo-shell" style="max-width:1000px;padding-block:28px">
+  <div style="display:grid;gap:24px;grid-template-columns:repeat(3,minmax(0,1fr))">
+    <figure class="eo-ph" style="margin:0;aspect-ratio:4/5">
+      <img src="assets/Imagery/hero-stefanie.webp" alt="Stefanie Kaindl im Behandlungsraum" style="object-position:50% 30%">
+    </figure>
+    <figure class="eo-ph" style="margin:0;aspect-ratio:4/5">
+      <img src="assets/Imagery/behandlung_2.webp" alt="Hände halten die Füße während einer craniosacralen Behandlung" style="object-position:50% 45%">
+    </figure>
+    <figure class="eo-ph eo-ph-deep" style="margin:0;aspect-ratio:4/5">
+      <img src="assets/Imagery/yoga.webp" alt="Yoga-Haltung auf der Matte" style="object-position:38% 50%">
+    </figure>
+  </div>
+  <p class="eo-small" style="margin-top:16px">Links und Mitte: <code>.ph</code> mit der Standard-Gradiation (Olive-Multiplikation 14 %). Rechts: <code>.ph-deep</code> (42 %) — für Motive, die als dunkle Fläche tragen sollen.</p>
+</div></div>
+</section>
+<h3 class="grp">Overlay</h3>
+<section class="spec" id="c-CookieBanner">
+  <div class="page">
+    <div class="spechead"><h4>Cookie-Hinweis<span class="dim"> · CookieBanner</span></h4>
+      <p class="src"><code>src/components/cookie-banner.tsx</code></p></div>
+    <p class="lede">Cookie-Hinweis am unteren Rand: dunkle Fläche (<code>rgba(29,28,23,.95)</code>) mit <code>blur(12px)</code>, obere Haarlinie in <code>cream-line</code>, Einfahren von unten in 500 ms (<code>banner-in</code>).</p>
+  </div>
+  <div class="stage"><div style="position:relative;min-height:260px;background:var(--paper)">
+  <div class="eo-cookie eo-banner-in" style="position:absolute;left:0;right:0;bottom:0">
+    <div class="eo-shell" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding-block:24px">
+      <p style="margin:0;max-width:42rem;font-size:0.8125rem;line-height:1.625;color:var(--cream-70)">
+        <span class="eo-label eo-label-inverse eo-label-caps">Cookies</span>
+        <span style="display:block;margin-top:8px">Diese Website nutzt Cookies. Notwendige sind immer aktiv; Statistik und Marketing nur, wenn du zustimmst. Deine Auswahl kannst du jederzeit ändern.</span>
+      </p>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 32px;flex:none">
+        <a href="#" class="eo-cta-link" style="font-size:0.8125rem">Einstellungen</a>
+        <button type="button" class="eo-cta-link" style="font-size:0.8125rem;background:none;border:0;cursor:pointer">Nur notwendige akzeptieren</button>
+        <button type="button" class="eo-btn eo-btn-cream" style="padding:0.875rem 1.5rem;font-size:0.75rem;font-weight:500;letter-spacing:0.025em">Akzeptieren</button>
+      </div>
+    </div>
+  </div>
+</div></div>
+</section>
+</div>
+<section class="sec" id="stimme"><div class="page">
+  <span class="eo-label eo-label-caps">Stimme</span>
+  <h2>Leise, konkret, immer du.</h2>
+  
+<div class="cols">
+  <div>
+    <h4>Do</h4>
+    <ul>
+      <li><b>Du-Anrede</b> — „Bei mir findest du zwei Wege, wieder bei dir anzukommen." <code>Sie</code> nur in den Rechtstexten.</li>
+      <li><b>Kurze Aussagesätze mit Punkt</b> — „Raum, um anzukommen." „Zwei Kurse am Donnerstag."</li>
+      <li><b>Exakte Zahlen aus ihrem Material</b> — 73 €, 53 €, 400 €, 40 €, 14 €/h, Do 17:30 &amp; 19:00.</li>
+      <li><b>Nummerierte Eyebrows</b> — <code>01 · Cranio</code>, <code>02 · Yoga</code> auf der Startseite.</li>
+      <li><b>Wortmarke „Cranio Sacral"</b>, Angebot ausgeschrieben „Craniosacrale Körperarbeit".</li>
+      <li><b>Die vier Angebote des Footers</b> als Reihenfolge — Cranio für Erwachsene · Cranio für Babys &amp; Kinder · Erstberatung &amp; 5er-Paket · Yoga am Donnerstag.</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Don't</h4>
+    <ul>
+      <li><b>Nie „Praxis"</b> — es ist keine. Erlaubt: Adresse, Seiten, Behandlungsraum, Einblicke in die Räume.</li>
+      <li><b>„Hausbesuche" ist kein Angebot</b> und kommt nirgends vor.</li>
+      <li><b>Keine Ausrufezeichen, keine Emoji, keine Werbeadjektive.</b></li>
+      <li><b>Keine erfundenen Preise, Termine oder Stimmen</b> — die vier Zitate des Bestands sind die einzigen.</li>
+      <li><b>Keine zweite Akzentfarbe</b>, keine weißen Karten mit großem Radius und Schatten (der alte Stand vor dem Redesign).</li>
+      <li><b><code>ink-400</code> nicht für Kleinschrift</b> (3,2:1), <code>cream-70</code> nicht für Kleinschrift auf Olive (3,5:1).</li>
+    </ul>
+  </div>
+</div>
+</div></section>
+<section class="sec" id="assets"><div class="page">
+  <span class="eo-label eo-label-caps">Assets</span>
+  <h2>Originale, unverändert — mit ihrer Herkunft.</h2>
+  
+<div class="assets">
+  <div class="asset"><img src="assets/Logos/logo.png" alt="Bildmarke: runde teal Disc mit Handlinie">
+    <code>logo.png</code><span>Disc <code>#9dcdcd</code> mit handgezeichneter Hand-/Blütenlinie und Schrift. <b>Alter Stand vor dem Redesign.</b></span></div>
+  <div class="asset"><img src="assets/Logos/sk_logo_dark.png" alt="Lockup: Wortmarke schwarz, Unterzeile teal">
+    <code>sk_logo_dark.png</code><span>Lockup für helle Flächen: Wortmarke <code>#050505</code>, Unterzeile <code>#67b1b1</code> — <b>mit weißem Hintergrund, nicht transparent</b>. <b>Nicht im System.</b></span></div>
+  <div class="asset"><img src="assets/Logos/favicon.png" alt="Favicon: teal Disc">
+    <code>favicon.png</code><span>Wird aktuell als Favicon ausgeliefert — noch teal.</span></div>
+  <div class="asset"><img src="assets/Logos/apple-touch-icon.png" alt="Apple Touch Icon: teal Disc">
+    <code>apple-touch-icon.png</code><span>180×180 für den iOS-Homescreen.</span></div>
+</div>
+<div class="assets">
+  <div class="asset"><img src="assets/Imagery/hero-stefanie.webp" alt="Hero-Porträt"><code>hero-stefanie.webp</code><span>Hero — eigene Gradiation <code>brightness(0.76)</code>, weil Text darüber liegt.</span></div>
+  <div class="asset"><img src="assets/Imagery/behandlung.webp" alt="Behandlungsraum"><code>behandlung.webp</code><span>Ruhige Fläche, trägt das Buchungsband.</span></div>
+  <div class="asset"><img src="assets/Imagery/behandlung_2.webp" alt="Hände halten die Füße"><code>behandlung_2.webp</code><span>Arbeitsweise-Sektion.</span></div>
+  <div class="asset"><img src="assets/Imagery/yoga.webp" alt="Yoga-Haltung"><code>yoga.webp</code><span>Yoga-Band.</span></div>
+</div>
+<p class="lede"><b>Die Wortmarke ist keine Datei</b> — sie ist Satz: Cormorant 500, Versalien, 0.18em gesperrt, darunter „CRANIO SACRAL" in 0.36em. Jedes Foto läuft über <code>.ph</code>: <code>sepia(0.16) saturate(0.86) contrast(1.03)</code> plus Olive-Multiplikation 14 % (tief 42 %) — erst dadurch haben Aufnahmen aus verschiedenen Räumen denselben Ton. Keine Stockfotos, kein Bild mit Text darüber.</p>
+</div></section>
+<section class="sec" id="offen"><div class="page">
+  <span class="eo-label eo-label-caps">Offene Punkte</span>
+  <h2>Gemessen, nicht vermutet.</h2>
+  
+<ol class="rules">
+  <li><span><b>Cream auf Olive hält kein AA.</b> <code>cream-70</code> 3,5:1, <code>cream-60</code> 2,9:1, <code>cream-45</code> 2,3:1 auf <code>#616949</code> — im Footer tragen sie 11–14 px Text. Kleinste tragfähige Stufe: <code>cream-80</code> (4,6:1). Betroffen: <code>footer.tsx</code>, <code>.label-inverse</code>, die Laufschrift.</span></li>
+  <li><span><b>Favicon und Apple-Touch-Icon sind noch teal</b> (<code>#9dcdcd</code>, Akzent <code>#67b1b1</code>) — der alte Stand. Zwei ehrliche Wege: ersetzen (Olive-Disc oder „SK" in Cormorant) oder bewusst behalten und als dokumentierten Sonderfall führen. Entscheidung der Klientin.</span></li>
+  <li><span><b>Legacy-Tokens in <code>tailwind.config.ts</code></b> — <code>cream</code>, <code>sage</code>, <code>taupe</code>, <code>therapeutic</code> sind auf Papier/Tinte/Olive umgestimmt, damit alte Unterseiten ohne Einzeländerung im neuen Ton erscheinen. Sie sind <b>kein</b> Teil dieser Palette; neuer Code nutzt <code>paper</code>, <code>ink</code>, <code>olive</code>.</span></li>
+  <li><span><b><code>--ink-80</code> war falsch dokumentiert</b> (<code>#3a3830</code>, 10,3:1) — tatsächlich <code>rgba(29,28,23,.8)</code> = <code>#484641</code>, 8,3:1. In <code>DESIGN.md</code> korrigiert.</span></li>
+</ol>
+</div></section>
+<div class="page"><div class="foot">
+  <p><b>Wie anwenden:</b> im Repo gelten weiter <code>src/app/globals.css</code> und <code>tailwind.config.ts</code> — dieses System beschreibt sie, es ersetzt sie nicht. In einem anderen Projekt <code>tokens.css</code> einbinden und mit den Variablen arbeiten; die semantischen Aliase (<code>--canvas</code>, <code>--text</code>, <code>--accent</code>, <code>--border</code>) sind für Komponenten gedacht, die Farbnamen für redaktionelles Layout.</p>
+  <p><b>Dateien:</b> <code>overview.html</code> (diese Seite) · <code>tokens.css</code> · <code>tokens.json</code> (mit Nutzungshinweis und gemessenem Kontrast) · <code>design-system.json</code> · <code>components/&lt;Name&gt;/{preview.html,README.md}</code> · <code>components/bundle.css</code> · <code>components/index.d.ts</code> · <code>components/index.html</code> (Board) · <code>assets/Logos|Imagery/</code> · <code>../DESIGN.md</code> · <code>../docs/design-styleguide.html</code></p>
+  <p>Statische Renditionen — nicht die laufenden React-Komponenten. Hanken Grotesk und Cormorant Garamond kommen aus <code>next/font/google</code> und werden hier von Google Fonts geladen.</p>
+</div></div>
+</body>
+</html>
