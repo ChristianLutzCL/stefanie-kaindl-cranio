@@ -7,6 +7,13 @@ import type { MetadataRoute } from 'next';
  */
 export const dynamic = 'force-static';
 
+/* Läuft die Seite auf einem Review-Host (SITE_URL gesetzt, siehe .env.local),
+   dann darf sie nicht indexiert werden: dieselben Inhalte liegen noch einmal auf
+   der Produktions-Domain, und ein zweiter Eintrag im Index schadet der Klientin.
+   Ohne SITE_URL — also im DigitalOcean-Build aus main — bleibt es unten beim
+   erlaubenden robots.txt. */
+const isReview = Boolean(process.env.SITE_URL);
+
 /* Im Export-Modus erwartet Next für Metadata-Routen diese Funktion; ohne sie
    antwortet der Dev-Server (/sitemap.xml) mit 500 statt der Datei. */
 export function generateStaticParams() {
@@ -14,6 +21,9 @@ export function generateStaticParams() {
 }
 
 export default function robots(): MetadataRoute.Robots {
+  if (isReview) {
+    return { rules: [{ userAgent: '*', disallow: '/' }] };
+  }
   return {
     rules: [
       {

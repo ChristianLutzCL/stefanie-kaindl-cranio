@@ -1,4 +1,6 @@
 import Content from './content';
+import { JsonLd } from '@/components/json-ld';
+import { breadcrumbs, service } from '@/lib/structured-data';
 
 export const metadata = {
   title: 'Craniosacrale Körperarbeit | Stefanie Kaindl',
@@ -7,5 +9,23 @@ export const metadata = {
 };
 
 export default function CranioPage() {
-  return <Content />;
+  return (
+    <>
+      <JsonLd
+        nodes={[
+          breadcrumbs([
+            ['Start', '/'],
+            ['Cranio', '/cranio/'],
+          ]),
+          service(
+            'Craniosacrale Körperarbeit',
+            'Sanfte Craniosacrale Körperarbeit für Erwachsene, Babys und Kinder in Pfaffenhofen an der Ilm. Behandlungen nach Vereinbarung, Termine online oder telefonisch.',
+            'Craniosacrale Körperarbeit',
+            '/cranio/',
+          ),
+        ]}
+      />
+      <Content />
+    </>
+  );
 }

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Hanken_Grotesk, Cormorant_Garamond } from "next/font/google";
 import { Footer, Layout, Navbar, CookieBanner } from "@/components";
 import Script from "next/script";
+import { JsonLd } from "@/components/json-ld";
+import { BUSINESS, person, website } from "@/lib/structured-data";
 
 // Zwei Rollen, ein System (siehe research/design-brief-editorial-olive.md):
 // Hanken Grotesk = alles Lesbare (Display, Text, Labels, Navigation),
@@ -30,7 +32,7 @@ const serif = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: "Craniosacrale Körperarbeit & Yoga | Stefanie Kaindl",
-  description: "Craniosacrale Körperarbeit und Yoga in Pfaffenhofen an der Ilm: sanfte Behandlung für Erwachsene, Babys und Kinder, dazu Yoga donnerstags in Paunzhausen. Preise, Termine und Buchung.",
+  description: "Craniosacrale Körperarbeit und Yoga in Pfaffenhofen an der Ilm — für Erwachsene, Babys und Kinder. Yoga donnerstags in Paunzhausen.",
   keywords: [
     "Craniosacrale Therapie",
     "Craniosacrale Körperarbeit",
@@ -50,7 +52,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Stefanie Kaindl" }],
   creator: "Stefanie Kaindl",
   publisher: "Stefanie Kaindl",
-  metadataBase: new URL('https://stefanie-kaindl-cranio.de'),
+  // Absolute URLs (og:image, canonical) folgen dem Host, auf dem die Seite läuft.
+  // Produktion behält ihren Standard; die Review-Instanz setzt SITE_URL in .env.local —
+  // sonst zeigen ihre Meta-Tags auf die Live-Domain, und jeder Share-Check auf dem
+  // Dev-Host jagt eine 404-Seite statt der Karte.
+  metadataBase: new URL(process.env.SITE_URL ?? 'https://stefanie-kaindl-cranio.de'),
   alternates: {
     canonical: '/',
   },
@@ -64,28 +70,33 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'de_DE',
-    url: 'https://stefanie-kaindl-cranio.de',
+    url: process.env.SITE_URL ?? 'https://stefanie-kaindl-cranio.de',
     title: 'Craniosacrale Körperarbeit & Yoga | Stefanie Kaindl',
-    description: 'Craniosacrale Körperarbeit und Yoga in Pfaffenhofen an der Ilm: sanfte Behandlung für Erwachsene, Babys und Kinder, dazu Yoga donnerstags in Paunzhausen. Preise, Termine und Buchung.',
+    description: 'Sanfte Craniosacrale Körperarbeit und Yoga in Pfaffenhofen — Termin online vereinbaren.',
     siteName: 'Stefanie Kaindl — Craniosacrale Körperarbeit & Yoga',
     images: [
       {
-        url: '/image/hero.webp',
+        // Eigene Share-Karte, 1200x630 — erzeugt aus design-system/og/og-image-foto.html.
+        // Vorher stand hier /image/hero.webp: ein 2048x1365-Foto mit behaupteten
+        // 1200x630, das die Plattformen selbst beschnitten haben.
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Craniosacrale Körperarbeit Stefanie Kaindl',
+        alt: 'Stefanie Kaindl — Craniosacrale Körperarbeit und Yoga',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Craniosacrale Körperarbeit & Yoga | Stefanie Kaindl',
-    description: 'Sanfte Behandlung für Erwachsene, Babys und Kinder — und Yoga donnerstags in Paunzhausen. Preise, Termine und Buchung.',
-    images: ['/image/hero.webp'],
+    description: 'Sanfte Craniosacrale Körperarbeit und Yoga in Pfaffenhofen — Termin online vereinbaren.',
+    images: ['/og-image.jpg'],
   },
   robots: {
-    index: true,
-    follow: true,
+    // Auf einem Review-Host (SITE_URL gesetzt) nicht indexieren: die Inhalte liegen
+    // noch einmal auf der Produktions-Domain. Produktion behält index/follow.
+    index: !process.env.SITE_URL,
+    follow: !process.env.SITE_URL,
     googleBot: {
       index: true,
       follow: true,
@@ -112,6 +123,10 @@ export default function RootLayout({
         <meta name="theme-color" content="#616949" />
       </head>
       <body className={`${sans.variable} ${serif.variable} font-sans`}>
+        {/* Strukturierte Daten: Betrieb, Person und Website — einmal für alle Seiten.
+            Die Seiten hängen ihr eigenes Dokument mit Brotkrumen und Angebot dazu. */}
+        <JsonLd nodes={[BUSINESS, person(), website()]} />
+
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-CV0R2VE8F2`}
