@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-const withMT = require("@material-tailwind/react/utils/withMT");
+import withMT from "@material-tailwind/react/utils/withMT";
 
 /**
  * Farbwelt „Editorial Olive" (siehe research/design-brief-editorial-olive.md).
@@ -9,7 +9,8 @@ const withMT = require("@material-tailwind/react/utils/withMT");
  * dieselben Werte umgestimmt, damit die noch nicht umgebauten Unterseiten im
  * neuen Ton erscheinen, ohne dass dort jede Klasse angepasst werden muss.
  */
-const config: Config = withMT({
+/* withMT's own typings return `object`, so the cast restores the Config type. */
+const config = withMT({
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -111,6 +112,6 @@ const config: Config = withMT({
     },
   },
   plugins: [],
-});
+}) as Config;
 
 export default config;

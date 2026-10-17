@@ -1,5 +1,12 @@
 import { NextResponse } from 'next/server';
 
+/** Minimal shape of the Notion database query response we read from. */
+type NotionQueryResponse = {
+  results: Array<{
+    properties: { Date?: { date: { start: string } | null } | null };
+  }>;
+};
+
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const DATABASE_ID = process.env.NOTION_YOGA_DATABASE_ID || '';
 
@@ -55,10 +62,10 @@ export async function GET() {
       );
     }
 
-    const data = await response.json();
+    const data: NotionQueryResponse = await response.json();
 
     // Extract dates from the response
-    const dates = data.results.map((page: any) => {
+    const dates = data.results.map((page) => {
       const dateProperty = page.properties.Date;
       if (dateProperty && dateProperty.date) {
         const date = new Date(dateProperty.date.start);
@@ -72,10 +79,10 @@ export async function GET() {
     }).filter(Boolean);
 
     return NextResponse.json({ dates });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching yoga dates from Notion:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch yoga dates', details: error.message },
+      { error: 'Failed to fetch yoga dates', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

@@ -1,4 +1,12 @@
 // Utility to fetch yoga dates from Notion at build time
+
+/** Minimal shape of the Notion database query response we read from. */
+type NotionQueryResponse = {
+  results: Array<{
+    properties: { Date?: { date: { start: string } | null } | null };
+  }>;
+};
+
 export async function getYogaDates(): Promise<string[]> {
   const NOTION_API_KEY = process.env.NOTION_API_KEY;
   const DATABASE_ID = process.env.NOTION_YOGA_DATABASE_ID;
@@ -42,11 +50,11 @@ export async function getYogaDates(): Promise<string[]> {
       return [];
     }
 
-    const data = await response.json();
+    const data: NotionQueryResponse = await response.json();
 
     // Extract and format dates
     const dates = data.results
-      .map((page: any) => {
+      .map((page) => {
         const dateProperty = page.properties.Date;
         if (dateProperty && dateProperty.date) {
           const date = new Date(dateProperty.date.start);
