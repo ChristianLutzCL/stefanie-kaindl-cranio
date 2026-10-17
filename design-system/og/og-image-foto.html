@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>OG-Karte — Foto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  /* Share-Karte 1200×630. Die Werte kommen aus ../tokens.css — hier steht nur die
+     Geometrie des Formats (absolute Positionen, feste Größen, kein Fluss). */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; }
+  .card { position: absolute; inset: 0; overflow: hidden; }
+  .band { position: absolute; left: 0; top: 0; }
+  .rule { position: absolute; left: 0; height: 1px; background: var(--line); }
+  .label { position: absolute; display: flex; align-items: center; gap: 12px;
+           font-size: 15px; font-weight: 500; letter-spacing: var(--tracking-caps);
+           text-transform: uppercase; color: var(--ink-60); }
+  .label::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .wordmark { position: absolute; font-family: var(--font-serif); font-weight: 500;
+              font-size: 84px; line-height: 1; letter-spacing: var(--tracking-caps);
+              text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .submark { position: absolute; font-size: 14px; font-weight: 500;
+             letter-spacing: var(--tracking-sub); text-transform: uppercase; color: var(--ink-60); }
+  .offer { position: absolute; font-size: 20px; font-weight: 400; line-height: 1.45;
+           color: var(--ink-600); white-space: nowrap; }
+  .foot { position: absolute; bottom: 54px; font-size: 13px; font-weight: 500;
+          letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--ink-45); }
+</style>
+</head>
+<body>
+
+<style>
+  /* Foto und Schleier exakt wie .hero-photo / .hero-scrim in globals.css */
+  .photo { position: absolute; inset: 0; background-image: url('../assets/Imagery/hero-stefanie.webp');
+           background-size: cover; background-repeat: no-repeat; background-position: 38% 50%;
+           filter: brightness(0.76) saturate(0.96) contrast(1.08); }
+  .scrim { position: absolute; inset: 0; background-image: linear-gradient(to right,
+             rgba(40,27,16,0.52) 0%, rgba(40,27,16,0.5) 38%, rgba(40,27,16,0.46) 60%,
+             rgba(40,27,16,0.2) 74%, rgba(42,28,17,0.12) 100%); }
+  /* Weich auslaufende Bänder hinter den Textzeilen — dieselbe Lösung wie .hero-text-band
+     auf Mobil: das Foto bleibt sonst unverdeckt, nur hinter der Schrift wird es dunkel.
+     Die Werte sind gemessen: der hellste Bildpunkt hinter jeder Zeile muss AA halten. */
+  .shade-top { position: absolute; left: 0; top: 0; width: 100%; height: 210px;
+               background-image: linear-gradient(to bottom,
+                 rgba(40,27,16,0.46) 0%, rgba(40,27,16,0.42) 40%, rgba(40,27,16,0) 100%); }
+  /* Mittleres Band hinter dem Textblock — die Stärke des Hero-Bands auf Mobil
+     (max. 0,2), damit Eyebrow und Headline auch über dem hellen Bildbereich AA halten. */
+  .shade-mid { position: absolute; left: 0; top: 148px; width: 100%; height: 306px;
+               background-image: linear-gradient(to bottom,
+                 rgba(40,27,16,0) 0%, rgba(40,27,16,0.09) 14%, rgba(40,27,16,0.2) 36%,
+                 rgba(40,27,16,0.2) 78%, rgba(40,27,16,0.11) 92%, rgba(40,27,16,0) 100%); }
+  .shade-bottom { position: absolute; left: 0; bottom: 0; width: 100%; height: 190px;
+                  background-image: linear-gradient(to top,
+                    rgba(40,27,16,0.78) 0%, rgba(40,27,16,0.72) 34%, rgba(40,27,16,0.42) 66%,
+                    rgba(40,27,16,0) 100%); }
+  /* Kleine Grade auf dem Foto tragen den Schatten des Mobil-Rezepts, nicht den leichten. */
+  .small-on-photo { text-shadow: 0 2px 26px rgba(18,14,10,0.85), 0 1px 9px rgba(18,14,10,0.72),
+                                0 0 3px rgba(18,14,10,0.5); }
+  .onphoto { position: absolute; inset: 0; text-shadow: 0 1px 14px rgba(18,14,10,0.5), 0 1px 3px rgba(18,14,10,0.35); }
+  .eyebrow { position: absolute; left: 0; right: 0; top: 214px; text-align: center;
+             font-size: 15px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+             color: var(--cream); }
+  .eyebrow span { color: rgba(243,240,233,0.75); margin: 0 14px; }
+  .headline { position: absolute; left: 0; right: 0; top: 262px; text-align: center;
+              font-family: var(--font-serif); font-weight: 400; font-size: 58px; line-height: 1.12;
+              letter-spacing: var(--tracking-display); color: var(--cream); }
+  .mark-light { position: absolute; left: 76px; top: 54px; font-family: var(--font-serif);
+                font-weight: 500; font-size: 30px; line-height: 1; letter-spacing: var(--tracking-caps);
+                text-transform: uppercase; color: var(--cream); }
+  .mark-light-sub { position: absolute; left: 76px; top: 94px; font-size: 12px; font-weight: 500;
+                    letter-spacing: var(--tracking-sub); text-transform: uppercase; color: var(--cream-80); }
+  /* CTA = .btn des Repos (vollrund, 1rem/1.75rem, 13 px, gap .6rem), Beschriftung
+     wörtlich vom Footer-Button der Seite. Liegt außerhalb von .onphoto, damit der
+     Schatten nicht auf die Pille fällt — sie ist deckend und braucht ihn nicht. */
+  .cta { position: absolute; display: inline-flex; align-items: center; justify-content: center;
+         gap: 0.6rem; border-radius: var(--radius-full); padding: 1rem 1.75rem; font-size: 0.8125rem;
+         line-height: 1; font-weight: 500; border: 1px solid transparent; white-space: nowrap;
+         text-shadow: none; }
+  .cta svg { width: 0.68em; height: 0.68em; flex: none; display: block; }
+  .foot-light { position: absolute; bottom: 54px; font-size: 13px; font-weight: 500;
+                letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--cream-70-photo); }
+</style>
+<div class="card">
+  <div class="photo"></div>
+  <div class="scrim"></div>
+  <div class="shade-top"></div>
+  <div class="shade-mid"></div>
+  <div class="shade-bottom"></div>
+  <div class="onphoto">
+    <p class="mark-light">Stefanie Kaindl</p>
+    <p class="mark-light-sub small-on-photo">Cranio Sacral</p>
+
+    <p class="eyebrow">Craniosacrale Körperarbeit<span aria-hidden="true">&amp;</span>Yoga</p>
+    <p class="headline">Raum, um anzukommen.<br>Zeit, um loszulassen.</p>
+
+    <p class="foot-light small-on-photo" style="left:76px">Pfaffenhofen a. d. Ilm &amp; Paunzhausen</p>
+    <p class="foot-light small-on-photo" style="right:76px">stefanie-kaindl-cranio.de</p>
+  </div>
+  <a class="cta" style="left:50%;transform:translateX(-50%);top:428px;background:var(--cream);color:var(--ink)">Termin vereinbaren <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6"/><path d="M6.1 4.6h5.3v5.3"/></svg></a>
+</div>
+</body>
+</html>
