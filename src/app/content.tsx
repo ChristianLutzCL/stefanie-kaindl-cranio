@@ -16,7 +16,7 @@ import { BOOKING, CONTACT, Photo, useReveal } from '@/components/editorial';
  *   4 Yoga        Was es ist, wann, Eckdaten      → /yoga
  *   5 Arbeitsweise Olive-Fläche mit Akkordeon
  *   6 Über mich   Wer Steffi ist, Ausbildungen
- *   7 Stimmen     Rückmeldungen von Klientinnen und Klienten
+ *   7 Stimmen     Zitatband mit Namen und Anlass
  *   8 Termin      Weiße Karte auf dem Foto, beide Wege
  *
  * Ausführliches (Ablauf, alle Preise, Termine) steht auf /cranio und /yoga.
@@ -531,7 +531,7 @@ function Voices() {
                 <blockquote key={quote.name} data-card className='slide-full'>
                   <p className='quote'>&bdquo;{quote.text}&ldquo;</p>
                   <div className='hairline mt-14' />
-                  <footer className='mt-5 flex flex-wrap items-center justify-between gap-x-10 gap-y-4'>
+                  <footer className='mt-5 flex flex-wrap items-center gap-x-10 gap-y-4'>
                     <div className='flex items-center gap-3'>
                       <span aria-hidden className='initials'>
                         {quote.initials}
@@ -541,9 +541,6 @@ function Voices() {
                         <span className='mt-0.5 block text-[0.75rem] text-ink-500'>{quote.role}</span>
                       </span>
                     </div>
-                    <p className='text-[0.75rem] leading-relaxed text-ink-500 md:max-w-[16rem] md:text-right'>
-                      Echte Rückmeldungen von Klientinnen und Klienten.
-                    </p>
                   </footer>
                 </blockquote>
               ))}
