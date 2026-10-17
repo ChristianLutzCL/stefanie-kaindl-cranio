@@ -1,77 +1,95 @@
-import Image from 'next/image';
 import Link from 'next/link';
-
-const quickLinks = [
-  {href: '/cranio/', label: 'Cranio'},
-  {href: '/yoga', label: 'Yoga'},
-  {href: '/ueber-mich', label: 'Über Mich'},
-  {href: '/kontakt', label: 'Kontakt'},
-];
+import { Photo } from '@/components/editorial';
+import { ArrowUpRight } from '@/components/icons';
 
 /**
- * 404 page (German, in the site's own design).
+ * 404 — im System der übrigen Seiten.
  *
- * Rendered for every unknown URL and for the pages that are switched off in
- * src/site-config.ts (the retreat calls notFound() while RETREAT_ENABLED is
- * false). A dark hero background is deliberate: the navbar is transparent with
- * white text on pages it does not know, so it stays legible here.
+ * Erscheint für jede unbekannte Adresse und für die Seiten, die in
+ * src/site-config.ts abgeschaltet sind (der Retreat ruft notFound(), solange
+ * RETREAT_ENABLED false ist). Der Retreathinweis steht deshalb ausdrücklich im
+ * Text: wer über einen alten Link kommt, soll erfahren, warum dort nichts ist.
  *
- * With `output: 'export'` this becomes out/404.html, which the static host
- * (DigitalOcean App Platform, `error_document: 404.html`) serves for unknown
- * paths - so the page carries its own navigation back into the site.
+ * Mit `output: 'export'` entsteht daraus out/404.html, das der statische Hoster
+ * (DigitalOcean App Platform, `error_document: 404.html`) für unbekannte Pfade
+ * ausliefert — die Seite bringt ihre Navigation also selbst mit. Kopf- und
+ * Fußzeile kommen vom Wurzel-Layout, hier steht nur der Inhalt.
  */
+
+const LINKS = [
+  {
+    href: '/cranio/',
+    label: 'Craniosacrale Körperarbeit',
+    meta: 'Behandlung für Erwachsene, Babys und Kinder',
+  },
+  {
+    href: '/yoga/',
+    label: 'Yoga am Donnerstag',
+    meta: 'Zwei Kurse in Paunzhausen',
+  },
+  {
+    href: '/kontakt/',
+    label: 'Kontakt',
+    meta: 'Telefon, E-Mail und Anfahrt',
+  },
+];
+
 export default function NotFound() {
   return (
-    <main className='relative isolate min-h-[86vh] w-full overflow-hidden bg-taupe-900'>
-      <Image
-        src='/image/hero.webp'
-        alt=''
-        fill
-        priority
-        sizes='100vw'
-        className='-z-10 object-cover object-[33%_center] md:object-center'
-      />
-      <div className='absolute inset-0 -z-10 bg-gradient-to-b from-taupe-900/75 via-taupe-900/80 to-taupe-900/90' />
-
-      <div className='container mx-auto flex min-h-[86vh] max-w-3xl flex-col items-center justify-center px-6 pb-28 pt-32 text-center text-white'>
-        <p className='font-inter mb-4 text-xs uppercase tracking-[0.3em] text-cream-100/80'>
-          Fehler 404
+    <main>
+      <header className='shell pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+        <span className='label'>Fehler 404</span>
+        <h1 className='display display-serif d2 mt-6 max-w-3xl'>Diese Seite gibt es hier nicht.</h1>
+        <p className='lead-lg mt-7 max-w-2xl'>
+          Vielleicht wurde sie verschoben oder der Link ist veraltet. Einen Retreat gibt es derzeit
+          nicht — hier geht es zu den beiden Angeboten.
         </p>
-        <h1 className='font-inter mb-5 text-3xl font-light leading-tight text-white sm:text-4xl md:text-5xl'>
-          Diese Seite gibt es nicht mehr
-        </h1>
-        <p className='font-inter mb-9 max-w-xl text-base leading-relaxed text-cream-100/90 md:text-lg'>
-          Die Seite wurde vielleicht verschoben – oder der Retreat ist für dieses Jahr
-          vorbei. Alles Weitere findest du hier:
-        </p>
+      </header>
 
-        <div className='flex flex-col items-center gap-3 sm:flex-row md:gap-4'>
-          <Link
-            href='/'
-            className='font-inter inline-flex items-center justify-center rounded-full bg-[#616949] px-7 py-3.5 text-base font-medium text-white shadow-lg transition-all duration-300 hover:bg-[#4d5438] hover:shadow-xl md:px-8 md:py-4 md:text-lg'>
-            Zur Startseite
-          </Link>
-          <Link
-            href='/kontakt'
-            className='font-inter inline-flex items-center justify-center rounded-full border-2 border-cream-100 px-7 py-3.5 text-base font-medium text-cream-100 transition-all duration-300 hover:bg-cream-100 hover:text-taupe-800 md:px-8 md:py-4 md:text-lg'>
-            Termin anfragen
-          </Link>
+      <section className='shell pb-[clamp(4rem,8vw,8rem)]'>
+        <div className='grid items-start gap-12 lg:grid-cols-12 lg:gap-0'>
+          {/* Kein data-reveal: diese Seite wird nie über useReveal() eingeblendet,
+              ein gesetztes Attribut ließe das Bild unsichtbar. */}
+          <div className='lg:col-span-6'>
+            <Photo
+              src='/image/hero.webp'
+              alt='Stefanie Kaindl bei einer Behandlung'
+              ratio='aspect-[4/3]'
+              position='50% 35%'
+              sizes='(max-width: 1024px) 100vw, 50vw'
+              priority
+            />
+          </div>
+
+          <div className='lg:col-span-5 lg:col-start-8'>
+            <ul className='border-t border-[var(--line)]'>
+              {LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className='flex items-baseline justify-between gap-6 border-b border-[var(--line)] py-4 transition-colors hover:text-ink-600'>
+                    <span>
+                      <span className='serif block text-[1.25rem] leading-snug text-ink'>
+                        {link.label}
+                      </span>
+                      <span className='mt-1 block text-[0.8125rem] text-ink-600'>{link.meta}</span>
+                    </span>
+                    <span aria-hidden className='text-[0.85rem] text-ink-400'>
+                      <ArrowUpRight />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className='mt-9 flex flex-wrap items-center gap-x-10 gap-y-4'>
+              <Link href='/' className='cta-link cta-link-ink'>
+                Zur Startseite <ArrowUpRight />
+              </Link>
+            </div>
+          </div>
         </div>
-
-        <nav aria-label='Weitere Seiten' className='mt-12 w-full border-t border-white/20 pt-8'>
-          <ul className='flex flex-wrap items-center justify-center gap-x-7 gap-y-3'>
-            {quickLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className='font-inter text-sm text-cream-100/90 underline-offset-4 transition-colors duration-200 hover:text-white hover:underline'>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      </section>
     </main>
   );
 }
