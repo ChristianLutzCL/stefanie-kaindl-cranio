@@ -38,30 +38,47 @@ const LEGAL = [
   { text: 'Cookie-Einstellungen', href: '/cookie-einstellungen' },
 ];
 
+/* ---------------------------------------------------------------------------
+   Laufschrift „Raum für dich"
+
+   Zwei identische Spuren, jede verschiebt sich um ihre eigene Breite (Keyframe
+   -100 %), damit die zweite genau dort einläuft, wo die erste verschwindet.
+   Bedingung für einen lückenlosen Zyklus: **eine Spur muss breiter sein als der
+   Bildschirm** — sonst läuft sie leer.
+
+   Gemessen: eine Wiederholung ist 190 px breit (11 px, 0.4em Sperrung, px-6).
+   27 Wiederholungen = 5130 px, deckt also Breiten bis ~5120 px ab (vorher 6 =
+   1141 px, das riss ab 1440 px auf: bei 1920 px blieben bis zu 778 px leer,
+   bei 3840 px bis zu 2698 px).
+
+   Das Tempo hängt an der Spurdauer in globals.css: 5130 px / 189 s ≈ 27 px/s —
+   dasselbe wie vorher mit 1141 px / 42 s. Wer die Wiederholungen ändert, muss
+   die Dauer mitrechnen (Dauer = Wiederholungen × 190 px ÷ 27 px/s).
+   ------------------------------------------------------------------------- */
+const MARQUEE_REPEATS = 27;
+
+function MarqueeTrack() {
+  return (
+    <div className='marquee-track'>
+      {Array.from({ length: MARQUEE_REPEATS }).map((_, i) => (
+        <span
+          key={i}
+          className='px-6 text-[0.6875rem] uppercase tracking-[0.4em] text-[var(--cream-45)]'>
+          Raum für dich
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function Footer() {
   return (
     <footer className='relative mt-auto overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
       {/* Laufschrift */}
       <div className='hairline-inverse overflow-hidden py-4'>
         <div className='marquee' aria-hidden>
-          <div className='marquee-track'>
-            {Array.from({ length: 6 }).map((_, i) => (
-              <span
-                key={i}
-                className='px-6 text-[0.6875rem] uppercase tracking-[0.4em] text-[var(--cream-45)]'>
-                Raum für dich
-              </span>
-            ))}
-          </div>
-          <div className='marquee-track'>
-            {Array.from({ length: 6 }).map((_, i) => (
-              <span
-                key={i}
-                className='px-6 text-[0.6875rem] uppercase tracking-[0.4em] text-[var(--cream-45)]'>
-                Raum für dich
-              </span>
-            ))}
-          </div>
+          <MarqueeTrack />
+          <MarqueeTrack />
         </div>
       </div>
 

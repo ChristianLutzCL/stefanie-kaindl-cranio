@@ -687,7 +687,9 @@ textarea.field {
 .marquee-track {
   display: flex;
   flex: none;
-  animation: marquee 42s linear infinite;
+  /* 189 s für 5130 px Spur (27 Wiederholungen à 190 px, siehe footer.tsx) = 27 px/s.
+     Die Dauer muss mit der Spurlänge wachsen, sonst wird die Schrift schneller. */
+  animation: marquee 189s linear infinite;
 }
 @keyframes marquee {
   from { transform: translateX(0); }
