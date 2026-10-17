@@ -262,10 +262,13 @@ export function Content() {
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
             <div className='lg:col-span-6' data-reveal>
+              {/* Der Flyer ist quadratisch (1254 × 1254). In einer 3:4-Box
+                  bleiben mit `object-contain` oben und unten leere Streifen —
+                  die Box muss das Format des Bildes haben. */}
               <Photo
                 src='/image/yoga-day-wurzeln-loslassen.jpg'
                 alt='Flyer zum Yoga Day – Wurzeln & Loslassen'
-                ratio='aspect-[3/4]'
+                ratio='aspect-square'
                 fit='contain'
                 sizes='(max-width: 1024px) 100vw, 50vw'
               />
