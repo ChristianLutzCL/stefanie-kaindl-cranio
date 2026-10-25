@@ -25,8 +25,9 @@ const COLUMNS = [
     title: 'Angebote',
     links: [
       { text: 'Cranio für Erwachsene', href: '/cranio/#preise' },
+      { text: 'Cranio-Intensiv · 90 Min', href: '/cranio/#preise' },
       { text: 'Cranio für Babys & Kinder', href: '/cranio/#preise' },
-      { text: 'Erstberatung & 5er-Paket', href: '/cranio/#preise' },
+      { text: 'Fußreflexzonenmassage', href: '/cranio/#preise' },
       { text: 'Yoga am Donnerstag', href: '/yoga/#kurse' },
     ],
   },
@@ -73,7 +74,7 @@ function MarqueeTrack() {
 
 export function Footer() {
   return (
-    <footer className='relative mt-auto overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+    <footer data-review='Fußzeile' className='relative mt-auto overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
       {/* Laufschrift */}
       <div className='hairline-inverse overflow-hidden py-4'>
         <div className='marquee' aria-hidden>

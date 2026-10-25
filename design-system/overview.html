@@ -58,10 +58,6 @@
 
   /* --- Foto: ein Ton für alle Aufnahmen ----------------------------- */
   --photo-ground: #241a11;   /* Grund unter dem Hero und dem Buchungsband */
-  --photo-veil: #6b7250;     /* Olive-Multiplikation über jedem Bild (.ph) */
-  --photo-veil-opacity: 0.14;
-  --photo-veil-deep: 0.42;
-  --photo-filter: sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99);
   --photo-filter-hero: brightness(0.76) saturate(0.96) contrast(1.08);
 
   /* --- Schatten: nur zwei ------------------------------------------- */
@@ -425,13 +421,7 @@ body {
 
 /* --- Fotoflächen --------------------------------------------------------- */
 .eo-ph { position: relative; overflow: hidden; background: var(--paper-deep); }
-.eo-ph img { filter: var(--photo-filter); display: block; width: 100%; height: 100%; object-fit: cover; }
-.eo-ph::after {
-  content: ""; position: absolute; inset: 0;
-  background: var(--photo-veil); mix-blend-mode: multiply;
-  opacity: var(--photo-veil-opacity); pointer-events: none;
-}
-.eo-ph-deep::after { opacity: var(--photo-veil-deep); }
+.eo-ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .eo-ph-fill { position: absolute; inset: 0; }
 
 /* --- Preiszeile / Fakten ------------------------------------------------- */
@@ -699,7 +689,7 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
     <span>Quelle: <code>/opt/sites/stefanie-kaindl-cranio</code></span>
     <span>Stand: <code>redesign/editorial-olive @ aacdf3e</code></span>
     <span>Sync: 17.10.2026</span>
-    <span>32 Farb-Tokens · 20 Typostile · 18 Renditionen</span>
+    <span>31 Farb-Tokens · 20 Typostile · 18 Renditionen</span>
   </div>
 </div>
 <section class="sec" id="prinzipien"><div class="page">
@@ -752,7 +742,6 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
 <tr><td class="sw"><span class="chip" style="background:rgba(29, 28, 23, 0.13)"></span></td><td class="nm"><code>--line</code><span class="inv">invers: rgba(243, 240, 233, 0.2)</span></td><td class="hx">rgba(29, 28, 23, 0.13)</td><td class="ct">—</td></tr>
 <tr><td class="sw"><span class="chip chip-ground" style="background:var(--olive)"><span style="background:rgba(243, 240, 233, 0.2)"></span></span></td><td class="nm"><code>--cream-line</code><span class="inv">invers: rgba(29, 28, 23, 0.13)</span></td><td class="hx">rgba(243, 240, 233, 0.2)</td><td class="ct">—</td></tr>
 <tr><td class="sw"><span class="chip" style="background:#241a11"></span></td><td class="nm"><code>--photo-ground</code><span class="inv">invers: #241a11</span></td><td class="hx">#241a11</td><td class="ct">—</td></tr>
-<tr><td class="sw"><span class="chip chip-ground" style="background:#241a11"><span style="background:#6b7250"></span></span></td><td class="nm"><code>--photo-veil</code><span class="inv">invers: #6b7250</span></td><td class="hx">#6b7250</td><td class="ct">—</td></tr>
   </tbody>
 </table>
 <div class="warn">
@@ -1051,7 +1040,7 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
         </nav>
         <nav aria-label="Angebote">
           <p class="eo-footer-col-title">Angebote</p>
-          <ul class="eo-footer-links"><li><a href="#">Cranio für Erwachsene</a></li><li><a href="#">Cranio für Babys &amp; Kinder</a></li><li><a href="#">Erstberatung &amp; 5er-Paket</a></li><li><a href="#">Yoga am Donnerstag</a></li></ul>
+          <ul class="eo-footer-links"><li><a href="#">Cranio für Erwachsene</a></li><li><a href="#">Cranio für Babys &amp; Kinder</a></li><li><a href="#">Yoga am Donnerstag</a></li></ul>
         </nav>
         <div style="grid-column:span 2;margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px">
           <a href="#" class="eo-btn eo-btn-cream">Termin vereinbaren
@@ -1190,7 +1179,7 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
   </div>
 
   <div style="position:relative;min-height:150px;background:var(--photo-ground);overflow:hidden">
-    <img src="assets/Imagery/behandlung.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.72) saturate(0.94)">
+    <img src="assets/Imagery/behandlung.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
     <span style="position:absolute;inset:0;background:rgba(36,26,17,0.26)"></span>
     <div style="position:relative;padding:34px 24px">
       <span class="eo-pill">Craniosacrale Körperarbeit</span>
@@ -1253,7 +1242,7 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
     </div>
   </div>
   <div style="position:relative;min-height:150px;background:var(--photo-ground);overflow:hidden">
-    <img src="assets/Imagery/behandlung_2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.72) saturate(0.94)">
+    <img src="assets/Imagery/behandlung_2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
     <span style="position:absolute;inset:0;background:rgba(36,26,17,0.26)"></span>
     <div style="position:relative;padding:44px 24px" class="eo-on-photo">
       <div class="eo-row" style="gap:40px">
@@ -1296,11 +1285,11 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
 
   <div class="eo-price-row">
     <div>
-      <h3>5er-Paket <span>/ ca. 60 Min</span></h3>
-      <p class="eo-price-body">Fünf Behandlungen zum Paketpreis — für einen Verlauf über mehrere Wochen.</p>
+      <h3>Erwachsene <span>/ ca. 60 Min</span></h3>
+      <p class="eo-price-body">Inklusive ausführlichem Vorgespräch, Nachruhe und Nachbesprechung.</p>
     </div>
     <div class="eo-price-cell">
-      <p class="eo-price-amount">400 €</p>
+      <p class="eo-price-amount">73 €</p>
       <a href="#" class="eo-cta-link eo-cta-link-ink" style="font-size:0.875rem">Termin buchen</a>
     </div>
   </div>
@@ -1447,7 +1436,7 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
   <div class="page">
     <div class="spechead"><h4>Bildfläche<span class="dim"> · Photo</span></h4>
       <p class="src"><code>src/components/editorial.tsx (Photo) · globals.css (.ph)</code></p></div>
-    <p class="lede">Jedes Foto der Seite läuft über <code>.ph</code>. Der Filter ist Teil des Systems, nicht eine Spielwiese: <code>sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99)</code> plus eine Olive-Fläche (<code>#6b7250</code>) mit <code>mix-blend-mode: multiply</code> bei 14 % (<code>.ph-deep</code>: 42 %). Erst dadurch haben Aufnahmen aus verschiedenen Räumen und Jahren denselben Ton.</p>
+    <p class="lede">Die Bildfläche <code>.ph</code> rahmt und beschneidet — sonst nichts. Fotofilter und die Olive-Fläche über den Bildern wurden im Okt 2026 auf Kundenwunsch entfernt: die Aufnahmen stehen in ihrem eigenen Ton. Einzige Ausnahme ist der Hero, der eine eigene dunklere Stufe trägt, weil Text darüber liegt.</p>
   </div>
   <div class="stage"><div class="eo-shell" style="max-width:1000px;padding-block:28px">
   <div style="display:grid;gap:24px;grid-template-columns:repeat(3,minmax(0,1fr))">
@@ -1457,11 +1446,11 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
     <figure class="eo-ph" style="margin:0;aspect-ratio:4/5">
       <img src="assets/Imagery/behandlung_2.webp" alt="Hände halten die Füße während einer craniosacralen Behandlung" style="object-position:50% 45%">
     </figure>
-    <figure class="eo-ph eo-ph-deep" style="margin:0;aspect-ratio:4/5">
+    <figure class="eo-ph" style="margin:0;aspect-ratio:4/5">
       <img src="assets/Imagery/yoga.webp" alt="Yoga-Haltung auf der Matte" style="object-position:38% 50%">
     </figure>
   </div>
-  <p class="eo-small" style="margin-top:16px">Links und Mitte: <code>.ph</code> mit der Standard-Gradiation (Olive-Multiplikation 14 %). Rechts: <code>.ph-deep</code> (42 %) — für Motive, die als dunkle Fläche tragen sollen.</p>
+  <p class="eo-small" style="margin-top:16px">Alle drei: <code>.ph</code> — Rahmen, Radius, Ausschnitt. Kein Filter, keine Fläche über dem Bild.</p>
 </div></div>
 </section>
 <h3 class="grp">Overlay</h3>
@@ -1498,10 +1487,10 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
     <ul>
       <li><b>Du-Anrede</b> — „Bei mir findest du zwei Wege, wieder bei dir anzukommen." <code>Sie</code> nur in den Rechtstexten.</li>
       <li><b>Kurze Aussagesätze mit Punkt</b> — „Raum, um anzukommen." „Zwei Kurse am Donnerstag."</li>
-      <li><b>Exakte Zahlen aus ihrem Material</b> — 73 €, 53 €, 400 €, 40 €, 14 €/h, Do 17:30 &amp; 19:00.</li>
+      <li><b>Exakte Zahlen aus ihrem Material</b> — 73 €, 100 €, 53 €, 50 €, 14 €/h, Do 17:30 &amp; 19:00.</li>
       <li><b>Nummerierte Eyebrows</b> — <code>01 · Cranio</code>, <code>02 · Yoga</code> auf der Startseite.</li>
       <li><b>Wortmarke „Cranio Sacral"</b>, Angebot ausgeschrieben „Craniosacrale Körperarbeit".</li>
-      <li><b>Die vier Angebote des Footers</b> als Reihenfolge — Cranio für Erwachsene · Cranio für Babys &amp; Kinder · Erstberatung &amp; 5er-Paket · Yoga am Donnerstag.</li>
+      <li><b>Die Angebote des Footers</b> als Reihenfolge — Cranio für Erwachsene · Cranio für Babys &amp; Kinder · Yoga am Donnerstag.</li>
     </ul>
   </div>
   <div>
@@ -1537,7 +1526,7 @@ ul.ez li{padding-block:.7rem;border-top:1px solid var(--line);display:grid;grid-
   <div class="asset"><img src="assets/Imagery/behandlung_2.webp" alt="Hände halten die Füße"><code>behandlung_2.webp</code><span>Arbeitsweise-Sektion.</span></div>
   <div class="asset"><img src="assets/Imagery/yoga.webp" alt="Yoga-Haltung"><code>yoga.webp</code><span>Yoga-Band.</span></div>
 </div>
-<p class="lede"><b>Die Wortmarke ist keine Datei</b> — sie ist Satz: Cormorant 500, Versalien, 0.18em gesperrt, darunter „CRANIO SACRAL" in 0.36em. Jedes Foto läuft über <code>.ph</code>: <code>sepia(0.16) saturate(0.86) contrast(1.03)</code> plus Olive-Multiplikation 14 % (tief 42 %) — erst dadurch haben Aufnahmen aus verschiedenen Räumen denselben Ton. Keine Stockfotos, kein Bild mit Text darüber.</p>
+<p class="lede"><b>Die Wortmarke ist keine Datei</b> — sie ist Satz: Cormorant 500, Versalien, 0.18em gesperrt, darunter „CRANIO SACRAL" in 0.36em. Jedes Foto läuft über <code>.ph</code> — gerahmt und beschnitten, ohne Filter. Keine Stockfotos, kein Bild mit Text darüber.</p>
 </div></section>
 <section class="sec" id="offen"><div class="page">
   <span class="eo-label eo-label-caps">Offene Punkte</span>

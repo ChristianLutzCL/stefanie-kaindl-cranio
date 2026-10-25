@@ -10,9 +10,11 @@ Rechts-Zeile.
   mit den früheren 6 (1141 px) lief sie ab 1440 px leer — auf 1920 px blieben bis zu 778 px
   ohne Text, auf 3840 px bis zu 2698 px. Die Dauer muss mit der Spurlänge wachsen, sonst
   wird die Schrift schneller: 5135 px / 189 s ≈ 27 px/s (vorher 1141 px / 42 s).
-- **Links**: Spalten „Seiten" und „Angebote" — genau die vier Angebote des Betriebs
-  (Cranio für Erwachsene · Cranio für Babys & Kinder · Erstberatung & 5er-Paket ·
-  Yoga am Donnerstag). Kein „Hausbesuche", kein „Praxis".
+- **Links**: Spalten „Seiten" und „Angebote" — genau die Angebote des Betriebs
+  (Cranio für Erwachsene · Cranio-Intensiv · Cranio für Babys & Kinder ·
+  Fußreflexzonenmassage · Yoga am Donnerstag).
+  Kein „Hausbesuche", kein „Praxis". (Ein Paket und eine Erstberatung gibt es
+  auf Kundenwunsch nicht mehr — sie standen bis Okt 2026 in dieser Liste.)
 - **Rechts**: Aussage in der Serif, Adresse, Öffnungszeiten, Instagram.
 - **Wortmarke**: Größe = Inhaltsbreite / 10,898 über eine Container-Query; dahinter
   die Blume des Lebens (19 Kreise — `editorial.tsx` generiert sie) als Linienzeichnung

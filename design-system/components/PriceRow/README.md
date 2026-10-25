@@ -12,9 +12,11 @@ Eine Angebotszeile mit Preis. Der Baustein für jede Preisliste — `/cranio`,
   lauter Buttons liest sich wie ein Shop.
 
 ## Nicht
-Keine Preise erfinden: die Werte stammen aus dem Bestand (Erwachsene 73 €,
-Babys & Kinder 53 €, 5er-Paket 400 €, Erstberatung 30 Min 40 €, Yoga 14 €/h).
-Kein „ab"-Preis, keine Streichpreise.
+Keine Preise erfinden: die Werte stammen aus dem Bestand — und zwar aus ihren
+Calendly-Terminarten, die die Liste 1:1 spiegelt (Erwachsene 73 €, Intensiv
+100 €, Babys & Kinder 53 €, Fußreflex mit kurzer Cranio 50 €, Yoga 14 €/h).
+Kein „ab"-Preis, keine Streichpreise. Paket und Erstberatung wurden auf
+Kundenwunsch gestrichen (Okt 2026).
 
 ## Props
 `title` · `meta` · `body` · `price` · `unit` · `cta` · `href`

@@ -39,6 +39,7 @@ export function CookieBanner() {
 
   return (
     <div
+      data-review='Cookie-Hinweis'
       role='dialog'
       aria-label='Cookie-Hinweis'
       className='banner-in fixed inset-x-0 bottom-0 z-[60] border-t border-[var(--cream-line)] bg-[rgba(29,28,23,0.95)] backdrop-blur-md'>

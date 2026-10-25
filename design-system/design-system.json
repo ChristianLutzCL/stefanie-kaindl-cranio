@@ -115,8 +115,8 @@
  },
  "lastChange": {
   "by": "Christian",
-  "at": "2026-10-17T12:00:00Z",
-  "via": "lokaler Checkout /opt/sites/stefanie-kaindl-cranio @ redesign/editorial-olive aacdf3e",
-  "note": "Erster Sync: 32 Farb-Tokens × 2 Flächen, 20 Typostile, Spacing, Radien, Schatten, Logos, 18 statische Komponenten-Renditionen, overview.html als Einzelseiten-Übersicht"
+  "at": "2026-10-17T16:13:07Z",
+  "via": "lokaler Checkout /opt/sites/stefanie-kaindl-cranio @ redesign/editorial-olive d4d537c (Arbeitsstand)",
+  "note": "Nachsync: Fotofilter + Olive-Multiplikation entfernt (Fotos unbearbeitet), 5er-Paket und Erstberatung gestrichen, Cranio-Intensiv 100 € und Fußreflexzonenmassage mit kurzer Cranio 50 € ergänzt, Angebotslisten und Zahlen in README/Bundle nachgezogen."
  }
 }

@@ -4,7 +4,16 @@ import { Hanken_Grotesk, Cormorant_Garamond } from "next/font/google";
 import { Footer, Layout, Navbar, CookieBanner } from "@/components";
 import Script from "next/script";
 import { JsonLd } from "@/components/json-ld";
+import dynamic from "next/dynamic";
 import { BUSINESS, person, website } from "@/lib/structured-data";
+
+// Rückmeldungs-Ebene: nur auf der Review-Instanz. NEXT_PUBLIC_REVIEW steht in
+// .env.local (gitignored) und wird beim Build als Konstante eingesetzt — der
+// DigitalOcean-Build aus main sieht die Datei nie. Der Import läuft über
+// `dynamic`, damit der Code der Ebene nicht im gemeinsamen Layout-Bündel der
+// Produktion liegt, sondern in einem eigenen, dort nie geladenen Chunk.
+const REVIEW = process.env.NEXT_PUBLIC_REVIEW === "1";
+const ReviewLayer = REVIEW ? dynamic(() => import("@/components/review/review-layer")) : null;
 
 // Zwei Rollen, ein System (siehe research/design-brief-editorial-olive.md):
 // Hanken Grotesk = alles Lesbare (Display, Text, Labels, Navigation),
@@ -174,6 +183,10 @@ export default function RootLayout({
           <Footer />
           <CookieBanner />
         </Layout>
+
+        {/* Rückmeldungs-Ebene — auf der Review-Instanz als letztes Element,
+            damit ihre Umrisse, Pins und Panels über allem liegen. */}
+        {ReviewLayer && <ReviewLayer />}
       </body>
     </html>
   );

@@ -27,6 +27,7 @@ function Content() {
   return (
     <>
       <PageIntro
+        review='Impressum · Seitenkopf'
         label='Impressum'
         title='Impressum'
         lead='Wer diese Website betreibt, wer die Fotos gemacht hat und wie Sie Kontakt aufnehmen.'

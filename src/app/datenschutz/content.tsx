@@ -30,6 +30,7 @@ function Content() {
   return (
     <>
       <PageIntro
+        review='Datenschutz · Seitenkopf'
         label='Datenschutz'
         title='Datenschutzerklärung'
         lead='Was mit Ihren Daten passiert, wenn Sie diese Website besuchen — und welche Rechte Sie haben.'

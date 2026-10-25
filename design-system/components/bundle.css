@@ -280,13 +280,7 @@ body {
 
 /* --- Fotoflächen --------------------------------------------------------- */
 .eo-ph { position: relative; overflow: hidden; background: var(--paper-deep); }
-.eo-ph img { filter: var(--photo-filter); display: block; width: 100%; height: 100%; object-fit: cover; }
-.eo-ph::after {
-  content: ""; position: absolute; inset: 0;
-  background: var(--photo-veil); mix-blend-mode: multiply;
-  opacity: var(--photo-veil-opacity); pointer-events: none;
-}
-.eo-ph-deep::after { opacity: var(--photo-veil-deep); }
+.eo-ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .eo-ph-fill { position: absolute; inset: 0; }
 
 /* --- Preiszeile / Fakten ------------------------------------------------- */

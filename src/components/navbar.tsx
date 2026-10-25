@@ -93,6 +93,7 @@ export function Navbar() {
   return (
     <>
       <header
+        data-review='Kopfzeile & Menü'
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
           solid ? 'nav-solid' : 'nav-clear'
         }`}>

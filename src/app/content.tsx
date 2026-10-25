@@ -44,7 +44,7 @@ export function Content() {
 
 function Intro() {
   return (
-    <section className='section'>
+    <section data-review='Start · Zwei Wege zur Ruhe' className='section'>
       <div className='shell'>
         <div className='mx-auto max-w-[46rem] text-center'>
           <span className='label'>Zwei Wege zur Ruhe</span>
@@ -98,7 +98,7 @@ function ImageBand() {
   }, [ref]);
 
   return (
-    <section aria-label='Einblicke in die Räume' className='pb-[clamp(4rem,8vw,8.5rem)]'>
+    <section data-review='Start · Einblicke in die Räume' aria-label='Einblicke in die Räume' className='pb-[clamp(4rem,8vw,8.5rem)]'>
       <div
         ref={ref}
         onScroll={onScroll}
@@ -166,7 +166,7 @@ function Facts({ items, inverse = false }: { items: [string, string][]; inverse?
 
 function CranioFeature() {
   return (
-    <section id='cranio' className='section pt-0'>
+    <section id='cranio' data-review='Start · Angebot Cranio' className='section pt-0'>
       <div className='shell'>
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='lg:col-span-6' data-reveal>
@@ -195,7 +195,9 @@ function CranioFeature() {
             <Facts
               items={[
                 ['Erwachsene', 'ca. 60 Min · 73 €'],
+                ['Cranio-Intensiv', '90 Min · 100 €'],
                 ['Babys & Kinder', '20 – 40 Min · 53 €'],
+                ['Fußreflex', 'ca. 40 Min · 50 €'],
                 ['Ort', 'Pfaffenhofen-Uttenhofen'],
               ]}
             />
@@ -219,7 +221,7 @@ function CranioFeature() {
 
 function YogaFeature() {
   return (
-    <section id='yoga' className='bg-[var(--olive)] text-[var(--cream)]'>
+    <section id='yoga' data-review='Start · Angebot Yoga' className='bg-[var(--olive)] text-[var(--cream)]'>
       <div className='shell py-[clamp(4rem,8vw,8.5rem)]'>
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='order-2 lg:order-1 lg:col-span-5'>
@@ -297,7 +299,7 @@ function Approach() {
   const [open, setOpen] = React.useState(0);
 
   return (
-    <section id='arbeitsweise' className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+    <section id='arbeitsweise' data-review='Start · Meine Arbeitsweise' className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
       <div className='grid lg:grid-cols-2'>
         {/* Bild links: echtes Behandlungsmotiv. Bewusst eine Aufnahme ohne
             Gesicht, damit keine Schrift über einem Gesicht liegt. */}
@@ -396,7 +398,7 @@ const QUALIFICATIONS = [
 
 function About() {
   return (
-    <section className='section' id='ueber-mich'>
+    <section data-review='Start · Über mich' className='section' id='ueber-mich'>
       <div className='shell'>
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='lg:col-span-5' data-reveal>
@@ -512,7 +514,7 @@ function Voices() {
   const { ref, onScroll, step, active } = useScroller(QUOTES.length);
 
   return (
-    <section className='section bg-[var(--paper-deep)]' aria-label='Stimmen'>
+    <section data-review='Start · Stimmen' className='section bg-[var(--paper-deep)]' aria-label='Stimmen'>
       <div className='shell'>
         <div className='grid gap-8 lg:grid-cols-12 lg:gap-0'>
           <div className='lg:col-span-3'>
@@ -571,7 +573,7 @@ const BOOK_PATHS = [
   {
     label: 'Cranio',
     title: 'Behandlung buchen',
-    body: 'Wähle deinen Termin direkt online — für dich oder für dein Kind. Lieber erst kennenlernen? Dann ist die Erstberatung (30 Min · 40 €) ein guter Anfang.',
+    body: 'Wähle deinen Termin direkt online — für dich oder für dein Kind. Lieber erst kennenlernen? Ruf mich an oder schreib mir kurz, dann finden wir den passenden Anfang.',
     facts: [['Termine', 'Mo – Fr nach Vereinbarung']],
     cta: 'Termin online buchen',
     href: BOOKING.cranioOverview,
@@ -590,7 +592,7 @@ const BOOK_PATHS = [
 
 function Booking() {
   return (
-    <section id='termin' className='relative isolate overflow-hidden bg-[#241a11]'>
+    <section id='termin' data-review='Start · Termin' className='relative isolate overflow-hidden bg-[#241a11]'>
       <Image
         src='/image/behandlung.webp'
         alt=''
@@ -598,7 +600,7 @@ function Booking() {
         fill
         sizes='100vw'
         className='object-cover'
-        style={{ objectPosition: '50% 45%', filter: 'brightness(0.72) saturate(0.94)' }}
+        style={{ objectPosition: '50% 45%' }}
       />
       <span aria-hidden className='absolute inset-0 bg-[rgba(36,26,17,0.26)]' />
       {/* Weite Kreisbögen wie im Referenz-Abschluss */}

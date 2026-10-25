@@ -11,7 +11,7 @@ import { ArrowRight } from '@/components/icons';
 
 export default function Hero() {
   return (
-    <section className='relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#241a11] text-[var(--cream)]'>
+    <section data-review='Start · Hero' className='relative isolate flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#241a11] text-[var(--cream)]'>
       <div aria-hidden className='hero-photo absolute inset-0' />
       {/* Verlauf statt flächigem Schleier: links kräftig (dort steht die
           Schrift), nach rechts über der Person zurückgenommen. */}

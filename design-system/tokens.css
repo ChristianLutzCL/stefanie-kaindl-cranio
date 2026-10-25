@@ -47,10 +47,10 @@
 
   /* --- Foto: ein Ton für alle Aufnahmen ----------------------------- */
   --photo-ground: #241a11;   /* Grund unter dem Hero und dem Buchungsband */
-  --photo-veil: #6b7250;     /* Olive-Multiplikation über jedem Bild (.ph) */
-  --photo-veil-opacity: 0.14;
-  --photo-veil-deep: 0.42;
-  --photo-filter: sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99);
+  /* Fotos laufen unbearbeitet durch: keine Gradiation, keine Olive-Fläche über
+     den Bildern — auf Kundenwunsch entfernt (Okt 2026). Die Bildfläche rahmt und
+     beschneidet nur. Einzige Ausnahme ist der Hero: dort liegt Text auf dem Foto,
+     deshalb hat er eine eigene, dunklere Stufe. */
   --photo-filter-hero: brightness(0.76) saturate(0.96) contrast(1.08);
 
   /* --- Schatten: nur zwei ------------------------------------------- */

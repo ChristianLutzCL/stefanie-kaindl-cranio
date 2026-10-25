@@ -16,8 +16,8 @@ Gradiation und als Bildmaterial für die Vorschauen (`components/Hero`,
 Alle Fotos laufen durch `.ph`:
 
 ```css
-.ph img { filter: sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99); }
-.ph::after { background: #6b7250; mix-blend-mode: multiply; opacity: 0.14; }
+/* entfallen: Fotos laufen seit Okt 2026 unbearbeitet durch */
+.ph img { /* kein Filter */ }
 .ph-deep::after { opacity: 0.42; }
 ```
 

@@ -75,8 +75,7 @@
   .dot{display:flex;flex-direction:column;gap:8px;align-items:center;font-size:11px;color:var(--ink-muted)}
   .dot i{display:block;background:var(--olive-soft);opacity:.9}
   .ph{position:relative;overflow:hidden;background:var(--paper-deep);border-radius:6px;height:150px}
-  .ph img{width:100%;height:100%;object-fit:cover;filter:sepia(.16) saturate(.86) contrast(1.03) brightness(.99)}
-  .ph::after{content:"";position:absolute;inset:0;background:#6b7250;mix-blend-mode:multiply;opacity:.14}
+  .ph img{width:100%;height:100%;object-fit:cover}
   .bad{color:#9a3b2b}
   .ok{color:var(--olive-deep)}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:var(--paper-deep);padding:2px 5px;border-radius:3px}
@@ -167,7 +166,7 @@
         <p style="margin-top:18px"><a class="cta" href="#" style="color:var(--olive)">Termin buchen ↗</a></p>
       </div>
     </div>
-    <p class="note">Bildfläche <code>.ph</code>: Radius 6 px, Gradiation <code>sepia(.16) saturate(.86) contrast(1.03)</code> plus Olive-Multiplikation 14 % — so sitzen alle Fotos im selben warmen Ton. Text steht unter dem Bild, nie als Overlay.</p>
+    <p class="note">Bildfläche <code>.ph</code>: Radius 6 px, Ausschnitt — <b>kein Filter, keine Fläche über dem Bild</b> (Gradiation und Olive-Multiplikation wurden im Okt 2026 entfernt). Text steht unter dem Bild, nie als Overlay.</p>
   </section>
 
   <section class="sec">

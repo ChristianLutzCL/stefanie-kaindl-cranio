@@ -1,6 +1,8 @@
 Jedes Foto der Seite läuft über `.ph`. Der Filter ist Teil des Systems, nicht eine
-Spielwiese: `sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99)` plus eine
-Olive-Fläche (`#6b7250`) mit `mix-blend-mode: multiply` bei 14 % (`.ph-deep`: 42 %).
+Kein Filter, keine Fläche über dem Bild: die Aufnahme steht in ihrem eigenen Ton
+(Filter und Olive-Multiplikation wurden im Okt 2026 auf Kundenwunsch entfernt —
+im Bestand standen `sepia(.16) saturate(.86) contrast(1.03)` plus 14 % Olive, tief
+42 %). Die Fläche rahmt und beschneidet nur.
 Erst dadurch haben Aufnahmen aus verschiedenen Räumen und Jahren denselben Ton.
 
 ## Use

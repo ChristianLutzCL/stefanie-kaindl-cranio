@@ -68,7 +68,7 @@ export function Content() {
   return (
     <>
       {/* Einstieg */}
-      <header className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+      <header data-review='Über mich · Seitenkopf' className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='order-2 lg:order-1 lg:col-span-5'>
             <span className='label'>Über mich</span>
@@ -113,7 +113,7 @@ export function Content() {
       </header>
 
       {/* Mein Weg — Bild links, Erzählung rechts, durch ein Zitat gebrochen */}
-      <section className='section pt-0'>
+      <section data-review='Über mich · Mein Weg' className='section pt-0'>
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
             <div className='lg:col-span-5'>
@@ -164,7 +164,7 @@ export function Content() {
       </section>
 
       {/* Ausbildung */}
-      <section className='section bg-[var(--paper-deep)]'>
+      <section data-review='Über mich · Ausbildung & Qualifikationen' className='section bg-[var(--paper-deep)]'>
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
             <div className='lg:col-span-5'>
@@ -195,7 +195,7 @@ export function Content() {
       </section>
 
       {/* Philosophie */}
-      <section className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+      <section data-review='Über mich · Meine Haltung' className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
         <div className='shell py-[clamp(4rem,8vw,8.5rem)]'>
           <div className='mx-auto max-w-[48rem] text-center'>
             <span className='label label-inverse'>Meine Haltung</span>
@@ -226,7 +226,7 @@ export function Content() {
       </section>
 
       {/* CTA */}
-      <section className='section'>
+      <section data-review='Über mich · Kennenlernen' className='section'>
         <div className='shell'>
           <SectionHead label='Kennenlernen' title='Lass uns sprechen.'>
             <p className='lead-lg mt-7'>

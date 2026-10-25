@@ -6,7 +6,7 @@ routed, compiled or built.
 ## Why these live here
 
 Both endpoints are server code, and this site is deployed as a **static export**
-(`output: 'export'` in `next.config.js`, served as plain files by DigitalOcean App
+(`output: 'export'` in `next.config.mjs`, served as plain files by DigitalOcean App
 Platform). A static host has no Node runtime, so neither endpoint was ever reachable
 in production — the old build never emitted an `out/api/` directory:
 

@@ -190,7 +190,7 @@ export function Content() {
   return (
     <>
       {/* Einstieg */}
-      <header className='shell pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+      <header data-review='Kontakt · Seitenkopf' className='shell pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
         <div className='mx-auto max-w-3xl text-center'>
           <span className='label'>Kontakt</span>
           <h1 className='display display-serif d1-hero mt-6'>Kontakt &amp; Anfahrt.</h1>
@@ -215,7 +215,7 @@ export function Content() {
       </header>
 
       {/* Bild */}
-      <section className='pb-[clamp(3rem,6vw,5.5rem)]'>
+      <section data-review='Kontakt · Blick in den Raum' className='pb-[clamp(3rem,6vw,5.5rem)]'>
         <div className='shell'>
           <Photo
             src='/image/kontakt.webp'
@@ -228,7 +228,7 @@ export function Content() {
       </section>
 
       {/* Fakten */}
-      <section className='section pt-0'>
+      <section data-review='Kontakt · Adresse & Erreichbarkeit' className='section pt-0'>
         <div className='shell'>
           <dl className='grid gap-x-10 gap-y-10 border-t border-[var(--line)] pt-10 sm:grid-cols-3'>
             {FACTS.map((fact) => (
@@ -266,7 +266,7 @@ export function Content() {
       </section>
 
       {/* Formular */}
-      <section className='section bg-[var(--paper-deep)]'>
+      <section data-review='Kontakt · Nachricht schreiben' className='section bg-[var(--paper-deep)]'>
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
             <div className='lg:col-span-4'>

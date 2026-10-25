@@ -37,7 +37,7 @@ const LINKS = [
 export default function NotFound() {
   return (
     <main>
-      <header className='shell pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+      <header data-review='404 · Seitenkopf' className='shell pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
         <span className='label'>Fehler 404</span>
         <h1 className='display display-serif d2 mt-6 max-w-3xl'>Diese Seite gibt es hier nicht.</h1>
         <p className='lead-lg mt-7 max-w-2xl'>
@@ -46,7 +46,7 @@ export default function NotFound() {
         </p>
       </header>
 
-      <section className='shell pb-[clamp(4rem,8vw,8rem)]'>
+      <section data-review='404 · Wege zurück' className='shell pb-[clamp(4rem,8vw,8rem)]'>
         <div className='grid items-start gap-12 lg:grid-cols-12 lg:gap-0'>
           {/* Kein data-reveal: diese Seite wird nie über useReveal() eingeblendet,
               ein gesetztes Attribut ließe das Bild unsichtbar. */}

@@ -21,15 +21,18 @@ Server und kein Build, nur einen Browser.
   muss nicht perfekt sein. Es muss nur beginnen."
 - **Nie „Praxis".** Es ist keine Praxis. Erlaubt sind „Adresse", „Seiten",
   „Behandlungsraum", „Einblicke in die Räume", „Über mich & Kontakt".
-- **„Hausbesuche" ist kein Angebot** und kommt nirgends vor. Die vier Angebote, wie
-  der Footer sie listet: Cranio für Erwachsene · Cranio für Babys & Kinder ·
-  Erstberatung & 5er-Paket · Yoga am Donnerstag.
+- **„Hausbesuche" ist kein Angebot** und kommt nirgends vor. Die Angebote, wie der
+  Footer sie listet: Cranio für Erwachsene · Cranio-Intensiv · Cranio für Babys &
+  Kinder · Fußreflexzonenmassage · Yoga am Donnerstag. **Kein Paket, keine
+  Erstberatung** — beides hat die Kundin im Okt 2026 streichen lassen.
 - **Wortmarke: „Cranio Sacral".** Das Angebot heißt ausgeschrieben „Craniosacrale
   Körperarbeit" (in der Hero-Eyebrow als „Craniosacrale Körperarbeit & Yoga").
-- **Zahlen sind exakt und stammen aus ihrem Material:** 73 € (ca. 60 Min), 5er-Paket
-  400 €, Babys & Kinder 53 € (20–40 Min), Erstberatung 30 Min 40 €, Yoga 14 €/h,
-  Do 17:30 & 19:00 in Paunzhausen. Keine erfundenen Preise, Termine oder Stimmen —
-  die vier Zitate des Bestands sind die einzigen.
+- **Zahlen sind exakt und stammen aus ihrem Material:** Cranio für Erwachsene 73 €
+  (ca. 60 Min), Cranio-Intensiv 100 € (90 Min), Babys & Kinder 53 € (20–40 Min),
+  Fußreflexzonenmassage mit kurzer Cranio 50 € (ca. 40 Min), Yoga 14 €/h, Do 17:30 &
+  19:00 in Paunzhausen. Die Preisliste spiegelt ihre Calendly-Terminarten 1:1. Keine
+  erfundenen Preise, Termine oder Stimmen — die vier Zitate des Bestands sind die
+  einzigen.
 - **Sektionslabels sind nummerierte Eyebrows** — `01 · Cranio`, `02 · Yoga` auf der
   Startseite; auf den Unterseiten ohne Nummer (`Cranio`, `Termine`, `Stimmen`).
 - **Überschriften sind kurze Aussagesätze mit Punkt** — „Raum, um anzukommen.",
@@ -171,7 +174,7 @@ stehen in `assets/Logos/README.md`.
 |---|---|
 | `overview.html` | **Der Einstieg** — das ganze System auf einer scrollbaren Seite, gerendert statt beschrieben. Eigenständig: keine Skripte, keine Server, Schriften von Google Fonts. |
 | `tokens.css` | Drop-in: alle Werte aus `globals.css` plus die Rollen, die im Repo nur als Tailwind-Klasse oder CSS-Klasse existieren. |
-| `tokens.json` | Dieselben Tokens maschinenlesbar: 32 Farben × zwei Flächen (Papier/Invers) **mit Nutzungshinweis und gemessenem Kontrast**, 20 Typostile, Spacing, Radien, Schatten, Easing. |
+| `tokens.json` | Dieselben Tokens maschinenlesbar: 31 Farben × zwei Flächen (Papier/Invers) **mit Nutzungshinweis und gemessenem Kontrast**, 20 Typostile, Spacing, Radien, Schatten, Easing. |
 | `design-system.json` | Manifest des Bundles (Gruppen, Dateien, Prüfsummen, Stand). |
 | `components/index.html` | Das Board — alle 18 Renditionen auf einer Seite. |
 | `components/<Name>/preview.html` · `README.md` | Eine Rendition pro Komponente, eigenständig lauffähig. |

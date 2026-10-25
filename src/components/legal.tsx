@@ -63,7 +63,10 @@ export function LegalSection({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className='border-t border-[var(--line)] py-10 first:border-t-0 first:pt-0'>
+    <section
+      id={id}
+      data-review={title}
+      className='border-t border-[var(--line)] py-10 first:border-t-0 first:pt-0'>
       {/* Lange Komposita („Verbraucherstreitbeilegung/Universalschlichtungs-
           stelle") sprengen sonst das Raster: sie dürfen umbrechen. */}
       <h2 className='serif break-words text-[clamp(1.15rem,1.8vw,1.7rem)] leading-snug text-ink [hyphens:auto]'>

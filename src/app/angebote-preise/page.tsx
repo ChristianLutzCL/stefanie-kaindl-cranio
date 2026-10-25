@@ -16,7 +16,7 @@ export default function AngebotePreisePage() {
   return (
     <>
       <meta httpEquiv='refresh' content='0; url=/cranio/' />
-      <div className='shell flex min-h-[70vh] flex-col items-center justify-center py-32 text-center'>
+      <div data-review='Angebote & Preise · Weiterleitung' className='shell flex min-h-[70vh] flex-col items-center justify-center py-32 text-center'>
         <span className='label'>Weiterleitung</span>
         <h1 className='display display-serif d2 mt-6'>Craniosacrale Körperarbeit</h1>
         <p className='lead-lg mt-6 max-w-xl'>

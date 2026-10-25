@@ -132,12 +132,15 @@ function Content() {
   return (
     <>
       <PageIntro
+        review='Cookie-Einstellungen · Seitenkopf'
         label='Cookies'
         title='Cookie-Einstellungen'
         lead='Du entscheidest, welche Cookies diese Website verwenden darf. Deine Auswahl gilt für diesen Browser und lässt sich jederzeit ändern.'
       />
 
-      <div className='shell pb-[clamp(4rem,8vw,8rem)]'>
+      <div
+          data-review='Cookie-Einstellungen · Kategorien und Auswahl'
+          className='shell pb-[clamp(4rem,8vw,8rem)]'>
         <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='lg:col-span-4'>
             <p className='text-[0.9375rem] leading-[1.75] text-ink-600'>

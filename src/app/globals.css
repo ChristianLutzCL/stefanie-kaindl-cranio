@@ -467,27 +467,14 @@ textarea.field {
 }
 
 /* ---------------------------------------------------------------------------
-   Foto-Gradiation — vereinheitlicht die hellen Studioaufnahmen
+   Bildfläche — Fotos laufen unbearbeitet, nur gerahmt und beschnitten.
+   (Früher lag hier eine Gradiation `sepia(.16) saturate(.86) contrast(1.03)`
+   plus Olive-Multiplikation 14 %; sie ist auf Kundenwunsch entfernt.)
    ------------------------------------------------------------------------ */
 .ph {
   position: relative;
   overflow: hidden;
   background: var(--paper-deep);
-}
-.ph img {
-  filter: sepia(0.16) saturate(0.86) contrast(1.03) brightness(0.99);
-}
-.ph::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #6b7250;
-  mix-blend-mode: multiply;
-  opacity: 0.14;
-  pointer-events: none;
-}
-.ph-deep::after {
-  opacity: 0.42;
 }
 
 /* ---------------------------------------------------------------------------

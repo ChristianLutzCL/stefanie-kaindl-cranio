@@ -32,7 +32,7 @@ No test framework, no CI. The bar is `npm run lint` plus `npm run build`. The wo
 `.github/workflows/nextjs.yml` comes from the starter template, targets a `live-demo` branch
 and GitHub Pages, and is **not** used.
 
-`next.config.js` additionally sets `allowedDevOrigins` for the review domain — without it
+`next.config.mjs` additionally sets `allowedDevOrigins` for the review domain — without it
 Next refuses to serve its own dev resources when the page is opened through the proxy.
 
 ## Quick start
@@ -298,16 +298,18 @@ Client-confirmed rules — they apply to every text change:
   Datenschutz, Cookie-Einstellungen), where it belongs.
 - **Never write "Praxis"** — it is not a practice. Allowed: "Adresse", "Seiten",
   "Behandlungsraum", "Einblicke in die Räume", "Über mich & Kontakt".
-- **"Hausbesuche" is not an offer** and appears nowhere. The four offers, as the footer lists
-  them: Cranio für Erwachsene · Cranio für Babys & Kinder · Erstberatung & 5er-Paket · Yoga
-  am Donnerstag.
+- **"Hausbesuche" is not an offer** and appears nowhere. The offers, as the footer lists them:
+  Cranio für Erwachsene · Cranio-Intensiv · Cranio für Babys & Kinder ·
+  Fußreflexzonenmassage · Yoga am Donnerstag. **No package, no Erstberatung** — the client had
+  both removed in October 2026.
 - **Wordmark: "Cranio Sacral".** Spelled out, the offer is "Craniosacrale Körperarbeit". The
   wordmark is typeset (Cormorant 500, 0.18em tracking), not an image file.
 - **No exclamation marks, no emoji, no advertising adjectives.** Headlines are short
   statements ending in a full stop.
-- **Numbers come from her material only:** Cranio für Erwachsene 73 € (ca. 60 min), 5er-Paket
-  400 €, Babys & Kinder 53 € (20–40 min), Erstberatung 30 min 40 €; yoga Thu 17:30 & 19:00 in
-  Paunzhausen, 14 €/h, EGYM Wellpass. No invented prices, dates or testimonials.
+- **Numbers come from her material only:** Cranio für Erwachsene 73 € (ca. 60 min), Cranio-Intensiv
+  100 € (90 min), Babys & Kinder 53 € (20–40 min), Fußreflexzonenmassage mit kurzer Cranio 50 €
+  (ca. 40 min); yoga Thu 17:30 & 19:00 in Paunzhausen, 14 €/h, EGYM Wellpass. No invented prices,
+  dates or testimonials. The price list mirrors her Calendly event types one to one.
 - **Contact:** 0176 63094476 · info@stefanie-kaindl-cranio.de · Bahnstraße 2a, 85276
   Pfaffenhofen a. d. Ilm, Ortsteil Uttenhofen.
 - **Booking:** Calendly `stefanie-kaindl-cranio` (`/cranio_session`, `/cranio-kinder`); yoga

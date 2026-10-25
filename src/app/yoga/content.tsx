@@ -99,7 +99,7 @@ export function Content() {
   return (
     <>
       {/* Einstieg */}
-      <header className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+      <header data-review='Yoga · Seitenkopf' className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='order-2 lg:order-1 lg:col-span-5'>
             <span className='label'>Yoga</span>
@@ -135,7 +135,7 @@ export function Content() {
       </header>
 
       {/* Was dich erwartet */}
-      <section className='section pt-0'>
+      <section data-review='Yoga · Deine Stunde' className='section pt-0'>
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
             <div className='lg:col-span-5'>
@@ -167,7 +167,7 @@ export function Content() {
       </section>
 
       {/* Kurse */}
-      <section className='section bg-[var(--paper-deep)]' id='kurse'>
+      <section data-review='Yoga · Kurse' className='section bg-[var(--paper-deep)]' id='kurse'>
         <div className='shell'>
           <SectionHead label='Kurse' title='Zwei Kurse am Donnerstag.'>
             <p className='mt-6 text-[0.9375rem] leading-relaxed text-ink-600'>
@@ -208,7 +208,7 @@ export function Content() {
       </section>
 
       {/* Termine */}
-      <section className='section'>
+      <section data-review='Yoga · Nächste Donnerstage' className='section'>
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
             <div className='lg:col-span-5'>
@@ -258,7 +258,7 @@ export function Content() {
       </section>
 
       {/* Yoga Day */}
-      <section className='section pt-0'>
+      <section data-review='Yoga · Yoga Day' className='section pt-0'>
         <div className='shell'>
           <div className='grid gap-12 lg:grid-cols-12 lg:gap-0'>
             <div className='lg:col-span-6' data-reveal>
@@ -306,7 +306,7 @@ export function Content() {
       </section>
 
       {/* Termin */}
-      <section id='termin' className='bg-[var(--olive)] text-[var(--cream)]'>
+      <section id='termin' data-review='Yoga · Platz reservieren' className='bg-[var(--olive)] text-[var(--cream)]'>
         <div className='shell py-[clamp(4rem,8vw,8rem)]'>
           <div className='mx-auto max-w-[40rem] text-center'>
             <span className='label label-inverse'>Platz reservieren</span>

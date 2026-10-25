@@ -18,6 +18,10 @@ export const CONTACT = {
 export const BOOKING = {
   cranioOverview: 'https://calendly.com/stefanie-kaindl-cranio',
   cranioAdults: 'https://calendly.com/stefanie-kaindl-cranio/cranio_session',
+  // Beide Ziele sind Terminarten ihres Calendly-Kalenders; die Adressen stammen
+  // von dort (die „Klon"-Namen hat Calendly beim Duplizieren vergeben).
+  cranioIntensiv: 'https://calendly.com/stefanie-kaindl-cranio/cranio-erwachsene-klon-1',
+  fussreflex: 'https://calendly.com/stefanie-kaindl-cranio/cranio-erwachsene-klon',
   cranioKids: 'https://calendly.com/stefanie-kaindl-cranio/cranio-kinder',
   yoga: `${CONTACT.whatsapp}?text=${encodeURIComponent(
     'Hallo Steffi, ich möchte gerne einen Platz beim Yoga am Donnerstag reservieren.',
@@ -153,14 +157,19 @@ export function PageIntro({
   title,
   lead,
   children,
+  review,
 }: {
   label: string;
   title: React.ReactNode;
   lead: React.ReactNode;
   children?: React.ReactNode;
+  /** Abschnittsname für die Rückmeldungs-Ebene (nur auf der Review-Instanz). */
+  review?: string;
 }) {
   return (
-    <header className='shell pb-[clamp(3rem,6vw,5.5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+    <header
+      data-review={review}
+      className='shell pb-[clamp(3rem,6vw,5.5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
       <div className='mx-auto max-w-3xl text-center'>
         <span className='label'>{label}</span>
         <h1 className='display display-serif d1-hero mt-6'>{title}</h1>

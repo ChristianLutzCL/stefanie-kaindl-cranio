@@ -387,9 +387,9 @@ Tiefe entsteht **fast nie** über Schatten. Hierarchie kommt aus Fläche
 - `card-price` — Preiskarte: Olive-Fläche, `rounded.sm`, Serif-Titel, Preis als
   große Serif-Zeile mit Einheit in `0.55em`; Fußzeile mit Haarlinie.
 - `card-paper` — die einzige Papierkarte (CTA-Block), 8 px, kein Schatten.
-- `card-photo` — Bildfläche `.ph`: `rounded.xs`, warmer Gradiation-Filter
-  (`sepia(.16) saturate(.86) contrast(1.03)` plus Olive-Multiplikation 14 %,
-  tief 42 %). Bilder sitzen **ohne** Overlay-Titel; Text steht unter dem Bild.
+- `card-photo` — Bildfläche `.ph`: `rounded.xs`, Ausschnitt — **kein Filter**
+  (Gradiation und Olive-Multiplikation wurden im Okt 2026 auf Kundenwunsch
+  entfernt). Bilder sitzen **ohne** Overlay-Titel; Text steht unter dem Bild.
 - `quote-block` — Zitat in der Sans (43 px, Gewicht 300), Name und Anliegen
   unter einer Haarlinie, Zähler „01 / 04" auf der Viertellinie.
 - `field` — Formularfeld ohne Box: nur eine 1-px-Linie unten, Fokus färbt sie

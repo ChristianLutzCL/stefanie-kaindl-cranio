@@ -120,17 +120,17 @@ function offer(name: string, price: number, url: string, unit: string, descripti
   };
 }
 
-/** Die vier Cranio-Angebote plus die Yogastunde — dieselben Zahlen wie auf den Seiten. */
+/** Die Cranio-Angebote plus die Yogastunde — dieselben Zahlen wie auf den Seiten. */
 export function offers(): Node[] {
   return [
     offer('Cranio für Erwachsene', 73, `${BOOKING}/cranio_session`, 'Behandlung (ca. 60 Minuten)',
       'Behandlung inklusive ausführlichem Vorgespräch, Nachruhe und Nachbesprechung.'),
-    offer('5er-Paket Cranio', 400, BOOKING, 'Paket (5 Behandlungen)',
-      'Fünf Behandlungen im Voraus, flexibel planbar, auf Wunsch mit Rechnung.'),
+    offer('Cranio-Intensiv', 100, `${BOOKING}/cranio-erwachsene-klon-1`, 'Behandlung (90 Minuten)',
+      'Intensivtermin mit mehr Zeit für die Craniosacrale Körperarbeit.'),
     offer('Cranio für Babys & Kinder', 53, `${BOOKING}/cranio-kinder`, 'Behandlung (20–40 Minuten)',
       'Altersgerechte, ruhige Behandlung für Babys und Kinder.'),
-    offer('Erstberatung', 40, BOOKING, 'Gespräch (30 Minuten)',
-      'Unverbindliches Kennenlerngespräch mit Anamnese und Behandlungsplanung.'),
+    offer('Fußreflexzonenmassage mit kurzer Cranio', 50, `${BOOKING}/cranio-erwachsene-klon`, 'Behandlung (ca. 40 Minuten)',
+      'Fußreflexzonenmassage mit einer kurzen Cranio-Einheit.'),
     offer('Yoga am Donnerstag', 14, abs('/yoga/'), 'Stunde',
       'Zwei Kurse donnerstags um 17:30 und 19:00 Uhr in Paunzhausen, Einstieg jederzeit möglich.'),
   ];

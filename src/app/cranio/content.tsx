@@ -54,7 +54,7 @@ export function Content() {
   return (
     <>
       {/* Einstieg */}
-      <header className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
+      <header data-review='Cranio · Seitenkopf' className='shell pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8.5rem,14vw,12rem)]'>
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-0'>
           <div className='lg:col-span-6' data-reveal>
             <Photo
@@ -89,7 +89,7 @@ export function Content() {
       </header>
 
       {/* Womit ich dich unterstütze */}
-      <section className='section pt-0'>
+      <section data-review='Cranio · Womit ich dich unterstütze' className='section pt-0'>
         <div className='shell'>
           <SectionHead label='Womit ich dich unterstütze' title='Für Erwachsene und für Kinder.' />
 
@@ -134,7 +134,7 @@ export function Content() {
       </section>
 
       {/* Ablauf */}
-      <section className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
+      <section data-review='Cranio · Ablauf einer Sitzung' className='relative overflow-hidden bg-[var(--olive)] text-[var(--cream)]'>
         <div className='shell py-[clamp(4rem,8vw,8.5rem)]'>
           <span className='label label-inverse'>Ablauf</span>
           <h2 className='display display-serif d2 mt-6 max-w-2xl text-[var(--cream)]'>
@@ -160,7 +160,7 @@ export function Content() {
       </section>
 
       {/* Preise */}
-      <section className='section' id='preise'>
+      <section data-review='Cranio · Preise' className='section' id='preise'>
         <div className='shell'>
           <SectionHead label='Preise' title='Was eine Behandlung kostet.' />
 
@@ -175,13 +175,13 @@ export function Content() {
               href={BOOKING.cranioAdults}
             />
             <PriceRow
-              title='5er-Paket'
-              meta='5 Behandlungen'
-              body='Fünf Behandlungen im Voraus — 50 € gespart, flexibel planbar. Auf Wunsch mit Rechnung für die Steuer oder die Krankenkasse.'
-              price='400 €'
-              unit='Paket'
-              cta='Paket anfragen'
-              href={BOOKING.cranioOverview}
+              title='Cranio-Intensiv'
+              meta='90 Minuten'
+              body='Mehr Zeit, die Cranio wirken zu lassen und noch etwas tiefer zu gehen — inklusive ausführlichem Vorgespräch, Nachruhe und Nachbesprechung.'
+              price='100 €'
+              unit='Behandlung'
+              cta='Termin buchen'
+              href={BOOKING.cranioIntensiv}
             />
             <PriceRow
               title='Cranio für Babys & Kinder'
@@ -193,13 +193,13 @@ export function Content() {
               href={BOOKING.cranioKids}
             />
             <PriceRow
-              title='Erstberatung'
-              meta='30 Minuten'
-              body='Unverbindliches Kennenlerngespräch mit Anamnese und Behandlungsplanung — wenn du erst schauen möchtest.'
-              price='40 €'
-              unit='Gespräch'
-              cta='Kennenlernen'
-              href={BOOKING.cranioOverview}
+              title='Fußreflexzonenmassage'
+              meta='ca. 40 Minuten'
+              body='Fußreflexzonenmassage mit einer kurzen Cranio-Einheit — bequeme Kleidung genügt.'
+              price='50 €'
+              unit='Behandlung'
+              cta='Termin buchen'
+              href={BOOKING.fussreflex}
             />
 
             <dl className='mt-14 grid gap-x-10 gap-y-6 border-t border-[var(--line)] pt-8 sm:grid-cols-2'>
@@ -221,14 +221,15 @@ export function Content() {
       </section>
 
       {/* Termin */}
-      <section id='termin' className='bg-[var(--paper-deep)]'>
+      <section id='termin' data-review='Cranio · Dein erster Termin' className='bg-[var(--paper-deep)]'>
         <div className='shell py-[clamp(4rem,8vw,8rem)]'>
           <div className='mx-auto max-w-[40rem] text-center'>
             <span className='label'>Termin</span>
             <h2 className='display display-serif d2 mt-6'>Dein erster Termin.</h2>
             <p className='lead-lg mt-7'>
               Such dir einen Termin aus, der dir passt. Wenn du unsicher bist, ob Cranio das
-              Richtige für dich ist, beginne mit der Erstberatung — oder ruf einfach an.
+              Richtige für dich ist, ruf einfach an oder schreib mir kurz — das klären wir in
+              ein paar Minuten.
             </p>
             <div className='mt-9 flex flex-wrap items-center justify-center gap-x-10 gap-y-4'>
               <a
