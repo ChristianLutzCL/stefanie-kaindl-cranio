@@ -8,11 +8,29 @@ import { CONTACT, Photo, useReveal } from '@/components/editorial';
 /**
  * Kontakt — Anfahrt, Erreichbarkeit und das Kontaktformular.
  *
- * Das Formular sendet unverändert an denselben n8n-Webhook wie bisher; nur die
- * Darstellung und die Anrede (durchgehend „du") sind neu.
+ * Versand: Web3Forms. Die Seite ist ein statischer Export (DigitalOcean App
+ * Platform, `static_sites`) — sie hat keine eigene Laufzeit, in der eine Mail
+ * verschickt werden könnte. Der frühere n8n-Webhook zeigte auf den eigenen
+ * Server und war tot. Web3Forms übernimmt den Versand serverseitig; der
+ * `access_key` ist ausdrücklich öffentlich (ein Alias auf das Postfach, kein
+ * Geheimnis — so dokumentiert Web3Forms selbst). Die Anfrage geht deshalb als
+ * `multipart/form-data` raus: damit löst der Browser keinen CORS-Preflight aus,
+ * der gegen `api.web3forms.com` unnötig wäre.
+ *
+ * `replyto` ist die Adresse des Besuchers, damit die Antwort direkt aus dem
+ * Postfach heraus an ihn geht.
  */
 
-const WEBHOOK = 'https://n8n.srv1010269.hstgr.cloud/webhook-test/stefanie-kaindl-cranio/kontakt';
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+
+/**
+ * Öffentlicher Formular-Schlüssel (Alias auf stefanie.kaindl.cranio@gmail.com).
+ * Kein Geheimnis — Web3Forms dokumentiert das ausdrücklich so; wer ihn hat, kann
+ * nur Mails an dieses Postfach schicken. Über die Umgebungsvariable
+ * überschreibbar, damit die Dev-Instanz auf ein anderes Postfach zeigen kann.
+ */
+const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? 'd19c3929-b8f8-478c-a5a3-d00d95a1dcae';
 
 const MAPS = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   'Bahnstraße 2a, 85276 Pfaffenhofen an der Ilm',
@@ -56,6 +74,7 @@ const FACTS: { title: string; lines: { text: string; href?: string; external?: b
 
 function ContactForm() {
   const [formData, setFormData] = React.useState({ name: '', email: '', phone: '', message: '' });
+  const [botcheck, setBotcheck] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [status, setStatus] = React.useState<{ type: 'success' | 'error' | null; message: string }>({
     type: null,
@@ -68,13 +87,27 @@ function ContactForm() {
     setStatus({ type: null, message: '' });
 
     try {
-      const response = await fetch(WEBHOOK, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      if (!WEB3FORMS_KEY) throw new Error('Formularschlüssel fehlt');
 
-      if (!response.ok) throw new Error('Fehler beim Senden');
+      // multipart statt JSON: gegen api.web3forms.com löst JSON einen
+      // CORS-Preflight aus, multipart nicht (Simple Request).
+      const payload = new FormData();
+      payload.append('access_key', WEB3FORMS_KEY);
+      payload.append('subject', `Kontaktformular: ${formData.name}`);
+      payload.append('from_name', 'Website Cranio Sacral');
+      payload.append('name', formData.name);
+      payload.append('email', formData.email);
+      payload.append('replyto', formData.email);
+      if (formData.phone) payload.append('phone', formData.phone);
+      payload.append('message', formData.message);
+      // Honeypot nur senden, wenn er angehakt ist: Web3Forms prüft die
+      // Anwesenheit, und der String "false" wäre dafür bereits truthy.
+      if (botcheck) payload.append('botcheck', 'true');
+
+      const response = await fetch(WEB3FORMS_ENDPOINT, { method: 'POST', body: payload });
+      const result = (await response.json().catch(() => null)) as { success?: boolean } | null;
+
+      if (!response.ok || !result?.success) throw new Error('Fehler beim Senden');
 
       setStatus({
         type: 'success',
@@ -98,6 +131,18 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className='space-y-8'>
+      {/* Honeypot — für Besucher unsichtbar, für Bots ein lockendes Feld. */}
+      <label className='hidden' aria-hidden='true'>
+        <input
+          type='checkbox'
+          name='botcheck'
+          checked={botcheck}
+          onChange={(e) => setBotcheck(e.target.checked)}
+          tabIndex={-1}
+          autoComplete='off'
+        />
+      </label>
+
       <div className='grid gap-8 sm:grid-cols-2'>
         <label className='block'>
           <span className='meta-line'>Name</span>

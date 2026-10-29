@@ -183,6 +183,20 @@ function Content() {
             Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben
             unberührt.
           </LegalP>
+          <LegalP>
+            Für die technische Übermittlung des Formulars nutzen wir den Dienst Web3Forms, betrieben
+            von Web3Creative. Ihre Angaben werden dabei auf den Servern des Anbieters empfangen,
+            gespeichert und von dort als E-Mail an uns weitergeleitet; verarbeitet werden dabei auch
+            technische Angaben wie Ihre IP-Adresse und der Zeitpunkt des Absendens. Zur Abwehr von
+            Spam werden IP-Adresse und E-Mail-Adresse zusätzlich an die Prüfdienste des Anbieters
+            übermittelt. Der Anbieter ist unser Auftragsverarbeiter; die Verarbeitung erfolgt auf
+            Grundlage eines Vertrags zur Auftragsverarbeitung, der Bestandteil seiner
+            Nutzungsbedingungen ist. Die Übermittlung in Drittländer – der Anbieter sitzt in Indien,
+            die Verarbeitung erfolgt unter anderem auf Servern von Amazon Web Services – stützt sich
+            auf die Standardvertragsklauseln der EU-Kommission nach Art. 46 Abs. 2 lit. c DSGVO. Die
+            bei dem Anbieter gespeicherten Formulardaten werden dort spätestens nach drei Jahren
+            automatisch gelöscht.
+          </LegalP>
 
           <LegalSub>Anfrage per E-Mail oder Telefon</LegalSub>
           <LegalP>
